@@ -11,7 +11,7 @@ class DefaultView  extends AbstractView{
     protected function home(){
         $html = "";
         foreach ($this->data as $value){
-            $html.="<li><a href='$this->script_name/wiki/view/?title=$value->title'>$value->title</a></li>";
+            $html.="<li><a href='$this->script_name/?title=$value->title'>$value->title</a></li>";
         }
         return "<ul id='menu2'>$html</ul>";
 
@@ -26,16 +26,18 @@ class DefaultView  extends AbstractView{
 				break;
         }
 
+        $style_file = $this->app_root.'/css/style.css';
         $header = $this->renderHeader();
         $menu   = $this->renderMenu();
         $footer = $this->renderFooter();
+
 
         $html = <<<EOT
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>MiniWiki</title>
+        <title>SportNet</title>
         <link rel="stylesheet" href="${style_file}">
     </head>
 
@@ -67,4 +69,3 @@ EOT;
 
 
 }
-

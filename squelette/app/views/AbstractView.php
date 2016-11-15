@@ -64,7 +64,7 @@ abstract class AbstractView {
      *
      */
     protected function renderHeader(){
-        $html ='<h1>MiniWiki</h1>';
+        $html ='<h1>SportNet</h1>';
         return $html;
     }
 
@@ -73,26 +73,21 @@ abstract class AbstractView {
      *
      */
     protected function renderFooter(){
-        $html = 'MinWiki la super app créée en Licence Pro &copy; 2016';
+        $html = 'SportNet &copy; 2016';
         return $html;
     }
 
 
-    /*
-     * Crée le fragment HTML dumenu
-     *
-     */
     protected function renderMenu(){
-        $html  = 'Bienvenu '.$_SESSION['user_login'];
+        $html  = 'Bienvenue '.$_SESSION['user_login'];
         $html .= '<h2>Menu</h2>';
         $html .= '<ul>';
-        $html .= '<li><a href="'.$this->script_name.'/wiki/list/">Tous les articles</a></li>';
+        $html .= '<li><a href="'.$this->script_name.'">Accueil</a></li>';
+        $html .= '<li><a href="'.$this->script_name.'/event/all/">Evenements</a></li>';
+        $html .= '<li><a href="'.$this->script_name.'/event/add/">Ajouter un évenement</a></li>';
         if(isset($_SESSION['user_login'])){
-          $html .= '<li><a href="'.$this->script_name.'/admin/perso/">Espace perso</a></li>';
-          $html .= '<li><a href="'.$this->script_name.'/wiki/add/">Ajouter un article</a></li>';
-          $html .= '<li><a href="'.$this->script_name.'/admin/logout/">Déconnexion</a></li>';
-        }else{
-          $html .= '<li><a href="'.$this->script_name.'/admin/login/">Connexion</a></li>';
+        // TODO: URL A VOIR
+            $html .= '<li><a href="'.$this->script_name.'/event/all/">Mes évenement</a></li>';
         }
         $html .= "</ul>";
         return $html;
