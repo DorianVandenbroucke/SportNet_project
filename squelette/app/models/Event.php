@@ -12,4 +12,8 @@ class Event extends Model{
     public function getActivities(){
         return $this->hasMany('app\models\Activity');
     }
+
+    public function getPromoter(){
+        return $this->belongsTo('app\moderls\Promoter', 'id_promoter');
+    }
 }
