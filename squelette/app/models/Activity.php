@@ -12,5 +12,9 @@ class Activity extends Model{
 	public function getEvent(){
 		return $this->belongsTo('\app\models\Event', 'id_event');
 	}
+	
+	public function getParticipants(){
+        return $this->belongsToMany('\app\models\Participant', 'Participant_Activity', 'id_activity', 'id_participant');
+	}
 
 }
