@@ -44,4 +44,19 @@ class EventController
         //redirect to events view
 
     }
+
+    public function deleteEvent(){
+        $id = $this->request->get['id'];
+        $totalDeleted = Event::destroy($id);
+        return $totalDeleted >0;
+    }
+
+    public function updateEvent(){
+        $event = new Event();
+        $event->id = $this->request->post['id'];
+        $event->name = $this->request->post['name'];
+        $event->description = $this->request->post['description'];
+        $event->startDate = $this->request->post['startDate'];
+        $event->endDate = $this->request->post['endDate'];
+    }
 }
