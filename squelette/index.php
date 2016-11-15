@@ -4,7 +4,7 @@ session_start();
 
 require_once("vendor/autoload.php");
 
-app\utils\AppInit::bootEloquent('/../conf/conf.ini');
+app\utils\AppInit::bootEloquent('conf/conf.ini');
 
 use app\utils\HttpRequest as HttpRequest;
 use app\utils\Router as Router;
