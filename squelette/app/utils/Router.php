@@ -5,8 +5,8 @@ namespace app\utils;
 class Router extends AbstractRouter{
 
 
-    public function addRoute($url, $ctrl, $mth, $level){
-        self::$routes[$url] = [$ctrl, $mth, $level];
+    public function addRoute($url, $ctrl, $mth){
+        self::$routes[$url] = [$ctrl, $mth];
     }
 
     public function dispatch(HttpRequest $http_request){
