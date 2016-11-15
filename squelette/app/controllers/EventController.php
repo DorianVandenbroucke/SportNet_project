@@ -36,6 +36,7 @@ class EventController
         $event->name = $this->request->post['name'];
         $event->description = $this->request->post['description'];
         $event->startDate = $this->request->post['startDate'];
+        $event->addresse = $this->request->post['addresse'];
         $event->endDate = $this->request->post['endDate'];
         $event->id_discipline = $this->request->post['id_discipline'];
         $event->id_promoter = $this->auth->promoter->id;
@@ -48,7 +49,7 @@ class EventController
     public function deleteEvent(){
         $id = $this->request->get['id'];
         $totalDeleted = Event::destroy($id);
-        return $totalDeleted >0;
+        return $totalDeleted > 0;
     }
 
     public function updateEvent(){
@@ -58,5 +59,19 @@ class EventController
         $event->description = $this->request->post['description'];
         $event->startDate = $this->request->post['startDate'];
         $event->endDate = $this->request->post['endDate'];
+        $event->update();
+    }
+
+    public function findById(){
+        $id = $this->request->get['id'];
+        return Event::find($id);
+    }
+
+    public function findAll(){
+        return Event::all();
+    }
+
+    public function findAllByPromoter(){
+        return $this->auth->promoter->getEvents();
     }
 }
