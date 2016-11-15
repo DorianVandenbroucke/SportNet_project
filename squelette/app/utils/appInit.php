@@ -1,6 +1,6 @@
 <?php
 
-namespace games;
+namespace app\utils;
 
 use \Illuminate\Database\Capsule\Manager;
 
