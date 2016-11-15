@@ -56,8 +56,7 @@ class EventController
     }
 
     public function updateEvent(){
-        $event = new Event();
-        $event->id = $this->request->post['id'];
+        $event = Event::find($this->request->post['id']);
         $event->name = $this->request->post['name'];
         $event->description = $this->request->post['description'];
         $event->startDate = $this->request->post['startDate'];
