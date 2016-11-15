@@ -20,4 +20,6 @@ class Promoter extends Model
     public function getEvents(){
         return $this->hasMany('\app\models\Event', 'id_promoter');
     }
+
+
 }

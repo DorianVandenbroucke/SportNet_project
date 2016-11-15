@@ -5,19 +5,19 @@ namespace app\utils;
 class HttpRequest extends AbstractHttpRequest{
 
 	public function __construct(){
-		if(isset($_SERVER['GET'])){
-			$this->get = $_SERVER['GET'];
-		}
+
+        if(isset($_GET)){
+            $this->get = $_GET;
+        }
+        if(isset($_POST)){
+            $this->post = $_POST;
+        }
 
 		if(isset($_SERVER['REQUEST_METHOD'])){
 			$this->method = $_SERVER['REQUEST_METHOD'];
 		}
 		if(isset($_SERVER['PATH_INFO'])){
 			$this->path_info = $_SERVER['PATH_INFO'];
-		}
-
-		if(isset($_SERVER['POST'])){
-			$this->post = $_SERVER['POST'];
 		}
 
 		if(isset($_SERVER['QUERY_STRING'])){
