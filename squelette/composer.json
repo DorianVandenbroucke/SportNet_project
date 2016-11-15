@@ -1,0 +1,11 @@
+{
+    "require": {
+        "illuminate/database": "5.0.33"
+    },
+
+    "autoload" : {
+    "psr-0": {
+      "app\\": "."
+    }
+  }
+}
