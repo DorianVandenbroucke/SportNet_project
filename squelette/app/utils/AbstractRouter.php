@@ -1,6 +1,6 @@
 <?php
 
-namespace wikiapp\utils;
+namespace app\utils;
 
 abstract class AbstractRouter {
 
