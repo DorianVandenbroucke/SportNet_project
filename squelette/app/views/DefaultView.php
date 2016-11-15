@@ -9,11 +9,19 @@ class DefaultView  extends AbstractView{
     }
 
     protected function home(){
-        $html = "";
-        foreach ($this->data as $value){
-            $html.="<li><a href='$this->script_name/wiki/view/?title=$value->title'>$value->title</a></li>";
-        }
-        return "<ul id='menu2'>$html</ul>";
+		
+		$html = "";
+		
+		foreach($this->data as $value){
+			$html .= 
+					"<div>
+						<h2>".$value->name ."</h2>
+						<div>".$value->startDate ." - ".$value->endDate ."</div>
+						<a href='$this->script_name/event/".$value->id ."'>Voir plus</a>"
+					."</div>";
+		}
+		
+		return $html;
 
     }
 
