@@ -11,6 +11,7 @@ namespace app\controllers;
 use app\models\Event;
 use app\utils\Authentification;
 use app\utils\HttpRequest;
+use app\views\EventView;
 
 class EventController
 {
@@ -25,8 +26,10 @@ class EventController
 
     public function addEvent(){
         if($this->auth->logged_in){
-            //TODO open EventView, addEvent form
+            $ev = new EventView(null);
+            $ev->render('addForm');
         }else{
+
             //TODO redirect to login
         }
     }
