@@ -7,14 +7,17 @@ use app\views\ActivityView;
 use app\models\Activity;
 use app\models\Event;
 use app\modelsParticipant;
+use app\utils\Authentification;
 
 class ActivityController{
 
     private $request = null;
+    private $auth;
 
     public function __construct(HttpRequest $http_req)
     {
         $this->request = $http_req;
+        $this->auth = new Authentification();
     }
 
     public function add()
@@ -32,7 +35,7 @@ class ActivityController{
             $view = new ActivityView($activity->id);
             return $view->render('detail');
         }
-        $view = new ActivityView($http_req);
+        $view = new ActivityView($this->request);
         return $view->render('add');
     }
 
