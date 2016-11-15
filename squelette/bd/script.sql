@@ -20,7 +20,7 @@ USE SportNet;
 DROP TABLE IF EXISTS `Discipline` ;
 
 CREATE TABLE IF NOT EXISTS `Discipline` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL auto_increment,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Promoter` ;
 
 CREATE TABLE IF NOT EXISTS `Promoter` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL auto_increment,
   `name` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
   `login` VARCHAR(45) NULL,
@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Event` ;
 
 CREATE TABLE IF NOT EXISTS `Event` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL auto_increment,
   `name` VARCHAR(45) NULL,
   `description` VARCHAR(45) NULL,
   `startDate` DATE NULL,
@@ -77,7 +77,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Activity` ;
 
 CREATE TABLE IF NOT EXISTS `Activity` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL auto_increment,
   `name` VARCHAR(45) NULL,
   `description` VARCHAR(45) NULL,
   `price` DECIMAL NULL,
@@ -99,7 +99,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Participant` ;
 
 CREATE TABLE IF NOT EXISTS `Participant` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL auto_increment,
   `mail` VARCHAR(45) NULL,
   `birthDate` DATE NULL,
   `firstName` VARCHAR(45) NULL,
