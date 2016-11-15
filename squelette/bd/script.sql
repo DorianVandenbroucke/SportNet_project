@@ -33,6 +33,7 @@ DROP TABLE IF EXISTS `Promoter` ;
 
 CREATE TABLE IF NOT EXISTS `Promoter` (
   `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
   `login` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
