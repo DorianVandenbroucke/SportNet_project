@@ -1,0 +1,162 @@
+
+.breadcrumb{
+  li{
+    display: inline-block;
+    list-style-type: none;
+    &::after{
+      content: "/";
+      padding: 5px;
+    }
+    &:last-child, &.disabled{
+      a{
+        color: $fontColor;
+        cursor: default;
+        &:hover{
+          text-decoration: none;
+        }
+      }
+    }
+    &:last-child{
+      &::after{
+        content: none;
+      }
+    }
+  }
+}
+
+.jumbotron{
+  background-color: #e3e3e3;
+  max-width: 50em;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+  button{
+    @extend .btn;
+  }
+}
+
+.navbar{
+  li{
+    a{
+      text-decoration: none;
+      &:hover{
+        color: $navbarColorHover;
+      }
+      &.active{
+        background-color: $navbarColor;
+        color: $navbarColorHover;
+      }
+      &.disabled{
+        color: lighten($navbarColor, 20);
+        cursor: default;
+        &:hover{
+          color: lighten($navbarColor, 20);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 70em){
+  .navbar{
+    padding-top: 12px;
+    padding-bottom: 15px;
+    li{
+      display: inline;
+      a{
+        padding: 10px 20px;
+        &:hover{
+          border-bottom: 3px solid $navbarColorHover;
+        }
+        &.active{
+          border-bottom: 3px solid $navbarColorHover;
+        }
+        &.disabled:hover{
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 70em){
+.navbar{
+  &::before{
+    content: "";
+    display: inline-block;
+    background-image: $navbarImage;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    cursor: pointer;
+    width: 100%;
+    height: 100px;
+  }
+  &:hover{
+    li{
+      display: block;
+    }
+  }
+  li{
+    display: none;
+    &:first-child{
+      border-top: 1px solid $navbarBorderColor;
+    }
+    a{
+      display: block;
+      padding: 20px 0;
+      padding-left: 20px;
+      border-bottom: 1px solid $navbarBorderColor;
+      transition: background-color 0.1s;
+      &:hover{
+        color: $navbarColorHover;
+        background-color: $navbarColor;
+      }
+      &.disabled:hover{
+        background-color: inherit;
+      }
+    }
+  }
+}
+}
+
+.page_header{
+  margin-bottom: 40px;
+  h1{
+    border-bottom: 1px solid #b2b2b2;
+	text-align: center;
+    padding-bottom: 10px;
+  }
+}
+
+.pagination{
+  margin-top: 30px;
+  li{
+    display: inline-block;
+    list-style-type: none;
+    margin: 0 -2px;
+    a{
+      border: 1px solid $paginationBorderColor;
+      color: $paginationColor;
+      padding: 5px 10px;
+      &:hover{
+        background-color: lighten($paginationBorderColor, 10);
+        color: $paginationColorHover;
+        text-decoration: none;
+        transition: background-color 0.2s;
+      }
+    }
+    &.active a{
+      background-color: lighten($paginationBorderColor, 10);
+      color: $paginationColorHover;
+      text-decoration: none;
+    }
+    &.disabled a{
+      color: lighten($paginationBorderColor, 10);
+      cursor: default;
+      &:hover{
+        color: lighten($paginationBorderColor, 10);
+        background-color: inherit;
+      }
+    }
+  }
+}

@@ -49,7 +49,8 @@ class DefaultView  extends AbstractView{
     				break;
         }
 
-        $style_file = $this->app_root.'/css/style.css';
+        $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';
+        $style_file = $this->app_root.'/css/css/style.css';
         $header = $this->renderHeader();
         $menu   = $this->renderMenu();
         $footer = $this->renderFooter();
@@ -61,6 +62,7 @@ class DefaultView  extends AbstractView{
     <head>
         <meta charset="utf-8">
         <title>SportNet</title>
+        <link rel="stylesheet" href="${framework}">
         <link rel="stylesheet" href="${style_file}">
     </head>
 

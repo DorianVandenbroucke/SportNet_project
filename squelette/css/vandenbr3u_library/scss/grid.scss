@@ -1,0 +1,112 @@
+
+$columns_number: 8;
+$gutter_width: 2%;
+$column_width: (100% - $columns_number * $gutter_width)/$columns_number;
+
+@function column_width($n_col){
+  @return ($n_col * $column_width) + (($n_col - 1 ) * $gutter_width);
+}
+
+@function offset_margin($n_col){
+  @return ($n_col * $column_width) + ($n_col * $gutter_width) + ($gutter_width / 2);
+}
+
+.grid_float{
+
+  @mixin column_n($col){
+    box-sizing: border-box;
+    width: column_width($col);
+    margin: 0 $gutter_width / 2;
+    float: left;
+  }
+
+  @mixin offset_n($col){
+    margin-left: offset_margin($col);
+    margin-right: $gutter_width / 2;
+  }
+
+  @for $col from 1 to $columns_number{
+    .column_#{$col}{
+      @include column_n($col);
+    }
+  }
+
+  @for $col from 1 to ($columns_number - 1){
+    .offset_#{$col}{
+      @include offset_n($col);
+    }
+  }
+
+  @for $col from 1 to ($columns_number / 2){
+    @media screen and (max-width: 40em){
+      .column_#{$col}{
+        @include column_n($col * 2);
+      }
+    }
+  }
+
+  @for $col from (($columns_number / 2)) to ($columns_number){
+    @media screen and (max-width: 70em){
+      .column_#{$col}{
+        @include column_n($columns_number);
+      }
+    }
+  }
+
+  @for $col from (($columns_number / 2) - 1) to ($columns_number){
+    @media screen and (max-width: 40em){
+      .column_#{$col}{
+        @include column_n($columns_number);
+      }
+    }
+  }
+
+  @for $col from 1 to ($columns_number / 2){
+    @media screen and (max-width: 40em){
+      .offset_#{$col}{
+        @include offset_n(0);
+      }
+    }
+  }
+
+
+  .row{
+    float: none;
+    clear: both;
+    overflow: hidden;
+  }
+
+}
+
+.grid_flex{
+
+  @mixin column_n($col){
+    flex-basis: column_width($col);
+    margin: 0 $gutter_width / 2;
+    flex-grow: 0;
+    flex-shrink: 1;
+  }
+
+  @mixin offset_n($col){
+    margin-left: offset_margin($col);
+    margin-right: $gutter_width / 2;
+  }
+
+  @for $col from 1 to $columns_number{
+    .column_#{$col}{
+      @include column_n($col);
+    }
+  }
+
+  @for $col from 1 to ($columns_number - 1){
+    .offset_#{$col}{
+      @include offset_n($col);
+    }
+  }
+
+  .row{
+    display: flex;
+    flex-direction: row;
+  }
+
+}

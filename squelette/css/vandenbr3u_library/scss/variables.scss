@@ -1,0 +1,68 @@
+
+/* By default */
+
+$fontColor: #454545;
+$fontFamily: "Lato";
+
+
+/* Inline Balises */
+
+$fontColorMark: #ffe700;
+
+/* Title */
+
+$fontColorTitle: #0b0b0b;
+$fontFamilyTitle: "Roboto Condensed";
+$fontSizeTitle: 2.8em;
+
+
+/* Link */
+
+$fontColorLink: #0069a7;
+
+
+/* Special Balise */
+
+$codeBackgroundColor: #bdeaee;
+$codeFontColor: #0e5b81;
+$preBackgroundColor: #bdeaee;
+$preColor: #0e5b81;
+$kbdColor: #f2f2f2;
+
+
+/* Special */
+
+$specialFontFamily: "Open Sans Condensed";
+
+
+/* Buttons */
+
+$buttonBackgroundColor: #e18d8d;
+$buttonColor: #bf0000;
+$buttonFontFamily: $specialFontFamily;
+
+
+/* Alerts */
+
+$alertBackgroundColor: #c9c9c9;
+$alertColor: $fontColor;
+$successAlertColor: #1a7833;
+$successAlertSecondColor: #a4e1b4;
+$infoAlertColor: #0b5767;
+$infoAlertSecondColor: #a7dae5;
+$warningAlertColor: #a75408;
+$warningAlertSecondColor: #eeb683;
+$dangerAlertColor: #960000;
+$dangeroAlertSecondColor: #ea8a8a;
+
+
+/* Components */
+
+$navbarColor: #0098d8;
+$navbarColorHover: #d9db00;
+$navbarBorderColor: $navbarColorHover;
+$navbarImage: url("../components/images/menu_2.png");
+
+$paginationColor: $navbarColor;
+$paginationColorHover: $navbarColorHover;
+$paginationBorderColor: darken($navbarColor, 20);

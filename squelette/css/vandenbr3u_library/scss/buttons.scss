@@ -1,0 +1,88 @@
+
+button{
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: $buttonFontFamily;
+  font-size: 1.2em;
+  padding: 5px 12px;
+  text-align: center;
+  &:hover{
+    transition: background-color 0.5s;
+  }
+}
+
+.btn{
+  @extend button;
+  background-color: $buttonBackgroundColor;
+  border: 1px solid $buttonColor;
+  color: $buttonColor;
+  &:focus{
+    background-color: darken($buttonColor, 20);
+    color: darken($buttonBackgroundColor, 20);
+  }
+  &:hover{
+    background-color: $buttonColor;
+    color: $buttonBackgroundColor;
+  }
+}
+
+.blue-btn{
+  @extend button;
+  background-color: #003e5c;
+  border: 1px solid #001b29;
+  color: #b7e3f9;
+  &:hover{
+    background-color: #001b29;
+  }
+}
+
+.green-btn{
+  @extend button;
+  background-color: #009812;
+  border: 1px solid #004b09;
+  color: #b6f4bd;
+  &:hover{
+    background-color: #004b09;
+  }
+}
+
+.large-btn{
+  border-radius: 7px;
+  font-size: 1.3em;
+  padding: 7px 15px;
+}
+
+.small-btn{
+  font-size: 0.7em;
+  padding: 2px 5px;
+}
+
+.yellow-btn{
+  @extend button;
+  background-color: #c3b100;
+  border: 1px solid #a39c00;
+  color: #fffba6;
+  &:hover{
+    background-color: #a39c00;
+  }
+}
+
+.extra-large-btn{
+  width: 100%;
+}
+
+.fat-btn{
+  border: none;
+  border-radius: 0;
+}
+
+.fancy-btn{
+  background: linear-gradient($buttonColor, darken($buttonColor, 20));
+  box-shadow: 1px 5px 5px darken($buttonColor, 50);
+  color: $buttonBackgroundColor;
+  &:hover{
+    background: linear-gradient(darken($buttonColor, 20), $buttonColor);
+    box-shadow: 0px 0px 0px;
+  }
+}
