@@ -7,8 +7,10 @@ use app\views\ActivityView;
 use app\views\DefaultView;
 use app\models\Activity;
 use app\models\Event;
+use app\views\EventView;
 use app\models\Participant;
 use app\utils\Authentification;
+
 
 class ActivityController{
 
@@ -77,7 +79,7 @@ class ActivityController{
             $event = $activity->getEvent();
             $activity->delete();
             $view = new EventView($event);
-            return $view->render('detailEvent');  
+            return $view->render('detailEvent');
         }
         $view = new DefaultView($this->request);
         return $view->render('signinForm');
@@ -106,11 +108,11 @@ class ActivityController{
             $participant->firstName = $this->request->post['firstName'];
             $participant->lastName = $this->request->post['lastName'];
             $participant->save();
-            
+
             $activity = Activity::find($this->request->get['id']);
             $activity->getParticipants()->attach($participant);
             $view = new ActivityView($activity);
-            return $view->render('detail');       
+            return $view->render('detail');
         }
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
@@ -124,4 +126,4 @@ class ActivityController{
         return $view->render('result');
     }
 
-} 
+}

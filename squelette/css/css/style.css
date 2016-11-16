@@ -62,8 +62,7 @@ header {
   padding: 5px;
   margin: 20px 0;
   border: 1px solid #bcbcbc;
-  border-top: none;
-  height: 100%; }
+  border-top: none; }
 
 footer {
   background-color: #454545;
@@ -88,6 +87,16 @@ textarea {
 
 .column_4 h2 {
   margin: 5px 0; }
+
+.list {
+  margin: 0 0 20px 0; }
+  .list li {
+    list-style: none;
+    border-bottom: 1px solid black;
+    padding: 10px; }
+
+.detail {
+  float: right; }
 
 @media screen and (max-width: 70em) {
   .menu ul {

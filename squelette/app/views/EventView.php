@@ -138,7 +138,7 @@ EOT;
             <div class='column_4'>
                 <h2>Liste des épreuves</h2>
                 <div>
-                    <ul>$activitiesList</ul>
+                    <ul class='list'>$activitiesList</ul>
                     <a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>
                 </div>
             </div>
@@ -158,9 +158,9 @@ EOT;
                 <h2>Listes des Évenements</h2>
                 <form action='$this->script_name/event/search/' method='post'><input type='text' placeholder='Recherche' name='searchText'/></form>
                 <div>
-                    <ul>$list</ul>
+                    <ul class='list'>$list</ul>
                 </div>
-                <div><a href='$this->script_name/event/add/'>Nouveau</a></div>
+                <div><a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a></div>
              </div>
         ";
         return $html;
@@ -169,9 +169,9 @@ EOT;
     private function eventLists(){
         $html = '';
         foreach ($this->data['events'] as $event){
-            $html.="<li>$event->name    $event->startDate - $event->endDate
-                <a  href='$this->script_name/event/?id=$event->id'>Details</a>
-                <a href='$this->script_name/event/?id=$event->id'>Supprimer</a>
+            $html.="<li>$event->name  <span class='offset_2'>$event->startDate - $event->endDate</span>
+                <a class='offset_1' href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
+                <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
                 </li>";
         }
         return $html;
@@ -180,8 +180,9 @@ EOT;
     private function eventActivities(){
         $html='';
         foreach ($this->data['events']->getActivities as $activity){
-            $html.="<li>$activity->name  
-                <a  href='$this->script_name/activity/detail/?id=$activity->id'>Détail</a>
+            $html.="<li class='column_8'>
+                    <span class='column_7'>$activity->name</span>
+                    <a href='$this->script_name/activity/detail/?id=$activity->id' class='row'>Détails</a>
                 </li>";
         }
         return $html;
