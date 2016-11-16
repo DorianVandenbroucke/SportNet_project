@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-
+define("EVENT_STATUS_CLOSED", 0);
+define("EVENT_STATUS_OPEN", 1);
 require_once("vendor/autoload.php");
 
 app\utils\AppInit::bootEloquent('conf/conf.ini');
@@ -23,6 +24,8 @@ $router->addRoute('/activity/delete', '\app\controllers\ActivityController', 'de
 $router->addRoute('/activity/detail/', '\app\controllers\ActivityController', 'detail');
 $router->addRoute('/activity/register', '\app\controllers\ActivityController', 'register');
 $router->addRoute('/event/add/', '\app\controllers\EventController', 'addEvent');
+$router->addRoute('/event/save/', '\app\controllers\EventController', 'saveEvent');
+$router->addRoute('/event/', '\app\controllers\EventController', 'detailEvent');
 
 
 $http_req = new HttpRequest();

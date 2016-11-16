@@ -22,7 +22,7 @@ class DefaultView  extends AbstractView{
   					"<div class='row'>
   						<h2>".$value->name ."</h2>
   						<div>Du ".$value->startDate ." au ".$value->endDate ."</div>
-  						<a href='$this->script_name/event/".$value->id ."'>Voir plus</a>"
+  						<a href='$this->script_name/event/?id=".$value->id ."'>Voir plus</a>"
   					."</div>";
   		}
   		return $html;
