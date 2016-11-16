@@ -141,7 +141,7 @@ EOT;
                     <a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>
                 </div>
             </div>
-            <div>
+            <div class='row'>
                 <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
                 <a href='$this->script_name/activity/add'><button class='blue-btn'>Fermer les inscriptions</button></a>
             </div>
