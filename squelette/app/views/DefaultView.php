@@ -35,17 +35,17 @@ class DefaultView  extends AbstractView{
               </div>
               <form class='row' method='POST' action='$this->script_name/signinVerification/'>
                 <div class='column_4'>
-                  <label class='row'>Login:</label>
-                  <input class='row' type='text' name='login' placeholder='Login' />
+                  <label for='login' class='row'>Login</label>
+                  <input id='login' class='row' type='text' name='login' placeholder='Login' />
                 </div>
                 <div class='column_4'>
-                  <label class='row'>Mot de passe:</label>
-                  <input class='row' type='password' name='password' placeholder='Mot de passe' />
+                  <label for='mdp' class='row'>Mot de passe</label>
+                  <input id='mdp' class='row' type='password' name='password' placeholder='Mot de passe' />
                 </div>
                 <div class='row button'>
                   <button name='send'>Connexion</button>
                 </div>
-                <p class='message_droite row'>Vous n'avez pas encore de compte? <a href='$this->script_name/signup/'>inscrivez-vous</a></p>.
+                <p class='message_droite row'>Vous n'avez pas encore de compte? <a href='$this->script_name/signup/'>inscrivez-vous</a></p>
               </form>";
       return $html;
     }
@@ -54,14 +54,31 @@ class DefaultView  extends AbstractView{
       $html =
               "<h1>S'inscrire</h1>
               <form method='POST' action='$this->script_name/signupVerification/'>
-                <input type='text' name='name' placeholder='Nom' />
-                <input type='text' name='mail' placeholder='E-mail' />
-                <input type='text' name='login' placeholder='Login' />
-                <input type='password' name='password' placeholder='Mot de passe' />
-                <input type='password' name='password_confirm' placeholder='Confirmez votre mot de passe' />
-                <button name='send'>Inscription</button>
-              </form>
-              Vous avez déjà un compte? <a href='$this->script_name/signin/'>connectez-vous</a>.";
+                <div class='column_4'>
+                  <label for='login' class='row'>Login</label>
+                  <input id='login' class='row' type='text' name='login' placeholder='Login' />
+                </div>
+                <div class='column_4'>
+                  <label for='password' class='row'>Mot de passe</label>
+                  <input id='password' class='row' type='password' name='password' placeholder='Mot de passe' />
+                </div>
+                <div class='column_4'>
+                  <label for='email' class='row'>Email</label>
+                  <input id='email' class='row' type='email' name='mail' placeholder='Email' />
+                </div>
+                <div class='column_4'>
+                  <label for='password2' class='row'>Mot de passe</label>
+                  <input id='password2' class='row' type='password' name='password_confirm' placeholder='Mot de passe' />
+                </div>
+                <div class='column_4'>
+                  <label for='nom' class='row'>Nom</label>
+                  <input id='nom' class='row' type='text' name='name' placeholder='Nom' />
+                </div>
+                <div class='row button'>
+                  <button name='send'>Inscription</button>
+                </div>
+                <p class='message_droite row'>Vous avez déjà un compte? <a href='$this->script_name/signin/'>connectez-vous</a></p>
+                </form>";
       return $html;
     }
 

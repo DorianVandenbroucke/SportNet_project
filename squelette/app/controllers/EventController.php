@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\models\Discipline;
 use app\models\Event;
+use app\models\Promoter;
 use app\utils\Authentification;
 use app\utils\HttpRequest;
 use app\views\DefaultView;
@@ -26,11 +27,16 @@ class EventController
         $this->auth = new Authentification();
     }
 
-    public function addEvent(){
+    public function saveEventForm(){
         if($this->auth->logged_in){
             $disciplines = Discipline::all();
-            $ev = new EventView(['disciplines' =>$disciplines]);
-            $ev->render('addForm');
+            if(isset($this->request->get['id'])){//edit
+                $event = Event::find($this->request->get['id']);
+                $ev = new EventView(['events'=>$event, 'disciplines'=>$disciplines]);
+            }else{//add
+                $ev = new EventView(['disciplines' =>$disciplines]);
+            }
+            $ev->render('saveEventForm');
         }else{
             $defaultView = new DefaultView(NULL);
             $defaultView->render('signinForm');
@@ -38,8 +44,9 @@ class EventController
     }
 
     public function saveEvent(){
+        $id = $this->request->post['id'];
         if($this->auth->logged_in){
-            $event = new Event();
+            $event = empty($id) ? new Event() : Event::find($id);
             $event->name = $this->request->post['name'];
             $event->description = $this->request->post['description'];
             $event->startDate = date("Y-m-d",strtotime($this->request->post['startDate']));
@@ -47,7 +54,9 @@ class EventController
             $event->addresse = $this->request->post['addresse'];
             $event->id_discipline = $this->request->post['id_discipline'];
             $event->status = EVENT_STATUS_OPEN;
-            $event->id_promoter = $this->auth->promoter->id;
+            if(empty($id))
+                $event->id_promoter = $this->auth->promoter;
+
             if($event->save()){
                 $ev = new EventView(['events' =>$event]);
                 $ev->render('event');
@@ -62,6 +71,8 @@ class EventController
     public function deleteEvent(){
         $id = $this->request->get['id'];
         $totalDeleted = Event::destroy($id);
+        var_dump($totalDeleted);
+        $this->findAllByPromoter();
 
     }
 
@@ -84,20 +95,15 @@ class EventController
         }
     }
 
-    //url /all
     public function findAll(){
-        $ev = new EventView(['events' =>Event::all()]);
-        $ev->render('allEvents');
-    }
-
-    //url /allPromoter
-    public function findAllByPromoter(){
-        if($this->auth->logged_in){
-            $ev = new EventView(['events' =>$this->auth->promoter->getEvents()]);
-            $ev->render('allEvents');
+        if(isset($this->request->get['id'])){
+            $id = $this->request->get['id'];
+            var_dump($id);
+            $events = Event::select()->where('id_promoter',$id)->get();
+            $ev = new EventView(['events' =>$events]);
         }else{
-            $defaultView = new DefaultView(NULL);
-            $defaultView->render('signinForm');
+            $ev = new EventView(['events' =>Event::all()]);
         }
+        $ev->render('allEvents');
     }
 }
