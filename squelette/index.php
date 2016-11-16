@@ -16,8 +16,13 @@ $router->addRoute('/signin/', '\app\controllers\DefaultController', 'signinForm'
 $router->addRoute('/signinVerification/', '\app\controllers\DefaultController', 'signinVerification');
 $router->addRoute('/signup/', '\app\controllers\DefaultController', 'signupForm');
 $router->addRoute('/signupVerification/', '\app\controllers\DefaultController', 'signupVerification');
+$router->addRoute('/activity/add/', '\app\controllers\ActivityController', 'add');
+$router->addRoute('/activity/edit', '\app\controllers\ActivityController', 'update');
+$router->addRoute('/activity/delete', '\app\controllers\ActivityController', 'delete');
+$router->addRoute('/activity/detail/', '\app\controllers\ActivityController', 'detail');
+$router->addRoute('/activity/register', '\app\controllers\ActivityController', 'register');
 
 $http_req = new HttpRequest();
 $router->dispatch($http_req);
 
-// var_dump(Router::$routes);
+ //var_dump(Router::$routes);
