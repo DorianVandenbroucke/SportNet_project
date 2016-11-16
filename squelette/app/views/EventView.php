@@ -154,8 +154,8 @@ EOT;
         $html = '';
         $list = $this->eventLists();
         $html.="
-            <div>
-                <h2>Listes des Évenements</h2>
+            <div class='page_header row'>
+                <h1>Listes des Évenements</h1>
                 <form action='$this->script_name/event/search/' method='post'><input type='text' placeholder='Recherche' name='searchText'/></form>
                 <div>
                     <ul class='list'>$list</ul>
