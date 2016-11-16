@@ -39,7 +39,6 @@ class DefaultController{
 				if(filter_var($login, FILTER_SANITIZE_STRING) && filter_var($pass, FILTER_SANITIZE_STRING)){
 					$authentification = new Authentification();
 					$auth = $authentification->login($login, $pass);
-					var_dump($auth);
 					if($auth){
 						$this->home();
 					}else{
@@ -58,6 +57,56 @@ class DefaultController{
 	public function signupForm(){
 		$defaultView = new DefaultView(NULL);
 		$defaultView->render(signupForm);
+	}
+
+	public function signupVerification(){
+
+		if(isset($_POST['send'])){
+
+			if(
+				!empty($_POST['name']) ||
+				!empty($_POST['mail']) ||
+				!empty($_POST['login']) ||
+				!empty($_POST['password']) ||
+				!empty($_POST['password_confirm'])
+			){
+				$name = $_POST['name'];
+				$mail = $_POST['mail'];
+				$login = $_POST['login'];
+				$password = $_POST['password'];
+				$password_confirm = $_POST['password_confirm'];
+
+				if(
+					filter_var($name, FILTER_SANITIZE_STRING) &&
+					filter_var($mail, FILTER_SANITIZE_STRING) &&
+					filter_var($login, FILTER_SANITIZE_STRING) &&
+					filter_var($password, FILTER_SANITIZE_STRING) &&
+					filter_var($password_confirm, FILTER_SANITIZE_STRING)
+				){
+					if($password == $password_confirm){
+						$authentification = new Authentification();
+						$auth = $authentification->createUser($name, $mail, $login, $password);
+
+						if($auth){
+							$eventController = new EventController();
+							$eventController->findAllByPromoter();
+						}else{
+							$this->signupForm();
+							echo "une erreur est survenue.";
+						}
+
+					}else{
+						return $this->signupForm();
+						echo "Les mots de passes entrés ne correspondent pas.";
+					}
+
+				}
+			}else{
+				return $this->signupForm();
+				echo "Veuillez compléter tous les champs.";
+			}
+
+		}
 	}
 
 }

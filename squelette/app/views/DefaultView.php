@@ -42,11 +42,11 @@ class DefaultView  extends AbstractView{
       $html =
               "<h1>S'inscrire</h1>
               <form method='POST' action='$this->script_name/signupVerification/'>
-                <input type='text' name='nom' placeholder='Nom' />
+                <input type='text' name='name' placeholder='Nom' />
                 <input type='text' name='mail' placeholder='E-mail' />
                 <input type='text' name='login' placeholder='Login' />
                 <input type='password' name='password' placeholder='Mot de passe' />
-                <input type='password' name='confirm_password' placeholder='Confirmez votre mot de passe' />
+                <input type='password' name='password_confirm' placeholder='Confirmez votre mot de passe' />
                 <button name='send'>Inscription</button>
               </form>
               Vous avez déjà un compte? <a href='$this->script_name/signin/'>connectez-vous</a>.";

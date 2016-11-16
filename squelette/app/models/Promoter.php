@@ -16,6 +16,7 @@ class Promoter extends Model
     protected $table = 'promoter';
     protected $primaryKey = 'id';
     protected $fillable = ['name', 'mail','login','password'];
+    public $timestamps = false;
 
     public function getEvents(){
         return $this->hasMany('\app\models\Event', 'id_promoter');

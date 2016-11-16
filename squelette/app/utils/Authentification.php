@@ -42,4 +42,16 @@ class Authentification extends AbstractAuthentification
         $this->promoter = null;
     }
 
+    public function createUser($name, $mail, $login, $password){
+
+      $promoter = new Promoter();
+      $promoter->name = $name;
+      $promoter->mail = $mail;
+      $promoter->login = $login;
+      $promoter->password = password_hash($password, PASSWORD_DEFAULT);
+      $promoter->save();
+
+		  return $promoter->id;
+    }
+
 }

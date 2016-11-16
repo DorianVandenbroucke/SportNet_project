@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS `discipline` ;
 
 CREATE TABLE IF NOT EXISTS `discipline` (
   `id` INT NOT NULL auto_increment,
-  `name` VARCHAR(45) NULL,
+  `name` VARCHAR(255) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -33,10 +33,10 @@ DROP TABLE IF EXISTS `promoter` ;
 
 CREATE TABLE IF NOT EXISTS `promoter` (
   `id` INT NOT NULL auto_increment,
-  `name` VARCHAR(45) NULL,
-  `mail` VARCHAR(45) NULL,
-  `login` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
+  `name` VARCHAR(255) NULL,
+  `mail` VARCHAR(255) NULL,
+  `login` VARCHAR(255) NULL,
+  `password` VARCHAR(255) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -48,8 +48,8 @@ DROP TABLE IF EXISTS `event` ;
 
 CREATE TABLE IF NOT EXISTS `event` (
   `id` INT NOT NULL auto_increment,
-  `name` VARCHAR(45) NULL,
-  `description` VARCHAR(45) NULL,
+  `name` VARCHAR(255) NULL,
+  `description` VARCHAR(500) NULL,
   `startDate` DATE NULL,
   `endDate` DATE NULL,
   `status` INT(11) NULL,
@@ -78,8 +78,8 @@ DROP TABLE IF EXISTS `activity` ;
 
 CREATE TABLE IF NOT EXISTS `activity` (
   `id` INT NOT NULL auto_increment,
-  `name` VARCHAR(45) NULL,
-  `description` VARCHAR(45) NULL,
+  `name` VARCHAR(255) NULL,
+  `description` VARCHAR(500) NULL,
   `price` DECIMAL NULL,
   `date` DATETIME NULL,
   `id_event` INT NULL,
@@ -100,10 +100,10 @@ DROP TABLE IF EXISTS `participant` ;
 
 CREATE TABLE IF NOT EXISTS `participant` (
   `id` INT NOT NULL auto_increment,
-  `mail` VARCHAR(45) NULL,
+  `mail` VARCHAR(255) NULL,
   `birthDate` DATE NULL,
-  `firstName` VARCHAR(45) NULL,
-  `lastName` VARCHAR(45) NULL,
+  `firstName` VARCHAR(255) NULL,
+  `lastName` VARCHAR(255) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `participant_activity` (
   `id_participant` INT NOT NULL,
   `id_activity` INT NOT NULL,
   `score` INT NULL,
-  `participant_number` VARCHAR(45) NULL,
+  `participant_number` VARCHAR(255) NULL,
   PRIMARY KEY (`id_participant`, `id_activity`),
   INDEX `fk_participant_activity__activity_idx` (`id_activity` ASC),
   CONSTRAINT `fk_participant_activity_participant`
