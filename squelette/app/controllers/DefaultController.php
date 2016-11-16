@@ -45,7 +45,7 @@ class DefaultController{
 					$auth = $authentification->login($login, $pass);
 					if($auth){
 						$id_promoter = $_SESSION['promoter'];
-						header("location: ../event/all/?id=$id_promoter");
+						header("location: ../event/add/");
 					}else{
 						$this->signinForm();
 						echo "Les données entrées ne correspondent pas.";
@@ -98,8 +98,7 @@ class DefaultController{
 							$auth = $authentification->createUser($name, $mail, $login, $password);
 
 							if($auth){
-								$eventController = new EventController($this->request);
-								$eventController->findAllByPromoter();
+								header("location: ../event/add/");
 							}else{
 								$this->signupForm();
 								echo "une erreur est survenue.";

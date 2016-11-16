@@ -88,11 +88,12 @@ abstract class AbstractView {
               "/event/add/$id_promoter/" => "Mes événements",
               "/logout/" => "Me déconnecter"
             );
-        } else{
+        }else if(!isset($_SESSION['promoter'])){
             $array = array(
               "" => "Accueil",
               "/event/all/" => "Evénements",
               "/event/add/" => "Ajouter un événement",
+              "/signin/" => "Me connecter"
             );
         }
 
@@ -110,7 +111,6 @@ abstract class AbstractView {
           }
         }
 
-        var_dump($array);
         $html .= "</ul>";
         return $html;
 
