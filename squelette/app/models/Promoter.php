@@ -13,12 +13,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Promoter extends Model
 {
-    protected $table = 'discipline';
+    protected $table = 'promoter';
     protected $primaryKey = 'id';
     protected $fillable = ['name', 'mail','login','password'];
 
     public function getEvents(){
         return $this->hasMany('\app\models\Event', 'id_promoter');
+    }
+
+    static public function findByName($login){
+      $p = Promoter::select()->where('login', $login)->get();
     }
 
 
