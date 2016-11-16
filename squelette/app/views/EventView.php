@@ -91,6 +91,7 @@ EOT;
         return "
             <h3>$title</h3>
             <form action=\"$this->script_name/event/save/\" method='post' >
+                <input type='hidden' value='$id'/>
                 <div class='column_4'>
                     <label for='nom'>Nom</label>
                     <input type='text' id='nom' placeholder='Nom' name='name' value='$name'>
@@ -169,8 +170,8 @@ EOT;
         $html = '';
         foreach ($this->data['events'] as $event){
             $html.="<li>$event->name    $event->startDate - $event->endDate
-                <a  href='$this->script_name/event/detail/?id=$event->id'>Details</a>
-                <a href='$this->script_name/event/delete/?id=$event->id'>Supprimer</a>
+                <a  href='$this->script_name/event/?id=$event->id'>Details</a>
+                <a href='$this->script_name/event/?id=$event->id'>Supprimer</a>
                 </li>";
         }
         return $html;
@@ -178,8 +179,8 @@ EOT;
 
     private function eventActivities(){
         $html='';
-        foreach ($this->data['events']->getActivities() as $activity){
-            $html.="<li>$activity->name
+        foreach ($this->data['events']->getActivities as $activity){
+            $html.="<li>$activity->name  
                 <a  href='$this->script_name/activity/detail/?id=$activity->id'>Détail</a>
                 </li>";
         }
