@@ -24,6 +24,19 @@ header{
 	margin: 0;
 }
 
+.presentation{
+	text-align: center;
+	a button{
+		border: 1px solid $primaryColor;
+		color: $primaryColor;
+		transition: 0.2s;
+		&:hover{
+			background-color: $primaryColor;
+			color: #ffffff;
+		}
+	}
+}
+
 footer{
 	background-color: $fontColor;
     color: lighten($secondaryColor, 55);

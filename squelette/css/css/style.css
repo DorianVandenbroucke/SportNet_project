@@ -35,6 +35,16 @@ header {
   background: #72d5ff;
   margin: 0; }
 
+.presentation {
+  text-align: center; }
+  .presentation a button {
+    border: 1px solid #a10000;
+    color: #a10000;
+    transition: 0.2s; }
+    .presentation a button:hover {
+      background-color: #a10000;
+      color: #ffffff; }
+
 footer {
   background-color: #454545;
   color: #f2fbff;

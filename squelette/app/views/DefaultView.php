@@ -10,14 +10,16 @@ class DefaultView  extends AbstractView{
 
     protected function renderHome(){
   		$html =
-              "<div>
-                <h1>Bienvenue sur SportNet, le rendez-vous des plus grands sportifs</h1>
-                <a href='$this->script_name/event/add/'>Ajouter un événement</a>
-              </h1>";
+              "<div class='row presentation'>
+                <h1 class='row'>Bienvenue sur SportNet, le rendez-vous des plus grands sportifs</h1>
+                <div class='row'>
+                  <a href='$this->script_name/event/add/'><button>Ajouter un événement</button></a>
+                </div>
+              </div>";
 
   		foreach($this->data as $value){
   			$html .=
-  					"<div>
+  					"<div class='row'>
   						<h2>".$value->name ."</h2>
   						<div>Du ".$value->startDate ." au ".$value->endDate ."</div>
   						<a href='$this->script_name/event/".$value->id ."'>Voir plus</a>"
