@@ -17,18 +17,9 @@
 /* Alerts */
 /* Components */
 body {
-  background-color: #efefef;
+  background-color: #f2fbff;
   margin-bottom: 320px !important; }
 
-/* By default */
-/* Inline Balises */
-/* Title */
-/* Link */
-/* Special Balise */
-/* Special */
-/* Buttons */
-/* Alerts */
-/* Components */
 header {
   background-color: #454545;
   text-align: center;
@@ -39,29 +30,11 @@ header {
     header div span {
       color: #0098d8; }
 
-/* By default */
-/* Inline Balises */
-/* Title */
-/* Link */
-/* Special Balise */
-/* Special */
-/* Buttons */
-/* Alerts */
-/* Components */
 .menu {
   border-bottom: 1px solid #0098d8;
-  background: #f2fbff;
+  background: #72d5ff;
   margin: 0; }
 
-/* By default */
-/* Inline Balises */
-/* Title */
-/* Link */
-/* Special Balise */
-/* Special */
-/* Buttons */
-/* Alerts */
-/* Components */
 footer {
   background-color: #454545;
   color: #f2fbff;

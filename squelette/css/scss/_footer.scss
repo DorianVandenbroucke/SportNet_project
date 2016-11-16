@@ -1,8 +1,0 @@
-@import "variables.scss";
-
-footer{
-	background-color: $fontColor;
-    color: lighten($secondaryColor, 55);
-	padding: 10px 0;
-	border-top: 3px solid $secondaryColor;
-}
