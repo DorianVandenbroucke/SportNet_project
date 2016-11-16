@@ -22,52 +22,69 @@ class ActivityController{
 
     public function add()
     {
-        if(!$this->request->post)
+        if($this->auth->logged_in)
         {
-            $activity = new Activity();
-            $activity->name = $this->request->post['name'];
-            $activity->description=  $this->request->post['description'];
-            $activity->date=  $this->request->post['date'];
-            $activity->id_event=  $this->request->post['id_event'];
+            if($this->request->post)
+            {
+                $activity = new Activity();
+                $activity->name = $this->request->post['name'];
+                $activity->description=  $this->request->post['description'];
+                $activity->date=  $this->request->post['date'];
+                $activity->id_event=  $this->request->post['id_event'];
 
-            $activity->save();
+                $activity->save();
 
-            $view = new ActivityView($activity->id);
-            return $view->render('detail');
+                $view = new ActivityView($activity);
+                return $view->render('detail');
+            }
+            $view = new ActivityView($this->request);
+            return $view->render('add');
         }
-        $view = new ActivityView($this->request);
-        return $view->render('add');
+        $view = new DefaultView($this->request);
+        return $view->render('signinForm');
     }
 
     public function update($id)
     {
-        if(!$this->request->post)
+        if($this->auth->logged_in)
         {
             $activity = Activity::find($id);
-            $activity->name = $this->request->post['name'];
-            $activity->description=  $this->request->post['description'];
-            $activity->date=  $this->request->post['date'];
-            $activity->id_event=  $this->request->post['id_event'];
+            if($this->request->post)
+            {
+                $activity->name = $this->request->post['name'];
+                $activity->description=  $this->request->post['description'];
+                $activity->date=  $this->request->post['date'];
+                $activity->id_event=  $this->request->post['id_event'];
 
-            $activity->save();
+                $activity->save();
 
-            $view = new ActivityView($activity->id);
-            return $view->render('detail');
+                $view = new ActivityView($activity);
+                return $view->render('detail');
+            }
+            $view = new ActivityView($activity);
+            return $view->render('edit');
         }
+        $view = new DefaultView($this->request);
+        return $view->render('signinForm');
     }
 
     public function delete($id)
     {
-        $activity = Activity::find($id);
-        $activity->delete();
+        if($this->auth->logged_in)
+        {
+            $activity = Activity::find($id);
+            $activity->delete();
+            return $this->all();  
+        }
+        $view = new DefaultView($this->request);
+        return $view->render('signinForm');
     }
 
-    public function all($idEvent)
+    public function detail($id)
     {
-        $event = Event::find($idEvent);
-        $activities = Event::find($idEvent)->with('getActivities')->get();   
+        $event = Activity::find($idEvent);
         $view = new ActivityView($activities);
-        $view->render('all');
+        $view->render('detail');
     }
 
     public function paiement()
