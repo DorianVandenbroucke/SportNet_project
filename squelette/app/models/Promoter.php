@@ -23,7 +23,7 @@ class Promoter extends Model
     }
 
     static public function findByName($login){
-        return Promoter::select()->where('login', '=', $login)->get();
+        return Promoter::where('login', '=', $login)->first();
     }
 
 

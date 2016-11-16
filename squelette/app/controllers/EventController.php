@@ -8,6 +8,7 @@
  */
 namespace app\controllers;
 
+use app\models\Discipline;
 use app\models\Event;
 use app\utils\Authentification;
 use app\utils\HttpRequest;
@@ -26,13 +27,14 @@ class EventController
     }
 
     public function addEvent(){
-        //if($this->auth->logged_in){
-            $ev = new EventView(null);
+        if($this->auth->logged_in){
+            $disciplines = Discipline::all();
+            $ev = new EventView(['disciplines' =>$disciplines]);
             $ev->render('addForm');
-        /*}else{
+        }else{
             $defaultView = new DefaultView(NULL);
             $defaultView->render('signinForm');
-        }*/
+        }
     }
 
     public function saveEvent(){
@@ -70,21 +72,21 @@ class EventController
         $id = $this->request->get['id'];
         $event = Event::find($id);
         if($event){
-            $ev = new EventView(Event::all());
+            $ev = new EventView(['events' =>$event]);
             $ev->render('event');
         }
     }
 
     //url /all
     public function findAll(){
-        $ev = new EventView(Event::all());
+        $ev = new EventView(['events' =>Event::all()]);
         $ev->render('allEvents');
     }
 
     //url /allPromoter
     public function findAllByPromoter(){
         if($this->auth->logged_in){
-            $ev = new EventView($this->auth->promoter->getEvents());
+            $ev = new EventView(['events' =>$this->auth->promoter->getEvents()]);
             $ev->render('allEvents');
         }else{
             $defaultView = new DefaultView(NULL);

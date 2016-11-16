@@ -86,7 +86,7 @@ EOT;
 
     public function openEventDetail(){
         $html = '<div>';
-        $event = $this->data;
+        $event = $this->data['events'];
         $activitiesList = $this->eventActivities();
         $html.="
             <h2>$event->name</h2>
