@@ -1,7 +1,7 @@
 @import "variables.scss";
 
 body{
-	background-color: #fefefe;
+	background-color: $backgroundColor;
 	margin-bottom: 320px!important;
 }
 
@@ -16,6 +16,14 @@ header{
 			color: $secondaryColor;
 		}
 	}
+}
+
+.content{
+	background-color: #fff;
+	padding: 5px;
+	margin: 20px 0;
+	border: 1px solid darken($backgroundColor, 20);
+	border-top: none;
 }
 
 .menu{
@@ -37,6 +45,10 @@ header{
 	}
 }
 
+.page_header h1{
+	text-align: left !important;
+}
+
 footer{
 	background-color: $fontColor;
     color: lighten($secondaryColor, 55);
@@ -45,6 +57,9 @@ footer{
 }
 
 form{
+	.button{
+		text-align: center;
+	}
 	input[type=text], input[type=password], input[type=date], select, textarea{
 		width: 100%;
 		padding: 5px 10px;
@@ -52,6 +67,9 @@ form{
 		box-sizing: border-box;
 		border: none;
 		border-bottom: 1px solid $fontColor;
+	}
+	.message_droite{
+		text-align: right;
 	}
 }
 

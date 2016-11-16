@@ -17,7 +17,7 @@
 /* Alerts */
 /* Components */
 body {
-  background-color: #fefefe;
+  background-color: #efefef;
   margin-bottom: 320px !important; }
 
 header {
@@ -29,6 +29,13 @@ header {
     font-size: 2em; }
     header div span {
       color: #0098d8; }
+
+.content {
+  background-color: #fff;
+  padding: 5px;
+  margin: 20px 0;
+  border: 1px solid #bcbcbc;
+  border-top: none; }
 
 .menu {
   border-bottom: 1px solid #0098d8;
@@ -45,12 +52,17 @@ header {
       background-color: #a10000;
       color: #ffffff; }
 
+.page_header h1 {
+  text-align: left !important; }
+
 footer {
   background-color: #454545;
   color: #f2fbff;
   padding: 10px 0;
   border-top: 3px solid #0098d8; }
 
+form .button {
+  text-align: center; }
 form input[type=text], form input[type=password], form input[type=date], form select, form textarea {
   width: 100%;
   padding: 5px 10px;
@@ -58,6 +70,8 @@ form input[type=text], form input[type=password], form input[type=date], form se
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid #454545; }
+form .message_droite {
+  text-align: right; }
 
 @media screen and (max-width: 70em) {
   .menu ul {
