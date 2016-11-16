@@ -47,9 +47,10 @@ class DefaultController{
 						echo "Les données entrées ne correspondent pas";
 					}
 				}
+			}else{
+				$this->signinForm();
+				echo "Veuillez remplir tous les champs";
 			}
-			$this->signinForm();
-			echo "Veuillez remplir tous lles champs";
 		}
 
 	}
