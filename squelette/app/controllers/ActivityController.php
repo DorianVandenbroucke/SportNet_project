@@ -113,4 +113,11 @@ class ActivityController{
         $view = new ActivityView($id);
         return $view->render('detail');
     }
+
+    public function result($id)
+    {
+        $activity = Activity::find($id)->with('getParticipants')->get();
+        $view = new ActivityView($activity);
+        return $view->render('result');
+    }
 } 

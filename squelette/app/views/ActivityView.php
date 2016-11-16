@@ -71,9 +71,9 @@ EOT;
                 <p>'.$this->data->description.'</p><br>
                 </section>
                 <aside class="column_3">
-                <form action="#" methode="post"><input type="submit" name="publishResults" value="Publier les résultats"/></form>
-                <form action="#" methode="post"><input type="submit" name="editActivity" value="Modifier l\'épreuve"/></form>
-                <form action="#" methode="post"><input type="submit" name="deleteActivity" value="Supprimer l\'épreuve"/></form>
+                <form action="'.$this->script_name.'/" methode="post"><input type="submit" name="publishResults" value="Publier les résultats"/></form>
+                <form action="'.$this->script_name.'/" methode="post"><input type="submit" name="editActivity" value="Modifier l\'épreuve"/></form>
+                <form action="'.$this->script_name.'/" methode="post"><input type="submit" name="deleteActivity" value="Supprimer l\'épreuve"/></form>
                 <h3>Date de l\'épreuve :'.$this->data->date.'</h3>
                 </aside>
            </section>
@@ -119,4 +119,20 @@ EOT;
                 </form>';
     }
 
+    public function result(){
+        return '<section class="row">
+                <h1>Résultat généraux de l\'épreuve</h1>
+                <h2>Marathon Kids</h2>
+                <form action="#" method="POST"/><input type="text" name="searchQuery"/><input type="submit" name="search" value="Recherche"/></form>
+                <table>
+                <tr><th>Ranking</th><th>Score</th><th>N°PArticipant</th><th>Nom</th></tr>
+                <tr>'.foreach ($this->data->getParticipants as $participant) {
+                    .'<td>'.$participant->pivot->score.'</td><td>'.$participant->firstName.'</td><td>'.$participant->firstName.'</td><td>'.$participant->birthDay.'</td>'.
+                }.'</tr><tr><td>Ranking</td><td>Score</td><td>N°PArticipant</td><td>Nom</td></tr>
+                
+                </table>
+                </section>';
+    }
 }    
+
+ 
