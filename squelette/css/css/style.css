@@ -17,7 +17,7 @@
 /* Alerts */
 /* Components */
 body {
-  background-color: #f2fbff;
+  background-color: #fefefe;
   margin-bottom: 320px !important; }
 
 header {
@@ -40,5 +40,15 @@ footer {
   color: #f2fbff;
   padding: 10px 0;
   border-top: 3px solid #0098d8; }
+
+form input[type=text], form input[type=password], form select {
+  width: 100%;
+  padding: 5px 10px;
+  margin: 8px 0;
+  box-sizing: border-box; }
+
+@media screen and (max-width: 70em) {
+  .menu ul {
+    margin: 0 auto !important; } }
 
 /*# sourceMappingURL=style.css.map */

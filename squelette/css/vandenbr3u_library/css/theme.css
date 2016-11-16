@@ -304,7 +304,7 @@ button, .btn, .jumbotron button, .blue-btn, .green-btn, .yellow-btn {
     .navbar li a.disabled:hover {
       color: #3fc6ff; }
 
-@media screen and (min-width: 70em) {
+@media screen and (min-width: 40em) {
   .navbar {
     padding-top: 12px;
     padding-bottom: 15px; }
@@ -318,7 +318,7 @@ button, .btn, .jumbotron button, .blue-btn, .green-btn, .yellow-btn {
           border-bottom: 3px solid #002c3f; }
         .navbar li a.disabled:hover {
           border: none; } }
-@media screen and (max-width: 70em) {
+@media screen and (max-width: 40em) {
   .navbar::before {
     content: "";
     display: inline-block;

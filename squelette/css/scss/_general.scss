@@ -1,7 +1,7 @@
 @import "variables.scss";
 
 body{
-	background-color: lighten($secondaryColor, 55);
+	background-color: #fefefe;
 	margin-bottom: 320px!important;
 }
 
@@ -29,4 +29,20 @@ footer{
     color: lighten($secondaryColor, 55);
 	padding: 10px 0;
 	border-top: 3px solid $secondaryColor;
+}
+
+form{
+	input[type=text], input[type=password], select{
+		width: 100%;
+		padding: 5px 10px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+}
+
+
+@media screen and (max-width: 70em) {
+	.menu ul{
+		margin: 0 auto !important;
+	}
 }

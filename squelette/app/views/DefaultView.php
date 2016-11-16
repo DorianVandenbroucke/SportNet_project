@@ -57,15 +57,15 @@ class DefaultView  extends AbstractView{
 
 
         switch($selector){
-          case 'signinForm':
-            $main = $this->renderSigninForm();
-            break;
-          case 'signupForm':
-            $main = $this->renderSignupForm();
-            break;
-    			default:
-    				$main = $this->renderHome();
-    				break;
+            case 'signinForm':
+                $main = $this->renderSigninForm();
+                break;
+            case 'signupForm':
+                $main = $this->renderSignupForm();
+                break;
+    		default:
+    			$main = $this->renderHome();
+    			break;
         }
 
         $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';

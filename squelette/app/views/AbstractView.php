@@ -85,7 +85,9 @@ abstract class AbstractView {
         $html .= '<li><a href="'.$this->script_name.'/event/add/">Ajouter un évenement</a></li>';
         if(isset($_SESSION['user_login'])){
         // TODO: URL A VOIR
-            $html .= '<li><a href="'.$this->script_name.'/event/all/">Mes évenement</a></li>';
+            foreach($this->data as $value){
+                $html .= '<li><a href="'.$this->script_name.'/event/all/'.$value->id .'">Mes évenement</a></li>';
+            }
         }
         $html .= "</ul>";
         return $html;
