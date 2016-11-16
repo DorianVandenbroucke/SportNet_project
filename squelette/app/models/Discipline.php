@@ -15,6 +15,7 @@ class Discipline extends Model
     protected $table = 'discipline';
     protected $primaryKey = 'id';
     protected $fillable = ['name'];
+    public $timestamps = false;
 
     public function getEvents(){
         return $this->hasMany('\app\models\Event', 'id_discipline');
