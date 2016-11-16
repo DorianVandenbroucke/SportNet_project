@@ -30,13 +30,23 @@ class DefaultView  extends AbstractView{
 
     protected function renderSigninForm(){
       $html =
-              "<h1>Se connecter</h1>
-              <form method='POST' action='$this->script_name/signinVerification/'>
-                <input type='text' name='login' placeholder='Login' />
-                <input type='password' name='password' placeholder='Mot de passe' />
-                <button name='send'>Connexion</button>
-              </form>
-              Vous n'avez pas encore de compte? <a href='$this->script_name/signup/'>inscrivez-vous</a>.";
+              "<div class='page_header row'>
+                <h1>Se connecter</h1>
+              </div>
+              <form class='row' method='POST' action='$this->script_name/signinVerification/'>
+                <div class='column_4'>
+                  <label class='row'>Login:</label>
+                  <input class='row' type='text' name='login' placeholder='Login' />
+                </div>
+                <div class='column_4'>
+                  <label class='row'>Mot de passe:</label>
+                  <input class='row' type='password' name='password' placeholder='Mot de passe' />
+                </div>
+                <div class='row button'>
+                  <button name='send'>Connexion</button>
+                </div>
+                <p class='message_droite row'>Vous n'avez pas encore de compte? <a href='$this->script_name/signup/'>inscrivez-vous</a></p>.
+              </form>";
       return $html;
     }
 

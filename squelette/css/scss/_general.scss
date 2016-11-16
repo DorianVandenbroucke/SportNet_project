@@ -18,6 +18,14 @@ header{
 	}
 }
 
+.content{
+	background-color: #fff;
+	padding: 5px;
+	margin: 20px 0;
+	border: 1px solid darken($backgroundColor, 20);
+	border-top: none;
+}
+
 .menu{
 	border-bottom: 1px solid $secondaryColor;
     background: lighten($secondaryColor, 30);
@@ -48,6 +56,10 @@ header{
     border-top: none;
 }
 
+.page_header h1{
+	text-align: left !important;
+}
+
 footer{
 	background-color: $fontColor;
     color: lighten($secondaryColor, 55);
@@ -56,6 +68,9 @@ footer{
 }
 
 form{
+	.button{
+		text-align: center;
+	}
 	input[type=text], input[type=password], input[type=date], select{
 		width: 100%;
 		padding: 5px 10px;
@@ -64,6 +79,17 @@ form{
 		border: none;
 		border-bottom: 1px solid $fontColor;
 	}
+	.message_droite{
+		text-align: right;
+	}
+}
+
+textarea{
+	width: 100%;
+	padding: 5px 10px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 1px dotted $fontColor;
 }
 
 textarea{
