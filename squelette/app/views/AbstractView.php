@@ -73,16 +73,16 @@ abstract class AbstractView {
         if (isset($_SERVER["PATH_INFO"])) {
             $path = $_SERVER["PATH_INFO"];
         }
-
-        $html = '<ul class="navbar offset_1">';
         $id_promoter = "";
         if (isset($_SESSION['promoter'])) {
             $id_promoter = $_SESSION['promoter'];
         }
 
+        $html = '<ul class="navbar offset_1">';
+
         if (isset($_SESSION['promoter'])) {
             $array = array(
-              "/" => "Accueil",
+              "" => "Accueil",
               "/event/all/" => "Evénements",
               "/event/add/" => "Ajouter un événement",
               "/event/add/$id_promoter/" => "Mes événements",
@@ -90,7 +90,7 @@ abstract class AbstractView {
             );
         } else{
             $array = array(
-              "/" => "Accueil",
+              "" => "Accueil",
               "/event/all/" => "Evénements",
               "/event/add/" => "Ajouter un événement",
             );

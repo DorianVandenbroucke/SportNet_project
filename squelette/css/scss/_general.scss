@@ -1,7 +1,7 @@
 @import "variables.scss";
 
 body{
-	background-color: #fefefe;
+	background-color: $backgroundColor;
 	margin-bottom: 320px!important;
 }
 
@@ -35,6 +35,17 @@ header{
 			color: #ffffff;
 		}
 	}
+}
+.page_header h1{
+    text-align: left !important;
+}
+
+.content{
+    background-color: #fff;
+    padding: 5px;
+    margin: 20px 0;
+    border: 1px solid darken($backgroundColor, 20);
+    border-top: none;
 }
 
 footer{

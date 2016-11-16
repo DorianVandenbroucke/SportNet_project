@@ -17,7 +17,7 @@
 /* Alerts */
 /* Components */
 body {
-  background-color: #fefefe;
+  background-color: #efefef;
   margin-bottom: 320px !important; }
 
 header {
@@ -44,6 +44,16 @@ header {
     .presentation a button:hover {
       background-color: #a10000;
       color: #ffffff; }
+
+.page_header h1 {
+  text-align: left !important; }
+
+.content {
+  background-color: #fff;
+  padding: 5px;
+  margin: 20px 0;
+  border: 1px solid #bcbcbc;
+  border-top: none; }
 
 footer {
   background-color: #454545;
