@@ -25,7 +25,7 @@ class Authentification extends AbstractAuthentification
     public function login($login, $pass)
     {
         $promoter= Promoter::findByName($login);
-        if(!is_null($promoter) && $pass == $promoter->login /*password_verify($pass, $promoter->password)*/){
+        if(!is_null($promoter) && password_verify($pass, $promoter->password)){
            $this->promoter = $promoter->id;
             $_SESSION['promoter'] = $this->promoter;
             $this->logged_in = true;

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\utils\HttpRequest;
 use app\views\ActivityView;
+use app\views\DefaultView;
 use app\models\Activity;
 use app\models\Event;
 use app\modelsParticipant;
@@ -44,11 +45,11 @@ class ActivityController{
         return $view->render('signinForm');
     }
 
-    public function update($id)
+    public function update()
     {
         if($this->auth->logged_in)
         {
-            $activity = Activity::find($id);
+            $activity = Activity::find($this->request->get['id']);
             if($this->request->post)
             {
                 $activity->name = $this->request->post['name'];
@@ -68,11 +69,11 @@ class ActivityController{
         return $view->render('signinForm');
     }
 
-    public function delete($id)
+    public function delete()
     {
         if($this->auth->logged_in)
         {
-            $activity = Activity::find($id);
+            $activity = Activity::find($this->request->get['id']);
             $activity->delete();
             return $this->all();  
         }
@@ -80,10 +81,10 @@ class ActivityController{
         return $view->render('signinForm');
     }
 
-    public function detail($id)
+    public function detail()
     {
-        $event = Activity::find($idEvent);
-        $view = new ActivityView($activities);
+        $activity = Activity::find($this->request->get['id']);
+        $view = new ActivityView($activity);
         $view->render('detail');
     }
 
@@ -93,7 +94,7 @@ class ActivityController{
         return $view->render('paiement');
     }
 
-    public function register($id)
+    public function register()
     {
         if(!$this->request->post)
         {
@@ -108,15 +109,15 @@ class ActivityController{
         $participant->lastName = $this->request->post['lastName'];
         $participant->save();
         
-        $activity = Activity::find($id);
+        $activity = Activity::find($this->request->get['id']);
         $activity->getParticipants()->attach($participant);
-        $view = new ActivityView($id);
+        $view = new ActivityView($activity);
         return $view->render('detail');
     }
 
-    public function result($id)
+    public function result()
     {
-        $activity = Activity::find($id)->with('getParticipants')->get();
+        $activity = Activity::find($this->request->get['id'])->with('getParticipants')->get();
         $view = new ActivityView($activity);
         return $view->render('result');
     }

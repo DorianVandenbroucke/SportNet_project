@@ -119,7 +119,7 @@ EOT;
                 </form>';
     }
 
-    public function result(){
+   /* public function result(){
         return '<section class="row">
                 <h1>Résultat généraux de l\'épreuve</h1>
                 <h2>Marathon Kids</h2>
@@ -132,7 +132,7 @@ EOT;
                 
                 </table>
                 </section>';
-    }
+    }*/
 }    
 
  
