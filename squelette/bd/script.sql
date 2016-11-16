@@ -17,9 +17,9 @@ USE SportNet;
 -- -----------------------------------------------------
 -- Table `Discipline`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Discipline` ;
+DROP TABLE IF EXISTS `discipline` ;
 
-CREATE TABLE IF NOT EXISTS `Discipline` (
+CREATE TABLE IF NOT EXISTS `discipline` (
   `id` INT NOT NULL auto_increment,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -29,9 +29,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Promoter`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Promoter` ;
+DROP TABLE IF EXISTS `promoter` ;
 
-CREATE TABLE IF NOT EXISTS `Promoter` (
+CREATE TABLE IF NOT EXISTS `promoter` (
   `id` INT NOT NULL auto_increment,
   `name` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
@@ -44,9 +44,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Event`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Event` ;
+DROP TABLE IF EXISTS `event` ;
 
-CREATE TABLE IF NOT EXISTS `Event` (
+CREATE TABLE IF NOT EXISTS `event` (
   `id` INT NOT NULL auto_increment,
   `name` VARCHAR(45) NULL,
   `description` VARCHAR(45) NULL,
@@ -60,12 +60,12 @@ CREATE TABLE IF NOT EXISTS `Event` (
   INDEX `fk_event_discipline_idx` (`id_discipline` ASC),
   CONSTRAINT `fk_event_promoter`
     FOREIGN KEY (`id_promoter`)
-    REFERENCES `Promoter` (`id`)
+    REFERENCES `promoter` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_event_discipline`
     FOREIGN KEY (`id_discipline`)
-    REFERENCES `Discipline` (`id`)
+    REFERENCES `discipline` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -74,9 +74,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Activity`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Activity` ;
+DROP TABLE IF EXISTS `activity` ;
 
-CREATE TABLE IF NOT EXISTS `Activity` (
+CREATE TABLE IF NOT EXISTS `activity` (
   `id` INT NOT NULL auto_increment,
   `name` VARCHAR(45) NULL,
   `description` VARCHAR(45) NULL,
@@ -85,9 +85,9 @@ CREATE TABLE IF NOT EXISTS `Activity` (
   `id_event` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Activity_Event_idx` (`id_event` ASC),
-  CONSTRAINT `fk_Activity_Event`
+  CONSTRAINT `fk_activity_event`
     FOREIGN KEY (`id_event`)
-    REFERENCES `Event` (`id`)
+    REFERENCES `event` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -96,9 +96,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Participant`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Participant` ;
+DROP TABLE IF EXISTS `participant` ;
 
-CREATE TABLE IF NOT EXISTS `Participant` (
+CREATE TABLE IF NOT EXISTS `participant` (
   `id` INT NOT NULL auto_increment,
   `mail` VARCHAR(45) NULL,
   `birthDate` DATE NULL,
@@ -111,23 +111,23 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Participant_Activity`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Participant_Activity` ;
+DROP TABLE IF EXISTS `participant_activity` ;
 
-CREATE TABLE IF NOT EXISTS `Participant_Activity` (
+CREATE TABLE IF NOT EXISTS `participant_activity` (
   `id_participant` INT NOT NULL,
   `id_activity` INT NOT NULL,
   `score` INT NULL,
   `participant_number` VARCHAR(45) NULL,
   PRIMARY KEY (`id_participant`, `id_activity`),
-  INDEX `fk_Participant_Activity__activity_idx` (`id_activity` ASC),
-  CONSTRAINT `fk_Participant_Activity_participant`
+  INDEX `fk_participant_activity__activity_idx` (`id_activity` ASC),
+  CONSTRAINT `fk_participant_activity_participant`
     FOREIGN KEY (`id_participant`)
-    REFERENCES `Participant` (`id`)
+    REFERENCES `participant` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Participant_Activity__activity`
+  CONSTRAINT `fk_participant_activity__activity`
     FOREIGN KEY (`id_activity`)
-    REFERENCES `Activity` (`id`)
+    REFERENCES `activity` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
