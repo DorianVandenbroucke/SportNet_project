@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `participant_activity` (
   `id_participant` INT NOT NULL,
   `id_activity` INT NOT NULL,
   `score` INT NULL,
+  `ranking` INT NULL,
   `participant_number` VARCHAR(255) NULL,
   PRIMARY KEY (`id_participant`, `id_activity`),
   INDEX `fk_participant_activity__activity_idx` (`id_activity` ASC),
