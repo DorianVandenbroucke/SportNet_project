@@ -29,8 +29,8 @@ class EventController
             $ev = new EventView(null);
             $ev->render('addForm');
         }else{
-
-            //TODO redirect to login
+            $defaultView = new DefaultView(NULL);
+            $defaultView->render('signinForm');
         }
     }
 
@@ -52,7 +52,7 @@ class EventController
     public function deleteEvent(){
         $id = $this->request->get['id'];
         $totalDeleted = Event::destroy($id);
-        return $totalDeleted > 0;
+
     }
 
     public function updateEvent(){
@@ -64,16 +64,30 @@ class EventController
         $event->update();
     }
 
+    //
     public function findById(){
         $id = $this->request->get['id'];
-        return Event::find($id);
+        $event = Event::find($id);
+        if($event){
+            $ev = new EventView(Event::all());
+            $ev->render('event');
+        }
     }
 
+    //url /all
     public function findAll(){
-        return Event::all();
+        $ev = new EventView(Event::all());
+        $ev->render('allEvents');
     }
 
+    //url /allPromoter
     public function findAllByPromoter(){
-        return $this->auth->promoter->getEvents();
+        if($this->auth->logged_in){
+            $ev = new EventView($this->auth->promoter->getEvents());
+            $ev->render('allEvents');
+        }else{
+            $defaultView = new DefaultView(NULL);
+            $defaultView->render('signinForm');
+        }
     }
 }
