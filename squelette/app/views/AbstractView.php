@@ -79,7 +79,7 @@ abstract class AbstractView {
 
 
     protected function renderMenu(){
-        $html .= '<ul class="navbar">';
+        $html .= '<ul class="navbar offset_1">';
         $html .= '<li><a href="'.$this->script_name.'" class="active">Accueil</a></li>';
         $html .= '<li><a href="'.$this->script_name.'/event/all/">Evenements</a></li>';
         $html .= '<li><a href="'.$this->script_name.'/event/add/">Ajouter un évenement</a></li>';
