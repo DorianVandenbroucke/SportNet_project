@@ -137,8 +137,8 @@ EOT;
             <div class='column_4'>
                 <h2>Liste des épreuves</h2>
                 <div>
-                        <ul>$activitiesList</ul>
-                        <a href='$this->script_name/activity/add/?id=$event->id'>Ajouter</a>
+                    <ul>$activitiesList</ul>
+                    <a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>
                 </div>
             </div>
             <div>
@@ -179,7 +179,7 @@ EOT;
     private function eventActivities(){
         $html='';
         foreach ($this->data['events']->getActivities() as $activity){
-            $html.="<li>$activity->name  
+            $html.="<li>$activity->name
                 <a  href='$this->script_name/activity/detail/?id=$activity->id'>Détail</a>
                 </li>";
         }
