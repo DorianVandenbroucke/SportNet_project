@@ -73,13 +73,34 @@ EOT;
         return "
             <h3>Ajouter un évenement</h3>
             <form action=\"$this->script_name/event/save/\" method='post' >
-                <div><label for='nom'>Nom</label><input type='text' id='nom' placeholder='Nom' name='name'></div>
-                <div><label for='desc'>Description</label><textarea maxlength='500' id='desc' placeholder='Description' name='description'></textarea></div>
-                <div><label for='date''>Dates</label><input type='date' id='date' placeholder='Date de début' name='startDate'><input type='date' placeholder='Date de fin' name='endDate'></div>
-                <div><label for='lieu'>Lieu</label><input type='text' id='lieu' placeholder='Lieu'></div>
-                <div><label>Discipline</label><select>$options</select></div>
-                <div><label>Photos</label><input type='file' placeholder='FileUpload'/></div>
-                <div><input type='submit' value='Valider'></div>
+                <div class='column_4'>
+                    <label for='nom'>Nom</label>
+                    <input type='text' id='nom' placeholder='Nom' name='name'>
+                </div>
+                <div class='column_4'>
+                    <label for='date''>Dates</label>
+                    <input type='date' id='date' placeholder='Date de début' name='startDate'>
+                    <input type='date' placeholder='Date de fin' name='endDate'>
+                </div>
+                <div class='column_4'>
+                    <label for='desc'>Description</label>
+                    <textarea maxlength='500' id='desc' placeholder='Description' name='description'></textarea>
+                </div>
+                <div class='column_4'>
+                    <label for='lieu'>Lieu</label>
+                    <input type='text' id='lieu' placeholder='Lieu'>
+                </div>
+                <div class='column_4'>
+                    <label>Discipline</label>
+                    <select>$options</select>
+                </div>
+                <div class='column_4'>
+                    <label>Photos</label>
+                    <input type='file' placeholder='FileUpload'/>
+                </div>
+                <div class='row button'>
+                    <button name='send'>Valider</button>
+                </div>
             </form>
         ";
     }
@@ -136,7 +157,7 @@ EOT;
     private function eventActivities(){
         $html='';
         foreach ($this->data['events']->getActivities() as $activity){
-            $html.="<li>$activity->nom  
+            $html.="<li>$activity->nom
                 <a  href='$this->script_name/activity/detail/?id=$activity->id'>Détail</a>
                 </li>";
         }

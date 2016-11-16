@@ -11,6 +11,7 @@ class Participant extends Model {
     protected $fillable = [
         'mail','birthDate','firstName','lastName'
     ];
+    public $timestamps = false;
 
     public function getActivities(){
         return $this->belongsToMany('\app\models\Activity', 'Participant_Activity', 'id_participant', 'id_activity');
