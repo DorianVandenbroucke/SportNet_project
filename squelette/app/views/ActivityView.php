@@ -15,16 +15,16 @@ class EventView extends AbstractView
     {
         switch ($selector) {
             case 'detail':
-                $this->detail();
+                $main = $this->detail();
                 break;
             case 'add':
-                $this->add();
+                $main = $this->add();
                 break;     
             case 'edit':
-                $this->edit();
+                $main = $this->edit();
                 break;                                       
             case 'register':
-                $this->register();
+                $main = $this->register();
                 break;
         }
         $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';
