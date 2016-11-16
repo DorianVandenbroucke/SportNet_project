@@ -45,11 +45,12 @@ header {
 .presentation {
   text-align: center; }
   .presentation a button {
-    border: 1px solid #a10000;
-    color: #a10000;
+    border: 1px solid #0098d8;
+    color: #0098d8;
+    background: #f2fbff;
     transition: 0.2s; }
     .presentation a button:hover {
-      background-color: #a10000;
+      background-color: #0098d8;
       color: #ffffff; }
 
 .page_header {

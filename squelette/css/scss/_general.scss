@@ -35,11 +35,12 @@ header{
 .presentation{
 	text-align: center;
 	a button{
-		border: 1px solid $primaryColor;
-		color: $primaryColor;
+		border: 1px solid $secondaryColor;
+		color: $secondaryColor;
+		background: lighten($secondaryColor, 55);
 		transition: 0.2s;
 		&:hover{
-			background-color: $primaryColor;
+			background-color: $secondaryColor;
 			color: #ffffff;
 		}
 	}
