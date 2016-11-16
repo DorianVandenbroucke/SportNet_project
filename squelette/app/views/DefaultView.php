@@ -9,29 +9,44 @@ class DefaultView  extends AbstractView{
     }
 
     protected function home(){
-		
-		$html = "";
-		
-		foreach($this->data as $value){
-			$html .= 
-					"<div>
-						<h2>".$value->name ."</h2>
-						<div>".$value->startDate ." - ".$value->endDate ."</div>
-						<a href='$this->script_name/event/".$value->id ."'>Voir plus</a>"
-					."</div>";
-		}
-		
-		return $html;
+  		$html =
+              "<div>
+                <h1>Bienvenue sur SportNet, le rendez-vous des plus grands sportifs</h1>
+                <a href='$this->script_name/event/add/'>Ajouter un événement</a>
+              </h1>";
 
+  		foreach($this->data as $value){
+  			$html .=
+  					"<div>
+  						<h2>".$value->name ."</h2>
+  						<div>Du ".$value->startDate ." au ".$value->endDate ."</div>
+  						<a href='$this->script_name/event/".$value->id ."'>Voir plus</a>"
+  					."</div>";
+  		}
+  		return $html;
+    }
+
+    protected function signinForm(){
+      $html =
+              "<h1>Se connecter</h1>
+              <form method='POST' action='$this->script_name/signinVerification/'>
+                <input type='text' name='login' placeholder='Login' />
+                <input type='password' name='password' placeholder='Mot de passe' />
+                <button name='send'>Connexion</button>
+              </form>";
+      return $html;
     }
 
     public function render($selector){
 
 
         switch($selector){
-			default:
-				$main = $this->home();
-				break;
+          case 'signinForm':
+            $main = $this->signinForm();
+            break;
+    			default:
+    				$main = $this->home();
+    				break;
         }
 
         $style_file = $this->app_root.'/css/style.css';
