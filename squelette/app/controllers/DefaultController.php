@@ -56,7 +56,7 @@ class DefaultController{
 
 	public function signupForm(){
 		$defaultView = new DefaultView(NULL);
-		$defaultView->render(signupForm);
+		$defaultView->render('signupForm');
 	}
 
 	public function signupVerification(){
@@ -88,7 +88,7 @@ class DefaultController{
 						$auth = $authentification->createUser($name, $mail, $login, $password);
 
 						if($auth){
-							$eventController = new EventController();
+							$eventController = new EventController($this->request);
 							$eventController->findAllByPromoter();
 						}else{
 							$this->signupForm();
