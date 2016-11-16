@@ -52,18 +52,18 @@ header {
       background-color: #a10000;
       color: #ffffff; }
 
-.page_header h1 {
-  text-align: left !important; }
+.page_header {
+  margin-bottom: 20px; }
+  .page_header h1 {
+    text-align: left !important; }
 
 .content {
   background-color: #fff;
   padding: 5px;
   margin: 20px 0;
   border: 1px solid #bcbcbc;
-  border-top: none; }
-
-.page_header h1 {
-  text-align: left !important; }
+  border-top: none;
+  height: 100%; }
 
 footer {
   background-color: #454545;
@@ -85,6 +85,9 @@ form .message_droite {
 
 textarea {
   resize: none; }
+
+.column_4 h2 {
+  margin: 5px 0; }
 
 @media screen and (max-width: 70em) {
   .menu ul {

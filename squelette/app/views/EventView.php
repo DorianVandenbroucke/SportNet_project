@@ -109,20 +109,24 @@ EOT;
         $html = '<div>';
         $event = $this->data['events'];
         $activitiesList = $this->eventActivities();
-        $html.="
-            <h2>$event->name</h2>
-            <div>
+        $html.="<div class='page_header row'>
+                <h1>$event->name</h1>
+            </div>
+            <div class='column_4'>
                 <div>Date:  $event->startDate    $event->endDate</div>
-                <div>$event->description</div>
+                <div class='row'>$event->description</div>
+            </div>
+            <div class='column_4'>
+                <h2>Liste des épreuves</h2>
                 <div>
-                    <h2>Liste des épreuves</h2>
-                    <div>
-                        <ul>$activitiesList</ul>
-                        <a href='$this->script_name/activity/add/'>Ajouter</a>
-                    </div>
+                    <ul>$activitiesList</ul>
+                    <a href='$this->script_name/activity/add/'><button class='blue-btn'>Ajouter</button></a>
                 </div>
             </div>
-            <div><a href='$this->script_name/event/edit/?id=$event->id'>Modifier</a><a href='$this->script_name/activity/add'>Fermer les inscriptions</a></div>
+            <div>
+                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
+                <a href='$this->script_name/activity/add'><button class='blue-btn'>Fermer les inscriptions</button></a>
+            </div>
         ";
         return $html.'</div>';
     }
