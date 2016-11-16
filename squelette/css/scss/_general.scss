@@ -1,0 +1,32 @@
+@import "variables.scss";
+
+body{
+	background-color: lighten($secondaryColor, 55);
+	margin-bottom: 320px!important;
+}
+
+header{
+	background-color: $fontColor;
+	text-align: center;
+	padding: 10px 0;
+	div{
+		color: lighten($fontColor, 70);
+		font-size: 2em;
+		span{
+			color: $secondaryColor;
+		}
+	}
+}
+
+.menu{
+	border-bottom: 1px solid $secondaryColor;
+    background: lighten($secondaryColor, 30);
+	margin: 0;
+}
+
+footer{
+	background-color: $fontColor;
+    color: lighten($secondaryColor, 55);
+	padding: 10px 0;
+	border-top: 3px solid $secondaryColor;
+}

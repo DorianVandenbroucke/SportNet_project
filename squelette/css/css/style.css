@@ -1,5 +1,44 @@
+/* By default */
+/* Inline Balises */
+/* Title */
+/* Link */
+/* Special Balise */
+/* Special */
+/* Buttons */
+/* Alerts */
+/* Components */
+/* By default */
+/* Inline Balises */
+/* Title */
+/* Link */
+/* Special Balise */
+/* Special */
+/* Buttons */
+/* Alerts */
+/* Components */
+body {
+  background-color: #f2fbff;
+  margin-bottom: 320px !important; }
 
+header {
+  background-color: #454545;
+  text-align: center;
+  padding: 10px 0; }
+  header div {
+    color: #f8f8f8;
+    font-size: 2em; }
+    header div span {
+      color: #0098d8; }
 
-h1{
-    color: red;
-}
+.menu {
+  border-bottom: 1px solid #0098d8;
+  background: #72d5ff;
+  margin: 0; }
+
+footer {
+  background-color: #454545;
+  color: #f2fbff;
+  padding: 10px 0;
+  border-top: 3px solid #0098d8; }
+
+/*# sourceMappingURL=style.css.map */

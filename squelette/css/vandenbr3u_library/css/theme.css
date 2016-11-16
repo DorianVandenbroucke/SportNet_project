@@ -294,10 +294,10 @@ button, .btn, .jumbotron button, .blue-btn, .green-btn, .yellow-btn {
 .navbar li a {
   text-decoration: none; }
   .navbar li a:hover {
-    color: #d9db00; }
+    color: #002c3f; }
   .navbar li a.active {
     background-color: #0098d8;
-    color: #d9db00; }
+    color: #002c3f; }
   .navbar li a.disabled {
     color: #3fc6ff;
     cursor: default; }
@@ -313,9 +313,9 @@ button, .btn, .jumbotron button, .blue-btn, .green-btn, .yellow-btn {
       .navbar li a {
         padding: 10px 20px; }
         .navbar li a:hover {
-          border-bottom: 3px solid #d9db00; }
+          border-bottom: 3px solid #002c3f; }
         .navbar li a.active {
-          border-bottom: 3px solid #d9db00; }
+          border-bottom: 3px solid #002c3f; }
         .navbar li a.disabled:hover {
           border: none; } }
 @media screen and (max-width: 70em) {
@@ -333,15 +333,15 @@ button, .btn, .jumbotron button, .blue-btn, .green-btn, .yellow-btn {
   .navbar li {
     display: none; }
     .navbar li:first-child {
-      border-top: 1px solid #d9db00; }
+      border-top: 1px solid #002c3f; }
     .navbar li a {
       display: block;
       padding: 20px 0;
       padding-left: 20px;
-      border-bottom: 1px solid #d9db00;
+      border-bottom: 1px solid #002c3f;
       transition: background-color 0.1s; }
       .navbar li a:hover {
-        color: #d9db00;
+        color: #002c3f;
         background-color: #0098d8; }
       .navbar li a.disabled:hover {
         background-color: inherit; } }
@@ -364,12 +364,12 @@ button, .btn, .jumbotron button, .blue-btn, .green-btn, .yellow-btn {
       padding: 5px 10px; }
       .pagination li a:hover {
         background-color: #0074a5;
-        color: #d9db00;
+        color: #002c3f;
         text-decoration: none;
         transition: background-color 0.2s; }
     .pagination li.active a {
       background-color: #0074a5;
-      color: #d9db00;
+      color: #002c3f;
       text-decoration: none; }
     .pagination li.disabled a {
       color: #0074a5;
