@@ -70,8 +70,12 @@ abstract class AbstractView {
     protected function renderMenu(){
 
         $path = "";
+        $path_param = "";
         if (isset($_SERVER["PATH_INFO"])) {
             $path = $_SERVER["PATH_INFO"];
+            if($_SERVER["QUERY_STRING"]){
+                $path = $path."?".$_SERVER["QUERY_STRING"];
+            }
         }
         $id_promoter = "";
         if (isset($_SESSION['promoter'])) {
@@ -101,12 +105,12 @@ abstract class AbstractView {
           if($lien === $path){
             $html .=
                     "<li>
-                      <a href='$this->script_name".$lien."' class='active'>".$nom."</a>
+                        <a href='$this->script_name".$lien."' class='active'>".$nom."</a>
                     </li>";
           }else{
             $html .=
                     "<li>
-                      <a href='$this->script_name".$lien."'>".$nom."</a>
+                        <a href='$this->script_name".$lien."'>".$nom."</a>
                     </li>";
           }
         }

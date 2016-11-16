@@ -98,7 +98,6 @@ class EventController
     public function findAll(){
         if(isset($this->request->get['id'])){
             $id = $this->request->get['id'];
-            var_dump($id);
             $events = Event::select()->where('id_promoter',$id)->get();
             $ev = new EventView(['events' =>$events]);
         }else{
