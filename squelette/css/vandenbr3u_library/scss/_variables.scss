@@ -59,7 +59,7 @@ $dangeroAlertSecondColor: #ea8a8a;
 /* Components */
 
 $navbarColor: #0098d8;
-$navbarColorHover: #d9db00;
+$navbarColorHover: darken($navbarColor, 30);
 $navbarBorderColor: $navbarColorHover;
 $navbarImage: url("../components/images/menu_2.png");
 

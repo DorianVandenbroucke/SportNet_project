@@ -64,7 +64,7 @@ abstract class AbstractView {
      *
      */
     protected function renderHeader(){
-        $html ='<h1>SportNet</h1>';
+        $html ='<div>Sport<span>Net</span></div>';
         return $html;
     }
 
@@ -79,11 +79,8 @@ abstract class AbstractView {
 
 
     protected function renderMenu(){
-        $html  = 'Bienvenue '.$_SESSION['user_login'];
-        $html .= '<h2>Menu</h2>';
-        $html .= '<ul>';
-        $html .= '<li><a href="'.$this
-                ->script_name.'">Accueil</a></li>';
+        $html .= '<ul class="navbar">';
+        $html .= '<li><a href="'.$this->script_name.'" class="active">Accueil</a></li>';
         $html .= '<li><a href="'.$this->script_name.'/event/all/">Evenements</a></li>';
         $html .= '<li><a href="'.$this->script_name.'/event/add/">Ajouter un évenement</a></li>';
         if(isset($_SESSION['user_login'])){

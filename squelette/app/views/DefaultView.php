@@ -66,23 +66,18 @@ class DefaultView  extends AbstractView{
         <link rel="stylesheet" href="${style_file}">
     </head>
 
-    <body>
+    <body class="grid_float">
 
-        <header class="theme-backcolor1"> ${header}  </header>
+        <header class="row">${header}</header>
 
-        <section>
-
-            <aside>
-
-                <nav id="menu" class="theme-backcolor1"> ${menu} </nav>
-
-            </aside>
-
-            <article class="theme-backcolor2">  ${main} </article>
-
+        <div class="row menu">
+            ${menu}
+    	</div>
+        <section class="row content offset_1 column_6">
+            ${main}
         </section>
 
-        <footer class="theme-backcolor1"> ${footer} </footer>
+        <footer> ${footer} </footer>
 
     </body>
 </html>
