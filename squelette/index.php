@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-
+define("EVENT_STATUS_CLOSED", 0);
+define("EVENT_STATUS_OPEN", 1);
 require_once("vendor/autoload.php");
 
 app\utils\AppInit::bootEloquent('conf/conf.ini');
@@ -16,7 +17,6 @@ $router->addRoute('/signin/', '\app\controllers\DefaultController', 'signinForm'
 $router->addRoute('/signinVerification/', '\app\controllers\DefaultController', 'signinVerification');
 $router->addRoute('/signup/', '\app\controllers\DefaultController', 'signupForm');
 $router->addRoute('/signupVerification/', '\app\controllers\DefaultController', 'signupVerification');
-$router->addRoute('/event/add/', '\app\controllers\EventController', 'addEvent');
 $router->addRoute('/activity/all/', '\app\controllers\ActivityController', 'all');
 $router->addRoute('/activity/all', '\app\controllers\ActivityController', 'all');
 $router->addRoute('/activity/add/', '\app\controllers\ActivityController', 'add');
@@ -29,7 +29,12 @@ $router->addRoute('/activity/detail/', '\app\controllers\ActivityController', 'd
 $router->addRoute('/activity/detail', '\app\controllers\ActivityController', 'detail');
 $router->addRoute('/activity/register/', '\app\controllers\ActivityController', 'register');
 $router->addRoute('/activity/register', '\app\controllers\ActivityController', 'register');
-
+$router->addRoute('/activity/result/', '\app\controllers\ActivityController', 'result');
+$router->addRoute('/activity/result', '\app\controllers\ActivityController', 'result');
+$router->addRoute('/event/add/', '\app\controllers\EventController', 'addEvent');
+$router->addRoute('/event/save/', '\app\controllers\EventController', 'saveEvent');
+$router->addRoute('/event/', '\app\controllers\EventController', 'detailEvent');
+$router->addRoute('/logout/', '\app\controllers\DefaultController', 'logout');
 
 $http_req = new HttpRequest();
 $router->dispatch($http_req);

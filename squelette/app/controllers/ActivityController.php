@@ -7,7 +7,7 @@ use app\views\ActivityView;
 use app\views\DefaultView;
 use app\models\Activity;
 use app\models\Event;
-use app\modelsParticipant;
+use app\models\Participant;
 use app\utils\Authentification;
 
 class ActivityController{
@@ -74,8 +74,10 @@ class ActivityController{
         if($this->auth->logged_in)
         {
             $activity = Activity::find($this->request->get['id']);
+            $event = $activity->getEvent();
             $activity->delete();
-            return $this->all();  
+            $view = new EventView($event);
+            return $view->render('detailEvent');  
         }
         $view = new DefaultView($this->request);
         return $view->render('signinForm');
@@ -96,29 +98,28 @@ class ActivityController{
 
     public function register()
     {
-        if(!$this->request->post)
+        if($this->request->post)
         {
+            $participant = new Participant();
+            $participant->mail = $this->request->post['mail'];
+            $participant->birthDate = $this->request->post['birthDate'];
+            $participant->firstName = $this->request->post['firstName'];
+            $participant->lastName = $this->request->post['lastName'];
+            $participant->save();
+            
             $activity = Activity::find($this->request->get['id']);
+            $activity->getParticipants()->attach($participant);
             $view = new ActivityView($activity);
-            return $view->render('register');
+            return $view->render('detail');       
         }
-
-        $participant = new Participant();
-        $participant->mail = $this->request->post['mail'];
-        $participant->birthDate = $this->request->post['birthDate'];
-        $participant->firstName = $this->request->post['firstName'];
-        $participant->lastName = $this->request->post['lastName'];
-        $participant->save();
-        
         $activity = Activity::find($this->request->get['id']);
-        $activity->getParticipants()->attach($participant);
         $view = new ActivityView($activity);
-        return $view->render('detail');
+        return $view->render('register');
     }
 
     public function result()
     {
-        $activity = Activity::find($this->request->get['id'])->with('getParticipants')->get();
+        $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
         return $view->render('result');
     }

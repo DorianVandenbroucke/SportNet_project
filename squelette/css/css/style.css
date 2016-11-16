@@ -17,7 +17,7 @@
 /* Alerts */
 /* Components */
 body {
-  background-color: #fefefe;
+  background-color: #efefef;
   margin-bottom: 320px !important; }
 
 header {
@@ -35,19 +35,46 @@ header {
   background: #72d5ff;
   margin: 0; }
 
+.presentation {
+  text-align: center; }
+  .presentation a button {
+    border: 1px solid #a10000;
+    color: #a10000;
+    transition: 0.2s; }
+    .presentation a button:hover {
+      background-color: #a10000;
+      color: #ffffff; }
+
+.page_header h1 {
+  text-align: left !important; }
+
+.content {
+  background-color: #fff;
+  padding: 5px;
+  margin: 20px 0;
+  border: 1px solid #bcbcbc;
+  border-top: none; }
+
 footer {
   background-color: #454545;
   color: #f2fbff;
   padding: 10px 0;
   border-top: 3px solid #0098d8; }
 
-form input[type=text], form input[type=password], form select {
+form input[type=text], form input[type=password], form input[type=date], form select {
   width: 100%;
   padding: 5px 10px;
   margin: 8px 0;
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid #454545; }
+
+textarea {
+  width: 100%;
+  padding: 5px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px dotted #454545; }
 
 @media screen and (max-width: 70em) {
   .menu ul {

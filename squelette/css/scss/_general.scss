@@ -1,7 +1,7 @@
 @import "variables.scss";
 
 body{
-	background-color: #fefefe;
+	background-color: $backgroundColor;
 	margin-bottom: 320px!important;
 }
 
@@ -24,6 +24,30 @@ header{
 	margin: 0;
 }
 
+.presentation{
+	text-align: center;
+	a button{
+		border: 1px solid $primaryColor;
+		color: $primaryColor;
+		transition: 0.2s;
+		&:hover{
+			background-color: $primaryColor;
+			color: #ffffff;
+		}
+	}
+}
+.page_header h1{
+    text-align: left !important;
+}
+
+.content{
+    background-color: #fff;
+    padding: 5px;
+    margin: 20px 0;
+    border: 1px solid darken($backgroundColor, 20);
+    border-top: none;
+}
+
 footer{
 	background-color: $fontColor;
     color: lighten($secondaryColor, 55);
@@ -32,7 +56,7 @@ footer{
 }
 
 form{
-	input[type=text], input[type=password], select{
+	input[type=text], input[type=password], input[type=date], select{
 		width: 100%;
 		padding: 5px 10px;
 		margin: 8px 0;
@@ -40,6 +64,14 @@ form{
 		border: none;
 		border-bottom: 1px solid $fontColor;
 	}
+}
+
+textarea{
+	width: 100%;
+	padding: 5px 10px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 1px dotted $fontColor;
 }
 
 

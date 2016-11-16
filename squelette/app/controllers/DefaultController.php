@@ -24,6 +24,10 @@ class DefaultController{
 	}
 
 	public function signinForm(){
+		if(isset($_SESSION['promoter'])){
+			$this->home();
+			return false;
+		}
 		$defaultView = new DefaultView(NULL);
 		$defaultView->render('signinForm');
 	}
@@ -55,6 +59,10 @@ class DefaultController{
 	}
 
 	public function signupForm(){
+		if(isset($_SESSION['promoter'])){
+			$this->home();
+			return false;
+		}
 		$defaultView = new DefaultView(NULL);
 		$defaultView->render('signupForm');
 	}
@@ -107,6 +115,12 @@ class DefaultController{
 			}
 
 		}
+	}
+
+	public function logout(){
+		$authentification = new Authentification();
+		$authentification->logout();
+		$this->home();
 	}
 
 }

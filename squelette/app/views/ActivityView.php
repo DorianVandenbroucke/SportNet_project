@@ -29,6 +29,9 @@ class ActivityView extends AbstractView
             case 'all':
                 $main = $this->all();
                 break;
+            case 'result':
+                $main = $this->result();
+                break;
         }
         $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';
         $style_file = $this->app_root.'/css/css/style.css';
@@ -74,7 +77,7 @@ EOT;
                 <p>'.$this->data->description.'</p><br>
                 </section>
                 <aside class="column_3">
-                <form action="#" methode="post"><input type="submit" name="publishResults" value="Publier les résultats"/></form>
+                <a href="#">Publier les résultas</a><br>
                 <a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'">Modifier</a><br>
                 <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'">Supprimer</a><br>
                 <h3>Date de l\'épreuve :'.$this->data->date.'</h3>
@@ -82,7 +85,7 @@ EOT;
            </section>
            <section class="row">
                 <div class="column_3"><a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'">S\'inscrire</a> </div>
-                <div class="column_3"><form action="#" methode="post"><input type="submit" name="resultats" value="Voir les résultats"/></form></div>
+                <div class="column_3"><a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'">Résultats</a> </div>
            </section>';
     }
 
@@ -124,25 +127,24 @@ EOT;
     public function all(){
         $html = '<h1>Toutes les activitées :</h1><br>';
         foreach ($this->data as $activity) {
-            $html .= $activity->name.' || '.$activity->description.' ||'.$activity->price.' || '.$activity->name.'<br>';
+            $html .= $activity->name.' / '.$activity->description.' /'.$activity->price.' / '.$activity->name.'<br>';
         }
         return $html;
     }
 
-   /* public function result(){
+    public function result(){
+        $data = '';
+        foreach ($this->data->getParticipants as $participant) {
+                    $data .= '<tr><td>'.$participant->pivot->score.'</td><td>'.$participant->firstName.'</td><td>'.$participant->firstName.'</td><td>'.$participant->birthDay.'</td></tr>';
+                }
         return '<section class="row">
-                <h1>Résultat généraux de l\'épreuve</h1>
-                <h2>Marathon Kids</h2>
-                <form action="#" method="POST"/><input type="text" name="searchQuery"/><input type="submit" name="search" value="Recherche"/></form>
+                <h1>Résultat généraux de l\'épreuve <small>'.$this->data->name.'</small></h1>
+                <form action="#" method="POST"/><label>Recherche</label><input type="text" name="searchQuery"/><input type="submit" name="search" value="Recherche"/></form>
                 <table>
-                <tr><th>Ranking</th><th>Score</th><th>N°PArticipant</th><th>Nom</th></tr>
-                <tr>'.foreach ($this->data->getParticipants as $participant) {
-                    .'<td>'.$participant->pivot->score.'</td><td>'.$participant->firstName.'</td><td>'.$participant->firstName.'</td><td>'.$participant->birthDay.'</td>'.
-                }.'</tr><tr><td>Ranking</td><td>Score</td><td>N°PArticipant</td><td>Nom</td></tr>
-                
+                <tr><th>Ranking</th><th>Score</th><th>N°PArticipant</th><th>Nom</th></tr>'.$data.'
                 </table>
                 </section>';
-    }*/
+    }
 }    
 
  
