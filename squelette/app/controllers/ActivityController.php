@@ -29,10 +29,10 @@ class ActivityController{
             {
                 $activity = new Activity();
                 $activity->name = $this->request->post['name'];
-                $activity->description=  $this->request->post['description'];
-                $activity->date=  $this->request->post['date'];
-                $activity->id_event=  $this->request->post['id_event'];
-
+                $activity->description =  $this->request->post['description'];
+                $activity->price = $this->request->post['price'];
+                $activity->date =  $this->request->post['date'];
+                $activity->id_event=  $this->request->get['id'];
                 $activity->save();
 
                 $view = new ActivityView($activity);
@@ -55,13 +55,13 @@ class ActivityController{
                 $activity->name = $this->request->post['name'];
                 $activity->description=  $this->request->post['description'];
                 $activity->date=  $this->request->post['date'];
-                $activity->id_event=  $this->request->post['id_event'];
 
                 $activity->save();
 
                 $view = new ActivityView($activity);
                 return $view->render('detail');
             }
+
             $view = new ActivityView($activity);
             return $view->render('edit');
         }
@@ -98,7 +98,8 @@ class ActivityController{
     {
         if(!$this->request->post)
         {
-            $view = new ActivityView($this->request);
+            $activity = Activity::find($this->request->get['id']);
+            $view = new ActivityView($activity);
             return $view->render('register');
         }
 
@@ -121,4 +122,5 @@ class ActivityController{
         $view = new ActivityView($activity);
         return $view->render('result');
     }
+
 } 
