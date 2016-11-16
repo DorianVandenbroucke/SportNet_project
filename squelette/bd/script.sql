@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `startDate` DATE NULL,
   `endDate` DATE NULL,
   `status` INT(11) NULL,
+  `addresse` varchar(100) NULL,
   `id_promoter` INT NULL,
   `id_discipline` INT NULL,
   PRIMARY KEY (`id`),
@@ -136,3 +137,12 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+insert into discipline(name) values('marathon'),('vélo'),('triathlon');
+insert into promoter(name, mail, login, password) values
+('admin','admin@gmail.com','admin','admin'),('marco','marco@gmail.com','marco','marco');
+
+insert into event(name,description,startDate,endDate,status,id_promoter, id_discipline) values
+('Event 1','a nice event','');

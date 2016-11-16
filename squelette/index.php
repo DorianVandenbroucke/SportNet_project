@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-
+define("EVENT_STATUS_CLOSED", 0);
+define("EVENT_STATUS_OPEN", 1);
 require_once("vendor/autoload.php");
 
 app\utils\AppInit::bootEloquent('conf/conf.ini');
@@ -17,6 +18,8 @@ $router->addRoute('/signinVerification/', '\app\controllers\DefaultController', 
 $router->addRoute('/signup/', '\app\controllers\DefaultController', 'signupForm');
 $router->addRoute('/signupVerification/', '\app\controllers\DefaultController', 'signupVerification');
 $router->addRoute('/event/add/', '\app\controllers\EventController', 'addEvent');
+$router->addRoute('/event/save/', '\app\controllers\EventController', 'saveEvent');
+$router->addRoute('/event/', '\app\controllers\EventController', 'detailEvent');
 
 $http_req = new HttpRequest();
 $router->dispatch($http_req);

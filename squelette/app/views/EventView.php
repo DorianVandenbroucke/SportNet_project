@@ -66,22 +66,22 @@ EOT;
     }
 
     public function openAddForm(){
-
-        return '
+        $options = '';
+        foreach ($this->data['disciplines'] as $discipline){
+            $options.="<option value='$discipline->id'>$discipline->name";
+        }
+        return "
             <h3>Ajouter un évenement</h3>
-            <form action="$this->script_name/event/save/" method="post" >
-                <div><label>Nom</label><input type="text" placeholder="Nom" name="name"/></div>
-                <div><label>Description</label><textarea  placeholder="Description" name="description"></textarea></div>
-                <div><label>Dates</label><input type="date" name="startDate"/><input type="date" name="endDate"/></div>
-                <div><label>Lieu</label><input type="text" placeholder="Lieu"/></div>
-                <div><label>Discipline</label><select>
-                                                <option>Marathon</option>
-                                                <option>Vélo</option>
-                                            </select></div>
-                <div><label>Photos</label><input type="file" placeholder="FileUpload"/></div>
-                <div><input type="submit" value="Valider"></div> 
+            <form action=\"$this->script_name/event/save/\" method='post' >
+                <div><label>Nom</label><input type='text' placeholder='Nom' name='name'/></div>
+                <div><label>Description</label><textarea  placeholder='Description' name='description''></textarea></div>
+                <div><label>Dates</label><input type='date' name='startDate'/><input type='date' name='endDate'/></div>
+                <div><label>Lieu</label><input type='text' placeholder='Lieu' name='addresse'/></div>
+                <div><label>Discipline</label><select name='id_discipline'>$options</select></div>
+                <div><label>Photos</label><input type='file' placeholder='FileUpload'/></div>
+                <div><input type='submit' value='Valider'></div> 
             </form>
-        ';
+        ";
     }
 
     public function openEventDetail(){
@@ -135,7 +135,7 @@ EOT;
 
     private function eventActivities(){
         $html='';
-        foreach ($this->data->getActivities() as $activity){
+        foreach ($this->data['events']->getActivities() as $activity){
             $html.="<li>$activity->nom  
                 <a  href='$this->script_name/activity/detail/?id=$activity->id'>Détail</a>
                 </li>";

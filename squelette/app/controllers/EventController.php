@@ -38,17 +38,24 @@ class EventController
     }
 
     public function saveEvent(){
-        $event = new Event();
-        $event->name = $this->request->post['name'];
-        $event->description = $this->request->post['description'];
-        $event->startDate = $this->request->post['startDate'];
-        $event->addresse = $this->request->post['addresse'];
-        $event->endDate = $this->request->post['endDate'];
-        $event->id_discipline = $this->request->post['id_discipline'];
-        $event->id_promoter = $this->auth->promoter->id;
-        $event->save();
-        $id = $event->id;
-        //redirect to events view
+        if($this->auth->logged_in){
+            $event = new Event();
+            $event->name = $this->request->post['name'];
+            $event->description = $this->request->post['description'];
+            $event->startDate = date("Y-m-d",strtotime($this->request->post['startDate']));
+            $event->endDate = date("Y-m-d",strtotime($this->request->post['endDate']));
+            $event->addresse = $this->request->post['addresse'];
+            $event->id_discipline = $this->request->post['id_discipline'];
+            $event->status = EVENT_STATUS_OPEN;
+            $event->id_promoter = $this->auth->promoter->id;
+            if($event->save()){
+                $ev = new EventView(['events' =>$event]);
+                $ev->render('event');
+            }
+        }else{
+            $defaultView = new DefaultView(NULL);
+            $defaultView->render('signinForm');
+        }
 
     }
 
@@ -68,7 +75,7 @@ class EventController
     }
 
     //
-    public function findById(){
+    public function detailEvent(){
         $id = $this->request->get['id'];
         $event = Event::find($id);
         if($event){
