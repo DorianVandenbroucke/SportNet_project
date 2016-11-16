@@ -84,35 +84,40 @@ class DefaultController{
 				$password = $_POST['password'];
 				$password_confirm = $_POST['password_confirm'];
 
-				if(
-					filter_var($name, FILTER_SANITIZE_STRING) &&
-					filter_var($mail, FILTER_SANITIZE_STRING) &&
-					filter_var($login, FILTER_SANITIZE_STRING) &&
-					filter_var($password, FILTER_SANITIZE_STRING) &&
-					filter_var($password_confirm, FILTER_SANITIZE_STRING)
-				){
-					if($password == $password_confirm){
-						$authentification = new Authentification();
-						$auth = $authentification->createUser($name, $mail, $login, $password);
+				if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
+					if(
+						filter_var($name, FILTER_SANITIZE_STRING) &&
+						filter_var($mail, FILTER_SANITIZE_STRING) &&
+						filter_var($login, FILTER_SANITIZE_STRING) &&
+						filter_var($password, FILTER_SANITIZE_STRING) &&
+						filter_var($password_confirm, FILTER_SANITIZE_STRING)
+					){
+						if($password == $password_confirm){
+							$authentification = new Authentification();
+							$auth = $authentification->createUser($name, $mail, $login, $password);
 
-						if($auth){
-							$eventController = new EventController($this->request);
-							$eventController->findAllByPromoter();
+							if($auth){
+								$eventController = new EventController($this->request);
+								$eventController->findAllByPromoter();
+							}else{
+								$this->signupForm();
+								echo "une erreur est survenue.";
+							}
+
 						}else{
-							$this->signupForm();
-							echo "une erreur est survenue.";
+							return $this->signupForm();
+							echo "Les mots de passes entrés ne correspondent pas.";
 						}
 
-					}else{
-						return $this->signupForm();
-						echo "Les mots de passes entrés ne correspondent pas.";
 					}
-
-				}
 			}else{
 				return $this->signupForm();
-				echo "Veuillez compléter tous les champs.";
+				echo "L'adresse mail entré est invalide.";
 			}
+		}else{
+			return $this->signupForm();
+			echo "Veuillez compléter tous les champs.";
+		}
 
 		}
 	}
