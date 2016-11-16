@@ -44,7 +44,8 @@ class DefaultController{
 					$authentification = new Authentification();
 					$auth = $authentification->login($login, $pass);
 					if($auth){
-						$this->home();
+						$id_promoter = $_SESSION['promoter'];
+						header("location: ../event/all/?id=$id_promoter");
 					}else{
 						$this->signinForm();
 						echo "Les données entrées ne correspondent pas.";
@@ -125,6 +126,7 @@ class DefaultController{
 	public function logout(){
 		$authentification = new Authentification();
 		$authentification->logout();
+		header("location: ../../index.php");
 		$this->home();
 	}
 
