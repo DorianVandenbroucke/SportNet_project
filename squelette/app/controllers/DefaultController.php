@@ -44,15 +44,20 @@ class DefaultController{
 						$this->home();
 					}else{
 						$this->signinForm();
-						echo "Les données entrées ne correspondent pas";
+						echo "Les données entrées ne correspondent pas.";
 					}
 				}
 			}else{
 				$this->signinForm();
-				echo "Veuillez remplir tous les champs";
+				echo "Veuillez remplir tous les champs.";
 			}
 		}
 
+	}
+
+	public function signupForm(){
+		$defaultView = new DefaultView(NULL);
+		$defaultView->render(signupForm);
 	}
 
 }

@@ -8,7 +8,7 @@ class DefaultView  extends AbstractView{
         parent::__construct($data);
     }
 
-    protected function home(){
+    protected function renderHome(){
   		$html =
               "<div>
                 <h1>Bienvenue sur SportNet, le rendez-vous des plus grands sportifs</h1>
@@ -26,14 +26,30 @@ class DefaultView  extends AbstractView{
   		return $html;
     }
 
-    protected function signinForm(){
+    protected function renderSigninForm(){
       $html =
               "<h1>Se connecter</h1>
               <form method='POST' action='$this->script_name/signinVerification/'>
                 <input type='text' name='login' placeholder='Login' />
                 <input type='password' name='password' placeholder='Mot de passe' />
                 <button name='send'>Connexion</button>
-              </form>";
+              </form>
+              Vous n'avez pas encore de compte? <a href='$this->script_name/signup/'>inscrivez-vous</a>.";
+      return $html;
+    }
+
+    protected function renderSignupForm(){
+      $html =
+              "<h1>S'inscrire</h1>
+              <form method='POST' action='$this->script_name/signupVerification/'>
+                <input type='text' name='nom' placeholder='Nom' />
+                <input type='text' name='mail' placeholder='E-mail' />
+                <input type='text' name='login' placeholder='Login' />
+                <input type='password' name='password' placeholder='Mot de passe' />
+                <input type='password' name='confirm_password' placeholder='Confirmez votre mot de passe' />
+                <button name='send'>Inscription</button>
+              </form>
+              Vous avez déjà un compte? <a href='$this->script_name/signin/'>connectez-vous</a>.";
       return $html;
     }
 
@@ -42,10 +58,13 @@ class DefaultView  extends AbstractView{
 
         switch($selector){
           case 'signinForm':
-            $main = $this->signinForm();
+            $main = $this->renderSigninForm();
+            break;
+          case 'signupForm':
+            $main = $this->renderSignupForm();
             break;
     			default:
-    				$main = $this->home();
+    				$main = $this->renderHome();
     				break;
         }
 
