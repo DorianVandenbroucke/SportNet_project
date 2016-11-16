@@ -14,6 +14,10 @@ class Event extends Model{
     }
 
     public function getPromoter(){
-        return $this->belongsTo('app\moderls\Promoter', 'id_promoter');
+        return $this->belongsTo('app\models\Promoter', 'id_promoter');
+    }
+
+    public function getDiscipline(){
+        return $this->belongsTo('app\models\Discipline', 'id_discipline');
     }
 }
