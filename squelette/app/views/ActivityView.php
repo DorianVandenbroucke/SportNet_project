@@ -3,7 +3,7 @@
 namespace app\views;
 
 
-class EventView extends AbstractView
+class ActivityView extends AbstractView
 {
 
     public function __construct($data)
