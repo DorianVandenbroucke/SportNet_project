@@ -72,11 +72,9 @@ form{
 	}
 	input, select, textarea{
 		width: 100%;
-		padding: 5px 10px;
-		margin: 8px 0;
-		box-sizing: border-box;
-		border: none;
-		border-bottom: 1px solid $fontColor;
+        padding: 5px 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
 	}
 	.message_droite{
 		text-align: right;

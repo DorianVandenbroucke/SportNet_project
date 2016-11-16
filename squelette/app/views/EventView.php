@@ -88,8 +88,9 @@ EOT;
             $options.="<option value='$discipline->id' $selected>$discipline->name";
         }
 
-        return "
-            <h3>$title</h3>
+        return "<div class='page_header row'>
+                <h1>$title</h1>
+            </div>
             <form action=\"$this->script_name/event/save/\" method='post' >
                 <input type='hidden' value='$id'/>
                 <div class='column_4'>
@@ -97,13 +98,16 @@ EOT;
                     <input type='text' id='nom' placeholder='Nom' name='name' value='$name'>
                 </div>
                 <div class='column_4'>
-                    <label for='date''>Dates</label>
-                    <input type='date' id='date' placeholder='Date de début' name='startDate' value='$startDate'>
-                    <input type='date' placeholder='Date de fin' name='endDate' value='$endDate'>
-                </div>
-                <div class='column_4'>
                     <label for='desc'>Description</label>
                     <textarea maxlength='500' id='desc' placeholder='Description' name='description'>$description</textarea>
+                </div>
+                <div class='column_4'>
+                    <label for='dateStart'>Date de début</label>
+                    <input type='date' id='dateStart' placeholder='Date de début' name='startDate' value='$startDate'>
+                </div>
+                <div class='column_4'>
+                    <label for='dateEnd'>Date de fin</label>
+                    <input type='dateEnd' placeholder='Date de fin' name='endDate' value='$endDate'>
                 </div>
                 <div class='column_4'>
                     <label for='lieu'>Lieu</label>
