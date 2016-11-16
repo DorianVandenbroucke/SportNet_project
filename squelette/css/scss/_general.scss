@@ -45,7 +45,7 @@ footer{
 }
 
 form{
-	input[type=text], input[type=password], input[type=date], select, textarea{
+	input[type=text], input[type=password], input[type=date], select{
 		width: 100%;
 		padding: 5px 10px;
 		margin: 8px 0;
@@ -53,6 +53,14 @@ form{
 		border: none;
 		border-bottom: 1px solid $fontColor;
 	}
+}
+
+textarea{
+	width: 100%;
+	padding: 5px 10px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 1px dotted $fontColor;
 }
 
 

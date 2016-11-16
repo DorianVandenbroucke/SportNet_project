@@ -69,18 +69,32 @@ abstract class AbstractView {
 
     protected function renderMenu(){
 
-        $path = $_SERVER["PATH_INFO"];
-        $id_promoter= "";
+        $path = "";
+        if (isset($_SERVER["PATH_INFO"])) {
+            $path = $_SERVER["PATH_INFO"];
+        }
+
+        $html = '<ul class="navbar offset_1">';
+        $id_promoter = "";
         if (isset($_SESSION['promoter'])) {
             $id_promoter = $_SESSION['promoter'];
         }
-        $html = '<ul class="navbar offset_1">';
 
-        $array = array(
-          "/" => "Accueil",
-          "/event/all/" => "Evénements",
-          "/event/add/" => "Ajouter un événement",
-        );
+        if (isset($_SESSION['promoter'])) {
+            $array = array(
+              "/" => "Accueil",
+              "/event/all/" => "Evénements",
+              "/event/add/" => "Ajouter un événement",
+              "/event/add/$id_promoter/" => "Mes événements",
+              "/logout/" => "Me déconnecter"
+            );
+        } else{
+            $array = array(
+              "/" => "Accueil",
+              "/event/all/" => "Evénements",
+              "/event/add/" => "Ajouter un événement",
+            );
+        }
 
         foreach($array as $lien => $nom){
           if($lien === $path){
@@ -97,54 +111,6 @@ abstract class AbstractView {
         }
 
         var_dump($array);
-/*
-        if ($path === "/") {
-
-            $html .= '<li><a href="'.$this->script_name.'/" class="active">Accueil</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/all/">Evenements</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/add/">Ajouter un évenement</a></li>';
-            if(isset($_SESSION['promoter'])){
-              $html .= '<li><a href="'.$this->script_name.'/event/all/'.$_SESSION['promoter'].'">Mes évenement</a></li>';
-              $html .= '<li><a href="'.$this->script_name.'/logout/">Me déconnecter</a></li>';
-            }
-        } elseif ($path === "/event/all/") {
-            $html .= '<li><a href="'.$this->script_name.'/" >Accueil</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/all/" class="active">Evenements</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/add/">Ajouter un évenement</a></li>';
-            if(isset($_SESSION['promoter'])){
-              $html .= '<li><a href="'.$this->script_name.'/event/all/'.$_SESSION['promoter'].'">Mes évenement</a></li>';
-              $html .= '<li><a href="'.$this->script_name.'/logout/">Me déconnecter</a></li>';
-            }
-        } elseif ($path === "/event/add/") {
-            $html .= '<li><a href="'.$this->script_name.'/" >Accueil</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/all/">Evenements</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/add/" class="active">Ajouter un évenement</a></li>';
-            if(isset($_SESSION['promoter'])){
-              $html .= '<li><a href="'.$this->script_name.'/event/all/'.$_SESSION['promoter'].'">Mes évenement</a></li>';
-              $html .= '<li><a href="'.$this->script_name.'/logout/">Me déconnecter</a></li>';
-            }
-        } elseif ($path === "/event/all/$id_promoter") {
-            $html .= '<li><a href="'.$this->script_name.'/" >Accueil</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/all/">Evenements</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/add/">Ajouter un évenement</a></li>';
-            if(isset($_SESSION['promoter'])){
-              $html .= '<li><a href="'.$this->script_name.'/event/all/'.$_SESSION['promoter'].'" class="active" >Mes évenement</a></li>';
-              $html .= '<li><a href="'.$this->script_name.'/logout/">Me déconnecter</a></li>';
-            }
-        } elseif ($path === "/logout/") {
-            $html .= '<li><a href="'.$this->script_name.'/" class="active">Accueil</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/all/">Evenements</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/add/">Ajouter un évenement</a></li>';
-        } else {
-            $html .= '<li><a href="'.$this->script_name.'/" >Accueil</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/all/">Evenements</a></li>';
-            $html .= '<li><a href="'.$this->script_name.'/event/add/">Ajouter un évenement</a></li>';
-            if(isset($_SESSION['promoter'])){
-              $html .= '<li><a href="'.$this->script_name.'/event/all/'.$_SESSION['promoter'].'" class="active">Mes évenement</a></li>';
-              $html .= '<li><a href="'.$this->script_name.'/logout/">Me déconnecter</a></li>';
-            }
-        }
-*/
         $html .= "</ul>";
         return $html;
 
