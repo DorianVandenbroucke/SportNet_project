@@ -16,6 +16,7 @@ $router->addRoute('/signin/', '\app\controllers\DefaultController', 'signinForm'
 $router->addRoute('/signinVerification/', '\app\controllers\DefaultController', 'signinVerification');
 $router->addRoute('/signup/', '\app\controllers\DefaultController', 'signupForm');
 $router->addRoute('/signupVerification/', '\app\controllers\DefaultController', 'signupVerification');
+$router->addRoute('/event/add/', '\app\controllers\EventController', 'addEvent');
 
 $http_req = new HttpRequest();
 $router->dispatch($http_req);

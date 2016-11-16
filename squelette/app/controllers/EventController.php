@@ -11,6 +11,7 @@ namespace app\controllers;
 use app\models\Event;
 use app\utils\Authentification;
 use app\utils\HttpRequest;
+use app\views\DefaultView;
 use app\views\EventView;
 
 class EventController
@@ -25,13 +26,13 @@ class EventController
     }
 
     public function addEvent(){
-        if($this->auth->logged_in){
+        //if($this->auth->logged_in){
             $ev = new EventView(null);
             $ev->render('addForm');
-        }else{
+        /*}else{
             $defaultView = new DefaultView(NULL);
             $defaultView->render('signinForm');
-        }
+        }*/
     }
 
     public function saveEvent(){

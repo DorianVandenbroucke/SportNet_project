@@ -19,13 +19,50 @@ class EventView extends AbstractView
 
     public function render($selector)
     {
+        $main = '';
         if($selector == 'addForm'){
-            return $this->openAddForm();
+            $main = $this->openAddForm();
         }else if($selector == 'allEvents'){
-            return $this->openEvents();
+            $main = $this->openEvents();
         }else if($selector == 'event'){
-            return $this->openEventDetail();
+            $main = $this->openEventDetail();
         }
+
+        $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';
+        $style_file = $this->app_root.'/css/css/style.css';
+        $header = $this->renderHeader();
+        $menu   = $this->renderMenu();
+        $footer = $this->renderFooter();
+
+
+        $html = <<<EOT
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>SportNet</title>
+        <link rel="stylesheet" href="${framework}">
+        <link rel="stylesheet" href="${style_file}">
+    </head>
+
+    <body class="grid_float">
+
+        <header class="row">${header}</header>
+
+        <div class="row menu">
+            ${menu}
+    	</div>
+        <section class="row content offset_1 column_6">
+            ${main}
+        </section>
+
+        <footer> ${footer} </footer>
+
+    </body>
+</html>
+EOT;
+
+        echo $html;
     }
 
     public function openAddForm(){
@@ -34,7 +71,7 @@ class EventView extends AbstractView
             <h3>Ajouter un évenement</h3>
             <form action="$this->script_name/event/save/" method="post" >
                 <div><label>Nom</label><input type="text" placeholder="Nom" name="name"/></div>
-                <div><label>Description</label><textarea  placeholder="Description" name="description"/></div>
+                <div><label>Description</label><textarea  placeholder="Description" name="description"></textarea></div>
                 <div><label>Dates</label><input type="date" name="startDate"/><input type="date" name="endDate"/></div>
                 <div><label>Lieu</label><input type="text" placeholder="Lieu"/></div>
                 <div><label>Discipline</label><select>
