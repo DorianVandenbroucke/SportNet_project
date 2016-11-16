@@ -76,6 +76,28 @@ abstract class AbstractView {
         }
         $html = '<ul class="navbar offset_1">';
 
+        $array = array(
+          "/" => "Accueil",
+          "/event/all/" => "Evénements",
+          "/event/add/" => "Ajouter un événement",
+        );
+
+        foreach($array as $lien => $nom){
+          if($lien === $path){
+            $html .=
+                    "<li>
+                      <a href='$this->script_name".$lien."' class='active'>".$nom."</a>
+                    </li>";
+          }else{
+            $html .=
+                    "<li>
+                      <a href='$this->script_name".$lien."'>".$nom."</a>
+                    </li>";
+          }
+        }
+
+        var_dump($array);
+/*
         if ($path === "/") {
 
             $html .= '<li><a href="'.$this->script_name.'/" class="active">Accueil</a></li>';
@@ -122,7 +144,7 @@ abstract class AbstractView {
               $html .= '<li><a href="'.$this->script_name.'/logout/">Me déconnecter</a></li>';
             }
         }
-
+*/
         $html .= "</ul>";
         return $html;
 
