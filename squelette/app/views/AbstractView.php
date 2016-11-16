@@ -110,7 +110,6 @@ abstract class AbstractView {
           }
         }
 
-        var_dump($array);
         $html .= "</ul>";
         return $html;
 
