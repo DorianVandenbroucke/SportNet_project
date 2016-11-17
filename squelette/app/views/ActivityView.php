@@ -209,8 +209,8 @@ EOT;
                     <input type='text' id='birthDate' placeholder='Date de naissance' name='birthDate'  >
                 </div>
                 <div class='row button'>
-                    <button name='register'>S'inscrire</button>
-                    <button name='cancel'>Annuler</button>
+                    <button class='blue-btn' name='register'>S'inscrire</button>
+                    <button class='blue-btn' name='cancel'>Annuler</button>
                 </div>
                 </form>";
     }
