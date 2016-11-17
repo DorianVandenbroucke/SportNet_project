@@ -85,8 +85,8 @@ class ActivityController{
             $activity = Activity::find($this->request->get['id']);
             $event = $activity->getEvent();
             $activity->delete();
-            $view = new EventView($event);
-            return $view->render('event');
+            $view = new ActivityView($event);
+            return $view->render('openEventDetail');
         }
         $view = new DefaultView($this->request);
         return $view->render('signinForm');
