@@ -113,7 +113,6 @@ class EventController
     }
 
     public function search(){
-        if($this->auth->logged_in){
             $searchText = filter_var(trim($this->request->post['searchText']),FILTER_SANITIZE_STRING);
             $searchText = empty($searchText) ? '%' : "%$searchText%";
             $id = $this->request->post['id'];
@@ -124,10 +123,6 @@ class EventController
             }
             $ev = new EventView(['events' =>$events]);
             $ev->render('allEvents');
-        }else{
-            $defaultView = new DefaultView(NULL);
-            $defaultView->render('signinForm');
-        }
     }
 
     public function changeStatus(){
