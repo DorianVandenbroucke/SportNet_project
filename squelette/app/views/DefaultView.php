@@ -15,7 +15,7 @@ class DefaultView  extends AbstractView{
               "<div class='row presentation'>
                 <h1 class='row'>Bienvenue sur SportNet, le rendez-vous des plus grands sportifs</h1>
                 <div class='row'>
-                  <a href='$this->script_name/event/add/'><button>Ajouter un événement</button></a>
+                  <a href='$this->script_name/event/add/'><button class='blue-btn'>Ajouter un événement</button></a>
                 </div>
               </div>";
 
@@ -34,9 +34,9 @@ class DefaultView  extends AbstractView{
                           <p>Du $dateStart au $dateEnd</p>
                         </div>
                         <div class='column_4 buttons_list'>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>";
+                            <a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Details</button></a>";
                             if(Util::isEventModifyable($event)) {
-                                $html .= "<a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>";
+                                $html .= "<a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Supprimer</button></a>";
                             }
 
                         $html.="</div>
