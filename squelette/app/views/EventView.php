@@ -124,8 +124,8 @@ EOT;
                     <input type='file' placeholder='FileUpload'/>
                 </div>
                 <div class='row button'>
-                    <button name='send'>Valider</button>
-                    <button name='cancel'>Annuler</button>
+                    <button class='blue-btn' name='send'>Valider</button>
+                    <button class='blue-btn' name='cancel'>Annuler</button>
                 </div>
             </form>
         ";
