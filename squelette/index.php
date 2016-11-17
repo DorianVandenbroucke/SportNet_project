@@ -42,9 +42,13 @@ if(!isset($_SESSION['promoter'])){
       $_SERVER['PATH_INFO'] != "/signin/" &&
       $_SERVER['PATH_INFO'] != "/signup/" &&
       $_SERVER['PATH_INFO'] != "/signupVerification/" &&
-      $_SERVER['PATH_INFO'] != "/signinVerification/"
+      $_SERVER['PATH_INFO'] != "/signinVerification/" &&
+      $_SERVER['PATH_INFO'] != "/logout/"
     ){
       $_SESSION['url_redirection'] = $_SERVER['PATH_INFO'];
+      if($_SERVER['QUERY_STRING']){
+        $_SESSION['url_redirection'] = $_SESSION['url_redirection']."?".$_SERVER['QUERY_STRING'];
+      }
     }else{
       $_SESSION['url_redirection'] = "";
     }
