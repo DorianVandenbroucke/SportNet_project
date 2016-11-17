@@ -66,6 +66,7 @@ class ActivityController{
                 $date = new \Datetime($this->request->post['startDate']);
                 $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
                 $activity->date =  $date;
+                $activity->price = $_POST['price'];
 
                 $activity->save();
 
@@ -144,8 +145,8 @@ class ActivityController{
             $activity = Activity::find($this->request->get['id']);
             if(!isset($_SESSION['recap'][$participant->id]))
                 $_SESSION['recap'][$participant->id] = [$activity->id];
-            else   
-                array_push($_SESSION['recap'][$participant->id],$activity->id);   
+            else
+                array_push($_SESSION['recap'][$participant->id],$activity->id);
 
             return $this->recap($participant->id);
         }
