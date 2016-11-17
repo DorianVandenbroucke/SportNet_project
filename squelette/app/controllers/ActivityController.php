@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\utils\HttpRequest;
+use app\utils\Util;
 use app\views\ActivityView;
 use app\views\EventView;
 use app\views\DefaultView;
@@ -116,17 +117,36 @@ class ActivityController{
 
     public function register()
     {
+        $participant = null;
         if($this->request->post)
         {
-            $participant = new Participant();
-            $participant->mail = $this->request->post['mail'];
-            $participant->birthDate = $this->request->post['birthDate'];
-            $participant->firstName = $this->request->post['firstName'];
-            $participant->lastName = $this->request->post['lastName'];
-            $participant->save();
+            $participants = Participant::all();
+
+            //Parcourir la table participant
+            foreach ($participants as $par) {
+                if($par->mail == $this->request->post['mail'])
+                {
+                    $participant = $par;
+                }
+            }
+
+            //Verifier si le participant existe dans la BD
+            if($participant == null)
+            {
+                $participant = new Participant();
+                $participant->mail = $this->request->post['mail'];
+                $participant->birthDate = $this->request->post['birthDate'];
+                $participant->firstName = $this->request->post['firstName'];
+                $participant->lastName = $this->request->post['lastName'];
+                $participant->save();
+            }
 
             $activity = Activity::find($this->request->get['id']);
-            $activity->getParticipants()->attach($participant);
+            if(!isset($_SESSION['recap'][$participant->id]))
+                $_SESSION['recap'][$participant->id] = [$activity->id];
+            else   
+                array_push($_SESSION['recap'][$participant->id],$activity->id);   
+
             return $this->recap($participant->id);
         }
         $activity = Activity::find($this->request->get['id']);
@@ -142,9 +162,31 @@ class ActivityController{
     }
 
     public function recap($id){
-        $activities = Participant::find($id)->getActivities;
+        var_dump($_SESSION['recap']);
+        /*$activities = Participant::find($id)->getActivities;
         $view = new ParticipantView($activities);
-        return $view->render('recap');
+        return $view->render('recap');*/
+    }
+
+
+    public function export(){
+        $id = $this->request->get['id'];
+        if(!empty($id)){
+            $activity = Activity::find($id);
+           $participants = $activity->getParticipants()->get();
+            $fp = fopen('php://memory', 'w');
+            foreach ($participants as $participant){
+                fputcsv($fp, [$participant->lastName, $participant->birthDate, $participant->mail]);
+            }
+            fseek($fp,0);
+            $date  = Util::dateToStr($activity->date, STANDARD_DATE_FORMAT);
+            $filename = $activity->name.'-participants-'.$date;
+            header('Content-Type: application/csv');
+            header("Content-Disposition: attachment; filename=$filename.csv;");
+            fpassthru($fp);
+            fclose($fp);
+
+        }
     }
 
 }

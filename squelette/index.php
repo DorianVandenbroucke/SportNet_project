@@ -15,6 +15,8 @@ use app\utils\HttpRequest as HttpRequest;
 use app\utils\Router as Router;
 
 $router = new Router();
+if(!isset($_SESSION['recap']))
+{$_SESSION['recap']=array();}
 
 $router->addRoute('default', '\app\controllers\DefaultController', 'home');
 $router->addRoute('/signin/', '\app\controllers\DefaultController', 'signinForm');
@@ -29,6 +31,7 @@ $router->addRoute('/activity/delete/', '\app\controllers\ActivityController', 'd
 $router->addRoute('/activity/detail/', '\app\controllers\ActivityController', 'detail');
 $router->addRoute('/activity/register/', '\app\controllers\ActivityController', 'register');
 $router->addRoute('/activity/result/', '\app\controllers\ActivityController', 'result');
+$router->addRoute('/activity/export/', '\app\controllers\ActivityController', 'export');
 $router->addRoute('/paiement/', '\app\controllers\ActivityController', 'paiement');
 $router->addRoute('/validatePaiment/', '\app\controllers\ActivityController', 'validatePaiement');
 $router->addRoute('/event/add/', '\app\controllers\EventController', 'saveEventForm');

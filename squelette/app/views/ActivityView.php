@@ -79,7 +79,13 @@ EOT;
     }
 
     public function detail(){
-        $promoter = Util::isCurrentEventPromoter(Event::find($this->data->id_event));
+        $event = Event::find($this->data->id_event);
+        $modifyBlock='';$actionBlock='';
+        $optionArray = $this->generateactivityActions($event->status);
+        if(Util::isCurrentEventPromoter($event)){
+            $modifyBlock = $optionArray['modify_block'];
+        }
+        $actionBlock = empty($optionArray['action_block']) ? '' : "<section class='row column_5 text-align-center'>$optionArray[action_block]</section>";
         $html =
             '<div class="page_header row" >
                 <div class="row">
@@ -91,13 +97,9 @@ EOT;
                 <section class="column_5">
                     <p>'.$this->data->description.'</p><br>
                 </section>
-                <aside class="column_3">';
-    if($promoter){
-        $html .= '<a href="#"><button class="blue-btn extra-large-btn row">Publier les résultats</button></a><br>
-                <a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Modifier</button></a><br>
-                <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Supprimer</button></a><br>';
-    }
-         $html .=   '<div>
+                <aside class="column_3">
+                        .'.$modifyBlock.'.
+                        <div>
                         <ul class="list-without-style">
                             <li><strong>Date de l\'épreuve :</strong></li>
                             <li>'.$this->data->date->format('d/m/Y').'</li>
@@ -109,10 +111,7 @@ EOT;
                 </div>
                 </aside>
            </section>
-           <section class="row column_5 text-align-center">
-                <a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'"><button class="blue-btn">S\'inscrire</button></a>
-                <a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'"><button class="blue-btn">Résultats</button></a>
-           </section>';
+            '.$actionBlock;
            return $html;
     }
 
@@ -226,14 +225,25 @@ EOT;
     public function result(){
         $data = '';
         foreach ($this->data->getParticipants as $participant) {
-                    $data .= '<tr><td>'.$participant->pivot->score.'</td><td>'.$participant->firstName.'</td><td>'.$participant->firstName.'</td><td>'.$participant->birthDay.'</td></tr>';
+                    $data .= '<tr>
+                                <td>'.$participant->lastName.' '.$participant->firstName.'</td>
+                                <td class="text-align-center">'.$participant->id.'</td>
+                                <td>'.$participant->mail.'</td>
+                                <td>'.$participant->birthDate.'</td>
+                              </tr>';
                 }
         return '<section class="row">
                 <h1>Résultat généraux de l\'épreuve <small>'.$this->data->name.'</small></h1>
                 <form action="#" method="POST"/><label>Recherche</label><input type="text" name="searchQuery"/><input type="submit" name="search" value="Recherche"/></form>
                 <table>
-                <tr><th>Ranking</th><th>Score</th><th>N°PArticipant</th><th>Nom</th></tr>'.$data.'
+                    <thead>
+                        <tr><th>Nom</th><th>Nº Participant</th><th>Email</th><th>Birthdate</th></tr>
+                    </thead>
+                    <tbody>
+                        '.$data.'
+                    </tbody>
                 </table>
+                <a href="'.$this->script_name.'/activity/export/?id='.$this->data->id.'".><button>Exporter CSV</button></a>
                 </section>';
     }
 
@@ -250,5 +260,28 @@ EOT;
     public function validatePaiement()
     {
         return $this->data;
+    }
+
+    private function generateactivityActions($status){
+        $modifyBlock = ''; $actionBlock ='';
+
+        if($status != EVENT_STATUS_PUBLISHED){
+            if($status == EVENT_STATUS_CLOSED){
+                $modifyBlock.= '<a href="#"><button class="blue-btn extra-large-btn row">Publier les résultats</button></a><br>';
+            }
+            $modifyBlock.='<a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Modifier</button></a><br>
+                <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Supprimer</button></a><br>';
+        }
+        if($status != EVENT_STATUS_VALIDATED && $status != EVENT_STATUS_CREATED){
+            if($status == EVENT_STATUS_OPEN){
+                $actionBlock.= '<a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'"><button class="blue-btn">S\'inscrire</button></a>';
+            }
+            $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'"><button class="blue-btn">Voir Participants</button></a>';
+            if($status == EVENT_STATUS_PUBLISHED){
+                $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'"><button class="blue-btn">Voir Résultats</button></a>';
+            }
+        }
+
+        return ['modify_block'=>$modifyBlock, 'action_block'=>$actionBlock];
     }
 }
