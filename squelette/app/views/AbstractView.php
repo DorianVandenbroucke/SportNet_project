@@ -89,7 +89,7 @@ abstract class AbstractView {
               "" => "Accueil",
               "/event/all/" => "Evénements",
               "/event/add/" => "Ajouter un événement",
-              "/event/all/?id=$id_promoter" => "Mes événements",
+              "/myEvents/" => "Mes événements",
               "/logout/" => "Me déconnecter"
             );
         }else if(!isset($_SESSION['promoter'])){

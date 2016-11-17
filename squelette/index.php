@@ -31,6 +31,7 @@ $router->addRoute('/event/save/', '\app\controllers\EventController', 'saveEvent
 $router->addRoute('/event/delete/', '\app\controllers\EventController', 'deleteEvent');
 $router->addRoute('/event/', '\app\controllers\EventController', 'detailEvent');
 $router->addRoute('/event/all/', '\app\controllers\EventController', 'findAll');
+$router->addRoute('/myEvents/', '\app\controllers\EventController', 'myEvents');
 $router->addRoute('/logout/', '\app\controllers\DefaultController', 'logout');
 
 $http_req = new HttpRequest();
