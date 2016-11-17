@@ -54,7 +54,7 @@ class DefaultView  extends AbstractView{
                   <input id='mdp' class='row' type='password' name='password' placeholder='Mot de passe' />
                 </div>
                 <div class='row button'>
-                  <button name='send'>Connexion</button>
+                  <button class='blue-btn' name='send'>Connexion</button>
                 </div>
                 <p class='message_droite row'>Vous n'avez pas encore de compte? <a href='$this->script_name/signup/'>inscrivez-vous</a></p>
               </form>";
@@ -86,7 +86,7 @@ class DefaultView  extends AbstractView{
                   <input id='nom' class='row' type='text' name='name' placeholder='Nom' />
                 </div>
                 <div class='row button'>
-                  <button name='send'>Inscription</button>
+                  <button class='blue-btn' name='send'>Inscription</button>
                 </div>
                 <p class='message_droite row'>Vous avez déjà un compte? <a href='$this->script_name/signin/'>connectez-vous</a></p>
                 </form>";
