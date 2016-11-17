@@ -60,13 +60,16 @@ if(!isset($_SESSION['promoter'])){
 // On crée une variable de session dans le cas où l'utilisateur souhaite retourner sur une page précéDefaultController
 if(
   isset($_SERVER["PATH_INFO"]) &&
-  $_SERVER['PATH_INFO'] != "/event/"
+  $_SERVER['PATH_INFO'] != "/event/" &&
+  $_SERVER['PATH_INFO'] != "/activity/add/"
 ){
   $_SESSION['return_button'] = $_SERVER['PATH_INFO'];
   if($_SERVER['QUERY_STRING']){
     $_SESSION['return_button'] = $_SESSION['return_button']."?".$_SERVER['QUERY_STRING'];
   }
 }
+
+echo "<pre>"; var_dump($_SESSION); echo "</pre>";
 
 $http_req = new HttpRequest();
 $router->dispatch($http_req);
