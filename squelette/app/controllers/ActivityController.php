@@ -95,6 +95,8 @@ class ActivityController{
     public function detail()
     {
         $activity = Activity::find($this->request->get['id']);
+        $date = new \Datetime($activity->date);
+        $activity->date = $date;
         $view = new ActivityView($activity);
         $view->render('detail');
     }
