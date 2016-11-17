@@ -159,7 +159,7 @@ EOT;
             "<div class='page_header row'>
                 <div class='row'>
                   <div class='column_4'>
-                    <a href='$this->script_name".$url."'><button class='lightblue_button'>Retour</button></a>
+                    <a href='$this->script_name/event/all/'><button class='lightblue_button'>Retour</button></a>
                   </div>
                   <div class='column_4 buttons_event'>
                     $modifyBlock
