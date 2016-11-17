@@ -14,7 +14,6 @@ define('STANDARD_DATE_FORMAT', 'd-m-Y');
 
 class Util
 {
-
     public static function strToDate($strDate, $format){
         $date = strtr($strDate, '/', '-');
         return date($format,strtotime($date));
@@ -24,5 +23,4 @@ class Util
         $date = new \DateTime($date);
         return $date->format($format);
     }
-
 }

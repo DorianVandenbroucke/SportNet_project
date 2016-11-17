@@ -140,8 +140,14 @@ EOT;
         }
 
         $html = '<div>';
-        $modifyEventBlock= $this->generateModifyBlock($event);
-        $addEventBlock = $this->generateAddBlock($event);
+        $addEventBlock = ''; $modifyEventBlock = '';
+        if($this->isEventModifiable($event)){
+            $addEventBlock = "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
+            $modifyEventBlock = "<div class='row'>
+                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
+                <a href='$this->script_name/event/close/?id=$event->id'><button class='blue-btn'>Fermer les inscriptions</button></a>
+            </div>";
+        }
         $activitiesList = $this->eventActivities();
         $html.="<div class='page_header row'>
                 <a href='$this->script_name".$url."'><button class='blue-btn'>Retour</button></a>
@@ -216,21 +222,9 @@ EOT;
         return $html;
     }
 
-    private function generateModifyBlock($event){
-        if(isset($_SESSION['promoter']) && $event->getPromoter->id == $_SESSION['promoter']){
-            return "<div class='row'>
-                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
-                <a href='$this->script_name/activity/add'><button class='blue-btn'>Fermer les inscriptions</button></a>
-            </div>";
-        }
-        return '';
-    }
-
-    private function generateAddBlock($event){
-        if(isset($_SESSION['promoter']) && $event->getPromoter->id == $_SESSION['promoter']){
-            return "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
-        }
-        return '';
+    private function isEventModifiable($event){
+        return (isset($_SESSION['promoter']) && $event->getPromoter->id == $_SESSION['promoter']
+        && $event->status == EVENT_STATUS_OPEN);
     }
 
 }
