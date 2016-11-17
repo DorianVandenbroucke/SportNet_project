@@ -109,12 +109,12 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve</label>
-                    <input type='date' id='date' placeholder='Date' name='startDate'  >
+                    <input type='date' id='date' placeholder='DD-MM-YYYY' name='startDate'  >
                 </div>
                 <div class='column_4'>
-                    <label for='heure'>Heure de l'épreuve</label>
-                    <input type='text' id='heure' placeholder='Heure' name='startDateH'  >
-                    <input type='text' id='heure' placeholder='Heure' name='startDateM'  >
+                    <label for='heure'>Heure de l'épreuve</label><br>
+                    <input type='text' id='heure' class='heure' placeholder='HH' name='startDateH'>
+                    <input type='text' class='heure' placeholder='MM' name='startDateM'>
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>
