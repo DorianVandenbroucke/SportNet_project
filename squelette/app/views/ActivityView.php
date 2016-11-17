@@ -113,7 +113,11 @@ EOT;
     }
 
     public function add(){
-        return "<div class='page_header row'>
+        return "
+                <div class='page_header row'>
+                  <div class='row'>
+                    <a href='$this->script_name".$_SESSION['return_button']."'><button class='lightblue_button'>Retour</button></a>
+                  </div>
                     <h1>Ajouter une épreuve</h1>
                 </div>
                 <form action='#' method='POST'/>
@@ -127,25 +131,28 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve</label>
-                    <input type='date' id='date' placeholder='DD-MM-YYYY' name='startDate'  >
+                    <input type='date' id='date' placeholder='dd-mm-yyyy' name='startDate'  >
                 </div>
                 <div class='column_4'>
-                    <label for='heure'>Heure de l'épreuve</label><br>
-                    <input type='text' id='heure' class='heure' placeholder='HH' name='startDateH'>
-                    <input type='text' class='heure' placeholder='MM' name='startDateM'>
+                    <label for='heure'>Heure de l'épreuve (hh:mm)</label><br>
+                    <input type='text' id='heure' class='heure' placeholder='hh' name='startDateH'>
+                    <input type='text' class='heure' placeholder='mm' name='startDateM'>
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>
                     <input type='number' id='price' placeholder='Prix' name='price'  >
                 </div>
                 <div class='row button'>
-                    <button name='valider'>Valider</button>
+                    <button class='blue-btn' name='valider'>Valider</button>
                 </div>
                 </form>";
     }
 
     public function edit(){
          return "<div class='page_header row'>
+           <div class='row'>
+             <a href='$this->script_name".$_SESSION['return_button']."'><button class='lightblue_button'>Retour</button></a>
+           </div>
                     <h1>Modifier : ".$this->data->name."</h1>
                 </div>
                 <form action='#' method='POST'/>
@@ -159,12 +166,12 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve</label>
-                    <input type='date' id='date' placeholder='DD-MM-YYYY' name='startDate' value=".$this->data->date."  >
+                    <input type='date' id='date' placeholder='dd-mm-yyyy' name='startDate' value=".$this->data->date."  >
                 </div>
                 <div class='column_4'>
-                    <label for='heure'>Heure de l'épreuve</label><br>
-                    <input type='text' id='heure' class='heure' placeholder='HH' name='startDateH' value=".substr($this->data->date,11,2)." >
-                    <input type='text' class='heure' placeholder='MM' name='startDateM' value=".substr($this->data->date,14,2)." >
+                    <label for='heure'>Heure de l'épreuve (hh:mm)</label><br>
+                    <input type='text' id='heure' class='heure' placeholder='hh' name='startDateH' value=".substr($this->data->date,11,2)." >
+                    <input type='text' class='heure' placeholder='mm' name='startDateM' value=".substr($this->data->date,14,2)." >
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>
