@@ -17,14 +17,20 @@ class DefaultView  extends AbstractView{
                 </div>
               </div>";
 
-  		foreach($this->data as $value){
-  			$html .=
-  					"<div class='row'>
-  						<h2>".$value->name ."</h2>
-  						<div>Du ".$value->startDate ." au ".$value->endDate ."</div>
-  						<a href='$this->script_name/event/?id=".$value->id ."'>Voir plus</a>"
-  					."</div>";
-  		}
+        foreach ($this->data as $event){
+            $html.="<div class='row list'>
+                    <div class='ligne row'>
+                        <div class='column_4'>
+                          <h3>$event->name</h3>
+                          <p>Du $event->startDate au $event->endDate</p>
+                        </div>
+                        <div class='column_4 buttons_list'>
+                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
+                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
+                        </div>
+                    </div>
+                    </div>";
+        }
   		return $html;
     }
 
@@ -67,7 +73,7 @@ class DefaultView  extends AbstractView{
                   <input id='email' class='row' type='email' name='mail' placeholder='Email' />
                 </div>
                 <div class='column_4'>
-                  <label for='password2' class='row'>Confirmer votre mot de passe</label>
+                  <label for='password2' class='row'>Confirmer votre ot de passe</label>
                   <input id='password2' class='row' type='password' name='password_confirm' placeholder='Mot de passe' />
                 </div>
                 <div class='column_4'>
