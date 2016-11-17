@@ -122,7 +122,8 @@ EOT;
                     <input type='file' placeholder='FileUpload'/>
                 </div>
                 <div class='row button'>
-                    <button name='send'>Valider</button><button name='cancel'>Annuler</button>
+                    <button name='send'>Valider</button>
+                    <button name='cancel'>Annuler</button>
                 </div>
             </form>
         ";
@@ -168,12 +169,26 @@ EOT;
         $html.="
             <div class='page_header row'>
                 <h1>Listes des Évenements</h1>
+<<<<<<< HEAD
                 <div class='row'>
                   <form action='$this->script_name/event/search/' method='post'>
                     <input type='text' placeholder='Recherche' name='searchText'/>
                   </form>
                 </div>
                 <div class='row list'>
+=======
+                <form action='$this->script_name/event/search/' method='post'>
+                    <div class='row'>
+                        <div  class='column_5'>
+                            <input type='text' placeholder='Recherche' name='searchText'/>
+                        </div>
+                         <div  class='column_3'>   
+                            <button class='btn blue-btn' name='send'>Recherche</button>
+                        </div>
+                    </div>
+                </form>
+                <div class='column_8 list'>
+>>>>>>> d9f4e6f163587be10dd53e1d6a7aa46eae76c94d
                     $list
                 </div>
                 <div class='row'>
