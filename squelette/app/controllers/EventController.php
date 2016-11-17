@@ -13,6 +13,7 @@ use app\models\Event;
 use app\models\Promoter;
 use app\utils\Authentification;
 use app\utils\HttpRequest;
+use app\utils\Util;
 use app\views\DefaultView;
 use app\views\EventView;
 
@@ -54,21 +55,19 @@ class EventController
                 $id = $this->request->post['id'];
                 $event = empty($id) ? new Event() : Event::find($id);
                 $event->name = $this->request->post['name'];
-                $event->description = $this->request->post['description'];
-                $event->startDate = date("Y-m-d",strtotime($this->request->post['startDate']));
-                $event->endDate = date("Y-m-d",strtotime($this->request->post['endDate']));
+                $event->description = filter_var($this->request->post['description'], FILTER_SANITIZE_SPECIAL_CHARS);
+                $event->startDate = Util::strToDate($this->request->post['startDate'], MYSQL_DATE_FORMAT);
+                $event->endDate = Util::strToDate($this->request->post['endDate'], MYSQL_DATE_FORMAT);
                 $event->addresse = $this->request->post['addresse'];
                 $event->id_discipline = $this->request->post['id_discipline'];
                 $event->status = EVENT_STATUS_OPEN;
                 if(empty($id))
                     $event->id_promoter = $this->auth->promoter;
-
                 if($event->save()) {
                     $ev = new EventView(['events' => $event]);
                     $ev->render('event');
                 }
             }
-
         }else{
             $defaultView = new DefaultView(NULL);
             $defaultView->render('signinForm');
@@ -115,7 +114,6 @@ class EventController
 
     public function search(){
         if($this->auth->logged_in){
-
             $searchText = filter_var(trim($this->request->post['searchText']),FILTER_SANITIZE_STRING);
             $searchText = empty($searchText) ? '%' : "%$searchText%";
             $events = Event::where('name','like',$searchText)->get();
