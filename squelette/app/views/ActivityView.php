@@ -2,6 +2,8 @@
 
 namespace app\views;
 
+use app\utils\Util;
+use app\models\Event;
 
 class ActivityView extends AbstractView
 {
@@ -37,7 +39,7 @@ class ActivityView extends AbstractView
                 break;
             case 'validatePaiement':
                 $main = $this->validatePaiement();
-                break;    
+                break;
         }
         $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';
         $style_file = $this->app_root.'/css/css/style.css';
@@ -77,18 +79,21 @@ EOT;
     }
 
     public function detail(){
-        return '<a href="'.$this->script_name.'/event/?id='.$this->data->id_event.'"><button class="blue-btn column_1 row">Retour</button></a><div class="page_header row">
+        $promoter = Util::isCurrentEventPromoter(Event::find($this->data->id_event));
+        $html = '<a href="'.$this->script_name.'/event/?id='.$this->data->id_event.'"><button class="blue-btn column_1 row">Retour</button></a><div class="page_header row">
                 <h1>'.$this->data->name.'</h1>
             </div>
             <section>
                 <section class="column_5">
                     <p>'.$this->data->description.'</p><br>
                 </section>
-                <aside class="column_3">
-                <a href="#"><button class="blue-btn column_3 row">Publier les résultats</button></a><br>
+                <aside class="column_3>';
+    if($promoter){
+        $html .= '<a href="#"><button class="blue-btn column_3 row">Publier les résultats</button></a><br>
                 <a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'"><button class="blue-btn column_3 row">Modifier</button></a><br>
-                <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'"><button class="blue-btn column_3 row">Supprimer</button></a><br>
-                <div>
+                <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'"><button class="blue-btn column_3 row">Supprimer</button></a><br>';
+    }   
+         $html .=   '<div>
                     <h5>Date de l\'épreuve : '.$this->data->date->format('Y-m-d').'</h5>
                     <h5>Heure de l\'épreuve : '.$this->data->date->format('H:i').'</h5>
                 </div>
@@ -98,6 +103,7 @@ EOT;
                 <a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'"><button class="blue-btn column_2">S\'inscrire</button></a>
                 <a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'"><button class="blue-btn column_2">Résultats</button></a>
            </section>';
+           return $html;
     }
 
     public function add(){

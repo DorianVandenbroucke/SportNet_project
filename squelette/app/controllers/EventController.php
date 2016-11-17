@@ -60,7 +60,7 @@ class EventController
                 $event->id_discipline = $this->request->post['id_discipline'];
 
                 if(empty($id)) {
-                    $event->status = EVENT_STATUS_OPEN;
+                    $event->status = EVENT_STATUS_CREATED;
                     $event->id_promoter = $this->auth->promoter;
                 }
                 if($event->save()) {
@@ -107,7 +107,7 @@ class EventController
             $events = Event::select()->where('id_promoter',$id)->get();
             $ev = new EventView(['events' =>$events]);
         }else{
-            $ev = new EventView(['events' =>Event::all()]);
+            $ev = new EventView(['events' =>Event::select()->where('status', '!=',0)]);
         }
         $ev->render('allEvents');
     }
@@ -116,7 +116,11 @@ class EventController
         if($this->auth->logged_in){
             $searchText = filter_var(trim($this->request->post['searchText']),FILTER_SANITIZE_STRING);
             $searchText = empty($searchText) ? '%' : "%$searchText%";
-            $events = Event::where('name','like',$searchText)->get();
+            $events = Event::where([
+                ['name','like',$searchText],
+                ['id_promoter','=',$this->auth->promoter]
+
+            ])->get();
             $ev = new EventView(['events' =>$events]);
             $ev->render('allEvents');
         }else{
@@ -128,11 +132,11 @@ class EventController
     public function changeStatus(){
         if($this->auth->logged_in){
             $id = $this->request->get['id'];
+            $status = $this->request->get['status'];
             $event = Event::find($id);
-            $event->status = ($event->status == EVENT_STATUS_OPEN) ? EVENT_STATUS_CLOSED : EVENT_STATUS_OPEN;
+            $event->status = $status;
             $event->update();
-            $ev = new EventView(['events' =>$event]);
-            $ev->render('event');
+            header("location: ../?id=$id");
         }else{
             $defaultView = new DefaultView(NULL);
             $defaultView->render('signinForm');

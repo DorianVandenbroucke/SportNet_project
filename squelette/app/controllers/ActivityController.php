@@ -6,6 +6,7 @@ use app\utils\HttpRequest;
 use app\views\ActivityView;
 use app\views\EventView;
 use app\views\DefaultView;
+use app\views\ParticipantView;
 use app\models\Activity;
 use app\models\Event;
 use app\models\Participant;
@@ -126,8 +127,7 @@ class ActivityController{
 
             $activity = Activity::find($this->request->get['id']);
             $activity->getParticipants()->attach($participant);
-            $view = new ActivityView($activity);
-            return $view->render('paiement');
+            return $this->recap($participant->id);
         }
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
@@ -139,6 +139,12 @@ class ActivityController{
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
         return $view->render('result');
+    }
+
+    public function recap($id){
+        $activities = Participant::find($id)->getActivities;
+        $view = new ParticipantView($activities);
+        return $view->render('recap');
     }
 
 }
