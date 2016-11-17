@@ -9,6 +9,8 @@
 namespace app\views;
 
 
+use app\utils\Util;
+
 class EventView extends AbstractView
 {
 
@@ -76,8 +78,8 @@ EOT;
             $id = $event->id;
             $name = $event->name;
             $description = $event->description;
-            $startDate = $event->startDate;
-            $endDate = $event->endDate;
+            $startDate = Util::dateToStr($event->startDate, STANDARD_DATE_FORMAT);
+            $endDate = Util::dateToStr($event->endDate, STANDARD_DATE_FORMAT);
             $addresse = $event->addresse;
         }
         foreach ($this->data['disciplines'] as $discipline){
@@ -92,7 +94,7 @@ EOT;
                 <h1>$title</h1>
             </div>
             <form action=\"$this->script_name/event/save/\" method='post' >
-                <input type='hidden' value='$id'/>
+                <input type='hidden' value='$id' name='id'/>
                 <div class='column_4'>
                     <label for='nom'>Nom</label>
                     <input type='text' id='nom' placeholder='Nom' name='name' required value='$name'>
@@ -111,11 +113,11 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='lieu'>Lieu</label>
-                    <input type='text' id='lieu' placeholder='Lieu' value='$addresse' required>
+                    <input type='text' id='lieu' placeholder='Lieu' value='$addresse' required name='addresse'>
                 </div>
                 <div class='column_4'>
                     <label>Discipline</label>
-                    <select name='id_discipline '>$options</select>
+                    <select name='id_discipline'>$options</select>
                 </div>
                 <div class='column_4'>
                     <label>Photos</label>
@@ -130,7 +132,7 @@ EOT;
     }
 
     public function openEventDetail(){
-
+        $event = $this->data['events'];
         if(isset($_SESSION['return_button'])){
           $url = $_SESSION['return_button'];
         }else{
@@ -138,7 +140,7 @@ EOT;
         }
 
         $html = '<div>';
-        $event = $this->data['events'];
+        $modifyEventBlock= $this->generateModifyBlock($event);
         $activitiesList = $this->eventActivities();
         $html.="<div class='page_header row'>
                 <a href='$this->script_name".$url."'><button class='blue-btn'>Retour</button></a>
@@ -155,10 +157,7 @@ EOT;
                     <a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>
                 </div>
             </div>
-            <div class='row'>
-                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
-                <a href='$this->script_name/activity/add'><button class='blue-btn'>Fermer les inscriptions</button></a>
-            </div>
+            $modifyEventBlock
         ";
         return $html.'</div>';
     }
@@ -169,29 +168,18 @@ EOT;
         $html.="
             <div class='page_header row'>
                 <h1>Listes des Évenements</h1>
-<<<<<<< HEAD
-                <div class='row'>
+                <div class='row search'>
                   <form action='$this->script_name/event/search/' method='post'>
-                    <input type='text' placeholder='Recherche' name='searchText'/>
+                    <input class='column_8' type='text' placeholder='Rechercher un événement' name='searchText'/>
+                    <div class='column_8 button'>
+                      <button class='blue-btn' name='send'>Rechercher</button>
+                    </div>
                   </form>
                 </div>
                 <div class='row list'>
-=======
-                <form action='$this->script_name/event/search/' method='post'>
-                    <div class='row'>
-                        <div  class='column_5'>
-                            <input type='text' placeholder='Recherche' name='searchText'/>
-                        </div>
-                         <div  class='column_3'>   
-                            <button class='btn blue-btn' name='send'>Recherche</button>
-                        </div>
-                    </div>
-                </form>
-                <div class='column_8 list'>
->>>>>>> d9f4e6f163587be10dd53e1d6a7aa46eae76c94d
                     $list
                 </div>
-                <div class='row'>
+                <div class='row text-align-right'>
                   <a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a>
                 </div>
              </div>
@@ -203,9 +191,11 @@ EOT;
         $html = '';
         foreach ($this->data['events'] as $event){
             $html.="<div class='ligne row'>
-                        <div class='column_3'>$event->name</div>
-                        <div class='column_1'>$event->startDate  $event->endDate</div>
-                        <div class='column_3'>
+                        <div class='column_4'>
+                          <h3>$event->name</h3>
+                          <p>Du $event->startDate au $event->endDate</p>
+                        </div>
+                        <div class='column_4 buttons_list'>
                             <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
                             <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
                         </div>
@@ -223,6 +213,16 @@ EOT;
                 </li>";
         }
         return $html;
+    }
+
+    private function generateModifyBlock($event){
+        if(isset($_SESSION['promoter']) && $event->getPromoter->id == $_SESSION['promoter']){
+            return "<div class='row'>
+                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
+                <a href='$this->script_name/activity/add'><button class='blue-btn'>Fermer les inscriptions</button></a>
+            </div>";
+        }
+        return '';
     }
 
 }

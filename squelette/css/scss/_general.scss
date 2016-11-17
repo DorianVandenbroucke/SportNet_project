@@ -64,6 +64,12 @@ footer{
 	border-top: 3px solid $secondaryColor;
 }
 
+.search{
+	border-bottom: 1px solid $borderSearchForm;
+	margin-bottom: 50px;
+	padding-bottom: 8px;
+}
+
 form{
 	.button{
 		text-align: center;
@@ -90,6 +96,9 @@ textarea{
 
 .list {
 	margin: 0 0 20px 0;
+	.buttons_list{
+		text-align: center;
+	}
 	li, .ligne{
 		list-style: none;
 		border-bottom: 1px solid black;
@@ -112,6 +121,16 @@ textarea{
 	form{
 		input, select, textarea{
 			padding: 5px 10px;
+		}
+	}
+
+	.list{
+		.buttons_list{
+			margin-top: 10px;
+			text-align: right;
+		}
+		h3{
+			margin-top: 0!important;
 		}
 	}
 
