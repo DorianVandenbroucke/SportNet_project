@@ -34,7 +34,7 @@ $router->addRoute('/event/delete/', '\app\controllers\EventController', 'deleteE
 $router->addRoute('/event/', '\app\controllers\EventController', 'detailEvent');
 $router->addRoute('/event/all/', '\app\controllers\EventController', 'findAll');
 $router->addRoute('/event/search/', '\app\controllers\EventController', 'search');
-$router->addRoute('/event/close/', '\app\controllers\EventController', 'close');
+$router->addRoute('/event/changeStatus/', '\app\controllers\EventController', 'changeStatus');
 $router->addRoute('/myEvents/', '\app\controllers\EventController', 'myEvents');
 $router->addRoute('/logout/', '\app\controllers\DefaultController', 'logout');
 

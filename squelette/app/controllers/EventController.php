@@ -125,11 +125,11 @@ class EventController
         }
     }
 
-    public function close(){
+    public function changeStatus(){
         if($this->auth->logged_in){
             $id = $this->request->get['id'];
             $event = Event::find($id);
-            $event->status = EVENT_STATUS_CLOSED;
+            $event->status = ($event->status == EVENT_STATUS_OPEN) ? EVENT_STATUS_CLOSED : EVENT_STATUS_OPEN;
             $event->update();
             $ev = new EventView(['events' =>$event]);
             $ev->render('event');

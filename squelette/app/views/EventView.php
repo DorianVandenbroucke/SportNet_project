@@ -138,16 +138,17 @@ EOT;
         }else{
           $url = "/event/all/";
         }
-
         $html = '<div>';
         $addEventBlock = ''; $modifyEventBlock = '';
         if(Util::isCurrentEventPromoter($event)){
-            $modifyEventBlock = "
-                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>";
+            $modifyEventBlock = "<a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>";
                 if($event->status == EVENT_STATUS_OPEN){
-                    $modifyEventBlock.= "<a href='$this->script_name/event/close/?id=$event->id'><button class='blue-btn'>Fermer les inscriptions</button></a>";
+                    $modifyStatus = 'Fermer les inscriptions';
                     $addEventBlock = "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
+                }else{
+                    $modifyStatus = 'Ouvrir les inscriptions';
                 }
+            $modifyEventBlock.= "<a href='$this->script_name/event/changeStatus/?id=$event->id'><button class='blue-btn'>$modifyStatus</button></a>";
         }
         $activitiesList = $this->eventActivities();
         $html.=
@@ -230,10 +231,6 @@ EOT;
                 </li>";
         }
         return $html;
-    }
-
-    private function isEventModifiable($event){
-        return Util::isCurrentEventPromoter($event) && $event->status == EVENT_STATUS_OPEN;
     }
 
 }
