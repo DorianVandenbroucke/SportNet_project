@@ -180,7 +180,7 @@ EOT;
                 <div class='row list'>
                     $list
                 </div>
-                <div class='row'>
+                <div class='row text-align-right'>
                   <a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a>
                 </div>
              </div>
@@ -192,9 +192,11 @@ EOT;
         $html = '';
         foreach ($this->data['events'] as $event){
             $html.="<div class='ligne row'>
-                        <div class='column_3'>$event->name</div>
-                        <div class='column_1'>$event->startDate  $event->endDate</div>
-                        <div class='column_3'>
+                        <div class='column_4'>
+                          <h3>$event->name</h3>
+                          <p>Du $event->startDate au $event->endDate</p>
+                        </div>
+                        <div class='column_4 buttons_list'>
                             <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
                             <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
                         </div>

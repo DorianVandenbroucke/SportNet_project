@@ -93,6 +93,8 @@ textarea {
 
 .list {
   margin: 0 0 20px 0; }
+  .list .buttons_list {
+    text-align: center; }
   .list li, .list .ligne {
     list-style: none;
     border-bottom: 1px solid black;
@@ -107,6 +109,12 @@ textarea {
 @media screen and (min-width: 70em) {
   form input, form select, form textarea {
     padding: 5px 10px; }
+
+  .list .buttons_list {
+    margin-top: 10px;
+    text-align: right; }
+  .list h3 {
+    margin-top: 0 !important; }
 
   .page_header h1 {
     text-align: left !important; } }
