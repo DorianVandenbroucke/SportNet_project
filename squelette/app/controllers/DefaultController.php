@@ -104,13 +104,7 @@ class DefaultController{
 							$auth = $authentification->createUser($name, $mail, $login, $password);
 
 							if($auth){
-
-								if(isset($_SESSION['url_redirection'])){
-									header("location: ..".$_SESSION['url_redirection']);
-								}else{
-									header("location: ..");
-								}
-
+								header("location: ../signin/");
 							}else{
 								$_SESSION['message_form'] = "Une erreur est survenue.";
 								$this->signupForm();
