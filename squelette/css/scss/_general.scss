@@ -109,6 +109,12 @@ textarea{
 
 @media screen and(min-width: 70em){
 
+	form{
+		input, select, textarea{
+			padding: 5px 10px;
+		}
+	}
+
 	.page_header h1{
 		text-align: left!important;
 	}
