@@ -103,8 +103,15 @@ class ActivityController{
 
     public function paiement()
     {
-        $view = new ActivityView($this->request);
+        $activity = Activity::find($this->request->get['id']);
+        $view = new ActivityView($activity);
         return $view->render('paiement');
+    }
+
+    public function validatePaiement()
+    {
+        $view = new ActivityView('<h1>Paiement accepté</h1>');
+        return $view->render('validatePaiement');
     }
 
     public function register()
@@ -121,7 +128,7 @@ class ActivityController{
             $activity = Activity::find($this->request->get['id']);
             $activity->getParticipants()->attach($participant);
             $view = new ActivityView($activity);
-            return $view->render('detail');
+            return $view->render('paiement');
         }
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);

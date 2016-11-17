@@ -32,6 +32,12 @@ class ActivityView extends AbstractView
             case 'result':
                 $main = $this->result();
                 break;
+            case 'paiement':
+                $main = $this->paiement();
+                break;
+            case 'validatePaiement':
+                $main = $this->validatePaiement();
+                break;    
         }
         $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';
         $style_file = $this->app_root.'/css/css/style.css';
@@ -71,7 +77,7 @@ EOT;
     }
 
     public function detail(){
-        return '<div class="page_header row">
+        return '<a href="'.$this->script_name.'/event/?id='.$this->data->id_event.'"><button class="blue-btn column_1 row">Retour</button></a><div class="page_header row">
                 <h1>'.$this->data->name.'</h1>
             </div>
             <section>
@@ -172,8 +178,8 @@ EOT;
                     <input type='text' id='lastName' placeholder='Nom' name='lastName'  >
                 </div>
                 <div class='column_4'>
-                    <label for='mail'>Nom</label>
-                    <input type='mail' id='mail' placeholder='Nom' name='mail'  >
+                    <label for='mail'>Mail</label>
+                    <input type='mail' id='mail' placeholder='Mail' name='mail'  >
                 </div>
                 <div class='column_4'>
                     <label for='birthDate'>Date de naissance</label>
@@ -206,5 +212,20 @@ EOT;
                 <tr><th>Ranking</th><th>Score</th><th>N°PArticipant</th><th>Nom</th></tr>'.$data.'
                 </table>
                 </section>';
+    }
+
+    public function paiement(){
+        return "<h1>Paiement</h1>
+                <h2> Montant de la transaction : ".$this->data->price."</h2>
+                Numéro de la carte : <input type='text'/><br>
+                Date d'expiration : <input type='text'/><br>
+                Code de vérification : <input type='text'/><br>
+                <a href='".$this->script_name."/validatePaiment/' type='submit' name='paiment' />Valider</a>
+                ";
+    }
+
+    public function validatePaiement()
+    {
+        return $this->data;
     }
 }
