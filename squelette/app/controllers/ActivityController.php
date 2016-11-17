@@ -43,8 +43,7 @@ class ActivityController{
                 $activity->id_event =  $this->request->get['id'];
                 $activity->save();
 
-                $view = new ActivityView($activity);
-                return $view->render('detail');
+                header("location: ../detail/?id=".$activity->id);
             }
             $view = new ActivityView($this->request);
             return $view->render('add');
