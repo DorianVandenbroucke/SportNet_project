@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\utils\HttpRequest;
+use app\utils\Util;
 use app\views\ActivityView;
 use app\views\EventView;
 use app\views\DefaultView;
@@ -145,6 +146,27 @@ class ActivityController{
         $activities = Participant::find($id)->getActivities;
         $view = new ParticipantView($activities);
         return $view->render('recap');
+    }
+
+
+    public function export(){
+        $id = $this->request->get['id'];
+        if(!empty($id)){
+            $activity = Activity::find($id);
+           $participants = $activity->getParticipants()->get();
+            $fp = fopen('php://memory', 'w');
+            foreach ($participants as $participant){
+                fputcsv($fp, [$participant->lastName, $participant->birthDate, $participant->mail]);
+            }
+            fseek($fp,0);
+            $date  = Util::dateToStr($activity->date, STANDARD_DATE_FORMAT);
+            $filename = $activity->name.'-participants-'.$date;
+            header('Content-Type: application/csv');
+            header("Content-Disposition: attachment; filename=$filename.csv;");
+            fpassthru($fp);
+            fclose($fp);
+
+        }
     }
 
 }

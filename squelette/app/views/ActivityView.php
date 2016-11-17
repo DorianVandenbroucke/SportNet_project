@@ -226,14 +226,25 @@ EOT;
     public function result(){
         $data = '';
         foreach ($this->data->getParticipants as $participant) {
-                    $data .= '<tr><td>'.$participant->pivot->score.'</td><td>'.$participant->firstName.'</td><td>'.$participant->firstName.'</td><td>'.$participant->birthDay.'</td></tr>';
+                    $data .= '<tr>
+                                <td>'.$participant->lastName.' '.$participant->firstName.'</td>
+                                <td class="text-align-center">'.$participant->id.'</td>
+                                <td>'.$participant->mail.'</td>
+                                <td>'.$participant->birthDate.'</td>
+                              </tr>';
                 }
         return '<section class="row">
                 <h1>Résultat généraux de l\'épreuve <small>'.$this->data->name.'</small></h1>
                 <form action="#" method="POST"/><label>Recherche</label><input type="text" name="searchQuery"/><input type="submit" name="search" value="Recherche"/></form>
                 <table>
-                <tr><th>Ranking</th><th>Score</th><th>N°PArticipant</th><th>Nom</th></tr>'.$data.'
+                    <thead>
+                        <tr><th>Nom</th><th>Nº Participant</th><th>Email</th><th>Birthdate</th></tr>
+                    </thead>
+                    <tbody>
+                        '.$data.'
+                    </tbody>
                 </table>
+                <a href="'.$this->script_name.'/activity/export/?id='.$this->data->id.'".><button>Exporter CSV</button></a>
                 </section>';
     }
 

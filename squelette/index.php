@@ -29,6 +29,7 @@ $router->addRoute('/activity/delete/', '\app\controllers\ActivityController', 'd
 $router->addRoute('/activity/detail/', '\app\controllers\ActivityController', 'detail');
 $router->addRoute('/activity/register/', '\app\controllers\ActivityController', 'register');
 $router->addRoute('/activity/result/', '\app\controllers\ActivityController', 'result');
+$router->addRoute('/activity/export/', '\app\controllers\ActivityController', 'export');
 $router->addRoute('/paiement/', '\app\controllers\ActivityController', 'paiement');
 $router->addRoute('/validatePaiment/', '\app\controllers\ActivityController', 'validatePaiement');
 $router->addRoute('/event/add/', '\app\controllers\EventController', 'saveEventForm');
