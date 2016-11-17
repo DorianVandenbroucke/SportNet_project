@@ -80,7 +80,8 @@ EOT;
                 <a href="#">Publier les résultas</a><br>
                 <a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'">Modifier</a><br>
                 <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'">Supprimer</a><br>
-                <h3>Date de l\'épreuve :'.$this->data->date.'</h3>
+                <h5>Date de l\'épreuve : '.$this->data->date->format('Y/m/d').'</h5>
+                <h5>Heure de l\'épreuve : '.$this->data->date->format('H:i').'</h5>
                 </aside>
            </section>
            <section class="row">
@@ -94,8 +95,8 @@ EOT;
                 <form action="#" method="POST"/>
                 <label>Titre de l\'epreuve</label><input type="text" name="name" required/><br>
                 <label>Description</label><textarea name="description"></textarea><br>
-                <label>Date de l\'epreuve</label><input type="text" name="date" /><br>
-                <label>Heure de l\'epreuve</label><input type="text" name="date" /><br>
+                <label>Date de l\'epreuve</label><input type="text" name="startDate" /><br>
+                <label>Heure de l\'epreuve</label><input type="text" name="startDateH" /> <input type="text" name="startDateM" /><br>
                 <label>Tarif de l\'epreuve</label><input type="text" name="price" required/><br>
                 <input type="submit" name="valider"/>
                 </form>';         
@@ -106,8 +107,9 @@ EOT;
                 <form action="#" method="POST"/>
                 <label>Titre de l\'epreuve</label><input type="text" name="name" value="'.$this->data->name.'" /><br>
                 <label>Description</label><textarea name="description">'.$this->data->description.'</textarea><br>
-                <label>Heure de l\'epreuve</label><input type="text" name="date" value="'.$this->data->date.'" /><br>
-                 <label>Tarif de l\'epreuve</label><input type="text" name="price" value="'.$this->data->price.'"/><br>
+                <label>Date de l\'epreuve</label><input type="text" name="startDate" value="'.substr($this->data->date,0,10).'" /><br>
+                <label>Heure de l\'epreuve</label><input type="text" name="startDateH" value="'.substr($this->data->date,11,2).'" /> <input type="text" name="startDateM" value="'.substr($this->data->date,14,2).'"/><br>
+                <label>Tarif de l\'epreuve</label><input type="text" name="price" value="'.$this->data->price.'"/><br>
                 <input type="submit" name="valider"/>
                 </form>';         
     }

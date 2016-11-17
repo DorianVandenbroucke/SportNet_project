@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\utils\HttpRequest;
 use app\views\ActivityView;
+use app\views\EventView;
 use app\views\DefaultView;
 use app\models\Activity;
 use app\models\Event;
@@ -31,8 +32,12 @@ class ActivityController{
                 $activity->name = $this->request->post['name'];
                 $activity->description =  $this->request->post['description'];
                 $activity->price = $this->request->post['price'];
-                $activity->date =  $this->request->post['date'];
-                $activity->id_event=  $this->request->get['id'];
+
+                $date = new \DateTime();
+                $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
+                $activity->date =  $date->format('Y-m-d H:i:s');
+
+                $activity->id_event =  $this->request->get['id'];
                 $activity->save();
 
                 $view = new ActivityView($activity);
@@ -54,7 +59,10 @@ class ActivityController{
             {
                 $activity->name = $this->request->post['name'];
                 $activity->description=  $this->request->post['description'];
-                $activity->date=  $this->request->post['date'];
+
+                $date = new \Datetime($this->request->post['startDate']);
+                $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
+                $activity->date =  $date;
 
                 $activity->save();
 
