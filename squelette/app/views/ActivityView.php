@@ -37,7 +37,7 @@ class ActivityView extends AbstractView
                 break;
             case 'validatePaiement':
                 $main = $this->validatePaiement();
-                break;    
+                break;
         }
         $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';
         $style_file = $this->app_root.'/css/css/style.css';
