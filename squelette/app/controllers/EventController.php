@@ -114,7 +114,7 @@ class EventController
         $ev->render('allEvents');
     }
 
-    public function myEvents(){
+    /*public function myEvents(){
         if($this->auth->logged_in){
             $promoter = Promoter::find($this->auth->promoter);
             $ev = new EventView(['events' =>$promoter->getEvents]);
@@ -123,6 +123,6 @@ class EventController
             $defaultView = new DefaultView(NULL);
             $defaultView->render('signinForm');
         }
-    }
+    }*/
 
 }

@@ -34,6 +34,19 @@ $router->addRoute('/event/all/', '\app\controllers\EventController', 'findAll');
 $router->addRoute('/myEvents/', '\app\controllers\EventController', 'myEvents');
 $router->addRoute('/logout/', '\app\controllers\DefaultController', 'logout');
 
+// On redirige automatiquement un organisateur à sa connexion vers la page précédent son authentification;
+if(
+  isset($_SERVER["PATH_INFO"]) &&
+  $_SERVER['PATH_INFO'] != "/signin/" &&
+  $_SERVER['PATH_INFO'] != "/signup/" &&
+  $_SERVER['PATH_INFO'] != "/signupVerification/" &&
+  $_SERVER['PATH_INFO'] != "/signinVerification/"
+){
+  $_SESSION['url_redirection'] = $_SERVER['PATH_INFO'];
+}else{
+  $_SESSION['url_redirection'] = "";
+}
+
 $http_req = new HttpRequest();
 $router->dispatch($http_req);
 

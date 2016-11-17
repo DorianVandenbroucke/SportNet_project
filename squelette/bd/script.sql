@@ -62,12 +62,12 @@ CREATE TABLE IF NOT EXISTS `event` (
   CONSTRAINT `fk_event_promoter`
     FOREIGN KEY (`id_promoter`)
     REFERENCES `promoter` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE SET NULL
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_event_discipline`
     FOREIGN KEY (`id_discipline`)
     REFERENCES `discipline` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE SET NULL
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   CONSTRAINT `fk_activity_event`
     FOREIGN KEY (`id_event`)
     REFERENCES `event` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -125,12 +125,12 @@ CREATE TABLE IF NOT EXISTS `participant_activity` (
   CONSTRAINT `fk_participant_activity_participant`
     FOREIGN KEY (`id_participant`)
     REFERENCES `participant` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_participant_activity__activity`
     FOREIGN KEY (`id_activity`)
     REFERENCES `activity` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -139,11 +139,13 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-
-
 insert into discipline(name) values('marathon'),('vélo'),('triathlon');
 insert into promoter(name, mail, login, password) values
 ('admin','admin@gmail.com','admin','admin'),('marco','marco@gmail.com','marco','marco');
 
 insert into event(name,description,startDate,endDate,status,id_promoter, id_discipline) values
-('Event 1','a nice event','');
+('Event 1','a nice event','2016-12-25','2016-12-28',1,1,1);
+
+insert into activity(name,description,price,date,id_event) values
+('Event 1','a nice event','30.00','2016-12-27',2);
+
