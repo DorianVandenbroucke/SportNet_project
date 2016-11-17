@@ -89,7 +89,7 @@ textarea {
 
 .list {
   margin: 0 0 20px 0; }
-  .list li {
+  .list li, .list .ligne {
     list-style: none;
     border-bottom: 1px solid black;
     padding: 10px; }

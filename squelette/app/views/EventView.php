@@ -161,8 +161,8 @@ EOT;
             <div class='page_header row'>
                 <h1>Listes des Évenements</h1>
                 <form action='$this->script_name/event/search/' method='post'><input type='text' placeholder='Recherche' name='searchText'/></form>
-                <div>
-                    <ul class='list'>$list</ul>
+                <div class='column_8 list'>
+                    $list
                 </div>
                 <div><a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a></div>
              </div>
@@ -173,10 +173,14 @@ EOT;
     private function eventLists(){
         $html = '';
         foreach ($this->data['events'] as $event){
-            $html.="<li>$event->name  <span class='offset_2'>$event->startDate - $event->endDate</span>
-                <a class='offset_1' href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
-                <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
-                </li>";
+            $html.="<div class='ligne row'>
+                        <div class='column_3'>$event->name</div>
+                        <div class='column_1'>$event->startDate  $event->endDate</div>
+                        <div class='column_3'>
+                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
+                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
+                        </div>
+                    </div>";
         }
         return $html;
     }
