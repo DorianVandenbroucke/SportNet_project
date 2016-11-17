@@ -95,27 +95,27 @@ EOT;
                 <input type='hidden' value='$id'/>
                 <div class='column_4'>
                     <label for='nom'>Nom</label>
-                    <input type='text' id='nom' placeholder='Nom' name='name' value='$name'>
+                    <input type='text' id='nom' placeholder='Nom' name='name' required value='$name'>
                 </div>
                 <div class='column_4'>
                     <label for='desc'>Description</label>
-                    <textarea maxlength='500' id='desc' placeholder='Description' name='description'>$description</textarea>
+                    <textarea maxlength='500' id='desc' placeholder='Description' name='description' required>$description</textarea>
                 </div>
                 <div class='column_4'>
                     <label for='dateStart'>Date de début</label>
-                    <input type='date' id='dateStart' placeholder='Date de début' name='startDate' value='$startDate'>
+                    <input type='date' id='dateStart' placeholder='Date de début' name='startDate' value='$startDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='dateEnd'>Date de fin</label>
-                    <input type='dateEnd' placeholder='Date de fin' name='endDate' value='$endDate'>
+                    <input type='dateEnd' placeholder='Date de fin' name='endDate' value='$endDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='lieu'>Lieu</label>
-                    <input type='text' id='lieu' placeholder='Lieu' value='$addresse'>
+                    <input type='text' id='lieu' placeholder='Lieu' value='$addresse' required>
                 </div>
                 <div class='column_4'>
                     <label>Discipline</label>
-                    <select>$options</select>
+                    <select name='id_discipline '>$options</select>
                 </div>
                 <div class='column_4'>
                     <label>Photos</label>
