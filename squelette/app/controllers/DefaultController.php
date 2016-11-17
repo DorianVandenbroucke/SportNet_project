@@ -112,23 +112,23 @@ class DefaultController{
 								}
 
 							}else{
-								$this->signupForm();
 								$_SESSION['message_form'] = "Une erreur est survenue.";
+								$this->signupForm();
 							}
 
 						}else{
-							return $this->signupForm();
 							$_SESSION['message_form'] = "Les mots de passes entrés ne correspondent pas.";
+							return $this->signupForm();
 						}
 
 					}
 			}else{
-				return $this->signupForm();
 				$_SESSION['message_form'] = "L'adresse mail entré est invalide.";
+				return $this->signupForm();
 			}
 		}else{
-			return $this->signupForm();
 			$_SESSION['message_form'] = "Veuillez compléter tous les champs.";
+			return $this->signupForm();
 		}
 
 		}
