@@ -109,12 +109,12 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve</label>
-                    <input type='date' id='date' placeholder='Date' name='startDate'  >
+                    <input type='date' id='date' placeholder='DD-MM-YYYY' name='startDate'  >
                 </div>
                 <div class='column_4'>
-                    <label for='heure'>Heure de l'épreuve</label>
-                    <input type='text' id='heure' placeholder='Heure' name='startDateH'  >
-                    <input type='text' id='heure' placeholder='Heure' name='startDateM'  >
+                    <label for='heure'>Heure de l'épreuve</label><br>
+                    <input type='text' id='heure' class='heure' placeholder='HH' name='startDateH'>
+                    <input type='text' class='heure' placeholder='MM' name='startDateM'>
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>
@@ -141,12 +141,12 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve</label>
-                    <input type='date' id='date' placeholder='Date' name='startDate' value=".$this->data->date."  >
+                    <input type='date' id='date' placeholder='DD-MM-YYYY' name='startDate' value=".$this->data->date."  >
                 </div>
                 <div class='column_4'>
-                    <label for='heure'>Heure de l'épreuve</label>
-                    <input type='text' id='heure' placeholder='Heure' name='startDateH' value=".substr($this->data->date,11,2)." >
-                    <input type='text' id='heure' placeholder='Heure' name='startDateM' value=".substr($this->data->date,14,2)." >
+                    <label for='heure'>Heure de l'épreuve</label><br>
+                    <input type='text' id='heure' class='heure' placeholder='HH' name='startDateH' value=".substr($this->data->date,11,2)." >
+                    <input type='text' class='heure' placeholder='MM' name='startDateM' value=".substr($this->data->date,14,2)." >
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>

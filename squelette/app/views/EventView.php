@@ -105,11 +105,11 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='dateStart'>Date de début</label>
-                    <input type='date' id='dateStart' placeholder='Date de début' name='startDate' value='$startDate' required>
+                    <input type='date' id='dateStart' placeholder='DD-MM-YYYY' name='startDate' value='$startDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='dateEnd'>Date de fin</label>
-                    <input type='dateEnd' placeholder='Date de fin' name='endDate' value='$endDate' required>
+                    <input type='date' id='dateEnd' placeholder='DD-MM-YYYY' name='endDate' value='$endDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='lieu'>Lieu</label>
