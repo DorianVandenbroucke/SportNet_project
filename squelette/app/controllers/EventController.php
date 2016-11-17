@@ -125,15 +125,17 @@ class EventController
         }
     }
 
-    /*public function myEvents(){
+    public function close(){
         if($this->auth->logged_in){
-            $promoter = Promoter::find($this->auth->promoter);
-            $ev = new EventView(['events' =>$promoter->getEvents]);
-            $ev->render('allEvents');
+            $id = $this->request->get['id'];
+            $event = Event::find($id);
+            $event->status = EVENT_STATUS_CLOSED;
+            $ev = new EventView(['events' =>$event]);
+            $ev->render('event');
         }else{
             $defaultView = new DefaultView(NULL);
             $defaultView->render('signinForm');
         }
-    }*/
+    }
 
 }

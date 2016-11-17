@@ -105,11 +105,11 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='dateStart'>Date de début</label>
-                    <input type='date' id='dateStart' placeholder='Date de début' name='startDate' value='$startDate' required>
+                    <input type='date' id='dateStart' placeholder='DD-MM-YYYY' name='startDate' value='$startDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='dateEnd'>Date de fin</label>
-                    <input type='dateEnd' placeholder='Date de fin' name='endDate' value='$endDate' required>
+                    <input type='date' id='dateEnd' placeholder='DD-MM-YYYY' name='endDate' value='$endDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='lieu'>Lieu</label>
@@ -140,7 +140,16 @@ EOT;
         }
 
         $html = '<div>';
-        $modifyEventBlock= $this->generateModifyBlock($event);
+        $addEventBlock = ''; $modifyEventBlock = '';
+        if(Util::isCurrentEventPromoter($event)){
+            $modifyEventBlock = "<div class='row'>
+                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>";
+                if($event->status == EVENT_STATUS_OPEN){
+                    $modifyEventBlock.= "<a href='$this->script_name/event/close/?id=$event->id'><button class='blue-btn'>Fermer les inscriptions</button></a>";
+                    $addEventBlock = "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
+                }
+              $modifyEventBlock.="</div>";
+        }
         $activitiesList = $this->eventActivities();
         $html.="<div class='page_header row'>
                 <a href='$this->script_name".$url."'><button class='blue-btn'>Retour</button></a>
@@ -154,7 +163,7 @@ EOT;
                 <h2>Liste des épreuves</h2>
                 <div>
                     <ul class='list'>$activitiesList</ul>
-                    <a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>
+                    $addEventBlock
                 </div>
             </div>
             $modifyEventBlock
@@ -196,9 +205,11 @@ EOT;
                           <p>Du $event->startDate au $event->endDate</p>
                         </div>
                         <div class='column_4 buttons_list'>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
-                        </div>
+                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>";
+                            if(Util::isEventModifyable($event)) {
+                                $html .= "<a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>";
+                            }
+                        $html.="</div>
                     </div>";
         }
         return $html;
@@ -215,14 +226,8 @@ EOT;
         return $html;
     }
 
-    private function generateModifyBlock($event){
-        if(isset($_SESSION['promoter']) && $event->getPromoter->id == $_SESSION['promoter']){
-            return "<div class='row'>
-                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
-                <a href='$this->script_name/activity/add'><button class='blue-btn'>Fermer les inscriptions</button></a>
-            </div>";
-        }
-        return '';
+    private function isEventModifiable($event){
+        return Util::isCurrentEventPromoter($event) && $event->status == EVENT_STATUS_OPEN;
     }
 
 }

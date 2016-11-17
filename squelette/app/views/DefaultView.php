@@ -2,6 +2,8 @@
 
 namespace app\views;
 
+use app\utils\Util;
+
 class DefaultView  extends AbstractView{
 
     public function __construct($data){
@@ -25,9 +27,12 @@ class DefaultView  extends AbstractView{
                           <p>Du $event->startDate au $event->endDate</p>
                         </div>
                         <div class='column_4 buttons_list'>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
-                        </div>
+                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>";
+                            if(Util::isEventModifyable($event)) {
+                                $html .= "<a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>";
+                            }
+
+                        $html.="</div>
                     </div>
                     </div>";
         }

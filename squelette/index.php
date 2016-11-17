@@ -34,6 +34,7 @@ $router->addRoute('/event/delete/', '\app\controllers\EventController', 'deleteE
 $router->addRoute('/event/', '\app\controllers\EventController', 'detailEvent');
 $router->addRoute('/event/all/', '\app\controllers\EventController', 'findAll');
 $router->addRoute('/event/search/', '\app\controllers\EventController', 'search');
+$router->addRoute('/event/close/', '\app\controllers\EventController', 'close');
 $router->addRoute('/myEvents/', '\app\controllers\EventController', 'myEvents');
 $router->addRoute('/logout/', '\app\controllers\DefaultController', 'logout');
 
@@ -44,9 +45,13 @@ if(!isset($_SESSION['promoter'])){
       $_SERVER['PATH_INFO'] != "/signin/" &&
       $_SERVER['PATH_INFO'] != "/signup/" &&
       $_SERVER['PATH_INFO'] != "/signupVerification/" &&
-      $_SERVER['PATH_INFO'] != "/signinVerification/"
+      $_SERVER['PATH_INFO'] != "/signinVerification/" &&
+      $_SERVER['PATH_INFO'] != "/logout/"
     ){
       $_SESSION['url_redirection'] = $_SERVER['PATH_INFO'];
+      if($_SERVER['QUERY_STRING']){
+        $_SESSION['url_redirection'] = $_SESSION['url_redirection']."?".$_SERVER['QUERY_STRING'];
+      }
     }else{
       $_SESSION['url_redirection'] = "";
     }

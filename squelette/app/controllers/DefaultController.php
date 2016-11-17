@@ -49,7 +49,7 @@ class DefaultController{
 						if(isset($_SESSION['url_redirection'])){
 							header("location: ..".$_SESSION['url_redirection']);
 						}else{
-							header("location: ../home/");
+							header("location: ..");
 						}
 
 					}else{
@@ -108,7 +108,7 @@ class DefaultController{
 								if(isset($_SESSION['url_redirection'])){
 									header("location: ..".$_SESSION['url_redirection']);
 								}else{
-									header("location: ../home/");
+									header("location: ..");
 								}
 
 							}else{
@@ -137,7 +137,7 @@ class DefaultController{
 	public function logout(){
 		$authentification = new Authentification();
 		$authentification->logout();
-		header("location: ../../index.php");
+		header("location: ..");
 		$this->home();
 	}
 

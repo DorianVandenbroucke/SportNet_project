@@ -53,7 +53,11 @@ abstract class AbstractView {
     }
 
     protected function renderFooter(){
-        $html = 'SportNet &copy; 2016';
+        $html = '<div class="row">
+			        <div class="offset_1 column_4">
+				        <p>SportNet &copy; 2016</p>
+				        <a href="#">Nous contacter</a>
+			    </div>';
         return $html;
     }
 
@@ -93,7 +97,7 @@ abstract class AbstractView {
         }
 
         foreach($array as $lien => $nom){
-          if($lien === $path){
+          if($lien === $path || ($path == "/" && $lien == "")){
             $html .=
                     "<li>
                         <a href='$this->script_name".$lien."' class='active'>".$nom."</a>

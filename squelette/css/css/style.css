@@ -68,6 +68,8 @@ footer {
   color: #f2fbff;
   padding: 10px 0;
   border-top: 3px solid #0098d8; }
+  footer a {
+    color: #72d5ff; }
 
 .search {
   border-bottom: 1px solid #b2b2b2;
@@ -102,6 +104,12 @@ textarea {
 
 .detail {
   float: right; }
+
+a button {
+  margin: 0 5px; }
+
+.heure {
+  width: 45%; }
 
 @media screen and (max-width: 70em) {
   .menu ul {
