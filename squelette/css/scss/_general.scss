@@ -62,6 +62,10 @@ footer{
     color: lighten($secondaryColor, 55);
 	padding: 10px 0;
 	border-top: 3px solid $secondaryColor;
+	a{
+		color: lighten($secondaryColor, 30);
+	}
+
 }
 
 .search{
