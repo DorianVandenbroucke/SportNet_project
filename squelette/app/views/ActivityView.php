@@ -136,7 +136,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>
-                    <input type='text' id='price' placeholder='Prix' name='price'  >
+                    <input type='number' id='price' placeholder='Prix' name='price'  >
                 </div>
                 <div class='row button'>
                     <button name='valider'>Valider</button>
@@ -168,7 +168,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>
-                    <input type='text' id='price' placeholder='Prix' name='price' value=".$this->data->price." >
+                    <input type='number' id='price' placeholder='Prix' name='price' value=".$this->data->price." >
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='valider'>Valider</button>
