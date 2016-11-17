@@ -105,9 +105,9 @@ class EventController
         if(isset($this->request->get['id'])){
             $id = $this->request->get['id'];
             $events = Event::select()->where('id_promoter',$id)->get();
-            $ev = new EventView(['events' =>$events]);
+            $ev = new EventView(['events' =>$events, 'promoter_id'=>$id]);
         }else{
-            $ev = new EventView(['events' =>Event::select()->where('status', '!=',0)]);
+            $ev = new EventView(['events' =>Event::select()->where('status', '!=',0)->get()]);
         }
         $ev->render('allEvents');
     }
@@ -116,11 +116,12 @@ class EventController
         if($this->auth->logged_in){
             $searchText = filter_var(trim($this->request->post['searchText']),FILTER_SANITIZE_STRING);
             $searchText = empty($searchText) ? '%' : "%$searchText%";
-            $events = Event::where([
-                ['name','like',$searchText],
-                ['id_promoter','=',$this->auth->promoter]
-
-            ])->get();
+            $id = $this->request->post['id'];
+            if(!empty($id)){
+                $events = Event::where('name','like',$searchText)->where('id_promoter','=',$this->auth->promoter)->get();
+            }else{
+                $events = Event::where('name','like',$searchText)->get();
+            }
             $ev = new EventView(['events' =>$events]);
             $ev->render('allEvents');
         }else{
