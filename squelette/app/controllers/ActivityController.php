@@ -8,7 +8,6 @@ use app\views\EventView;
 use app\views\DefaultView;
 use app\models\Activity;
 use app\models\Event;
-use app\views\EventView;
 use app\models\Participant;
 use app\utils\Authentification;
 
