@@ -48,8 +48,7 @@ class ActivityController{
             $view = new ActivityView($this->request);
             return $view->render('add');
         }
-        $view = new DefaultView($this->request);
-        return $view->render('signinForm');
+        header("location: ../../signin/");
     }
 
     public function update()
@@ -69,15 +68,14 @@ class ActivityController{
 
                 $activity->save();
 
-                $view = new ActivityView($activity);
-                return $view->render('detail');
+                header("location: ../detail/?id=".$activity->id);
             }
 
             $view = new ActivityView($activity);
             return $view->render('edit');
         }
-        $view = new DefaultView($this->request);
-        return $view->render('signinForm');
+
+        header("location: ../../signin/");
     }
 
     public function delete()
