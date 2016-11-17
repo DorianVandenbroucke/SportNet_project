@@ -8,7 +8,6 @@ use app\views\EventView;
 use app\views\DefaultView;
 use app\models\Activity;
 use app\models\Event;
-use app\views\EventView;
 use app\models\Participant;
 use app\utils\Authentification;
 
@@ -37,7 +36,7 @@ class ActivityController{
 
                 $date = new \DateTime();
                 $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
-                $activity->date =  $date->format('Y-m-d H:i:s');
+                $activity->date =  $date;
 
                 $activity->id_event =  $this->request->get['id'];
                 $activity->save();
