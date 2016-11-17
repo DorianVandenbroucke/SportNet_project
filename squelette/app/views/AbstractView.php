@@ -47,20 +47,11 @@ abstract class AbstractView {
         return $str;
     }
 
-
-    /*
-     *  Crée le fragment HTML de l'entête
-     *
-     */
     protected function renderHeader(){
         $html ='<div>Sport<span>Net</span></div>';
         return $html;
     }
 
-    /*
-     * Crée le fragment HTML du bas de la page
-     *
-     */
     protected function renderFooter(){
         $html = 'SportNet &copy; 2016';
         return $html;
@@ -89,7 +80,7 @@ abstract class AbstractView {
               "" => "Accueil",
               "/event/all/" => "Evénements",
               "/event/add/" => "Ajouter un événement",
-              "/event/all/?id=$id_promoter" => "Mes événements",
+              "/myEvents/" => "Mes événements",
               "/logout/" => "Me déconnecter"
             );
         }else if(!isset($_SESSION['promoter'])){
@@ -120,13 +111,6 @@ abstract class AbstractView {
 
     }
 
-
-    /*
-     * Affiche une page HTML complète.
-     *
-     * A definir dans les classe concrètes
-     *
-     */
     abstract public function render($selector);
 
 
