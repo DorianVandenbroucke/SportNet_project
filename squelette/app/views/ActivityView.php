@@ -96,7 +96,7 @@ EOT;
          $html .=   '<div>
                         <ul class="list-without-style">
                             <li><strong>Date de l\'épreuve :</strong></li>
-                            <li>'.$this->data->date->format('Y-m-d').'</li>
+                            <li>'.$this->data->date->format('d/m/Y').'</li>
                             <li><strong>Heure de l\'épreuve :</strong></li>
                             <li>'.$this->data->date->format('H:i').'</li>
                             <li><strong>Tarif de l\'épreuve :</strong></li>
@@ -140,7 +140,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>
-                    <input type='text' id='price' placeholder='Prix' name='price'  >
+                    <input type='number' id='price' placeholder='Prix' name='price'  >
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='valider'>Valider</button>
@@ -175,7 +175,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>
-                    <input type='text' id='price' placeholder='Prix' name='price' value=".$this->data->price." >
+                    <input type='number' id='price' placeholder='Prix' name='price' value=".$this->data->price." >
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='valider'>Valider</button>
