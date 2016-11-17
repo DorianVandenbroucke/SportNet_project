@@ -142,7 +142,7 @@ EOT;
                     <input type='text' class='heure' placeholder='mm' name='startDateM'>
                 </div>
                 <div class='column_4'>
-                    <label for='price'>Tarif de l'épreuve</label>
+                    <label for='price'>Tarif de l'épreuve (en €)</label>
                     <input type='number' id='price' placeholder='Prix' name='price'  >
                 </div>
                 <div class='row button'>
@@ -168,7 +168,7 @@ EOT;
                     <textarea id='desc' name='description'>".$this->data->description."</textarea>
                 </div>
                 <div class='column_4'>
-                    <label for='date'>Date de l'épreuve</label>
+                    <label for='date'>Date de l'épreuve (en €)</label>
                     <input type='date' id='date' placeholder='dd-mm-yyyy' name='startDate' value=".$this->data->date."  >
                 </div>
                 <div class='column_4'>
