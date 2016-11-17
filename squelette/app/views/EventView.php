@@ -9,6 +9,8 @@
 namespace app\views;
 
 
+use app\utils\Util;
+
 class EventView extends AbstractView
 {
 
@@ -76,8 +78,8 @@ EOT;
             $id = $event->id;
             $name = $event->name;
             $description = $event->description;
-            $startDate = $event->startDate;
-            $endDate = $event->endDate;
+            $startDate = Util::dateToStr($event->startDate, STANDARD_DATE_FORMAT);
+            $endDate = Util::dateToStr($event->endDate, STANDARD_DATE_FORMAT);
             $addresse = $event->addresse;
         }
         foreach ($this->data['disciplines'] as $discipline){
@@ -92,7 +94,7 @@ EOT;
                 <h1>$title</h1>
             </div>
             <form action=\"$this->script_name/event/save/\" method='post' >
-                <input type='hidden' value='$id'/>
+                <input type='hidden' value='$id' name='id'/>
                 <div class='column_4'>
                     <label for='nom'>Nom</label>
                     <input type='text' id='nom' placeholder='Nom' name='name' required value='$name'>
@@ -111,11 +113,11 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='lieu'>Lieu</label>
-                    <input type='text' id='lieu' placeholder='Lieu' value='$addresse' required>
+                    <input type='text' id='lieu' placeholder='Lieu' value='$addresse' required name='addresse'>
                 </div>
                 <div class='column_4'>
                     <label>Discipline</label>
-                    <select name='id_discipline '>$options</select>
+                    <select name='id_discipline'>$options</select>
                 </div>
                 <div class='column_4'>
                     <label>Photos</label>
