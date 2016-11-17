@@ -139,26 +139,21 @@ EOT;
           $url = "/event/all/";
         }
         $html = '<div>';
-        $addEventBlock = ''; $modifyEventBlock = '';
+        $modifyBlock =''; $addBlock ='';
         if(Util::isCurrentEventPromoter($event)){
-            $modifyEventBlock = "<a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>";
-                if($event->status == EVENT_STATUS_OPEN){
-                    $modifyStatus = 'Fermer les inscriptions';
-                    $addEventBlock = "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
-                }else{
-                    $modifyStatus = 'Ouvrir les inscriptions';
-                }
-            $modifyEventBlock.= "<a href='$this->script_name/event/changeStatus/?id=$event->id'><button class='blue-btn'>$modifyStatus</button></a>";
+            $actions = $this->generateEventActions($event);
+            $modifyBlock = $actions['modify_block'];
+            $addBlock = $actions['add_block'];
         }
         $activitiesList = $this->eventActivities();
         $html.=
             "<div class='page_header row'>
                 <div class='row'>
                   <div class='column_4'>
-                    <a href='$this->script_name".$url."'><button class='blue-btn'>Retour</button></a>
+                    <a href='$this->script_name".$url."'><button class='lightblue_button'>Retour</button></a>
                   </div>
                   <div class='column_4 buttons_event'>
-                    $modifyEventBlock
+                    $modifyBlock
                   </div>
                 </div>
                 <h1>$event->name</h1>
@@ -171,7 +166,7 @@ EOT;
                 <h2>Liste des épreuves</h2>
                 <div>
                     <ul class='list'>$activitiesList</ul>
-                    $addEventBlock
+                    $addBlock
                 </div>
             </div>
         ";
@@ -195,7 +190,7 @@ EOT;
                 <div class='row list'>
                     $list
                 </div>
-                <div class='row text-align-right'>
+                <div class='row text-align-center'>
                   <a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a>
                 </div>
              </div>
@@ -212,7 +207,7 @@ EOT;
                           <p>Du $event->startDate au $event->endDate</p>
                         </div>
                         <div class='column_4 buttons_list'>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>";
+                            <a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Details</button></a>";
                             if(Util::isEventModifyable($event)) {
                                 $html .= "<a href='$this->script_name/event/delete/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>";
                             }
@@ -231,6 +226,39 @@ EOT;
                 </li>";
         }
         return $html;
+    }
+
+    private function generateEventActions($event){
+        $modifyEventBlock = "<a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>";
+        $addEventBlock = '';
+        $button = array();
+        switch ($event->status){
+            case EVENT_STATUS_CREATED:{
+                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_VALIDATED."&id=$event->id'><button class='blue-btn'>Valider</button></a>";
+                break;
+            }
+            case EVENT_STATUS_VALIDATED:{
+                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_OPEN."&id=$event->id'><button class='blue-btn'>Ouvrir les inscriptions</button></a>";
+                break;
+            }
+            case EVENT_STATUS_OPEN:{
+                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_CLOSED."&id=$event->id'><button class='blue-btn'>Fermer les inscriptions</button></a>";
+                break;
+            }
+            case EVENT_STATUS_CLOSED:{
+                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_OPEN."&id=$event->id'><button class='blue-btn'>Ouvrir les inscriptions</button></a>";
+                break;
+            }
+            default:{
+                $modifyEventBlock ='';
+
+            }
+        }
+            if($event->status != EVENT_STATUS_CLOSED && $event->status != EVENT_STATUS_PUBLISHED){
+                $addEventBlock = "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
+            }
+
+            return ['modify_block'=>$modifyEventBlock, 'add_block'=>$addEventBlock];
     }
 
 }

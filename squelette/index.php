@@ -1,8 +1,12 @@
 <?php
 
 session_start();
-define("EVENT_STATUS_CLOSED", 0);
+define("EVENT_STATUS_CREATED", 0);
 define("EVENT_STATUS_OPEN", 1);
+define("EVENT_STATUS_CLOSED", 2);
+define("EVENT_STATUS_VALIDATED", 3);
+define("EVENT_STATUS_PUBLISHED", 4);
+
 require_once("vendor/autoload.php");
 
 app\utils\AppInit::bootEloquent('conf/conf.ini');
@@ -60,8 +64,7 @@ if(!isset($_SESSION['promoter'])){
 // On crée une variable de session dans le cas où l'utilisateur souhaite retourner sur une page précéDefaultController
 if(
   isset($_SERVER["PATH_INFO"]) &&
-  $_SERVER['PATH_INFO'] != "/event/" &&
-  $_SERVER['PATH_INFO'] != "/activity/add/"
+  $_SERVER['PATH_INFO'] == "/event/all/"
 ){
   $_SESSION['return_button'] = $_SERVER['PATH_INFO'];
   if($_SERVER['QUERY_STRING']){

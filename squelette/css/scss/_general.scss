@@ -32,17 +32,21 @@ header{
 	margin: 0;
 }
 
+.lightblue_button{
+	border: 1px solid $secondaryColor;
+	color: $secondaryColor;
+	background: lighten($secondaryColor, 55);
+	transition: 0.2s;
+	&:hover{
+		background-color: $secondaryColor;
+		color: #ffffff;
+	}
+}
+
 .presentation{
 	text-align: center;
 	a button{
-		border: 1px solid $secondaryColor;
-		color: $secondaryColor;
-		background: lighten($secondaryColor, 55);
-		transition: 0.2s;
-		&:hover{
-			background-color: $secondaryColor;
-			color: #ffffff;
-		}
+		@extend .lightblue_button;
 	}
 }
 .page_header {
