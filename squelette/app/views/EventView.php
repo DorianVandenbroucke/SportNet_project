@@ -155,7 +155,7 @@ EOT;
             "<div class='page_header row'>
                 <div class='row'>
                   <div class='column_4'>
-                    <a href='$this->script_name".$url."'><button class='blue-btn'>Retour</button></a>
+                    <a href='$this->script_name".$url."'><button class='lightblue_button'>Retour</button></a>
                   </div>
                   <div class='column_4 buttons_event'>
                     $modifyEventBlock
@@ -195,7 +195,7 @@ EOT;
                 <div class='row list'>
                     $list
                 </div>
-                <div class='row text-align-right'>
+                <div class='row text-align-center'>
                   <a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a>
                 </div>
              </div>
@@ -212,7 +212,7 @@ EOT;
                           <p>Du $event->startDate au $event->endDate</p>
                         </div>
                         <div class='column_4 buttons_list'>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>";
+                            <a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Details</button></a>";
                             if(Util::isEventModifyable($event)) {
                                 $html .= "<a href='$this->script_name/event/delete/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>";
                             }

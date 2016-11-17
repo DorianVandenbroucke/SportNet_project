@@ -42,16 +42,17 @@ header {
   background: #72d5ff;
   margin: 0; }
 
+.lightblue_button, .presentation a button {
+  border: 1px solid #0098d8;
+  color: #0098d8;
+  background: #f2fbff;
+  transition: 0.2s; }
+  .lightblue_button:hover, .presentation a button:hover {
+    background-color: #0098d8;
+    color: #ffffff; }
+
 .presentation {
   text-align: center; }
-  .presentation a button {
-    border: 1px solid #0098d8;
-    color: #0098d8;
-    background: #f2fbff;
-    transition: 0.2s; }
-    .presentation a button:hover {
-      background-color: #0098d8;
-      color: #ffffff; }
 
 .page_header {
   margin-bottom: 20px; }
