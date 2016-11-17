@@ -69,8 +69,6 @@ if(
   }
 }
 
-echo "<pre>"; var_dump($_SESSION); echo "</pre>";
-
 $http_req = new HttpRequest();
 $router->dispatch($http_req);
 
