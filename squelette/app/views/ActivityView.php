@@ -81,10 +81,10 @@ EOT;
     public function detail(){
         $promoter = Util::isCurrentEventPromoter(Event::find($this->data->id_event));
         $html =
-            '<div class="page_header row
-              <div class="row">
-                <a href="'.$this->script_name.'/event/all/"><button class="lightblue_button">Retour</button></a>
-              </div>
+            '<div class="page_header row" >
+                <div class="row">
+                  <a href="'.$this->script_name.'/event/all/"><button class="lightblue_button">Retour</button></a>
+                </div>
                 <h1>'.$this->data->name.'</h1>
             </div>
             <section>
