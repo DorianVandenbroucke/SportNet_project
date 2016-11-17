@@ -78,7 +78,7 @@ class EventController
     public function deleteEvent(){
         $id = $this->request->get['id'];
         $totalDeleted = Event::destroy($id);
-        $this->findAllByPromoter();
+        header("location: ../all/?id=$_SESSION[promoter]");
 
     }
 

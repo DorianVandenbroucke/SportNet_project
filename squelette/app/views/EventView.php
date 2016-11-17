@@ -207,7 +207,7 @@ EOT;
                         <div class='column_4 buttons_list'>
                             <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>";
                             if(Util::isEventModifyable($event)) {
-                                $html .= "<a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>";
+                                $html .= "<a href='$this->script_name/event/delete/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>";
                             }
                         $html.="</div>
                     </div>";
