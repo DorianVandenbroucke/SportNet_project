@@ -205,7 +205,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='birthDate'>Date de naissance</label>
-                    <input type='text' id='birthDate' placeholder='Date de naissance' name='birthDate'  >
+                    <input type='text' id='birthDate' placeholder='dd-mm-yyyy' name='birthDate'  >
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='register'>S'inscrire</button>
