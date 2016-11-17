@@ -55,8 +55,6 @@ header {
 
 .page_header {
   margin-bottom: 20px; }
-  .page_header h1 {
-    text-align: left !important; }
 
 .content {
   background-color: #fff;
@@ -100,5 +98,8 @@ textarea {
 @media screen and (max-width: 70em) {
   .menu ul {
     margin: 0 auto !important; } }
+@media screen and (min-width: 70em) {
+  .page_header h1 {
+    text-align: left !important; } }
 
 /*# sourceMappingURL=style.css.map */

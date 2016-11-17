@@ -46,9 +46,6 @@ header{
 	}
 }
 .page_header {
-	h1{
-    	text-align: left !important;
-	}
 	margin-bottom: 20px;
 }
 
@@ -107,4 +104,12 @@ textarea{
 	.menu ul{
 		margin: 0 auto !important;
 	}
+}
+
+@media screen and(min-width: 70em){
+
+	.page_header h1{
+		text-align: left!important;
+	}
+
 }
