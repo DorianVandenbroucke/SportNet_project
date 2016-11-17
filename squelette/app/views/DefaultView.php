@@ -58,6 +58,13 @@ class DefaultView  extends AbstractView{
                 </div>
                 <p class='message_droite row'>Vous n'avez pas encore de compte? <a href='$this->script_name/signup/'>inscrivez-vous</a></p>
               </form>";
+              if(isset($_SESSION['message_form'])){
+                $html .=
+                          "<div class='danger-alert row'>
+                            <span>".$_SESSION['message_form']."</span>
+                          </div>";
+                unset($_SESSION['message_form']);
+              }
       return $html;
     }
 
@@ -86,10 +93,17 @@ class DefaultView  extends AbstractView{
                   <input id='nom' class='row' type='text' name='name' placeholder='Nom' />
                 </div>
                 <div class='row button'>
-                  <button class='blue-btn' name='send'>Inscription</button>
-                </div>
-                <p class='message_droite row'>Vous avez déjà un compte? <a href='$this->script_name/signin/'>connectez-vous</a></p>
-                </form>";
+                <button class='blue-btn' name='send'>Inscription</button>
+              </div>
+              <p class='message_droite row'>Vous avez déjà un compte? <a href='$this->script_name/signin/'>connectez-vous</a></p>
+              </form>";
+              if(isset($_SESSION['message_form'])){
+                $html .=
+                          "<div class='danger-alert row'>
+                            <span>".$_SESSION['message_form']."</span>
+                          </div>";
+                unset($_SESSION['message_form']);
+              }
       return $html;
     }
 

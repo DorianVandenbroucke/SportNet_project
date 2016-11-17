@@ -124,8 +124,8 @@ EOT;
                     <input type='file' placeholder='FileUpload'/>
                 </div>
                 <div class='row button'>
-                    <button name='send'>Valider</button>
-                    <button name='cancel'>Annuler</button>
+                    <button class='blue-btn' name='send'>Valider</button>
+                    <button class='blue-btn' name='cancel'>Annuler</button>
                 </div>
             </form>
         ";
@@ -176,11 +176,13 @@ EOT;
     public function openEvents(){
         $html = '';
         $list = $this->eventLists();
+        $id = isset($this->data['promoter_id']) ? $this->data['promoter_id'] : '';
         $html.="
             <div class='page_header row'>
                 <h1>Listes des Évenements</h1>
                 <div class='row search'>
                   <form action='$this->script_name/event/search/' method='post'>
+                  <input type='hidden' value='$id' name='id'/>
                     <input class='column_8' type='text' placeholder='Rechercher un événement' name='searchText'/>
                     <div class='column_8 button'>
                       <button class='blue-btn' name='send'>Rechercher</button>
@@ -231,7 +233,6 @@ EOT;
     private function generateEventActions($event){
         $modifyEventBlock = "<a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>";
         $addEventBlock = '';
-        $button = array();
         switch ($event->status){
             case EVENT_STATUS_CREATED:{
                 $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_VALIDATED."&id=$event->id'><button class='blue-btn'>Valider</button></a>";

@@ -29,6 +29,6 @@ class Util
     }
 
     public static function isEventModifyable($event){
-        return self::isCurrentEventPromoter($event) && $event->status == EVENT_STATUS_OPEN;
+        return self::isCurrentEventPromoter($event) && $event->status != EVENT_STATUS_PUBLISHED;
     }
 }
