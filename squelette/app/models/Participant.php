@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Participant extends Model {
 
-    protected $table = 'Participant';
+    protected $table = 'participant';
     protected $primaryKey = 'id';
     protected $fillable = [
         'mail','birthDate','firstName','lastName'
@@ -14,6 +14,6 @@ class Participant extends Model {
     public $timestamps = false;
 
     public function getActivities(){
-        return $this->belongsToMany('\app\models\Activity', 'Participant_Activity', 'id_participant', 'id_activity');
+        return $this->belongsToMany('\app\models\Activity', 'participant_activity', 'id_participant', 'id_activity');
     }
 }

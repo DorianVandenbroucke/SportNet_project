@@ -130,6 +130,7 @@ class EventController
             $id = $this->request->get['id'];
             $event = Event::find($id);
             $event->status = EVENT_STATUS_CLOSED;
+            $event->update();
             $ev = new EventView(['events' =>$event]);
             $ev->render('event');
         }else{
