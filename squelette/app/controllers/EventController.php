@@ -10,7 +10,6 @@ namespace app\controllers;
 
 use app\models\Discipline;
 use app\models\Event;
-use app\models\Promoter;
 use app\utils\Authentification;
 use app\utils\HttpRequest;
 use app\utils\Util;
@@ -48,11 +47,10 @@ class EventController
 
 
         if($this->auth->logged_in){
+            $id = $this->request->post['id'];
             if(isset($this->request->post['cancel'])){
-                //$id = $this->request->post['id'];
-                echo "cancel";
+                header("location: ../?id=$id");
             }else{
-                $id = $this->request->post['id'];
                 $event = empty($id) ? new Event() : Event::find($id);
                 $event->name = $this->request->post['name'];
                 $event->description = filter_var($this->request->post['description'], FILTER_SANITIZE_SPECIAL_CHARS);
@@ -60,9 +58,11 @@ class EventController
                 $event->endDate = Util::strToDate($this->request->post['endDate'], MYSQL_DATE_FORMAT);
                 $event->addresse = $this->request->post['addresse'];
                 $event->id_discipline = $this->request->post['id_discipline'];
-                $event->status = EVENT_STATUS_OPEN;
-                if(empty($id))
+
+                if(empty($id)) {
+                    $event->status = EVENT_STATUS_OPEN;
                     $event->id_promoter = $this->auth->promoter;
+                }
                 if($event->save()) {
                     $ev = new EventView(['events' => $event]);
                     $ev->render('event');
