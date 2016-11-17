@@ -36,7 +36,7 @@ class ActivityController{
 
                 $date = new \DateTime();
                 $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
-                $activity->date =  $date->format('Y-m-d H:i:s');
+                $activity->date =  $date;
 
                 $activity->id_event =  $this->request->get['id'];
                 $activity->save();
@@ -95,6 +95,8 @@ class ActivityController{
     public function detail()
     {
         $activity = Activity::find($this->request->get['id']);
+        $date = new \Datetime($activity->date);
+        $activity->date = $date;
         $view = new ActivityView($activity);
         $view->render('detail');
     }

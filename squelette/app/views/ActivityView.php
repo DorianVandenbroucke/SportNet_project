@@ -83,7 +83,7 @@ EOT;
                 <a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'"><button class="blue-btn column_3 row">Modifier</button></a><br>
                 <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'"><button class="blue-btn column_3 row">Supprimer</button></a><br>
                 <div>
-                    <h5>Date de l\'épreuve : '.$this->data->date->format('Y/m/d').'</h5>
+                    <h5>Date de l\'épreuve : '.$this->data->date->format('Y-m-d').'</h5>
                     <h5>Heure de l\'épreuve : '.$this->data->date->format('H:i').'</h5>
                 </div>
                 </aside>
@@ -101,7 +101,7 @@ EOT;
                 <form action='#' method='POST'/>
                 <div class='column_4'>
                     <label for='nom'>Titre de l'épreuve</label>
-                    <input type='text' id='nom' placeholder='Nom' name='name' required>
+                    <input type='text' id='nom' placeholder='Nom' name='name'  >
                 </div>
                 <div class='column_4'>
                     <label for='desc'>Description</label>
@@ -109,16 +109,16 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve</label>
-                    <input type='date' id='date' placeholder='Date' name='startDate' required>
+                    <input type='date' id='date' placeholder='Date' name='startDate'  >
                 </div>
                 <div class='column_4'>
                     <label for='heure'>Heure de l'épreuve</label>
-                    <input type='date' id='heure' placeholder='Heure' name='startDateH' required>
-                    <input type='date' id='heure' placeholder='Heure' name='startDateM' required>
+                    <input type='text' id='heure' placeholder='Heure' name='startDateH'  >
+                    <input type='text' id='heure' placeholder='Heure' name='startDateM'  >
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve</label>
-                    <input type='date' id='price' placeholder='Prix' name='price' required>
+                    <input type='text' id='price' placeholder='Prix' name='price'  >
                 </div>
                 <div class='row button'>
                     <button name='valider'>Valider</button>
@@ -127,34 +127,34 @@ EOT;
     }
 
     public function edit(){
-        return "<div class='page_header row'>
-                    <h1>Modifier l'épreuve : ".$this->data->name."</h1>
+         return "<div class='page_header row'>
+                    <h1>Modifier : ".$this->data->name."</h1>
                 </div>
                 <form action='#' method='POST'/>
-                    <div class='column_4'>
-                        <label for='nom'>Titre de l'épreuve</label>
-                        <input type='text' id='nom' placeholder='Nom' name='name' value=".$this->data->name.">
-                    </div>
-                    <div class='column_4'>
-                        <label for='desc'>Description</label>
-                        <textarea id='desc' name='description' value=".$this->data->description."></textarea>
-                    </div>
-                    <div class='column_4'>
-                        <label for='date'>Date de l'épreuve</label>
-                        <input type='text' name='startDate' value='".substr($this->data->date,0,10)."' />
-                    </div>
-                    <div class='column_4'>
-                        <label for='date'>Heure de l'épreuve</label>
-                        <input type='text' name='startDateH' value='".substr($this->data->date,11,2)."' /> 
-                        <input type='text' name='startDateM' value='".substr($this->data->date,14,2)."'/>
-                    </div>                    
-                    <div class='column_4'>
-                        <label for='price'>Tarif de l'épreuve</label>
-                        <input type='date' id='price' placeholder='Prix' name='price' value=".$this->data->price.">
-                    </div>
-                    <div class='row button'>
-                        <button name='valider'>Valider</button>
-                    </div>
+                <div class='column_4'>
+                    <label for='nom'>Titre de l'épreuve</label>
+                    <input type='text' id='nom' placeholder='Nom' name='name' value=".$this->data->name."  >
+                </div>
+                <div class='column_4'>
+                    <label for='desc'>Description</label>
+                    <textarea id='desc' name='description'>".$this->data->description."</textarea>
+                </div>
+                <div class='column_4'>
+                    <label for='date'>Date de l'épreuve</label>
+                    <input type='date' id='date' placeholder='Date' name='startDate' value=".$this->data->date."  >
+                </div>
+                <div class='column_4'>
+                    <label for='heure'>Heure de l'épreuve</label>
+                    <input type='text' id='heure' placeholder='Heure' name='startDateH' value=".substr($this->data->date,11,2)." >
+                    <input type='text' id='heure' placeholder='Heure' name='startDateM' value=".substr($this->data->date,14,2)." >
+                </div>
+                <div class='column_4'>
+                    <label for='price'>Tarif de l'épreuve</label>
+                    <input type='text' id='price' placeholder='Prix' name='price' value=".$this->data->price." >
+                </div>
+                <div class='row button'>
+                    <button name='valider'>Valider</button>
+                </div>
                 </form>";
     }
 
@@ -165,19 +165,19 @@ EOT;
                 <form action='#' method='POST'/>
                 <div class='column_4'>
                     <label for='firstName'>Prénom</label>
-                    <input type='text' id='firstName' placeholder='Prénom' name='firstName' required>
+                    <input type='text' id='firstName' placeholder='Prénom' name='firstName'  >
                 </div>
                 <div class='column_4'>
                     <label for='lastName'>Nom</label>
-                    <input type='text' id='lastName' placeholder='Nom' name='lastName' required>
+                    <input type='text' id='lastName' placeholder='Nom' name='lastName'  >
                 </div>
                 <div class='column_4'>
                     <label for='mail'>Nom</label>
-                    <input type='mail' id='mail' placeholder='Nom' name='mail' required>
+                    <input type='mail' id='mail' placeholder='Nom' name='mail'  >
                 </div>
                 <div class='column_4'>
                     <label for='birthDate'>Date de naissance</label>
-                    <input type='text' id='birthDate' placeholder='Date de naissance' name='birthDate' required>
+                    <input type='text' id='birthDate' placeholder='Date de naissance' name='birthDate'  >
                 </div>
                 <div class='row button'>
                     <button name='register'>S'inscrire</button>

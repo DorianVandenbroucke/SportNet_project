@@ -132,7 +132,7 @@ EOT;
     }
 
     public function openEventDetail(){
-
+        $event = $this->data['events'];
         if(isset($_SESSION['return_button'])){
           $url = $_SESSION['return_button'];
         }else{
@@ -140,7 +140,8 @@ EOT;
         }
 
         $html = '<div>';
-        $event = $this->data['events'];
+        $modifyEventBlock= $this->generateModifyBlock($event);
+        $addEventBlock = $this->generateAddBlock($event);
         $activitiesList = $this->eventActivities();
         $html.="<div class='page_header row'>
                 <a href='$this->script_name".$url."'><button class='blue-btn'>Retour</button></a>
@@ -154,13 +155,10 @@ EOT;
                 <h2>Liste des épreuves</h2>
                 <div>
                     <ul class='list'>$activitiesList</ul>
-                    <a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>
+                    $addEventBlock
                 </div>
             </div>
-            <div class='row'>
-                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
-                <a href='$this->script_name/activity/add'><button class='blue-btn'>Fermer les inscriptions</button></a>
-            </div>
+            $modifyEventBlock
         ";
         return $html.'</div>';
     }
@@ -216,6 +214,23 @@ EOT;
                 </li>";
         }
         return $html;
+    }
+
+    private function generateModifyBlock($event){
+        if(isset($_SESSION['promoter']) && $event->getPromoter->id == $_SESSION['promoter']){
+            return "<div class='row'>
+                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
+                <a href='$this->script_name/activity/add'><button class='blue-btn'>Fermer les inscriptions</button></a>
+            </div>";
+        }
+        return '';
+    }
+
+    private function generateAddBlock($event){
+        if(isset($_SESSION['promoter']) && $event->getPromoter->id == $_SESSION['promoter']){
+            return "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
+        }
+        return '';
     }
 
 }
