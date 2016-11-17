@@ -47,6 +47,10 @@ header{
 }
 .page_header {
 	margin-bottom: 20px;
+	.buttons_event{
+		text-align: center;
+		margin-top: 20px;
+	}
 }
 
 .content{
@@ -148,6 +152,11 @@ a button {
 
 	.page_header h1{
 		text-align: left!important;
+	}
+
+	.page_header .buttons_event{
+		text-align: right;
+		margin-top: 0;
 	}
 
 }

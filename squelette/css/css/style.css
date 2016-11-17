@@ -55,6 +55,9 @@ header {
 
 .page_header {
   margin-bottom: 20px; }
+  .page_header .buttons_event {
+    text-align: center;
+    margin-top: 20px; }
 
 .content {
   background-color: #fff;
@@ -125,6 +128,10 @@ a button {
     margin-top: 0 !important; }
 
   .page_header h1 {
-    text-align: left !important; } }
+    text-align: left !important; }
+
+  .page_header .buttons_event {
+    text-align: right;
+    margin-top: 0; } }
 
 /*# sourceMappingURL=style.css.map */
