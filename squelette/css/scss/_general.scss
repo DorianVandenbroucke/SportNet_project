@@ -64,6 +64,12 @@ footer{
 	border-top: 3px solid $secondaryColor;
 }
 
+.search{
+	border-bottom: 1px solid $borderSearchForm;
+	margin-bottom: 50px;
+	padding-bottom: 8px;
+}
+
 form{
 	.button{
 		text-align: center;

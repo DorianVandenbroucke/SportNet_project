@@ -69,6 +69,11 @@ footer {
   padding: 10px 0;
   border-top: 3px solid #0098d8; }
 
+.search {
+  border-bottom: 1px solid #b2b2b2;
+  margin-bottom: 50px;
+  padding-bottom: 8px; }
+
 form .button {
   text-align: center; }
 form input, form select, form textarea {

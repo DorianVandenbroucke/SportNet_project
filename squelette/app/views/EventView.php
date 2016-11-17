@@ -169,26 +169,15 @@ EOT;
         $html.="
             <div class='page_header row'>
                 <h1>Listes des Évenements</h1>
-<<<<<<< HEAD
-                <div class='row'>
+                <div class='row search'>
                   <form action='$this->script_name/event/search/' method='post'>
-                    <input type='text' placeholder='Recherche' name='searchText'/>
+                    <input class='column_8' type='text' placeholder='Rechercher un événement' name='searchText'/>
+                    <div class='column_8 button'>
+                      <button class='blue-btn' name='send'>Rechercher</button>
+                    </div>
                   </form>
                 </div>
                 <div class='row list'>
-=======
-                <form action='$this->script_name/event/search/' method='post'>
-                    <div class='row'>
-                        <div  class='column_5'>
-                            <input type='text' placeholder='Recherche' name='searchText'/>
-                        </div>
-                         <div  class='column_3'>   
-                            <button class='btn blue-btn' name='send'>Recherche</button>
-                        </div>
-                    </div>
-                </form>
-                <div class='column_8 list'>
->>>>>>> d9f4e6f163587be10dd53e1d6a7aa46eae76c94d
                     $list
                 </div>
                 <div class='row'>
