@@ -42,12 +42,12 @@ header {
   background: #72d5ff;
   margin: 0; }
 
-.lightblue_button, .presentation a button {
+.lightblue_button {
   border: 1px solid #0098d8;
   color: #0098d8;
   background: #f2fbff;
   transition: 0.2s; }
-  .lightblue_button:hover, .presentation a button:hover {
+  .lightblue_button:hover {
     background-color: #0098d8;
     color: #ffffff; }
 
