@@ -156,7 +156,7 @@ EOT;
                   <div class='column_4'>
                     <a href='$this->script_name".$url."'><button class='blue-btn'>Retour</button></a>
                   </div>
-                  <div class='column_4 text-align-right'>
+                  <div class='column_4 buttons_event'>
                     $modifyEventBlock
                   </div>
                 </div>
