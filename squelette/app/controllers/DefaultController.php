@@ -137,7 +137,7 @@ class DefaultController{
 	public function logout(){
 		$authentification = new Authentification();
 		$authentification->logout();
-		header("location: ../../index.php");
+		header("location: ..");
 		$this->home();
 	}
 
