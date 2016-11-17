@@ -105,11 +105,11 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='dateStart'>Date de début</label>
-                    <input type='date' id='dateStart' placeholder='DD-MM-YYYY' name='startDate' value='$startDate' required>
+                    <input type='date' id='dateStart' placeholder='dd-mm-yyyy' name='startDate' value='$startDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='dateEnd'>Date de fin</label>
-                    <input type='date' id='dateEnd' placeholder='DD-MM-YYYY' name='endDate' value='$endDate' required>
+                    <input type='date' id='dateEnd' placeholder='dd-mm-yyyy' name='endDate' value='$endDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='lieu'>Lieu</label>
@@ -124,8 +124,8 @@ EOT;
                     <input type='file' placeholder='FileUpload'/>
                 </div>
                 <div class='row button'>
-                    <button name='send'>Valider</button>
-                    <button name='cancel'>Annuler</button>
+                    <button class='blue-btn' name='send'>Valider</button>
+                    <button class='blue-btn' name='cancel'>Annuler</button>
                 </div>
             </form>
         ";
@@ -146,11 +146,20 @@ EOT;
             $addBlock = $actions['add_block'];
         }
         $activitiesList = $this->eventActivities();
+
+        $dateStart = $event->startDate;
+        $dateStart = explode("-", $dateStart);
+        $dateStart = $dateStart['2']."/".$dateStart['1']."/".$dateStart['0'];
+
+        $dateEnd = $event->endDate;
+        $dateEnd = explode("-", $dateEnd);
+        $dateEnd = $dateEnd['2']."/".$dateEnd['1']."/".$dateEnd['0'];
+
         $html.=
             "<div class='page_header row'>
                 <div class='row'>
                   <div class='column_4'>
-                    <a href='$this->script_name".$url."'><button class='lightblue_button'>Retour</button></a>
+                    <a href='$this->script_name/event/all/'><button class='lightblue_button'>Retour</button></a>
                   </div>
                   <div class='column_4 buttons_event'>
                     $modifyBlock
@@ -159,7 +168,9 @@ EOT;
                 <h1>$event->name</h1>
             </div>
             <div class='column_4'>
-                <div>Date:  $event->startDate    $event->endDate</div>
+                <div>
+                    <p>Du $dateStart au $dateEnd</p>
+                </div>
                 <div class='row'>$event->description</div>
             </div>
             <div class='column_4'>
@@ -176,11 +187,13 @@ EOT;
     public function openEvents(){
         $html = '';
         $list = $this->eventLists();
+        $id = isset($this->data['promoter_id']) ? $this->data['promoter_id'] : '';
         $html.="
             <div class='page_header row'>
                 <h1>Listes des Évenements</h1>
                 <div class='row search'>
                   <form action='$this->script_name/event/search/' method='post'>
+                  <input type='hidden' value='$id' name='id'/>
                     <input class='column_8' type='text' placeholder='Rechercher un événement' name='searchText'/>
                     <div class='column_8 button'>
                       <button class='blue-btn' name='send'>Rechercher</button>
@@ -199,12 +212,21 @@ EOT;
     }
 
     private function eventLists(){
-        $html = '';
+
+      $html = "";
+
         foreach ($this->data['events'] as $event){
+            $dateStart = $event->startDate;
+            $dateStart = explode("-", $dateStart);
+            $dateStart = $dateStart['2']."/".$dateStart['1']."/".$dateStart['0'];
+
+            $dateEnd = $event->endDate;
+            $dateEnd = explode("-", $dateEnd);
+            $dateEnd = $dateEnd['2']."/".$dateEnd['1']."/".$dateEnd['0'];
             $html.="<div class='ligne row'>
                         <div class='column_4'>
                           <h3>$event->name</h3>
-                          <p>Du $event->startDate au $event->endDate</p>
+                          <p>Du $dateStart au $dateEnd</p>
                         </div>
                         <div class='column_4 buttons_list'>
                             <a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Détails</button></a>";
@@ -231,7 +253,6 @@ EOT;
     private function generateEventActions($event){
         $modifyEventBlock = "<a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>";
         $addEventBlock = '';
-        $button = array();
         switch ($event->status){
             case EVENT_STATUS_CREATED:{
                 $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_VALIDATED."&id=$event->id'><button class='blue-btn'>Valider</button></a>";

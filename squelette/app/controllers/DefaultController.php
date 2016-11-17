@@ -36,7 +36,7 @@ class DefaultController{
 
 		if(isset($_POST['send'])){
 
-			if(!empty($_POST['login']) || !empty($_POST['password'])){
+			if(!empty($_POST['login']) && !empty($_POST['password'])){
 				$login = $_POST['login'];
 				$pass = $_POST['password'];
 
@@ -53,13 +53,13 @@ class DefaultController{
 						}
 
 					}else{
+						$_SESSION['message_form'] = "Les données entrées ne correspondent pas.";
 						$this->signinForm();
-						echo "Les données entrées ne correspondent pas.";
 					}
 				}
 			}else{
+				$_SESSION['message_form'] = "Veuillez remplir tous les champs.";
 				$this->signinForm();
-				echo "Veuillez remplir tous les champs.";
 			}
 		}
 
@@ -79,10 +79,10 @@ class DefaultController{
 		if(isset($_POST['send'])){
 
 			if(
-				!empty($_POST['name']) ||
-				!empty($_POST['mail']) ||
-				!empty($_POST['login']) ||
-				!empty($_POST['password']) ||
+				!empty($_POST['name']) &&
+				!empty($_POST['mail']) &&
+				!empty($_POST['login']) &&
+				!empty($_POST['password']) &&
 				!empty($_POST['password_confirm'])
 			){
 				$name = $_POST['name'];
@@ -112,23 +112,23 @@ class DefaultController{
 								}
 
 							}else{
+								$_SESSION['message_form'] = "Une erreur est survenue.";
 								$this->signupForm();
-								echo "une erreur est survenue.";
 							}
 
 						}else{
+							$_SESSION['message_form'] = "Les mots de passes entrés ne correspondent pas.";
 							return $this->signupForm();
-							echo "Les mots de passes entrés ne correspondent pas.";
 						}
 
 					}
 			}else{
+				$_SESSION['message_form'] = "L'adresse mail entré est invalide.";
 				return $this->signupForm();
-				echo "L'adresse mail entré est invalide.";
 			}
 		}else{
+			$_SESSION['message_form'] = "Veuillez compléter tous les champs.";
 			return $this->signupForm();
-			echo "Veuillez compléter tous les champs.";
 		}
 
 		}

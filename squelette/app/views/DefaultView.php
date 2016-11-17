@@ -15,21 +15,28 @@ class DefaultView  extends AbstractView{
               "<div class='row presentation'>
                 <h1 class='row'>Bienvenue sur SportNet, le rendez-vous des plus grands sportifs</h1>
                 <div class='row'>
-                  <a href='$this->script_name/event/add/'><button>Ajouter un événement</button></a>
+                  <a href='$this->script_name/event/add/'><button class='blue-btn'>Ajouter un événement</button></a>
                 </div>
               </div>";
 
         foreach ($this->data as $event){
+            $dateStart = $event->startDate;
+            $dateStart = explode("-", $dateStart);
+            $dateStart = $dateStart['2']."/".$dateStart['1']."/".$dateStart['0'];
+
+            $dateEnd = $event->endDate;
+            $dateEnd = explode("-", $dateEnd);
+            $dateEnd = $dateEnd['2']."/".$dateEnd['1']."/".$dateEnd['0'];
             $html.="<div class='row list'>
                     <div class='ligne row'>
                         <div class='column_4'>
                           <h3>$event->name</h3>
-                          <p>Du $event->startDate au $event->endDate</p>
+                          <p>Du $dateStart au $dateEnd</p>
                         </div>
                         <div class='column_4 buttons_list'>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>";
+                            <a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Details</button></a>";
                             if(Util::isEventModifyable($event)) {
-                                $html .= "<a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>";
+                                $html .= "<a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Supprimer</button></a>";
                             }
 
                         $html.="</div>
@@ -58,6 +65,13 @@ class DefaultView  extends AbstractView{
                 </div>
                 <p class='message_droite row'>Vous n'avez pas encore de compte? <a href='$this->script_name/signup/'>inscrivez-vous</a></p>
               </form>";
+              if(isset($_SESSION['message_form'])){
+                $html .=
+                          "<div class='danger-alert row'>
+                            <span>".$_SESSION['message_form']."</span>
+                          </div>";
+                unset($_SESSION['message_form']);
+              }
       return $html;
     }
 
@@ -86,10 +100,17 @@ class DefaultView  extends AbstractView{
                   <input id='nom' class='row' type='text' name='name' placeholder='Nom' />
                 </div>
                 <div class='row button'>
-                  <button class='blue-btn' name='send'>Inscription</button>
-                </div>
-                <p class='message_droite row'>Vous avez déjà un compte? <a href='$this->script_name/signin/'>connectez-vous</a></p>
-                </form>";
+                <button class='blue-btn' name='send'>Inscription</button>
+              </div>
+              <p class='message_droite row'>Vous avez déjà un compte? <a href='$this->script_name/signin/'>connectez-vous</a></p>
+              </form>";
+              if(isset($_SESSION['message_form'])){
+                $html .=
+                          "<div class='danger-alert row'>
+                            <span>".$_SESSION['message_form']."</span>
+                          </div>";
+                unset($_SESSION['message_form']);
+              }
       return $html;
     }
 

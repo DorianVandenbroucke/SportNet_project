@@ -45,9 +45,9 @@ header{
 
 .presentation{
 	text-align: center;
-	a button{
-		@extend .lightblue_button;
-	}
+	// a button{
+	// 	@extend .lightblue_button;
+	// }
 }
 .page_header {
 	margin-bottom: 20px;
@@ -128,6 +128,20 @@ a button {
 
 .heure{
 	width: 45%;
+}
+
+section section {
+	padding: 15px;
+}
+
+.list-without-style{
+	li{
+		padding: 10px;
+	}
+}
+
+.extra-large-btn{
+	margin: 1px 0;
 }
 
 @media screen and (max-width: 70em) {
