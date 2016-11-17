@@ -80,22 +80,28 @@ EOT;
 
     public function detail(){
         $promoter = Util::isCurrentEventPromoter(Event::find($this->data->id_event));
-        $html = '<a href="'.$this->script_name.'/event/?id='.$this->data->id_event.'"><button class="blue-btn column_1 row">Retour</button></a><div class="page_header row">
+        $html = '<a href="'.$this->script_name.'/event/?id='.$this->data->id_event.'"><button class="lightblue_button column_1 row">Retour</button></a><div class="page_header row">
                 <h1>'.$this->data->name.'</h1>
             </div>
             <section>
                 <section class="column_5">
                     <p>'.$this->data->description.'</p><br>
                 </section>
-                <aside class="column_3>';
+                <aside class="column_3">';
     if($promoter){
-        $html .= '<a href="#"><button class="blue-btn column_3 row">Publier les résultats</button></a><br>
-                <a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'"><button class="blue-btn column_3 row">Modifier</button></a><br>
-                <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'"><button class="blue-btn column_3 row">Supprimer</button></a><br>';
-    }   
+        $html .= '<a href="#"><button class="blue-btn extra-large-btn row">Publier les résultats</button></a><br>
+                <a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Modifier</button></a><br>
+                <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Supprimer</button></a><br>';
+    }
          $html .=   '<div>
-                    <h5>Date de l\'épreuve : '.$this->data->date->format('Y-m-d').'</h5>
-                    <h5>Heure de l\'épreuve : '.$this->data->date->format('H:i').'</h5>
+                        <ul class="list-without-style">
+                            <li><strong>Date de l\'épreuve :</strong></li>
+                            <li>'.$this->data->date->format('Y-m-d').'</li>
+                            <li><strong>Heure de l\'épreuve :</strong></li>
+                            <li>'.$this->data->date->format('H:i').'</li>
+                            <li><strong>Tarif de l\'épreuve :</strong></li>
+                            <li>'.$this->data->price.' €</li>
+                        </ul>
                 </div>
                 </aside>
            </section>

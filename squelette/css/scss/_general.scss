@@ -130,6 +130,20 @@ a button {
 	width: 45%;
 }
 
+section section {
+	padding: 15px;
+}
+
+.list-without-style{
+	li{
+		padding: 10px;
+	}
+}
+
+.extra-large-btn{
+	margin: 1px 0;
+}
+
 @media screen and (max-width: 70em) {
 	.menu ul{
 		margin: 0 auto !important;
