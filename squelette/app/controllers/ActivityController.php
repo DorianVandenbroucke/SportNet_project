@@ -154,11 +154,11 @@ class ActivityController{
         return $view->render('register');
     }
 
-    public function result()
+    public function participants()
     {
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
-        return $view->render('result');
+        return $view->render('participants');
     }
 
     public function recap($id){
@@ -187,6 +187,23 @@ class ActivityController{
             fclose($fp);
 
         }
+    }
+
+    public function publish(){
+        $id = $this->request->get['id'];
+        echo $id;
+        $av = new ActivityView(Activity::find($id));
+        $av->render('publish');
+    }
+
+    public function importResult(){
+        if($_FILES['fichier']['error']>0){
+            echo "Hubo un error al cargar el archivo";
+            return;
+        }
+        $csvFile = $_FILES['fichier']['tmp_name'];
+        $csvAsArray = array_map('str_getcsv',file($csvFile));
+        var_dump($csvAsArray);
     }
 
 }

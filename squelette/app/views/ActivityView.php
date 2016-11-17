@@ -31,14 +31,17 @@ class ActivityView extends AbstractView
             case 'all':
                 $main = $this->all();
                 break;
-            case 'result':
-                $main = $this->result();
+            case 'participants':
+                $main = $this->participants();
                 break;
             case 'paiement':
                 $main = $this->paiement();
                 break;
             case 'validatePaiement':
                 $main = $this->validatePaiement();
+                break;
+            case 'publish':
+                $main = $this->publish();
                 break;
         }
         $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';
@@ -222,7 +225,7 @@ EOT;
         return $html;
     }
 
-    public function result(){
+    public function participants(){
         $data = '';
         foreach ($this->data->getParticipants as $participant) {
                     $data .= '<tr>
@@ -262,12 +265,35 @@ EOT;
         return $this->data;
     }
 
+    public function publish(){
+        $id = $this->data->id;
+        $html =
+            "<div class='page_header row' >
+                <div class='row'>
+                  <a href='$this->script_name/activity/detail/?id=$id'><button class='lightblue_button'>Retour</button></a>
+                </div>
+                <h1>Publier les résultats</h1>
+            </div>
+            <section>
+                <section class='column_8'>
+                    <form enctype='multipart/form-data' action='$this->script_name/activity/importResult/' method='post'>
+                        <input type='hidden' name='id' value='$id'/>
+                        <label for='fichier'>Ajout du fichier CSV</label><input type='file' accept='text/csv' placeholder='Upload fichier' name='fichier' id='fichier' required/>
+                        <button name='send'>Upload</button>
+                    </form>
+                </section>
+             
+           </section>";
+        return $html;
+    }
+
+
     private function generateactivityActions($status){
         $modifyBlock = ''; $actionBlock ='';
 
         if($status != EVENT_STATUS_PUBLISHED){
             if($status == EVENT_STATUS_CLOSED){
-                $modifyBlock.= '<a href="#"><button class="blue-btn extra-large-btn row">Publier les résultats</button></a><br>';
+                $modifyBlock.= '<a href="'.$this->script_name.'/activity/publish/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Publier les résultats</button></a><br>';
             }
             $modifyBlock.='<a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Modifier</button></a><br>
                 <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Supprimer</button></a><br>';
@@ -276,7 +302,7 @@ EOT;
             if($status == EVENT_STATUS_OPEN){
                 $actionBlock.= '<a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'"><button class="blue-btn">S\'inscrire</button></a>';
             }
-            $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'"><button class="blue-btn">Voir Participants</button></a>';
+            $actionBlock.='<a href="'.$this->script_name.'/activity/participants/?id='.$this->data->id.'"><button class="blue-btn">Voir Participants</button></a>';
             if($status == EVENT_STATUS_PUBLISHED){
                 $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'"><button class="blue-btn">Voir Résultats</button></a>';
             }
