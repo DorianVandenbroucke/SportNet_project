@@ -79,7 +79,6 @@ class EventController
     public function deleteEvent(){
         $id = $this->request->get['id'];
         $totalDeleted = Event::destroy($id);
-        var_dump($totalDeleted);
         $this->findAllByPromoter();
 
     }
@@ -112,6 +111,20 @@ class EventController
             $ev = new EventView(['events' =>Event::all()]);
         }
         $ev->render('allEvents');
+    }
+
+    public function search(){
+        if($this->auth->logged_in){
+
+            $searchText = filter_var(trim($this->request->post['searchText']),FILTER_SANITIZE_STRING);
+            $searchText = empty($searchText) ? '%' : "%$searchText%";
+            $events = Event::where('name','like',$searchText)->get();
+            $ev = new EventView(['events' =>$events]);
+            $ev->render('allEvents');
+        }else{
+            $defaultView = new DefaultView(NULL);
+            $defaultView->render('signinForm');
+        }
     }
 
     /*public function myEvents(){

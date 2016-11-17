@@ -169,7 +169,16 @@ EOT;
         $html.="
             <div class='page_header row'>
                 <h1>Listes des Évenements</h1>
-                <form action='$this->script_name/event/search/' method='post'><input type='text' placeholder='Recherche' name='searchText'/></form>
+                <form action='$this->script_name/event/search/' method='post'>
+                    <div class='row'>
+                        <div  class='column_5'>
+                            <input type='text' placeholder='Recherche' name='searchText'/>
+                        </div>
+                         <div  class='column_3'>   
+                            <button class='btn blue-btn' name='send'>Recherche</button>
+                        </div>
+                    </div>
+                </form>
                 <div class='column_8 list'>
                     $list
                 </div>
