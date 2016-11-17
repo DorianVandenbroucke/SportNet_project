@@ -168,11 +168,17 @@ EOT;
         $html.="
             <div class='page_header row'>
                 <h1>Listes des Évenements</h1>
-                <form action='$this->script_name/event/search/' method='post'><input type='text' placeholder='Recherche' name='searchText'/></form>
-                <div class='column_8 list'>
+                <div class='row'>
+                  <form action='$this->script_name/event/search/' method='post'>
+                    <input type='text' placeholder='Recherche' name='searchText'/>
+                  </form>
+                </div>
+                <div class='row list'>
                     $list
                 </div>
-                <div><a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a></div>
+                <div class='row'>
+                  <a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a>
+                </div>
              </div>
         ";
         return $html;
