@@ -15,6 +15,8 @@ use app\utils\HttpRequest as HttpRequest;
 use app\utils\Router as Router;
 
 $router = new Router();
+if(!isset($_SESSION['recap']))
+{$_SESSION['recap']=array();}
 
 $router->addRoute('default', '\app\controllers\DefaultController', 'home');
 $router->addRoute('/signin/', '\app\controllers\DefaultController', 'signinForm');

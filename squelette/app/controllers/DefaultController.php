@@ -137,6 +137,7 @@ class DefaultController{
 	public function logout(){
 		$authentification = new Authentification();
 		$authentification->logout();
+		unset($_SESSION['recap']);
 		header("location: ..");
 		$this->home();
 	}
