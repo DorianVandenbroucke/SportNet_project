@@ -35,17 +35,18 @@ header{
 .presentation{
 	text-align: center;
 	a button{
-		border: 1px solid $primaryColor;
-		color: $primaryColor;
+		border: 1px solid $secondaryColor;
+		color: $secondaryColor;
+		background: lighten($secondaryColor, 55);
 		transition: 0.2s;
 		&:hover{
-			background-color: $primaryColor;
+			background-color: $secondaryColor;
 			color: #ffffff;
 		}
 	}
 }
-.page_header h1{
-    text-align: left !important;
+.page_header {
+	margin-bottom: 20px;
 }
 
 .content{
@@ -54,10 +55,6 @@ header{
     margin: 20px 0;
     border: 1px solid darken($backgroundColor, 20);
     border-top: none;
-}
-
-.page_header h1{
-	text-align: left !important;
 }
 
 footer{
@@ -73,11 +70,9 @@ form{
 	}
 	input, select, textarea{
 		width: 100%;
-		padding: 5px 10px;
-		margin: 8px 0;
-		box-sizing: border-box;
-		border: none;
-		border-bottom: 1px solid $fontColor;
+        padding: 5px 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
 	}
 	.message_droite{
 		text-align: right;
@@ -88,8 +83,33 @@ textarea{
 	resize: none;
 }
 
+.column_4 h2{
+	margin: 5px 0;
+}
+
+.list {
+	margin: 0 0 20px 0;
+	li, .ligne{
+		list-style: none;
+		border-bottom: 1px solid black;
+		padding: 10px;
+	}
+}
+
+.detail {
+	float: right;
+}
+
 @media screen and (max-width: 70em) {
 	.menu ul{
 		margin: 0 auto !important;
 	}
+}
+
+@media screen and(min-width: 70em){
+
+	.page_header h1{
+		text-align: left!important;
+	}
+
 }

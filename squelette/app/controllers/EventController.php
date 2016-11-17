@@ -44,23 +44,31 @@ class EventController
     }
 
     public function saveEvent(){
-        $id = $this->request->post['id'];
-        if($this->auth->logged_in){
-            $event = empty($id) ? new Event() : Event::find($id);
-            $event->name = $this->request->post['name'];
-            $event->description = $this->request->post['description'];
-            $event->startDate = date("Y-m-d",strtotime($this->request->post['startDate']));
-            $event->endDate = date("Y-m-d",strtotime($this->request->post['endDate']));
-            $event->addresse = $this->request->post['addresse'];
-            $event->id_discipline = $this->request->post['id_discipline'];
-            $event->status = EVENT_STATUS_OPEN;
-            if(empty($id))
-                $event->id_promoter = $this->auth->promoter;
 
-            if($event->save()){
-                $ev = new EventView(['events' =>$event]);
-                $ev->render('event');
+
+        if($this->auth->logged_in){
+            if(isset($this->request->post['cancel'])){
+                //$id = $this->request->post['id'];
+                echo "cancel";
+            }else{
+                $id = $this->request->post['id'];
+                $event = empty($id) ? new Event() : Event::find($id);
+                $event->name = $this->request->post['name'];
+                $event->description = $this->request->post['description'];
+                $event->startDate = date("Y-m-d",strtotime($this->request->post['startDate']));
+                $event->endDate = date("Y-m-d",strtotime($this->request->post['endDate']));
+                $event->addresse = $this->request->post['addresse'];
+                $event->id_discipline = $this->request->post['id_discipline'];
+                $event->status = EVENT_STATUS_OPEN;
+                if(empty($id))
+                    $event->id_promoter = $this->auth->promoter;
+
+                if($event->save()) {
+                    $ev = new EventView(['events' => $event]);
+                    $ev->render('event');
+                }
             }
+
         }else{
             $defaultView = new DefaultView(NULL);
             $defaultView->render('signinForm');
@@ -98,7 +106,6 @@ class EventController
     public function findAll(){
         if(isset($this->request->get['id'])){
             $id = $this->request->get['id'];
-            var_dump($id);
             $events = Event::select()->where('id_promoter',$id)->get();
             $ev = new EventView(['events' =>$events]);
         }else{
@@ -106,4 +113,16 @@ class EventController
         }
         $ev->render('allEvents');
     }
+
+    /*public function myEvents(){
+        if($this->auth->logged_in){
+            $promoter = Promoter::find($this->auth->promoter);
+            $ev = new EventView(['events' =>$promoter->getEvents]);
+            $ev->render('allEvents');
+        }else{
+            $defaultView = new DefaultView(NULL);
+            $defaultView->render('signinForm');
+        }
+    }*/
+
 }

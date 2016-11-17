@@ -88,59 +88,76 @@ EOT;
             $options.="<option value='$discipline->id' $selected>$discipline->name";
         }
 
-        return "
-            <h3>$title</h3>
+        return "<div class='page_header row'>
+                <h1>$title</h1>
+            </div>
             <form action=\"$this->script_name/event/save/\" method='post' >
+                <input type='hidden' value='$id'/>
                 <div class='column_4'>
                     <label for='nom'>Nom</label>
-                    <input type='text' id='nom' placeholder='Nom' name='name' value='$name'>
-                </div>
-                <div class='column_4'>
-                    <label for='date''>Dates</label>
-                    <input type='date' id='date' placeholder='Date de début' name='startDate' value='$startDate'>
-                    <input type='date' placeholder='Date de fin' name='endDate' value='$endDate'>
+                    <input type='text' id='nom' placeholder='Nom' name='name' required value='$name'>
                 </div>
                 <div class='column_4'>
                     <label for='desc'>Description</label>
-                    <textarea maxlength='500' id='desc' placeholder='Description' name='description'>$description</textarea>
+                    <textarea maxlength='500' id='desc' placeholder='Description' name='description' required>$description</textarea>
+                </div>
+                <div class='column_4'>
+                    <label for='dateStart'>Date de début</label>
+                    <input type='date' id='dateStart' placeholder='Date de début' name='startDate' value='$startDate' required>
+                </div>
+                <div class='column_4'>
+                    <label for='dateEnd'>Date de fin</label>
+                    <input type='dateEnd' placeholder='Date de fin' name='endDate' value='$endDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='lieu'>Lieu</label>
-                    <input type='text' id='lieu' placeholder='Lieu' value='$addresse'>
+                    <input type='text' id='lieu' placeholder='Lieu' value='$addresse' required>
                 </div>
                 <div class='column_4'>
                     <label>Discipline</label>
-                    <select>$options</select>
+                    <select name='id_discipline '>$options</select>
                 </div>
                 <div class='column_4'>
                     <label>Photos</label>
                     <input type='file' placeholder='FileUpload'/>
                 </div>
                 <div class='row button'>
-                    <button name='send'>Valider</button>
+                    <button name='send'>Valider</button><button name='cancel'>Annuler</button>
                 </div>
             </form>
         ";
     }
 
     public function openEventDetail(){
+
+        if(isset($_SESSION['return_button'])){
+          $url = $_SESSION['return_button'];
+        }else{
+          $url = "/event/all/";
+        }
+
         $html = '<div>';
         $event = $this->data['events'];
         $activitiesList = $this->eventActivities();
-        $html.="
-            <h2>$event->name</h2>
-            <div>
+        $html.="<div class='page_header row'>
+                <a href='$this->script_name".$url."'><button class='blue-btn'>Retour</button></a>
+                <h1>$event->name</h1>
+            </div>
+            <div class='column_4'>
                 <div>Date:  $event->startDate    $event->endDate</div>
-                <div>$event->description</div>
+                <div class='row'>$event->description</div>
+            </div>
+            <div class='column_4'>
+                <h2>Liste des épreuves</h2>
                 <div>
-                    <h2>Liste des épreuves</h2>
-                    <div>
-                        <ul>$activitiesList</ul>
-                        <a href='$this->script_name/activity/add/?id=$event->id'>Ajouter</a>
-                    </div>
+                    <ul class='list'>$activitiesList</ul>
+                    <a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>
                 </div>
             </div>
-            <div><a href='$this->script_name/event/edit/?id=$event->id'>Modifier</a><a href='$this->script_name/activity/add'>Fermer les inscriptions</a></div>
+            <div class='row'>
+                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
+                <a href='$this->script_name/activity/add'><button class='blue-btn'>Fermer les inscriptions</button></a>
+            </div>
         ";
         return $html.'</div>';
     }
@@ -149,13 +166,13 @@ EOT;
         $html = '';
         $list = $this->eventLists();
         $html.="
-            <div>
-                <h2>Listes des Évenements</h2>
+            <div class='page_header row'>
+                <h1>Listes des Évenements</h1>
                 <form action='$this->script_name/event/search/' method='post'><input type='text' placeholder='Recherche' name='searchText'/></form>
-                <div>
-                    <ul>$list</ul>
+                <div class='column_8 list'>
+                    $list
                 </div>
-                <div><a href='$this->script_name/event/add/'>Nouveau</a></div>
+                <div><a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a></div>
              </div>
         ";
         return $html;
@@ -164,19 +181,24 @@ EOT;
     private function eventLists(){
         $html = '';
         foreach ($this->data['events'] as $event){
-            $html.="<li>$event->name    $event->startDate - $event->endDate
-                <a  href='$this->script_name/event/detail/?id=$event->id'>Details</a>
-                <a href='$this->script_name/event/delete/?id=$event->id'>Supprimer</a>
-                </li>";
+            $html.="<div class='ligne row'>
+                        <div class='column_3'>$event->name</div>
+                        <div class='column_1'>$event->startDate  $event->endDate</div>
+                        <div class='column_3'>
+                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
+                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
+                        </div>
+                    </div>";
         }
         return $html;
     }
 
     private function eventActivities(){
         $html='';
-        foreach ($this->data['events']->getActivities() as $activity){
-            $html.="<li>$activity->name  
-                <a  href='$this->script_name/activity/detail/?id=$activity->id'>Détail</a>
+        foreach ($this->data['events']->getActivities as $activity){
+            $html.="<li class='column_8'>
+                    <span class='column_7'>$activity->name</span>
+                    <a href='$this->script_name/activity/detail/?id=$activity->id' class='row'>Détails</a>
                 </li>";
         }
         return $html;

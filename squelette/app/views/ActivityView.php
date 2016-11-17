@@ -19,10 +19,10 @@ class ActivityView extends AbstractView
                 break;
             case 'add':
                 $main = $this->add();
-                break;     
+                break;
             case 'edit':
                 $main = $this->edit();
-                break;                                       
+                break;
             case 'register':
                 $main = $this->register();
                 break;
@@ -91,15 +91,36 @@ EOT;
     }
 
     public function add(){
-        return '<h1>Ajouter une epreuve</h1><hr>
-                <form action="#" method="POST"/>
-                <label>Titre de l\'epreuve</label><input type="text" name="name" required/><br>
-                <label>Description</label><textarea name="description"></textarea><br>
-                <label>Date de l\'epreuve</label><input type="text" name="startDate" /><br>
-                <label>Heure de l\'epreuve</label><input type="text" name="startDateH" /> <input type="text" name="startDateM" /><br>
-                <label>Tarif de l\'epreuve</label><input type="text" name="price" required/><br>
-                <input type="submit" name="valider"/>
-                </form>';         
+        return "<div class='page_header row'>
+                    <h1>Ajouter une épreuve</h1>
+                </div>
+                <form action='#' method='POST'/>
+                <div class='column_4'>
+                    <label for='nom'>Titre de l'épreuve</label>
+                    <input type='text' id='nom' placeholder='Nom' name='name' required>
+                </div>
+                <div class='column_4'>
+                    <label for='desc'>Description</label>
+                    <textarea id='desc' name='description'></textarea>
+                </div>
+                <div class='column_4'>
+                    <label for='date'>Date de l'épreuve</label>
+                    <input type='date' id='date' placeholder='Date' name='startDate' required>
+                </div>
+                <div class='column_4'>
+                    <label for='heure'>Heure de l'épreuve</label>
+                    <input type='date' id='heure' placeholder='Heure' name='startDateH' required>
+                    <input type='date' id='heure' placeholder='Heure' name='startDateM' required>
+                </div>
+                <div class='column_4'>
+                    <label for='price'>Tarif de l'épreuve</label>
+                    <input type='date' id='price' placeholder='Prix' name='price' required>
+                </div>
+                <div class='row button'>
+                    <button name='valider'>Valider</button>
+                </div>
+                </form>";
+>>>>>>> 81e1bfcc123d25b3172aaaca603abd79fbb1e20e
     }
 
     public function edit(){
@@ -111,7 +132,7 @@ EOT;
                 <label>Heure de l\'epreuve</label><input type="text" name="startDateH" value="'.substr($this->data->date,11,2).'" /> <input type="text" name="startDateM" value="'.substr($this->data->date,14,2).'"/><br>
                 <label>Tarif de l\'epreuve</label><input type="text" name="price" value="'.$this->data->price.'"/><br>
                 <input type="submit" name="valider"/>
-                </form>';         
+                </form>';
     }
 
     public function register(){
@@ -147,6 +168,4 @@ EOT;
                 </table>
                 </section>';
     }
-}    
-
- 
+}

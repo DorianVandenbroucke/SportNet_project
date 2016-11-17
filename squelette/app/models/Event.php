@@ -10,7 +10,7 @@ class Event extends Model{
     public $timestamps = false;
 
     public function getActivities(){
-        return $this->hasMany('app\models\Activity');
+        return $this->hasMany('app\models\Activity', 'id_event');
     }
 
     public function getPromoter(){
