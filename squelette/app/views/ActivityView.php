@@ -96,7 +96,7 @@ EOT;
          $html .=   '<div>
                         <ul class="list-without-style">
                             <li><strong>Date de l\'épreuve :</strong></li>
-                            <li>'.$this->data->date->format('Y-m-d').'</li>
+                            <li>'.$this->data->date->format('d/m/Y').'</li>
                             <li><strong>Heure de l\'épreuve :</strong></li>
                             <li>'.$this->data->date->format('H:i').'</li>
                             <li><strong>Tarif de l\'épreuve :</strong></li>

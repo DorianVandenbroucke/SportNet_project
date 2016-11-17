@@ -146,6 +146,15 @@ EOT;
             $addBlock = $actions['add_block'];
         }
         $activitiesList = $this->eventActivities();
+
+        $dateStart = $event->startDate;
+        $dateStart = explode("-", $dateStart);
+        $dateStart = $dateStart['2']."/".$dateStart['1']."/".$dateStart['0'];
+
+        $dateEnd = $event->endDate;
+        $dateEnd = explode("-", $dateEnd);
+        $dateEnd = $dateEnd['2']."/".$dateEnd['1']."/".$dateEnd['0'];
+
         $html.=
             "<div class='page_header row'>
                 <div class='row'>
@@ -159,7 +168,9 @@ EOT;
                 <h1>$event->name</h1>
             </div>
             <div class='column_4'>
-                <div>Date:  $event->startDate    $event->endDate</div>
+                <div>
+                    <p>Du $dateStart au $dateEnd</p>
+                </div>
                 <div class='row'>$event->description</div>
             </div>
             <div class='column_4'>
@@ -201,12 +212,20 @@ EOT;
     }
 
     private function eventLists(){
-        $html = '';
+
         foreach ($this->data['events'] as $event){
+            $dateStart = $event->startDate;
+            $dateStart = explode("-", $dateStart);
+            $dateStart = $dateStart['2']."/".$dateStart['1']."/".$dateStart['0'];
+
+            $dateEnd = $event->endDate;
+            $dateEnd = explode("-", $dateEnd);
+            $dateEnd = $dateEnd['2']."/".$dateEnd['1']."/".$dateEnd['0'];
+            $html = '';
             $html.="<div class='ligne row'>
                         <div class='column_4'>
                           <h3>$event->name</h3>
-                          <p>Du $event->startDate au $event->endDate</p>
+                          <p>Du $dateStart au $dateEnd</p>
                         </div>
                         <div class='column_4 buttons_list'>
                             <a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Détails</button></a>";

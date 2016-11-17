@@ -20,11 +20,18 @@ class DefaultView  extends AbstractView{
               </div>";
 
         foreach ($this->data as $event){
+            $dateStart = $event->startDate;
+            $dateStart = explode("-", $dateStart);
+            $dateStart = $dateStart['2']."/".$dateStart['1']."/".$dateStart['0'];
+
+            $dateEnd = $event->endDate;
+            $dateEnd = explode("-", $dateEnd);
+            $dateEnd = $dateEnd['2']."/".$dateEnd['1']."/".$dateEnd['0'];
             $html.="<div class='row list'>
                     <div class='ligne row'>
                         <div class='column_4'>
                           <h3>$event->name</h3>
-                          <p>Du $event->startDate au $event->endDate</p>
+                          <p>Du $dateStart au $dateEnd</p>
                         </div>
                         <div class='column_4 buttons_list'>
                             <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>";
