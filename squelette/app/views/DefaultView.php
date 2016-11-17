@@ -67,7 +67,7 @@ class DefaultView  extends AbstractView{
                   <input id='email' class='row' type='email' name='mail' placeholder='Email' />
                 </div>
                 <div class='column_4'>
-                  <label for='password2' class='row'>Mot de passe</label>
+                  <label for='password2' class='row'>Confirmer votre mot de passe</label>
                   <input id='password2' class='row' type='password' name='password_confirm' placeholder='Mot de passe' />
                 </div>
                 <div class='column_4'>
