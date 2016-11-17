@@ -141,12 +141,14 @@ EOT;
 
         $html = '<div>';
         $addEventBlock = ''; $modifyEventBlock = '';
-        if($this->isEventModifiable($event)){
-            $addEventBlock = "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
+        if(Util::isCurrentEventPromoter($event)){
             $modifyEventBlock = "<div class='row'>
-                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>
-                <a href='$this->script_name/event/close/?id=$event->id'><button class='blue-btn'>Fermer les inscriptions</button></a>
-            </div>";
+                <a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>";
+                if($event->status == EVENT_STATUS_OPEN){
+                    $modifyEventBlock.= "<a href='$this->script_name/event/close/?id=$event->id'><button class='blue-btn'>Fermer les inscriptions</button></a>";
+                    $addEventBlock = "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
+                }
+              $modifyEventBlock.="</div>";
         }
         $activitiesList = $this->eventActivities();
         $html.="<div class='page_header row'>
@@ -203,9 +205,11 @@ EOT;
                           <p>Du $event->startDate au $event->endDate</p>
                         </div>
                         <div class='column_4 buttons_list'>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>
-                        </div>
+                            <a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Details</button></a>";
+                            if(Util::isEventModifyable($event)) {
+                                $html .= "<a href='$this->script_name/event/?id=$event->id'><button class='blue-btn'>Supprimer</button></a>";
+                            }
+                        $html.="</div>
                     </div>";
         }
         return $html;
@@ -223,8 +227,7 @@ EOT;
     }
 
     private function isEventModifiable($event){
-        return (isset($_SESSION['promoter']) && $event->getPromoter->id == $_SESSION['promoter']
-        && $event->status == EVENT_STATUS_OPEN);
+        return Util::isCurrentEventPromoter($event) && $event->status == EVENT_STATUS_OPEN;
     }
 
 }

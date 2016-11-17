@@ -23,4 +23,12 @@ class Util
         $date = new \DateTime($date);
         return $date->format($format);
     }
+
+    public static function isCurrentEventPromoter($event){
+        return (isset($_SESSION['promoter']) && $event->getPromoter->id == $_SESSION['promoter']);
+    }
+
+    public static function isEventModifyable($event){
+        return self::isCurrentEventPromoter($event) && $event->status == EVENT_STATUS_OPEN;
+    }
 }
