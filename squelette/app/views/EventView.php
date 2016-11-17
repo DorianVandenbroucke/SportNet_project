@@ -213,6 +213,8 @@ EOT;
 
     private function eventLists(){
 
+      $html = "";
+
         foreach ($this->data['events'] as $event){
             $dateStart = $event->startDate;
             $dateStart = explode("-", $dateStart);
@@ -221,7 +223,6 @@ EOT;
             $dateEnd = $event->endDate;
             $dateEnd = explode("-", $dateEnd);
             $dateEnd = $dateEnd['2']."/".$dateEnd['1']."/".$dateEnd['0'];
-            $html = '';
             $html.="<div class='ligne row'>
                         <div class='column_4'>
                           <h3>$event->name</h3>
