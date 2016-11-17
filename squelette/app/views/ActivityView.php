@@ -80,7 +80,7 @@ EOT;
 
     public function detail(){
         $promoter = Util::isCurrentEventPromoter(Event::find($this->data->id_event));
-        $html = '<a href="'.$this->script_name.'/event/?id='.$this->data->id_event.'"><button class="lightblue_button column_1 row">Retour</button></a><div class="page_header row">
+        $html = '<a href="'.$this->script_name.'/event/?id='.$this->data->id_event.'"><button class="lightblue_button row">Retour</button></a><div class="page_header row">
                 <h1>'.$this->data->name.'</h1>
             </div>
             <section>
@@ -105,9 +105,9 @@ EOT;
                 </div>
                 </aside>
            </section>
-           <section class="row offset_1">
-                <a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'"><button class="blue-btn column_2">S\'inscrire</button></a>
-                <a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'"><button class="blue-btn column_2">Résultats</button></a>
+           <section class="row column_5 text-align-center">
+                <a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'"><button class="blue-btn">S\'inscrire</button></a>
+                <a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'"><button class="blue-btn">Résultats</button></a>
            </section>';
            return $html;
     }
@@ -171,7 +171,7 @@ EOT;
                     <input type='text' id='price' placeholder='Prix' name='price' value=".$this->data->price." >
                 </div>
                 <div class='row button'>
-                    <button name='valider'>Valider</button>
+                    <button class='blue-btn' name='valider'>Valider</button>
                 </div>
                 </form>";
     }
