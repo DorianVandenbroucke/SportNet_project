@@ -35,16 +35,29 @@ $router->addRoute('/myEvents/', '\app\controllers\EventController', 'myEvents');
 $router->addRoute('/logout/', '\app\controllers\DefaultController', 'logout');
 
 // On redirige automatiquement un organisateur à sa connexion vers la page précédent son authentification;
+if(!isset($_SESSION['promoter'])){
+    if(
+      isset($_SERVER["PATH_INFO"]) &&
+      $_SERVER['PATH_INFO'] != "/signin/" &&
+      $_SERVER['PATH_INFO'] != "/signup/" &&
+      $_SERVER['PATH_INFO'] != "/signupVerification/" &&
+      $_SERVER['PATH_INFO'] != "/signinVerification/"
+    ){
+      $_SESSION['url_redirection'] = $_SERVER['PATH_INFO'];
+    }else{
+      $_SESSION['url_redirection'] = "";
+    }
+}
+
+// On crée une variable de session dans le cas où l'utilisateur souhaite retourner sur une page précéDefaultController
 if(
   isset($_SERVER["PATH_INFO"]) &&
-  $_SERVER['PATH_INFO'] != "/signin/" &&
-  $_SERVER['PATH_INFO'] != "/signup/" &&
-  $_SERVER['PATH_INFO'] != "/signupVerification/" &&
-  $_SERVER['PATH_INFO'] != "/signinVerification/"
+  $_SERVER['PATH_INFO'] != "/event/"
 ){
-  $_SESSION['url_redirection'] = $_SERVER['PATH_INFO'];
-}else{
-  $_SESSION['url_redirection'] = "";
+  $_SESSION['return_button'] = $_SERVER['PATH_INFO'];
+  if($_SERVER['QUERY_STRING']){
+    $_SESSION['return_button'] = $_SESSION['return_button']."?".$_SERVER['QUERY_STRING'];
+  }
 }
 
 $http_req = new HttpRequest();

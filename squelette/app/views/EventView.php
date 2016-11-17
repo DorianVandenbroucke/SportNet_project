@@ -129,11 +129,18 @@ EOT;
     }
 
     public function openEventDetail(){
+
+        if(isset($_SESSION['return_button'])){
+          $url = $_SESSION['return_button'];
+        }else{
+          $url = "/event/all/";
+        }
+
         $html = '<div>';
         $event = $this->data['events'];
         $activitiesList = $this->eventActivities();
         $html.="<div class='page_header row'>
-                <a href='$this->script_name/myEvents/'><button class='blue-btn'>Retour</button></a>
+                <a href='$this->script_name".$url."'><button class='blue-btn'>Retour</button></a>
                 <h1>$event->name</h1>
             </div>
             <div class='column_4'>
