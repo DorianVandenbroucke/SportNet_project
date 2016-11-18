@@ -46,11 +46,11 @@ class DefaultController{
 					if($auth){
 						$id_promoter = $_SESSION['promoter'];
 
-						if(isset($_SESSION['url_redirection'])){
+						/*if(isset($_SESSION['url_redirection'])){
 							header("location: ..".$_SESSION['url_redirection']);
 						}else{
 							header("location: ..");
-						}
+						}*/
 
 					}else{
 						$_SESSION['message_form'] = "Les données entrées ne correspondent pas.";
@@ -136,5 +136,5 @@ class DefaultController{
 		$this->home();
 	}
 
-	
+
 }
