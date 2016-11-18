@@ -141,11 +141,11 @@ class ActivityController{
 
             $activity = Activity::find($this->request->get['id']);
             if(!isset($_SESSION['recap'][$participant->id]))
-                $_SESSION['recap'][$participant->id] = [$activity->id];
+                $_SESSION['recap'][$participant->id] = [$activity];
             else
-                array_push($_SESSION['recap'][$participant->id],$activity->id);
+                array_push($_SESSION['recap'][$participant->id],$activity);
 
-            return $this->recap($participant->id);
+            return $this->recap();
         }
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
@@ -160,24 +160,20 @@ class ActivityController{
     }
 
     public function recap(){
+
         $inscription = [];
-        foreach ($_SESSION['recap'] as $p=>$value) 
-        {
-            $participant = Participant::find($p);
-            foreach ($value as $v) 
-            {
-                $activity = Activity::find($v);
-                $inscription[] = [$p=>$activity];
-            }
+        foreach ($_SESSION['recap'] as $key => $value) {
+            $participant = Participant::find($key);
+            $inscription[] = [$participant[$value]];           
         }
-        foreach ($inscription as $key => $value) {
-            foreach ($value as $key => $v) {
-                echo $v->name;
-            }
-        }
-        var_dump($inscription[0][83]->name);
-       // $view = new ParticipantView();
-       // $view->render('recap');
+        var_dump($inscription);
+
+
+
+        //var_dump($inscription);
+       // var_dump($_SESSION['recap']);
+       //$view = new ParticipantView();
+       //$view->render('recap');*/
     }
 
 
