@@ -55,12 +55,14 @@ class EventController extends AbstractController
                 $event = empty($id) ? new Event() : Event::find($id);
                 $event->name = $this->request->post['name'];
                 $event->description = filter_var($this->request->post['description'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+                if(!Util::isDateValid($this->request->post['startDate']) || !Util::isDateValid($this->request->post['endDate'])){
+                    $this->redirectTo($this->request->script_name."/event/add/".$redirectParam);
+                    $_SESSION['message_form'] = 'Les dates doivent être bien formatées';
+                    return;
+                }
                 $event->startDate = Util::strToDate($this->request->post['startDate'], MYSQL_DATE_FORMAT);
                 $event->endDate = Util::strToDate($this->request->post['endDate'], MYSQL_DATE_FORMAT);
-                if(!Util::areDatesValid([$event->startDate,$event->endDate])){
-                    echo $this->request->script_name."/add/".$redirectParam;
-                    $this->redirectTo($this->request->script_name."/add/".$redirectParam);
-                }
                 $event->addresse = $this->request->post['addresse'];
                 $event->id_discipline = $this->request->post['id_discipline'];
 
@@ -71,7 +73,7 @@ class EventController extends AbstractController
                 if($event->save()) {
                     $this->redirectTo("../?id=$event->id");
                 }else{
-                    $this->redirectTo($this->request->script_name."/add/".$redirectParam);
+                    $this->redirectTo($this->request->script_name."/event/add/".$redirectParam);
                 }
             }
         }else{
@@ -84,7 +86,7 @@ class EventController extends AbstractController
     public function deleteEvent(){
         $id = $this->request->get['id'];
         $totalDeleted = Event::destroy($id);
-        header("location: ../all/?id=$_SESSION[promoter]");
+        $this->redirectTo("../all/?id=$_SESSION[promoter]");
 
     }
 
@@ -101,6 +103,7 @@ class EventController extends AbstractController
     public function detailEvent(){
         $id = $this->request->get['id'];
         $event = Event::find($id);
+
         if($event){
             $ev = new EventView(['events' =>$event]);
             $ev->render('event');
