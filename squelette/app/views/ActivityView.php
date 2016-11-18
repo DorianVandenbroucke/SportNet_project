@@ -101,7 +101,7 @@ EOT;
                     <p>'.$this->data->description.'</p><br>
                 </section>
                 <aside class="column_3">
-                        .'.$modifyBlock.'.
+                        '.$modifyBlock.'
                         <div>
                         <ul class="list-without-style">
                             <li><strong>Date de l\'épreuve :</strong></li>
@@ -282,7 +282,7 @@ EOT;
                         <button name='send'>Upload</button>
                     </form>
                 </section>
-             
+
            </section>";
         return $html;
     }

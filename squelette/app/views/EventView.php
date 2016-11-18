@@ -169,7 +169,7 @@ EOT;
             </div>
             <div class='column_4'>
                 <div>
-                    <p>Du $dateStart au $dateEnd</p>
+                    <p>Du $dateStart au $dateEnd à $event->addresse</p>
                 </div>
                 <div class='row'>$event->description</div>
             </div>
