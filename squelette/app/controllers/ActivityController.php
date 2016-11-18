@@ -43,7 +43,7 @@ class ActivityController extends AbstractController {
 
                 $activity->id_event =  $this->request->get['id'];
                 $activity->save();
-                $this->redirectTo("../detail/?id='.$activity->id.'&event_id='.$activity->id_event");
+                $this->redirectTo("../detail/?id=".$activity->id."&event_id=".$activity->id_event);
             }
             $view = new ActivityView($this->request);
             return $view->render('add');
