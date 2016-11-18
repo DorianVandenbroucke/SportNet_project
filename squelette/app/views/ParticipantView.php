@@ -63,11 +63,6 @@ EOT;
 
     public function recap(){
         $html = "<div class='page_header row'>
-                    <div class='row'>
-                      <form action='".$this->script_name."/event/all/' class='column_3'>
-                        <button class='lightblue_button'>Retour</button>
-                      </form>
-                    </div>
                     <h1>Récapitulatif des inscriptions :</h1>
                     <table>
                     <thead>
@@ -93,7 +88,7 @@ EOT;
             <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
             <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
         }
-        
+
         $id_event = "";
         if(isset($_SESSION['recap']['0'])){
             $id_event = $_SESSION['recap']['0']->event_id;
