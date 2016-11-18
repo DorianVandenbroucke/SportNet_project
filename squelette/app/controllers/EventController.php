@@ -49,13 +49,18 @@ class EventController extends AbstractController
         if($this->auth->logged_in){
             $id = $this->request->post['id'];
             if(isset($this->request->post['cancel'])){
-                header("location: ../?id=$id");
+                $this->redirectTo("../?id=$id");
             }else{
+                $redirectParam = empty($id) ? '' : "?id=$id";
                 $event = empty($id) ? new Event() : Event::find($id);
                 $event->name = $this->request->post['name'];
                 $event->description = filter_var($this->request->post['description'], FILTER_SANITIZE_SPECIAL_CHARS);
                 $event->startDate = Util::strToDate($this->request->post['startDate'], MYSQL_DATE_FORMAT);
                 $event->endDate = Util::strToDate($this->request->post['endDate'], MYSQL_DATE_FORMAT);
+                if(!Util::areDatesValid([$event->startDate,$event->endDate])){
+                    echo $this->request->script_name."/add/".$redirectParam;
+                    $this->redirectTo($this->request->script_name."/add/".$redirectParam);
+                }
                 $event->addresse = $this->request->post['addresse'];
                 $event->id_discipline = $this->request->post['id_discipline'];
 
@@ -65,8 +70,8 @@ class EventController extends AbstractController
                 }
                 if($event->save()) {
                     $this->redirectTo("../?id=$event->id");
-                    //$ev = new EventView(['events' => $event]);
-                    //$ev->render('event');
+                }else{
+                    $this->redirectTo($this->request->script_name."/add/".$redirectParam);
                 }
             }
         }else{
@@ -133,7 +138,7 @@ class EventController extends AbstractController
             $event = Event::find($id);
             $event->status = $status;
             $event->update();
-            header("location: ../?id=$id");
+            $this->redirectTo("../?id=$id");
         }else{
             $defaultView = new DefaultView(NULL);
             $defaultView->render('signinForm');
