@@ -46,10 +46,19 @@ class DefaultController{
 					if($auth){
 						$id_promoter = $_SESSION['promoter'];
 
-						if(isset($_SESSION['url_redirection'])){
-							header("location: ..".$_SESSION['url_redirection']);
-						}else{
-							header("location: ..");
+						// if(isset($_SESSION['url_redirection'])){
+						// 	header("location: ..".$_SESSION['url_redirection']);
+						// }else{
+						// 	header("location: ..");
+						// }
+
+						$prev = "";
+						if(isset($_SERVER["HTTP_REFERER"])){
+						    $prev = $_SERVER["HTTP_REFERER"];
+							echo "<pre>";
+							var_dump($prev);
+						    echo "</pre>";
+						    header("Location: $prev");
 						}
 
 					}else{
