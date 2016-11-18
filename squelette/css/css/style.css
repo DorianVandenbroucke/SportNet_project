@@ -129,7 +129,7 @@ a.blue-btn, a.lightblue_button {
   margin: 10px 2px;
   text-align: center; }
 
-.page_header .buttons_event a {
+.page_header .buttons_event a, .part_link a {
   display: block;
   padding: 10px; }
 
@@ -159,6 +159,9 @@ a.blue-btn, a.lightblue_button {
     text-align: right; }
     .page_header .buttons_event a {
       display: inline-block;
-      margin: 0 5px; } }
+      margin: 0 5px; }
+
+  .part_link a {
+    display: inline-block; } }
 
 /*# sourceMappingURL=style.css.map */
