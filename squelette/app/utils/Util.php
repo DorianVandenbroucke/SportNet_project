@@ -38,14 +38,10 @@ class Util
      * @param $dates array of dates
      * @return bool is all dates are valid
      */
-    public static function areDatesValid($dates){
-        foreach ($dates as $date){
+    public static function isDateValid($date){
             $dt = DateTime::createFromFormat("d-m-Y", $date);
-            if(!($dt !== false && !array_sum($dt->getLastErrors()))){
-                return false;
-            }
-        }
-        return true;
+            return $dt !== false && !array_sum($dt->getLastErrors());
+
     }
 
     public static function generateParticipantNumber(){
