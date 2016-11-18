@@ -73,17 +73,24 @@ EOT;
                     <thead>
                         <tr>
                             <th>Nom</th>
+                            <th>Prénom</th>
                             <th>Epreuve</th>
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Tarif</th>
                         </tr>
                     </thead>";
+
         foreach ($_SESSION['recap'] as $inscription) {
-            $html .= "<tr><td style='padding:10px'>".$inscription->participant_name." </td>
-            <td style='padding:10px'>".$inscription->activity_firstname." </td>
+
+            $dateStart = substr($inscription->activity_date,0,10);
+            $dateStart = explode("-", $dateStart);
+            $dateStart = $dateStart['2']."/".$dateStart['1']."/".$dateStart['0'];
+
+            $html .= "<tr>
             <td style='padding:10px'>".$inscription->activity_lastname." </td>
-            <td style='padding:10px'>".substr($inscription->activity_date,0,10)." </td>
+            <td style='padding:10px'>".$inscription->activity_firstname." </td>
+            <td style='padding:10px'>".$dateStart." </td>
             <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
             <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
         }
