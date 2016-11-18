@@ -155,7 +155,7 @@ class ActivityController{
     public function participants()
     {
         $activity = Activity::find($this->request->get['id']);
-        $view = new ActivityView($activity);
+        $view = new ParticipantView(['activity_id'=>$activity->id, 'activity_name'=>$activity->name,'participants'=>$activity->getParticipants]);
         return $view->render('participants');
     }
 
@@ -173,8 +173,9 @@ class ActivityController{
             $activity = Activity::find($id);
            $participants = $activity->getParticipants()->get();
             $fp = fopen('php://memory', 'w');
+            fputcsv($fp, ['Nom', 'Nº Participant','Date de Naissance', 'E-Mail']);
             foreach ($participants as $participant){
-                fputcsv($fp, [$participant->lastName, $participant->birthDate, $participant->mail]);
+                fputcsv($fp, [$participant->lastName, $participant->id, $participant->birthDate, $participant->mail]);
             }
             fseek($fp,0);
             $date  = Util::dateToStr($activity->date, STANDARD_DATE_FORMAT);
@@ -202,6 +203,18 @@ class ActivityController{
         $csvFile = $_FILES['fichier']['tmp_name'];
         $csvAsArray = array_map('str_getcsv',file($csvFile));
         var_dump($csvAsArray);
+    }
+
+    public function searchParticipants(){
+        $searchText = filter_var(trim($this->request->post['searchQuery']),FILTER_SANITIZE_STRING);
+        $searchText = empty($searchText) ? '%' : "%$searchText%";
+        $activity = Activity::find($this->request->post['id']);
+        $participants = $activity->getParticipants()->where('firstName', 'like',$searchText)->orWhere('lastName','like',$searchText)->get();
+        /*$participants = Participant::whereHas('getActivities', function($q){
+            $q->where('id', '=', $this->request->post['id']);
+        })->where('name','like',$searchText)->get();*/
+        $view = new ParticipantView(['activity_id'=>$activity->id, 'activity_name'=>$activity->name,'participants'=>$participants]);
+        $view->render('participants');
     }
 
 }

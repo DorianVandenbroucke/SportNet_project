@@ -227,6 +227,7 @@ EOT;
 
     public function participants(){
         $data = '';
+        $id = $this->data->id;
         foreach ($this->data->getParticipants as $participant) {
                     $data .= '<tr>
                                 <td>'.$participant->lastName.' '.$participant->firstName.'</td>
@@ -236,8 +237,12 @@ EOT;
                               </tr>';
                 }
         return '<section class="row">
-                <h1>Résultat généraux de l\'épreuve <small>'.$this->data->name.'</small></h1>
-                <form action="#" method="POST"/><label>Recherche</label><input type="text" name="searchQuery"/><input type="submit" name="search" value="Recherche"/></form>
+                <h1>Participants de l\'épreuve <small>'.$this->data->name.'</small></h1>
+                <form action="'.$this->script_name.'searchParticipants/" method="POST"/>
+                    <input type="hidden" name="id" value="'.$id.'"/>
+                    <input type="text" name="searchQuery"/>
+                    <input type="submit" name="search" value="Recherche"/>
+                </form>
                 <table>
                     <thead>
                         <tr><th>Nom</th><th>Nº Participant</th><th>Email</th><th>Birthdate</th></tr>
