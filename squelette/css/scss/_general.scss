@@ -1,140 +1,5 @@
 @import "variables.scss";
 
-body{
-	background-color: $backgroundColor;
-	margin-bottom: 320px!important;
-}
-
-header{
-	background-color: $fontColor;
-	text-align: center;
-	padding: 10px 0;
-	div{
-		color: lighten($fontColor, 70);
-		font-size: 2em;
-		span{
-			color: $secondaryColor;
-		}
-	}
-}
-
-.content{
-	background-color: #fff;
-	padding: 5px;
-	margin-bottom: 20px;
-	border: 1px solid darken($backgroundColor, 20);
-}
-
-.menu{
-	border-bottom: 1px solid $secondaryColor;
-    background: lighten($secondaryColor, 30);
-	margin: 0;
-}
-
-.lightblue_button{
-	border: 1px solid $secondaryColor;
-	color: $secondaryColor;
-	background: lighten($secondaryColor, 55);
-	transition: 0.2s;
-	&:hover{
-		background-color: $secondaryColor;
-		color: #ffffff;
-	}
-}
-
-.presentation{
-	text-align: center;
-	margin-bottom: 30px;
-	form{
-		margin-top: 10px;
-	}
-}
-.page_header {
-	margin-bottom: 20px;
-	.buttons_event{
-		text-align: center;
-		margin-top: 20px;
-	}
-}
-
-.content{
-    background-color: #fff;
-    padding: 5px;
-    margin: 20px 0;
-    border: 1px solid darken($backgroundColor, 20);
-    border-top: none;
-}
-
-footer{
-	background-color: $fontColor;
-    color: lighten($secondaryColor, 55);
-	padding: 10px 0;
-	border-top: 3px solid $secondaryColor;
-	a{
-		color: lighten($secondaryColor, 30);
-	}
-
-}
-
-.search{
-	border-bottom: 1px solid $borderSearchForm;
-	margin-bottom: 50px;
-	padding-bottom: 8px;
-}
-
-form{
-	.button{
-		text-align: center;
-	}
-	input, select, textarea{
-		width: 100%;
-    padding: 10px 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
-		font-size: 1em;
-	}
-	.message_droite{
-		text-align: right;
-	}
-}
-
-textarea{
-	resize: none;
-}
-
-.column_4 h2{
-	margin: 5px 0;
-}
-
-.list {
-	margin: 0 0 20px 0;
-	.buttons_list{
-		text-align: center;
-	}
-	li, .ligne{
-		list-style: none;
-		border-bottom: 1px solid black;
-		padding: 10px;
-	}
-}
-
-.detail {
-	float: right;
-}
-
-.heure{
-	width: 45%;
-}
-
-section section {
-	padding: 15px;
-}
-
-.list-without-style{
-	li{
-		padding: 10px;
-	}
-}
 
 a.blue-btn, a.lightblue_button{
 	font-family: "Open Sans Condensed";
@@ -146,21 +11,25 @@ a.blue-btn, a.lightblue_button{
 	text-align: center;
 }
 
-
-.page_header .buttons_event, .part_link{
-	a{
-		display: block;
-		padding: 10px;
-	}
+body{
+	background-color: $backgroundColor;
+	margin-bottom: 320px!important;
 }
 
-
-.list .buttons_list{
-	margin: 25px 0;
+.column_4 h2{
+	margin: 5px 0;
 }
 
-.list_epreuve{
-	margin-bottom: 20px;
+.content{
+    background-color: #fff;
+    padding: 5px;
+    margin: 20px 0;
+    border: 1px solid darken($backgroundColor, 20);
+    border-top: none;
+}
+
+.detail {
+	float: right;
 }
 
 .export{
@@ -177,31 +46,83 @@ a.blue-btn, a.lightblue_button{
 	}
 }
 
-.paiement{
-	@extend .export;
-	float: none;
-}
-
 #fichier{
 	margin-bottom: 15px;
 }
 
-
-@media screen and (max-width: 70em) {
-	.menu ul{
-		margin: 0 auto !important;
+footer{
+	background-color: $fontColor;
+    color: lighten($secondaryColor, 55);
+	padding: 10px 0;
+	border-top: 3px solid $secondaryColor;
+	a{
+		color: lighten($secondaryColor, 30);
 	}
+
 }
 
-@media screen and(min-width: 70em){
+form{
+	.button{
+		text-align: center;
+	}
+	input, select, textarea{
+		width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+		font-size: 1em;
+	}
+	.message_droite{
+		text-align: right;
+	}
 
-	form{
+	@media screen and (min-width: 70em){
 		input, select, textarea{
 			padding: 5px 10px;
 		}
 	}
+}
 
-	.list{
+header{
+	background-color: $fontColor;
+	text-align: center;
+	padding: 10px 0;
+	div{
+		color: lighten($fontColor, 70);
+		font-size: 2em;
+		span{
+			color: $secondaryColor;
+		}
+	}
+}
+
+.heure{
+	width: 45%;
+}
+
+.lightblue_button{
+	border: 1px solid $secondaryColor;
+	color: $secondaryColor;
+	background: lighten($secondaryColor, 55);
+	transition: 0.2s;
+	&:hover{
+		background-color: $secondaryColor;
+		color: #ffffff;
+	}
+}
+
+.list {
+	margin: 0 0 20px 0;
+	.buttons_list{
+		text-align: center;
+	}
+	li, .ligne{
+		list-style: none;
+		border-bottom: 1px solid black;
+		padding: 10px;
+	}
+
+	@media screen and (min-width: 70em){
 		.buttons_list{
 			text-align: right;
 		}
@@ -209,19 +130,89 @@ a.blue-btn, a.lightblue_button{
 			margin-top: 0!important;
 		}
 	}
+}
 
-	.page_header h1{
-		text-align: left!important;
+.list .buttons_list{
+	margin: 25px 0;
+}
+
+.list_epreuve{
+	margin-bottom: 20px;
+}
+
+.list-without-style{
+	li{
+		padding: 10px;
 	}
+}
 
-	.page_header .buttons_event{
-		margin: 0;
-		text-align: right;
-		a{
-			display: inline-block;
-			margin: 0 5px;
+.menu{
+	border-bottom: 1px solid $secondaryColor;
+    background: lighten($secondaryColor, 30);
+	margin: 0;
+	@media screen and (max-width: 70em) {
+		ul{
+			margin: 0 auto !important;
 		}
 	}
+}
+
+.page_header {
+	margin-bottom: 20px;
+	.buttons_event{
+		text-align: center;
+		margin-top: 20px;
+		@media screen and(min-width: 70em){
+			margin: 0;
+			text-align: right;
+			a{
+				display: inline-block !important;
+				margin: 0 5px;
+			}
+		}
+	}
+	@media screen and(min-width: 70em){
+		h1{
+			text-align: left!important;
+		}
+	}
+}
+
+.page_header .buttons_event, .part_link{
+	a{
+		display: block;
+		padding: 10px;
+	}
+}
+
+.paiement{
+	@extend .export;
+	float: none;
+}
+
+.presentation{
+	text-align: center;
+	margin-bottom: 30px;
+	form{
+		margin-top: 10px;
+	}
+}
+
+.search{
+	border-bottom: 1px solid $borderSearchForm;
+	margin-bottom: 50px;
+	padding-bottom: 8px;
+}
+
+section section {
+	padding: 15px;
+}
+
+textarea{
+	resize: none;
+}
+
+@media screen and(min-width: 70em){
 
 	.part_link a {
 		display: inline-block;

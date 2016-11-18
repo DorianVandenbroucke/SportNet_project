@@ -37,7 +37,7 @@ $router->addRoute('/activity/publish/', '\app\controllers\ActivityController', '
 $router->addRoute('/activity/importResult/', '\app\controllers\ActivityController', 'importResult');
 $router->addRoute('/paiement/', '\app\controllers\ActivityController', 'paiement');
 $router->addRoute('/recapitulatif/', '\app\controllers\ActivityController', 'recap');
-$router->addRoute('/validatePaiment/', '\app\controllers\ActivityController', 'validatePaiement');
+$router->addRoute('/validatePaiement/', '\app\controllers\ActivityController', 'validatePaiement');
 $router->addRoute('/event/add/', '\app\controllers\EventController', 'saveEventForm');
 $router->addRoute('/event/edit/', '\app\controllers\EventController', 'saveEventForm');
 $router->addRoute('/event/save/', '\app\controllers\EventController', 'saveEvent');

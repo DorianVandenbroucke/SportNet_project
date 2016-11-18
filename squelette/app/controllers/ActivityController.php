@@ -102,12 +102,17 @@ class ActivityController extends AbstractController {
 
     public function paiement()
     {
+        var_dump($_SESSION['recap']);
         $view = new ParticipantView('Paiement validé');
         return $view->render('paiement');
     }
 
     public function validatePaiement()
     {
+        foreach ($_SESSION['recap'] as $value) {
+            echo $value->participant_id.' '.$value->activity_id;
+            echo '<hr>';
+        }
         $view = new ActivityView('<h1>Paiement accepté</h1>');
         return $view->render('validatePaiement');
     }
@@ -137,8 +142,9 @@ class ActivityController extends AbstractController {
             $iw->activity_name = $activity->name;
             $iw->activity_tarif = $activity->price;
             $iw->activity_date = $activity->date;
+            $iw->event_id = $activity->id_event;
             array_push($_SESSION['recap'], $iw);
-            return $this->recap();
+            $this->redirectTo($this->request->script_name.'/recapitulatif/');
         }
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
@@ -153,8 +159,8 @@ class ActivityController extends AbstractController {
     }
 
     public function recap(){
-        $view = new ParticipantView($_SESSION['recap']);
-        return $view->render('recap');
+        $view = new ParticipantView(null);
+        $view->render('recap');
     }
 
 

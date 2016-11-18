@@ -12,11 +12,12 @@ namespace app\utils;
 class InscriptionWrapper
 {
     private $participant_id;
-    private  $participant_name;
+    private $participant_name;
     private $activity_id;
     private $activity_name;
     private $activity_date;
     private $activity_tarif;
+    private $event_id;
 
     public function __construct()
     {
