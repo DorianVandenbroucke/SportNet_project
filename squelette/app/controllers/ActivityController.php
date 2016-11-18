@@ -202,7 +202,7 @@ class ActivityController extends AbstractController {
         $activity = Activity::find($id);
         $totalSaved = 0;
         foreach ($csvAsArray as $row){
-            // row[0]= participant_number, row[1] = mail, row[2] = score, row[3] = ranking
+            //row[0]= participant_number, row[1] = mail, row[2] = score, row[3] = ranking;
             $participant = $activity->getParticipants()->where('participant_number','=',$row[0])->where('mail','=',$row[1])->first();
             if($participant){
                 $participant->pivot->score = $row[2];
