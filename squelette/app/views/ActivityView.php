@@ -211,7 +211,6 @@ EOT;
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='register'>S'inscrire</button>
-                    <button class='blue-btn' name='cancel'>Annuler</button>
                 </div>
                 </form>";
     }
@@ -274,13 +273,6 @@ EOT;
         $id = $this->data->id;
         $html =
             "<div class='page_header row' >
-                <div class='row'>
-                  <form method='GET' class='row column_3' action='".$this->script_name."/activity/detail/'>
-                    <input type='hidden' name='id' value=''>
-                    <button class='lightblue_button'>Retour</button>
-                  </form>
-                  <a href='$this->script_name/activity/detail/?id=$id'><button class='lightblue_button'>Retour</a>
-                </div>
                 <h1>Publier les résultats</h1>
             </div>
             <section>
