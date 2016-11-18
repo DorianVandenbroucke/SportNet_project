@@ -136,6 +136,8 @@ abstract class AbstractView {
         if(isset($_SESSION['recap']['0'])){
             if(isset($path) && $path == "/recapitulatif/"){
                 $class = "class = 'active'";
+            }elseif(isset($path) && $path == "/paiement/"){
+                $class = "class = 'active'";
             }else{
                 $class = "";
             }
