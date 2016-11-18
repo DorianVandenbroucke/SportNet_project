@@ -15,7 +15,7 @@ class Activity extends Model{
 	}
 	
 	public function getParticipants(){
-        return $this->belongsToMany('\app\models\Participant', 'participant_activity', 'id_activity', 'id_participant');
+        return $this->belongsToMany('\app\models\Participant', 'participant_activity', 'id_activity', 'id_participant')->withPivot('ranking', 'score','participant_number');;
 	}
 
 }
