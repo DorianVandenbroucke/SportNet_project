@@ -45,7 +45,7 @@ class DefaultController{
 					$auth = $authentification->login($login, $pass);
 					if($auth){
 						$id_promoter = $_SESSION['promoter'];
-						
+
 						header("location: ..".$_SESSION['return_to_back']);
 
 					}else{
@@ -127,7 +127,6 @@ class DefaultController{
 	public function logout(){
 		$authentification = new Authentification();
 		$authentification->logout();
-		unset($_SESSION['recap']);
 		$this->home();
 	}
 
