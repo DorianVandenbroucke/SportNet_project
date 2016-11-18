@@ -48,4 +48,9 @@ class Util
         $numPart = rand(0,999999);
         return str_pad("".$numPart,6, "0",STR_PAD_LEFT);
     }
+
+    public static function isFuture($time)
+    {
+        return (strtotime($time) > time());
+    }
 }

@@ -135,40 +135,52 @@ EOT;
     }
 
     public function participants(){
-        $data = '';
+        $data = ''; $participantsBlock = 'Il n\'y a pas des participants pour l\'instant.';
         if(!isset($this->data['activity_id'])){
             //error
         }else{
             $id = $this->data['activity_id'];
+
             foreach ($this->data['participants'] as $participant) {
                 $data .= '<tr>
                                 <td>'.$participant->lastName.' '.$participant->firstName.'</td>
-                                <td>'.$participant->id.'</td>
+                                <td>'.$participant->getParticipantNumber().'</td>
                                 <td>'.$participant->mail.'</td>
                                 <td>'.$participant->birthDate.'</td>
                               </tr>';
             }
-            return '<section class="row">
-                <h1>Participants de l\'épreuve <small>'.$this->data['activity_name'].'</small></h1>
-                <form action="'.$this->script_name.'/activity/searchParticipants/" method="POST"/>
-                    <input type="hidden" name="id" value="'.$id.'"/>
-                    <input type="text" name="searchQuery" placeholder="Recherche"/>
-                    <div class="row button">
-                        <button class="blue-btn" name="search">Recherche</button>
-                    </div>
-                </form>
-                <table>
+            if($this->data['participants']->count()>0){
+                $participantsBlock = '<table>
                     <thead>
                         <tr><th>Nom</th><th>Nº du participant</th><th>E-mail</th><th>Date de naissance</th></tr>
                     </thead>
                     <tbody>
-                        '.$data.'
+                '.$data.'
                     </tbody>
                 </table>
                 <div class="export">
                     <a href="'.$this->script_name.'/activity/export/?id='.$id.'". class="blue-btn row">Exporter CSV</a>
-                </div>
-                </section>';
+                </div>';
+            }
+            return "
+                <section class='row'>
+                       <div class='column_3'>
+                    <a href='$this->script_name/activity/detail/?id=".$this->data['activity_id']."&event_id=".$this->data['event_id']."'>
+                        <button class='lightblue_button'>Retour</button>
+                    </a>
+                  </div>
+                </section>
+                <section class='row'>
+                <h1>Participants de l'épreuve <small>".$this->data['activity_name']."</small></h1>
+                <form action='$this->script_name/activity/searchParticipants/' method='POST'/>
+                    <input type='hidden' name='id' value='$id'/>
+                    <input type='text' name='searchQuery' placeholder='Recherche'/>
+                    <div class='row button'>
+                        <button class='blue-btn' name='search'>Recherche</button>
+                    </div>
+                </form>
+                $participantsBlock
+                </section>";
         }
 
     }

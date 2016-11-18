@@ -163,7 +163,7 @@ class ActivityController extends AbstractController {
     public function participants()
     {
         $activity = Activity::find($this->request->get['id']);
-        $view = new ParticipantView(['activity_id'=>$activity->id, 'activity_name'=>$activity->name,'participants'=>$activity->getParticipants]);
+        $view = new ParticipantView(['event_id'=>$activity->id_event,'activity_id'=>$activity->id, 'activity_name'=>$activity->name,'participants'=>$activity->getParticipants]);
         return $view->render('participants');
     }
 
@@ -190,7 +190,7 @@ class ActivityController extends AbstractController {
             $fp = fopen('php://memory', 'w');
             fputcsv($fp, ['Nom', 'Nº Participant','Date de Naissance', 'E-Mail']);
             foreach ($participants as $participant){
-                fputcsv($fp, [$participant->lastName, $participant->id, $participant->birthDate, $participant->mail]);
+                fputcsv($fp, [$participant->lastName, $participant->getParticipantNumber(), $participant->birthDate, $participant->mail]);
             }
             fseek($fp,0);
             $date  = Util::dateToStr($activity->date, STANDARD_DATE_FORMAT);
@@ -212,7 +212,7 @@ class ActivityController extends AbstractController {
     public function importResult(){
         $id = $this->request->post['id'];
         if($_FILES['fichier']['error']>0){
-            echo "Hubo un error al cargar el archivo";
+            $_SESSION['message_form'] = 'Un erreur est arrivé';
             return;
         }
         $csvFile = $_FILES['fichier']['tmp_name'];
@@ -239,8 +239,14 @@ class ActivityController extends AbstractController {
         }else{
             $av = new ActivityView($activity);
             $av->render('publish');
-            echo "Un erreur est arrivé";
+            //$_SESSION['message_form'] = 'Un erreur est arrivé, vérifiez que l\'évenement a participants inscrits';
         }
+    }
+
+    public function results(){
+        $id = $this->request->get['id'];
+        $av = new ActivityView(Activity::find($id));
+        $av->render('results');
     }
 
     public function searchParticipants(){

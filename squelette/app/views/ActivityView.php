@@ -84,7 +84,7 @@ EOT;
     public function detail(){
         $event = Event::find($this->data->id_event);
         $modifyBlock='';$actionBlock='';
-        $optionArray = $this->generateactivityActions($event->status);
+        $optionArray = $this->generateactivityActions($event);
         if(Util::isCurrentEventPromoter($event)){
             $modifyBlock = $optionArray['modify_block'];
         }
@@ -291,15 +291,14 @@ EOT;
                         </div>
                     </form>
                 </section>
-
            </section>";
         return $html;
     }
 
 
-    private function generateactivityActions($status){
+    private function generateactivityActions($event){
         $modifyBlock = ''; $actionBlock ='';
-
+        $status = $event->status;
         if($status != EVENT_STATUS_PUBLISHED){
             if($status == EVENT_STATUS_CLOSED){
                 $modifyBlock.= '<a href="'.$this->script_name.'/activity/publish/?id='.$this->data->id.'" class="blue-btn row">Publier les résultats</a>';
