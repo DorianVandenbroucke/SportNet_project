@@ -100,7 +100,7 @@ class DefaultController{
 							$auth = $authentification->createUser($name, $mail, $login, $password);
 
 							if($auth){
-								header("location: ..".$_SESSION['return_to_back']);
+								return $this->signinForm();
 							}else{
 								$_SESSION['message_form'] = "Une erreur est survenue.";
 								$this->signupForm();
@@ -127,7 +127,7 @@ class DefaultController{
 	public function logout(){
 		$authentification = new Authentification();
 		$authentification->logout();
-		$this->home();
+		header("location:../");
 	}
 
 
