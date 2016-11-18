@@ -160,20 +160,7 @@ class ActivityController{
     }
 
     public function recap(){
-
-        $inscription = [];
-        foreach ($_SESSION['recap'] as $key => $value) {
-            $participant = Participant::find($key);
-            $inscription[] = [$participant[$value]];           
-        }
-        var_dump($inscription);
-
-
-
-        //var_dump($inscription);
-       // var_dump($_SESSION['recap']);
-       //$view = new ParticipantView();
-       //$view->render('recap');*/
+    
     }
 
 
