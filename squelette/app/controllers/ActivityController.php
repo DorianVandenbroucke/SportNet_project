@@ -32,18 +32,33 @@ class ActivityController extends AbstractController {
         {
             if($this->request->post)
             {
-                $activity = new Activity();
-                $activity->name = $this->request->post['name'];
-                $activity->description =  $this->request->post['description'];
-                $activity->price = $this->request->post['price'];
+                //verification de la date si elle est valide
+                $event = Event::find($this->request->get['id']);
+                $datetimeEventStart = new \DateTime($event->startDate);
+                $datetimeEventEnd = new \DateTime($event->endDate);
+                $datetimeActivity = new \DateTime($this->request->post['startDate']);
+                $datetimeEventStart = $datetimeEventStart->format('Ymd');
+                $datetimeEventEnd = $datetimeEventEnd->format('Ymd');
+                $datetimeActivity = $datetimeActivity->format('Ymd');
+                
+                if($datetimeActivity >= $datetimeEventStart && $datetimeActivity <= $datetimeEventEnd)
+                {
+                    $activity = new Activity();
+                    $activity->name = $this->request->post['name'];
+                    $activity->description =  $this->request->post['description'];
+                    $activity->price = $this->request->post['price'];
 
-                $date = new \DateTime();
-                $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
-                $activity->date =  $date;
+                    $date = new \DateTime($this->request->post['startDate']);
+                    $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
+                    $activity->date =  $date;
 
-                $activity->id_event =  $this->request->get['id'];
-                $activity->save();
-                $this->redirectTo("../detail/?id=".$activity->id."&event_id=".$activity->id_event);
+                    $activity->id_event =  $this->request->get['id'];
+                    $activity->save();
+                    var_dump('ok');
+                    $this->redirectTo("../detail/?id=".$activity->id."&event_id=".$activity->id_event);
+                }
+
+                $_SESSION['dateValide'] = false;
             }
             $view = new ActivityView($this->request);
             return $view->render('add');
@@ -108,31 +123,19 @@ class ActivityController extends AbstractController {
 
     public function validatePaiement()
     {
-<<<<<<< HEAD
-        $number = 0;
-=======
         $parti = 0;
->>>>>>> 3970a2320c956777dc5d6149b45b26291216d9c7
         foreach ($_SESSION['recap'] as $value) {
             $activity = Activity::find($value->activity_id);
             $parts =  $activity->getParticipants();
             $parts->attach(Participant::find($value->participant_id));
             $part = $activity->getParticipants()->where('id_participant','=',$value->participant_id)->first();
-<<<<<<< HEAD
-            $number = Util::generateParticipantNumber(); 
-            $part->pivot->participant_number = $number;
-            $part->pivot->save();  
-        }
-            unset($_SESSION['recap']);        
-            $view = new ActivityView($number);
-=======
+
             $part->pivot->participant_number = Util::generateParticipantNumber();
             $part->pivot->save();
             $parti = $part->pivot->participant_number;
         }
             unset($_SESSION['recap']);
             $view = new ActivityView($parti);
->>>>>>> 3970a2320c956777dc5d6149b45b26291216d9c7
             return $view->render('validatePaiement');
     }
 

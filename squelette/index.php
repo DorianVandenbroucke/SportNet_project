@@ -18,6 +18,8 @@ $router = new Router();
 if(!isset($_SESSION['recap']))
 {$_SESSION['recap']=array();}
 
+$_SESSION['dateValide'] = true;
+
 $router->addRoute('default', '\app\controllers\DefaultController', 'home');
 $router->addRoute('/signin/', '\app\controllers\DefaultController', 'signinForm');
 $router->addRoute('/signinVerification/', '\app\controllers\DefaultController', 'signinVerification');

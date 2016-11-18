@@ -124,7 +124,7 @@ EOT;
     }
 
     public function add(){
-        return "
+        $html = "
                 <div class='page_header row'>
                     <h1>Ajouter une épreuve</h1>
                 </div>
@@ -154,6 +154,12 @@ EOT;
                     <button class='blue-btn' name='valider'>Valider</button>
                 </div>
                 </form>";
+            if(!$_SESSION['dateValide']){
+                $html .= "<div class='row'>
+                         la date ne correspondent pas aux dates de l'événement
+                        </div>";
+            }
+            return $html;
     }
 
     public function edit(){

@@ -55,14 +55,15 @@ class EventController extends AbstractController
                 $event = empty($id) ? new Event() : Event::find($id);
                 $event->name = $this->request->post['name'];
                 $event->description = filter_var($this->request->post['description'], FILTER_SANITIZE_SPECIAL_CHARS);
-
-                if(!Util::isDateValid($this->request->post['startDate']) || !Util::isDateValid($this->request->post['endDate'])){
+                $event->startDate = $this->request->post['startDate'];
+                $event->endDate = $this->request->post['endDate'];
+                /*if(!Util::isDateValid($this->request->post['startDate']) || !Util::isDateValid($this->request->post['endDate'])){
                     $this->redirectTo($this->request->script_name."/event/add/".$redirectParam);
                     $_SESSION['message_form'] = 'Les dates doivent être bien formatées';
                     return;
                 }
                 $event->startDate = Util::strToDate($this->request->post['startDate'], MYSQL_DATE_FORMAT);
-                $event->endDate = Util::strToDate($this->request->post['endDate'], MYSQL_DATE_FORMAT);
+                $event->endDate = Util::strToDate($this->request->post['endDate'], MYSQL_DATE_FORMAT);*/
                 $event->addresse = $this->request->post['addresse'];
                 $event->id_discipline = $this->request->post['id_discipline'];
 
