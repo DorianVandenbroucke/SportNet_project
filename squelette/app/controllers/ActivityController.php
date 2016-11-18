@@ -112,7 +112,7 @@ class ActivityController extends AbstractController {
         foreach ($_SESSION['recap'] as $value) {
             $activity = Activity::find($value->activity_id);
             $activity->getParticipants()->attach(Participant::find($value->participant_id));
-            $activity->pivot->participant_number = ;
+            $activity->pivot->participant_number = Util::generateParticipantNumber();
             $activity->pivot->save();
         }
         $view = new ActivityView('<h1>Paiement accepté</h1>');
