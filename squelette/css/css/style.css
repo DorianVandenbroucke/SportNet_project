@@ -129,7 +129,7 @@ a.blue-btn, a.lightblue_button {
   margin: 10px 2px;
   text-align: center; }
 
-.page_header .buttons_event a {
+.page_header .buttons_event a, .part_link a {
   display: block;
   padding: 10px; }
 
@@ -138,6 +138,20 @@ a.blue-btn, a.lightblue_button {
 
 .list_epreuve {
   margin-bottom: 20px; }
+
+.export {
+  margin-top: 25px; }
+  .export a {
+    display: block;
+    padding: 10px; }
+  @media screen and (min-width: 70em) {
+    .export {
+      float: right; }
+      .export a {
+        display: inline-block; } }
+
+#fichier {
+  margin-bottom: 15px; }
 
 @media screen and (max-width: 70em) {
   .menu ul {
@@ -159,6 +173,9 @@ a.blue-btn, a.lightblue_button {
     text-align: right; }
     .page_header .buttons_event a {
       display: inline-block;
-      margin: 0 5px; } }
+      margin: 0 5px; }
+
+  .part_link a {
+    display: inline-block; } }
 
 /*# sourceMappingURL=style.css.map */

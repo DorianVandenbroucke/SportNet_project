@@ -88,11 +88,12 @@ EOT;
         if(Util::isCurrentEventPromoter($event)){
             $modifyBlock = $optionArray['modify_block'];
         }
-        $actionBlock = empty($optionArray['action_block']) ? '' : "<section class='row column_5 text-align-center'>$optionArray[action_block]</section>";
+        $actionBlock = empty($optionArray['action_block']) ? '' : "<section class='row column_5 part_link text-align-center'>$optionArray[action_block]</section>";
         $html =
             '<div class="page_header row" >
                 <div class="row">
-                    <form class="row" action="'.$this->script_name.'/event/?'.$_SERVER['QUERY_STRING'].'">
+                    <form class="column_3" method="GET" action="'.$this->script_name.'/event/">
+                      <input type="hidden" name="id" value="'.$_GET['event_id'].'" />
                       <button class="lightblue_button">Retour</button>
                     </form>
                     <div class="column_5 buttons_event">'.
@@ -125,9 +126,6 @@ EOT;
     public function add(){
         return "
                 <div class='page_header row'>
-                  <form class='row' action='$this->script_name".$_SESSION['return_button']."'>
-                    <button class='lightblue_button'>Retour</button>
-                  </form>
                     <h1>Ajouter une épreuve</h1>
                 </div>
                 <form action='#' method='POST'>
@@ -160,9 +158,6 @@ EOT;
 
     public function edit(){
          return "<div class='page_header row'>
-           <div class='row'>
-             <a href='$this->script_name".$_SESSION['return_button']."' class='lightblue_button'>Retour</a>
-           </div>
                     <h1>Modifier : ".$this->data->name."</h1>
                 </div>
                 <form action='#' method='POST'>
@@ -216,7 +211,6 @@ EOT;
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='register'>S'inscrire</button>
-                    <button class='blue-btn' name='cancel'>Annuler</button>
                 </div>
                 </form>";
     }
@@ -279,17 +273,18 @@ EOT;
         $id = $this->data->id;
         $html =
             "<div class='page_header row' >
-                <div class='row'>
-                  <a href='$this->script_name/activity/detail/?id=$id'><button class='lightblue_button'>Retour</a>
-                </div>
                 <h1>Publier les résultats</h1>
             </div>
             <section>
                 <section class='column_8'>
                     <form enctype='multipart/form-data' action='$this->script_name/activity/importResult/' method='post'>
                         <input type='hidden' name='id' value='$id'/>
-                        <label for='fichier'>Ajout du fichier CSV</label><input type='file' accept='text/csv' placeholder='Upload fichier' name='fichier' id='fichier' required/>
-                        <button name='send'>Upload</button>
+                        <label for='fichier'>Ajout du fichier CSV</label>
+                        <input type='file' accept='text/csv' name='fichier' class='text-align-center' id='fichier' required >
+
+                        <div class='row button'>
+                            <button class='blue-btn send' name='send'>Upload</button>
+                        </div>
                     </form>
                 </section>
 
@@ -312,9 +307,9 @@ EOT;
             if($status == EVENT_STATUS_OPEN){
                 $actionBlock.= '<a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'" class="blue-btn">S\'inscrire</a>';
             }
-            $actionBlock.='<a href="'.$this->script_name.'/activity/participants/?id='.$this->data->id.'" class="blue-btn">Voir Participants</a>';
+            $actionBlock.='<a href="'.$this->script_name.'/activity/participants/?id='.$this->data->id.'" class="blue-btn">Voir les participants</a>';
             if($status == EVENT_STATUS_PUBLISHED){
-                $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'" class="blue-btn">Voir Résultats</a>';
+                $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'" class="blue-btn">Voir les résultats</a>';
             }
         }
 

@@ -147,12 +147,13 @@ a.blue-btn, a.lightblue_button{
 }
 
 
-.page_header .buttons_event{
+.page_header .buttons_event, .part_link{
 	a{
 		display: block;
 		padding: 10px;
 	}
 }
+
 
 .list .buttons_list{
 	margin: 25px 0;
@@ -160,6 +161,24 @@ a.blue-btn, a.lightblue_button{
 
 .list_epreuve{
 	margin-bottom: 20px;
+}
+
+.export{
+	margin-top: 25px;
+	a{
+		display: block;
+		padding: 10px;
+	}
+	@media screen and(min-width: 70em){
+		float: right;
+		a{
+			display: inline-block;
+		}
+	}
+}
+
+#fichier{
+	margin-bottom: 15px;
 }
 
 
@@ -197,6 +216,10 @@ a.blue-btn, a.lightblue_button{
 			display: inline-block;
 			margin: 0 5px;
 		}
+	}
+
+	.part_link a {
+		display: inline-block;
 	}
 
 }

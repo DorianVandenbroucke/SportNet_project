@@ -1,5 +1,6 @@
 <?php
 
+require_once("vendor/autoload.php");
 session_start();
 define("EVENT_STATUS_CREATED", 0);
 define("EVENT_STATUS_OPEN", 1);
@@ -7,7 +8,6 @@ define("EVENT_STATUS_CLOSED", 2);
 define("EVENT_STATUS_VALIDATED", 3);
 define("EVENT_STATUS_PUBLISHED", 4);
 
-require_once("vendor/autoload.php");
 
 app\utils\AppInit::bootEloquent('conf/conf.ini');
 
