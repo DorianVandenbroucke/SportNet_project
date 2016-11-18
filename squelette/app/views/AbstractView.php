@@ -57,6 +57,7 @@ abstract class AbstractView {
 			        <div class="offset_1 column_4">
 				        <p>SportNet &copy; 2016</p>
 				        <a href="#">Nous contacter</a>
+                    </div>
 			    </div>';
         return $html;
     }

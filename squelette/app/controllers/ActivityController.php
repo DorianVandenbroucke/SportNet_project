@@ -204,18 +204,28 @@ class ActivityController{
         $csvFile = $_FILES['fichier']['tmp_name'];
         $csvAsArray = array_map('str_getcsv',file($csvFile));
         $activity = Activity::find($id);
+        $totalSaved = 0;
         foreach ($csvAsArray as $row){
             // row[0]= participant_number, row[1] = mail, row[2] = score, row[3] = ranking
-            $participant = $activity->getParticipants()->where('participant_number','=',$row[0])->first();
-            $participant->pivot->score = $row[2];
-            $participant->pivot->ranking = $row[3];
-            if($participant->pivot->save()){
-                $event = $activity->getEvent;
-                $event->status = EVENT_STATUS_PUBLISHED;
-                $event->save();
-            }else{
-                echo "Un erreur est arrivé";
+            $participant = $activity->getParticipants()->where('participant_number','=',$row[0])->where('mail','=',$row[1])->first();
+            if($participant){
+                $participant->pivot->score = $row[2];
+                $participant->pivot->ranking = $row[3];
+                if($participant->pivot->save()){
+                    $event = $activity->getEvent;
+                    $event->status = EVENT_STATUS_PUBLISHED;
+                    $event->save();
+                    $totalSaved++;
+                }
             }
+        }
+        if($totalSaved>0){
+            $av = new ActivityView($activity);
+            $av->render('results');
+        }else{
+            $av = new ActivityView($activity);
+            $av->render('publish');
+            echo "Un erreur est arrivé";
         }
     }
 

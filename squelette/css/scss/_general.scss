@@ -119,10 +119,6 @@ textarea{
 	float: right;
 }
 
-a button {
-	margin: 0 5px;
-}
-
 .heure{
 	width: 45%;
 }
@@ -137,9 +133,32 @@ section section {
 	}
 }
 
-.extra-large-btn{
-	margin: 1px 0;
+a.blue-btn, a.lightblue_button{
+	font-family: "Open Sans Condensed";
+	font-size: 1.2em;
+	padding: 5px 12px;
+	border-radius: 3px;
+	text-decoration: none;
+	margin: 10px 2px;
+	text-align: center;
 }
+
+
+.page_header .buttons_event{
+	a{
+		display: block;
+		padding: 10px;
+	}
+}
+
+.list .buttons_list{
+	margin: 25px 0;
+}
+
+.list_epreuve{
+	margin-bottom: 20px;
+}
+
 
 @media screen and (max-width: 70em) {
 	.menu ul{
@@ -157,7 +176,6 @@ section section {
 
 	.list{
 		.buttons_list{
-			margin-top: 10px;
 			text-align: right;
 		}
 		h3{
@@ -170,8 +188,12 @@ section section {
 	}
 
 	.page_header .buttons_event{
+		margin: 0;
 		text-align: right;
-		margin-top: 0;
+		a{
+			display: inline-block;
+			margin: 0 5px;
+		}
 	}
 
 }
