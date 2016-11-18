@@ -315,9 +315,9 @@ EOT;
             if($status == EVENT_STATUS_OPEN){
                 $actionBlock.= '<a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'" class="blue-btn">S\'inscrire</a>';
             }
-            $actionBlock.='<a href="'.$this->script_name.'/activity/participants/?id='.$this->data->id.'" class="blue-btn">Voir Participants</a>';
+            $actionBlock.='<a href="'.$this->script_name.'/activity/participants/?id='.$this->data->id.'" class="blue-btn">Voir les participants</a>';
             if($status == EVENT_STATUS_PUBLISHED){
-                $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'" class="blue-btn">Voir Résultats</a>';
+                $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'" class="blue-btn">Voir les résultats</a>';
             }
         }
 
