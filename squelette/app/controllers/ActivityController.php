@@ -139,7 +139,7 @@ class ActivityController extends AbstractController {
             $iw->activity_tarif = $activity->price;
             $iw->activity_date = $activity->date;
             array_push($_SESSION['recap'], $iw);
-            return $this->recap();
+            $this->redirectTo($this->request->script_name.'/recapitulatif/');
         }
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
@@ -154,8 +154,8 @@ class ActivityController extends AbstractController {
     }
 
     public function recap(){
-        $view = new ParticipantView($_SESSION['recap']);
-        return $view->render('recap');
+        $view = new ParticipantView(null);
+        $view->render('recap');
     }
 
 

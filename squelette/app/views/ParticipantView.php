@@ -63,7 +63,7 @@ EOT;
 
     public function recap(){
         $html = "<h1>Récapitulatif des inscriptions :</h1><table>";
-        foreach ($this->data as $inscription) {
+        foreach ($_SESSION['recap'] as $inscription) {
             $html .= "<tr><td style='padding:10px'>".$inscription->participant_name." </td>
             <td style='padding:10px'>".$inscription->activity_name." </td>
             <td style='padding:10px'>".substr($inscription->activity_date,0,10)." </td>
@@ -78,6 +78,9 @@ EOT;
         return '<h1>'.$this->data.'</h1>';
     }
 
+    public function validatePaiment(){
+        
+    }
 
     public function participants(){
         $data = '';
