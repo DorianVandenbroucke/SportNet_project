@@ -70,12 +70,14 @@ EOT;
             <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
             <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
         }
-        $html .= "</table><div class='paiement'><a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a></div>";
+        $html .= "</table>
+        <div class='paiement'><a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a></div> 
+        <div class='paiement'><a href='".$this->script_name."/event/all/' class='blue-btn'>Retour</a>";
         return $html;
     }
 
     public function paiement(){
-        return '<h1>'.$this->data.'</h1>';
+        return "<h1>Paiement</h1><input type='text'/><input type='text'/><input type='text'/><a href='$this->script_name/validatePaiement/'>Valider</a>";
     }
 
     public function validatePaiment(){
