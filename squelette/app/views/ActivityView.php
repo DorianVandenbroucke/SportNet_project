@@ -264,9 +264,13 @@ EOT;
                 ";
     }
 
-    public function validatePaiement()
-    {
-        return $this->data;
+    public function validatePaiement(){
+        return "<div class='page_header row'>
+                    <h1>Paiement accepté</h1>
+                    <div>
+                        <p>Votre numéro de participant est $this->data</p>
+                    </div>
+                </div>";
     }
 
     public function publish(){
