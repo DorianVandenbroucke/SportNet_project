@@ -177,6 +177,11 @@ a.blue-btn, a.lightblue_button{
 	}
 }
 
+.paiement{
+	@extend .export;
+	float: none;
+}
+
 #fichier{
 	margin-bottom: 15px;
 }
