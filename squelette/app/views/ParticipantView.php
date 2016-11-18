@@ -70,7 +70,7 @@ EOT;
             <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
             <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
         }
-        $html .= "</table><a href='".$this->script_name."/paiement/'>Paiment</a>";
+        $html .= "</table><div class='export'><a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a></div>";
         return $html;
     }
 

@@ -195,19 +195,19 @@ EOT;
                 <form action='#' method='POST'>
                 <div class='column_4'>
                     <label for='firstName'>Prénom</label>
-                    <input type='text' id='firstName' placeholder='Prénom' name='firstName'  >
+                    <input type='text' id='firstName' placeholder='Prénom' name='firstName' required  >
                 </div>
                 <div class='column_4'>
                     <label for='lastName'>Nom</label>
-                    <input type='text' id='lastName' placeholder='Nom' name='lastName'  >
+                    <input type='text' id='lastName' placeholder='Nom' name='lastName' required >
                 </div>
                 <div class='column_4'>
                     <label for='mail'>Mail</label>
-                    <input type='mail' id='mail' placeholder='Mail' name='mail'  >
+                    <input type='mail' id='mail' placeholder='Mail' name='mail' required  >
                 </div>
                 <div class='column_4'>
                     <label for='birthDate'>Date de naissance</label>
-                    <input type='text' id='birthDate' placeholder='dd-mm-yyyy' name='birthDate'  >
+                    <input type='text' id='birthDate' placeholder='dd-mm-yyyy' name='birthDate' required >
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='register'>S'inscrire</button>
