@@ -15,7 +15,7 @@ use app\models\Participant;
 use app\utils\Authentification;
 
 
-class ActivityController{
+class ActivityController extends AbstractController {
 
     private $request = null;
     private $auth;
@@ -43,8 +43,7 @@ class ActivityController{
 
                 $activity->id_event =  $this->request->get['id'];
                 $activity->save();
-
-                header("location: ../detail/?id=".$activity->id."&event_id=".$activity->id_event);
+                $this->redirectTo("../detail/?id='.$activity->id.'&event_id='.$activity->id_event");
             }
             $view = new ActivityView($this->request);
             return $view->render('add');

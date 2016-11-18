@@ -36,7 +36,7 @@ class DefaultView  extends AbstractView{
                         <div class='column_4 buttons_list'>
                             <a class='lightblue_button' href='$this->script_name/event/?id=$event->id'>Details</a>";
                             if(Util::isEventModifyable($event)) {
-                                $html .= "<a href='$this->script_name/event/?id=$event->id' class='lightblue_button'>Supprimer</a>";
+                                $html .= "<a href='$this->script_name/event/delete/?id=$event->id' class='lightblue_button'>Supprimer</a>";
                             }
 
                         $html.="</div>
