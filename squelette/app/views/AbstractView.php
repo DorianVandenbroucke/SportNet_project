@@ -84,6 +84,7 @@ abstract class AbstractView {
         if (isset($_SESSION['promoter'])) {
             $array = array(
               "Accueil" => array("", "/", "/logout/"),
+<<<<<<< HEAD
               "Evénements" => array(
                                   "/event/all/",
                                   "/event/",
