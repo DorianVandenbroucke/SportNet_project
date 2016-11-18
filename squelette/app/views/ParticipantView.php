@@ -88,8 +88,8 @@ EOT;
         }
         $html .= "</table>
         <div class='paiement'>
-            <a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
             <a href='".$this->script_name."/event/all/' class='blue-btn'>Continuer les inscriptions</a>
+            <a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
         </div>";
         return $html;
     }
