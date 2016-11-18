@@ -108,31 +108,20 @@ class ActivityController extends AbstractController {
 
     public function validatePaiement()
     {
-<<<<<<< HEAD
         $number = 0;
-=======
-        $parti = 0;
->>>>>>> 3970a2320c956777dc5d6149b45b26291216d9c7
+
         foreach ($_SESSION['recap'] as $value) {
             $activity = Activity::find($value->activity_id);
             $parts =  $activity->getParticipants();
             $parts->attach(Participant::find($value->participant_id));
             $part = $activity->getParticipants()->where('id_participant','=',$value->participant_id)->first();
-<<<<<<< HEAD
-            $number = Util::generateParticipantNumber(); 
+
+            $number = Util::generateParticipantNumber();
             $part->pivot->participant_number = $number;
-            $part->pivot->save();  
-        }
-            unset($_SESSION['recap']);        
-            $view = new ActivityView($number);
-=======
-            $part->pivot->participant_number = Util::generateParticipantNumber();
             $part->pivot->save();
-            $parti = $part->pivot->participant_number;
         }
             unset($_SESSION['recap']);
-            $view = new ActivityView($parti);
->>>>>>> 3970a2320c956777dc5d6149b45b26291216d9c7
+            $view = new ActivityView($number);
             return $view->render('validatePaiement');
     }
 
@@ -184,8 +173,8 @@ class ActivityController extends AbstractController {
             foreach ($_SESSION['recap'] as $key => $inscription) {
                     if($inscription->participant_id == $_GET['idPar'] && $inscription->activity_id == $_GET['idact'])
                     {
-                        unset($_SESSION['recap'][$key]); 
-                    }          
+                        unset($_SESSION['recap'][$key]);
+                    }
             }
         }
         $view = new ParticipantView(null);

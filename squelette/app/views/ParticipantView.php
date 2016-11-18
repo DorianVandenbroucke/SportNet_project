@@ -72,6 +72,7 @@ EOT;
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Tarif</th>
+                            <th></th>
                         </tr>
                     </thead>";
 
