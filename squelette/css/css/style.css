@@ -16,110 +16,6 @@
 /* Buttons */
 /* Alerts */
 /* Components */
-body {
-  background-color: #efefef;
-  margin-bottom: 320px !important; }
-
-header {
-  background-color: #454545;
-  text-align: center;
-  padding: 10px 0; }
-  header div {
-    color: #f8f8f8;
-    font-size: 2em; }
-    header div span {
-      color: #0098d8; }
-
-.content {
-  background-color: #fff;
-  padding: 5px;
-  margin-bottom: 20px;
-  border: 1px solid #bcbcbc; }
-
-.menu {
-  border-bottom: 1px solid #0098d8;
-  background: #72d5ff;
-  margin: 0; }
-
-.lightblue_button {
-  border: 1px solid #0098d8;
-  color: #0098d8;
-  background: #f2fbff;
-  transition: 0.2s; }
-  .lightblue_button:hover {
-    background-color: #0098d8;
-    color: #ffffff; }
-
-.presentation {
-  text-align: center;
-  margin-bottom: 30px; }
-  .presentation form {
-    margin-top: 10px; }
-
-.page_header {
-  margin-bottom: 20px; }
-  .page_header .buttons_event {
-    text-align: center;
-    margin-top: 20px; }
-
-.content {
-  background-color: #fff;
-  padding: 5px;
-  margin: 20px 0;
-  border: 1px solid #bcbcbc;
-  border-top: none; }
-
-footer {
-  background-color: #454545;
-  color: #f2fbff;
-  padding: 10px 0;
-  border-top: 3px solid #0098d8; }
-  footer a {
-    color: #72d5ff; }
-
-.search {
-  border-bottom: 1px solid #b2b2b2;
-  margin-bottom: 50px;
-  padding-bottom: 8px; }
-
-form .button {
-  text-align: center; }
-form input, form select, form textarea {
-  width: 100%;
-  padding: 10px 10px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  font-size: 1em; }
-form .message_droite {
-  text-align: right; }
-
-textarea {
-  resize: none; }
-
-.column_4 h2 {
-  margin: 5px 0; }
-
-.list {
-  margin: 0 0 20px 0; }
-  .list .buttons_list {
-    text-align: center; }
-  .list li, .list .ligne {
-    list-style: none;
-    border-bottom: 1px solid black;
-    padding: 10px; }
-
-.detail {
-  float: right; }
-
-.heure {
-  width: 45%; }
-
-section section {
-  padding: 15px; }
-
-.list-without-style li {
-  padding: 10px; }
-
 a.blue-btn, a.lightblue_button {
   font-family: "Open Sans Condensed";
   font-size: 1.2em;
@@ -129,15 +25,22 @@ a.blue-btn, a.lightblue_button {
   margin: 10px 2px;
   text-align: center; }
 
-.page_header .buttons_event a, .part_link a {
-  display: block;
-  padding: 10px; }
+body {
+  background-color: #efefef;
+  margin-bottom: 320px !important; }
 
-.list .buttons_list {
-  margin: 25px 0; }
+.column_4 h2 {
+  margin: 5px 0; }
 
-.list_epreuve {
-  margin-bottom: 20px; }
+.content {
+  background-color: #fff;
+  padding: 5px;
+  margin: 20px 0;
+  border: 1px solid #bcbcbc;
+  border-top: none; }
+
+.detail {
+  float: right; }
 
 .export, .paiement {
   margin-top: 25px; }
@@ -150,34 +53,125 @@ a.blue-btn, a.lightblue_button {
       .export a, .paiement a {
         display: inline-block; } }
 
-.paiement {
-  float: none; }
-
 #fichier {
   margin-bottom: 15px; }
 
-@media screen and (max-width: 70em) {
-  .menu ul {
-    margin: 0 auto !important; } }
+footer {
+  background-color: #454545;
+  color: #f2fbff;
+  padding: 10px 0;
+  border-top: 3px solid #0098d8; }
+  footer a {
+    color: #72d5ff; }
+
+form .button {
+  text-align: center; }
+form input, form select, form textarea {
+  width: 100%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 1em; }
+form .message_droite {
+  text-align: right; }
 @media screen and (min-width: 70em) {
   form input, form select, form textarea {
-    padding: 5px 10px; }
+    padding: 5px 10px; } }
 
+header {
+  background-color: #454545;
+  text-align: center;
+  padding: 10px 0; }
+  header div {
+    color: #f8f8f8;
+    font-size: 2em; }
+    header div span {
+      color: #0098d8; }
+
+.heure {
+  width: 45%; }
+
+.lightblue_button {
+  border: 1px solid #0098d8;
+  color: #0098d8;
+  background: #f2fbff;
+  transition: 0.2s; }
+  .lightblue_button:hover {
+    background-color: #0098d8;
+    color: #ffffff; }
+
+.list {
+  margin: 0 0 20px 0; }
   .list .buttons_list {
-    text-align: right; }
-  .list h3 {
-    margin-top: 0 !important; }
+    text-align: center; }
+  .list li, .list .ligne {
+    list-style: none;
+    border-bottom: 1px solid black;
+    padding: 10px; }
+  @media screen and (min-width: 70em) {
+    .list .buttons_list {
+      text-align: right; }
+    .list h3 {
+      margin-top: 0 !important; } }
 
-  .page_header h1 {
-    text-align: left !important; }
+.list .buttons_list {
+  margin: 25px 0; }
 
+.list_epreuve {
+  margin-bottom: 20px; }
+
+.list-without-style li {
+  padding: 10px; }
+
+.menu {
+  border-bottom: 1px solid #0098d8;
+  background: #72d5ff;
+  margin: 0; }
+  @media screen and (max-width: 70em) {
+    .menu ul {
+      margin: 0 auto !important; } }
+
+.page_header {
+  margin-bottom: 20px; }
   .page_header .buttons_event {
-    margin: 0;
-    text-align: right; }
-    .page_header .buttons_event a {
-      display: inline-block;
-      margin: 0 5px; }
+    text-align: center;
+    margin-top: 20px; }
+    @media screen and (min-width: 70em) {
+      .page_header .buttons_event {
+        margin: 0;
+        text-align: right; }
+        .page_header .buttons_event a {
+          display: inline-block !important;
+          margin: 0 5px; } }
+  @media screen and (min-width: 70em) {
+    .page_header h1 {
+      text-align: left !important; } }
 
+.page_header .buttons_event a, .part_link a {
+  display: block;
+  padding: 10px; }
+
+.paiement {
+  float: none; }
+
+.presentation {
+  text-align: center;
+  margin-bottom: 30px; }
+  .presentation form {
+    margin-top: 10px; }
+
+.search {
+  border-bottom: 1px solid #b2b2b2;
+  margin-bottom: 50px;
+  padding-bottom: 8px; }
+
+section section {
+  padding: 15px; }
+
+textarea {
+  resize: none; }
+
+@media screen and (min-width: 70em) {
   .part_link a {
     display: inline-block; } }
 
