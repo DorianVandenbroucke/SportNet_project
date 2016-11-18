@@ -16,4 +16,8 @@ class Participant extends Model {
     public function getActivities(){
         return $this->belongsToMany('\app\models\Activity', 'participant_activity', 'id_participant', 'id_activity');
     }
+
+    public function getParticipantNumber(){
+        return $this->getActivities()->select()->where('id_participant','=',$this->id)->first()->participant_number;
+    }
 }
