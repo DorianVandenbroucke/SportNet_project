@@ -246,7 +246,8 @@ class ActivityController extends AbstractController {
     public function results(){
         $id = $this->request->get['id'];
         $activity = Activity::find($id);
-        $av = new ParticipantView(['activity_id'=>$id, 'activity_name'=>$activity->name, 'participants'=>$activity->getParticipants()]);
+        $participants = $activity->getParticipants()->orderBy('ranking')->get();
+        $av = new ParticipantView(['activity_id'=>$activity->id, 'activity_name'=>$activity->name, 'participants'=>$participants]);
         $av->render('results');
     }
 
