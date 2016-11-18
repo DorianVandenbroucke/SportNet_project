@@ -31,6 +31,7 @@ $router->addRoute('/activity/delete/', '\app\controllers\ActivityController', 'd
 $router->addRoute('/activity/detail/', '\app\controllers\ActivityController', 'detail');
 $router->addRoute('/activity/register/', '\app\controllers\ActivityController', 'register');
 $router->addRoute('/activity/participants/', '\app\controllers\ActivityController', 'participants');
+$router->addRoute('/activity/searchParticipants/', '\app\controllers\ActivityController', 'searchParticipants');
 $router->addRoute('/activity/export/', '\app\controllers\ActivityController', 'export');
 $router->addRoute('/activity/publish/', '\app\controllers\ActivityController', 'publish');
 $router->addRoute('/activity/importResult/', '\app\controllers\ActivityController', 'importResult');
