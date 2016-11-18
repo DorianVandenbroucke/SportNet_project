@@ -133,10 +133,17 @@ abstract class AbstractView {
                     </li>";
           }
         }
-        if(isset($_SESSION['recap'])){
+        if(isset($_SESSION['recap']['0'])){
+            if(isset($path) && $path == "/recapitulatif/"){
+                $class = "class = 'active'";
+            }elseif(isset($path) && $path == "/paiement/"){
+                $class = "class = 'active'";
+            }else{
+                $class = "";
+            }
           $html .=
                     "<li>
-                      <a href='$this->script_name/recapitulatif/'>Mes inscriptions</a>
+                      <a href='$this->script_name/recapitulatif/' $class>Mes inscriptions</a>
                     </li>";
         }
         $html .= "</ul>";
