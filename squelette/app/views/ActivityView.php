@@ -92,7 +92,7 @@ EOT;
         $html =
             '<div class="page_header row" >
                 <div class="row">
-                  <a href="'.$this->script_name.'/event/all/"><button class="lightblue_button">Retour</button></a>
+                  <a href="'.$this->script_name.'/event/?'.$_SERVER['QUERY_STRING'].'"><button class="lightblue_button">Retour</button></a>
                 </div>
                 <h1>'.$this->data->name.'</h1>
             </div>
@@ -101,7 +101,7 @@ EOT;
                     <p>'.$this->data->description.'</p><br>
                 </section>
                 <aside class="column_3">
-                        .'.$modifyBlock.'.
+                        '.$modifyBlock.'
                         <div>
                         <ul class="list-without-style">
                             <li><strong>Date de l\'épreuve :</strong></li>
@@ -282,7 +282,7 @@ EOT;
                         <button name='send'>Upload</button>
                     </form>
                 </section>
-             
+
            </section>";
         return $html;
     }
