@@ -16,7 +16,7 @@ use app\utils\Util;
 use app\views\DefaultView;
 use app\views\EventView;
 
-class EventController
+class EventController extends AbstractController
 {
     private $request = null;
     private $auth;
@@ -64,8 +64,9 @@ class EventController
                     $event->id_promoter = $this->auth->promoter;
                 }
                 if($event->save()) {
-                    $ev = new EventView(['events' => $event]);
-                    $ev->render('event');
+                    $this->redirectTo("../?id=$event->id");
+                    //$ev = new EventView(['events' => $event]);
+                    //$ev->render('event');
                 }
             }
         }else{
