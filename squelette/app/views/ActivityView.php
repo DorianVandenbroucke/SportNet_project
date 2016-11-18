@@ -289,8 +289,12 @@ EOT;
                 <section class='column_8'>
                     <form enctype='multipart/form-data' action='$this->script_name/activity/importResult/' method='post'>
                         <input type='hidden' name='id' value='$id'/>
-                        <label for='fichier'>Ajout du fichier CSV</label><input type='file' accept='text/csv' placeholder='Upload fichier' name='fichier' id='fichier' required/>
-                        <button name='send'>Upload</button>
+                        <label for='fichier'>Ajout du fichier CSV</label>
+                        <input type='file' accept='text/csv' name='fichier' class='text-align-center' id='fichier' required >
+
+                        <div class='row button'>
+                            <button class='blue-btn send' name='send'>Upload</button>
+                        </div>
                     </form>
                 </section>
 
