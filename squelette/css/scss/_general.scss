@@ -21,9 +21,8 @@ header{
 .content{
 	background-color: #fff;
 	padding: 5px;
-	margin: 20px 0;
+	margin-bottom: 20px;
 	border: 1px solid darken($backgroundColor, 20);
-	border-top: none;
 }
 
 .menu{
@@ -45,9 +44,7 @@ header{
 
 .presentation{
 	text-align: center;
-	// a button{
-	// 	@extend .lightblue_button;
-	// }
+	margin-bottom: 30px;
 }
 .page_header {
 	margin-bottom: 20px;

@@ -98,7 +98,7 @@ abstract class AbstractView {
         }
 
         foreach($array as $lien => $nom){
-          if($lien === $path || ($path == "/" && $lien == "")){
+          if($lien === $path || $lien === "/"){
             $html .=
                     "<li>
                         <a href='$this->script_name".$lien."' class='active'>".$nom."</a>
