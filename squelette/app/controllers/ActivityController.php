@@ -204,7 +204,6 @@ class ActivityController{
 
     public function publish(){
         $id = $this->request->get['id'];
-        echo $id;
         $av = new ActivityView(Activity::find($id));
         $av->render('publish');
     }
