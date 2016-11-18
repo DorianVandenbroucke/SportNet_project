@@ -92,7 +92,12 @@ EOT;
         $html =
             '<div class="page_header row" >
                 <div class="row">
-                  <a href="'.$this->script_name.'/event/?'.$_SERVER['QUERY_STRING'].'"><button class="lightblue_button">Retour</button></a>
+                    <form class="row" action="'.$this->script_name.'/event/?'.$_SERVER['QUERY_STRING'].'">
+                      <button class="lightblue_button">Retour</button>
+                    </form>
+                    <div class="column_5 buttons_event">'.
+                          $modifyBlock.'
+                    </div>
                 </div>
                 <h1>'.$this->data->name.'</h1>
             </div>
@@ -101,8 +106,7 @@ EOT;
                     <p>'.$this->data->description.'</p><br>
                 </section>
                 <aside class="column_3">
-                        '.$modifyBlock.'
-                        <div>
+                    <div>
                         <ul class="list-without-style">
                             <li><strong>Date de l\'épreuve :</strong></li>
                             <li>'.$this->data->date->format('d/m/Y').'</li>
@@ -111,7 +115,7 @@ EOT;
                             <li><strong>Tarif de l\'épreuve :</strong></li>
                             <li>'.$this->data->price.' €</li>
                         </ul>
-                </div>
+                    </div>
                 </aside>
            </section>
             '.$actionBlock;
@@ -121,12 +125,12 @@ EOT;
     public function add(){
         return "
                 <div class='page_header row'>
-                  <div class='row'>
-                    <a href='$this->script_name".$_SESSION['return_button']."'><button class='lightblue_button'>Retour</button></a>
-                  </div>
+                  <form class='row' action='$this->script_name".$_SESSION['return_button']."'>
+                    <button class='lightblue_button'>Retour</button>
+                  </form>
                     <h1>Ajouter une épreuve</h1>
                 </div>
-                <form action='#' method='POST'/>
+                <form action='#' method='POST'>
                 <div class='column_4'>
                     <label for='nom'>Titre de l'épreuve</label>
                     <input type='text' id='nom' placeholder='Nom' name='name'  >
@@ -136,8 +140,8 @@ EOT;
                     <textarea id='desc' name='description'></textarea>
                 </div>
                 <div class='column_4'>
-                    <label for='date'>Date de l'épreuve</label>
-                    <input type='date' id='date' placeholder='dd-mm-yyyy' name='startDate'  >
+                    <label for='date'>Date de l'épreuve (dd-mm-yyyy)</label>
+                    <input type='date' id='date' name='startDate'  >
                 </div>
                 <div class='column_4'>
                     <label for='heure'>Heure de l'épreuve (hh:mm)</label><br>
@@ -157,11 +161,11 @@ EOT;
     public function edit(){
          return "<div class='page_header row'>
            <div class='row'>
-             <a href='$this->script_name".$_SESSION['return_button']."'><button class='lightblue_button'>Retour</button></a>
+             <a href='$this->script_name".$_SESSION['return_button']."' class='lightblue_button'>Retour</a>
            </div>
                     <h1>Modifier : ".$this->data->name."</h1>
                 </div>
-                <form action='#' method='POST'/>
+                <form action='#' method='POST'>
                 <div class='column_4'>
                     <label for='nom'>Titre de l'épreuve</label>
                     <input type='text' id='nom' placeholder='Nom' name='name' value=".$this->data->name."  >
@@ -171,8 +175,8 @@ EOT;
                     <textarea id='desc' name='description'>".$this->data->description."</textarea>
                 </div>
                 <div class='column_4'>
-                    <label for='date'>Date de l'épreuve (en €)</label>
-                    <input type='date' id='date' placeholder='dd-mm-yyyy' name='startDate' value=".$this->data->date."  >
+                    <label for='date'>Date de l'épreuve (dd-mm-yyyy)</label>
+                    <input type='date' id='date' name='startDate' value=".$this->data->date."  >
                 </div>
                 <div class='column_4'>
                     <label for='heure'>Heure de l'épreuve (hh:mm)</label><br>
@@ -180,7 +184,7 @@ EOT;
                     <input type='text' class='heure' placeholder='mm' name='startDateM' value=".substr($this->data->date,14,2)." >
                 </div>
                 <div class='column_4'>
-                    <label for='price'>Tarif de l'épreuve</label>
+                    <label for='price'>Tarif de l'épreuve (en €)</label>
                     <input type='number' id='price' placeholder='Prix' name='price' value=".$this->data->price." >
                 </div>
                 <div class='row button'>
@@ -193,7 +197,7 @@ EOT;
         return "<div class='page_header row'>
                     <h1>Inscription à ".$this->data->name."</h1>
                 </div>
-                <form action='#' method='POST'/>
+                <form action='#' method='POST'>
                 <div class='column_4'>
                     <label for='firstName'>Prénom</label>
                     <input type='text' id='firstName' placeholder='Prénom' name='firstName'  >
@@ -276,7 +280,7 @@ EOT;
         $html =
             "<div class='page_header row' >
                 <div class='row'>
-                  <a href='$this->script_name/activity/detail/?id=$id'><button class='lightblue_button'>Retour</button></a>
+                  <a href='$this->script_name/activity/detail/?id=$id'><button class='lightblue_button'>Retour</a>
                 </div>
                 <h1>Publier les résultats</h1>
             </div>
@@ -299,18 +303,18 @@ EOT;
 
         if($status != EVENT_STATUS_PUBLISHED){
             if($status == EVENT_STATUS_CLOSED){
-                $modifyBlock.= '<a href="'.$this->script_name.'/activity/publish/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Publier les résultats</button></a><br>';
+                $modifyBlock.= '<a href="'.$this->script_name.'/activity/publish/?id='.$this->data->id.'" class="blue-btn row">Publier les résultats</a>';
             }
-            $modifyBlock.='<a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Modifier</button></a><br>
-                <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'"><button class="blue-btn extra-large-btn row">Supprimer</button></a><br>';
+            $modifyBlock.='<a href="'.$this->script_name.'/activity/edit/?id='.$this->data->id.'" class="blue-btn  row">Modifier</a>
+                <a href="'.$this->script_name.'/activity/delete/?id='.$this->data->id.'" class="blue-btn row">Supprimer</a>';
         }
         if($status != EVENT_STATUS_VALIDATED && $status != EVENT_STATUS_CREATED){
             if($status == EVENT_STATUS_OPEN){
-                $actionBlock.= '<a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'"><button class="blue-btn">S\'inscrire</button></a>';
+                $actionBlock.= '<a href="'.$this->script_name.'/activity/register/?id='.$this->data->id.'" class="blue-btn">S\'inscrire</a>';
             }
-            $actionBlock.='<a href="'.$this->script_name.'/activity/participants/?id='.$this->data->id.'"><button class="blue-btn">Voir Participants</button></a>';
+            $actionBlock.='<a href="'.$this->script_name.'/activity/participants/?id='.$this->data->id.'" class="blue-btn">Voir Participants</a>';
             if($status == EVENT_STATUS_PUBLISHED){
-                $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'"><button class="blue-btn">Voir Résultats</button></a>';
+                $actionBlock.='<a href="'.$this->script_name.'/activity/result/?id='.$this->data->id.'" class="blue-btn">Voir Résultats</a>';
             }
         }
 

@@ -118,7 +118,7 @@ section section {
 .list-without-style li {
   padding: 10px; }
 
-a.extra-large-btn, a.blue-btn, a.lightblue_button {
+a.blue-btn, a.lightblue_button {
   font-family: "Open Sans Condensed";
   font-size: 1.2em;
   padding: 5px 12px;
