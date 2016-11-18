@@ -86,17 +86,22 @@ EOT;
             <td style='padding:10px'>".$inscription->activity_name." </td>
             <td style='padding:10px'>".$dateStart." </td>
             <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
-            <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
+            <td style='padding:10px'>".$inscription->activity_tarif." </td>
+            <td style='padding:10px'><a href='".$this->script_name."/recapitulatif/?idact=".$inscription->activity_id."&idPar=".$inscription->participant_id."'/>Supprimer</a></td></tr>";
         }
 
-        $id_event = "";
-        if(isset($_SESSION['recap']['0'])){
-            $id_event = $_SESSION['recap']['0']->event_id;
-        }
-        $html .= "</table>
-        <div class='paiement'>
-            <a href='".$this->script_name."/event/?id=".$id_event."' class='blue-btn'>Continuer les inscriptions</a>
-            <a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
+        if(isset($inscription))
+            {
+                $html .= "</table>
+                <div class='paiement'>"." <a href='".$this->script_name."/event/?id=".$inscription->event_id."' class='blue-btn'>Continuer les inscriptions</a>";
+                }
+        else
+            {
+                $html .= "</table>
+                <div class='paiement'>"." <a href='".$this->script_name."/event/all' class='blue-btn'>Continuer les inscriptions</a>";
+            }
+
+        $html .= "<a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
         </div>";
         return $html;
     }

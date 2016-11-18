@@ -108,18 +108,21 @@ class ActivityController extends AbstractController {
 
     public function validatePaiement()
     {
+        $number = 0;
         foreach ($_SESSION['recap'] as $value) {
             $activity = Activity::find($value->activity_id);
             $parts =  $activity->getParticipants();
             $parts->attach(Participant::find($value->participant_id));
             $part = $activity->getParticipants()->where('id_participant','=',$value->participant_id)->first();
-            $part->pivot->participant_number = Util::generateParticipantNumber(); 
+            $number = Util::generateParticipantNumber(); 
+            $part->pivot->participant_number = $number;
             $part->pivot->save();  
         }
             unset($_SESSION['recap']);        
-            $view = new ActivityView('<h1>Paiement accepté</h1>');
+            $view = new ActivityView($number);
             return $view->render('validatePaiement');
     }
+
     public function register()
     {
         $participant = null;
@@ -133,7 +136,7 @@ class ActivityController extends AbstractController {
             {
                 $participant = new Participant();
                 $participant->mail = $this->request->post['mail'];
-                $participant->birthDate = Util::strToDate($this->request->post['birthDate'], MYSQL_DATE_FORMAT);
+                $participant->birthDate = $this->request->post['birthDate'];
                 $participant->firstName = $this->request->post['firstName'];
                 $participant->lastName = $this->request->post['lastName'];
                 $participant->save();
@@ -163,6 +166,15 @@ class ActivityController extends AbstractController {
     }
 
     public function recap(){
+        if(isset($_GET['idPar']) && isset($_GET['idact']))
+        {
+            foreach ($_SESSION['recap'] as $key => $inscription) {
+                    if($inscription->participant_id == $_GET['idPar'] && $inscription->activity_id == $_GET['idact'])
+                    {
+                        unset($_SESSION['recap'][$key]); 
+                    }          
+            }
+        }
         $view = new ParticipantView(null);
         $view->render('recap');
     }
