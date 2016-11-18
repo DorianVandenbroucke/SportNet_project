@@ -196,13 +196,27 @@ class ActivityController{
     }
 
     public function importResult(){
+        $id = $this->request->post['id'];
         if($_FILES['fichier']['error']>0){
             echo "Hubo un error al cargar el archivo";
             return;
         }
         $csvFile = $_FILES['fichier']['tmp_name'];
         $csvAsArray = array_map('str_getcsv',file($csvFile));
-        var_dump($csvAsArray);
+        $activity = Activity::find($id);
+        foreach ($csvAsArray as $row){
+            // row[0]= participant_number, row[1] = mail, row[2] = score, row[3] = ranking
+            $participant = $activity->getParticipants()->where('participant_number','=',$row[0])->first();
+            $participant->pivot->score = $row[2];
+            $participant->pivot->ranking = $row[3];
+            if($participant->pivot->save()){
+                $event = $activity->getEvent;
+                $event->status = EVENT_STATUS_PUBLISHED;
+                $event->save();
+            }else{
+                echo "Un erreur est arrivé";
+            }
+        }
     }
 
     public function searchParticipants(){

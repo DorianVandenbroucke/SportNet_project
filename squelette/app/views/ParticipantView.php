@@ -85,7 +85,7 @@ EOT;
                 <h1>Participants de l\'épreuve <small>'.$this->data['activity_name'].'</small></h1>
                 <form action="'.$this->script_name.'/activity/searchParticipants/" method="POST"/>
                     <input type="hidden" name="id" value="'.$id.'"/>
-                    <input type="text" name="searchQuery"/>
+                    <input type="text" name="searchQuery" placeholder="Recherche"/>
                     <input type="submit" name="search" value="Recherche"/>
                 </form>
                 <table>
