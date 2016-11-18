@@ -90,7 +90,7 @@ EOT;
             $options.="<option value='$discipline->id' $selected>$discipline->name";
         }
 
-        return "<div class='page_header row'>
+        $form .= "<div class='page_header row'>
                 <h1>$title</h1>
             </div>
             <form action=\"$this->script_name/event/save/\" method='post' >
@@ -127,8 +127,15 @@ EOT;
                     <button class='blue-btn' name='send'>Valider</button>
                     <button class='blue-btn' name='cancel'>Annuler</button>
                 </div>
-            </form>
-        ";
+            </form>";
+            if(isset($_SESSION['message_form'])){
+              $form .=
+                        "<div class='danger-alert row'>
+                          <span>".$_SESSION['message_form']."</span>
+                        </div>";
+              unset($_SESSION['message_form']);
+            }
+            return $form;
     }
 
     public function openEventDetail(){
