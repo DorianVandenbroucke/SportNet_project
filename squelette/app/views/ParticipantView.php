@@ -88,7 +88,7 @@ EOT;
             foreach ($this->data['participants'] as $participant) {
                 $data .= '<tr>
                                 <td>'.$participant->lastName.' '.$participant->firstName.'</td>
-                                <td class="text-align-center">'.$participant->id.'</td>
+                                <td>'.$participant->id.'</td>
                                 <td>'.$participant->mail.'</td>
                                 <td>'.$participant->birthDate.'</td>
                               </tr>';
@@ -104,7 +104,7 @@ EOT;
                 </form>
                 <table>
                     <thead>
-                        <tr><th>Nom</th><th>Nº Participant</th><th>Email</th><th>Birthdate</th></tr>
+                        <tr><th>Nom</th><th>Nº du participant</th><th>E-mail</th><th>Date de naissance</th></tr>
                     </thead>
                     <tbody>
                         '.$data.'
