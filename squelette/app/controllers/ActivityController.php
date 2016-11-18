@@ -64,7 +64,7 @@ class ActivityController{
                 $date = new \Datetime($this->request->post['startDate']);
                 $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
                 $activity->date =  $date;
-                $activity->price = $_POST['price'];
+                $activity->price = $this->request->post['price'];
 
                 $activity->save();
 
@@ -159,11 +159,25 @@ class ActivityController{
         return $view->render('participants');
     }
 
-    public function recap($id){
-        var_dump($_SESSION['recap']);
-        /*$activities = Participant::find($id)->getActivities;
-        $view = new ParticipantView($activities);
-        return $view->render('recap');*/
+    public function recap(){
+        $inscription = [];
+        foreach ($_SESSION['recap'] as $p=>$value) 
+        {
+            $participant = Participant::find($p);
+            foreach ($value as $v) 
+            {
+                $activity = Activity::find($v);
+                $inscription[] = [$p=>$activity];
+            }
+        }
+        foreach ($inscription as $key => $value) {
+            foreach ($value as $key => $v) {
+                echo $v->name;
+            }
+        }
+        var_dump($inscription[0][83]->name);
+       // $view = new ParticipantView();
+       // $view->render('recap');
     }
 
 
