@@ -58,6 +58,7 @@ class EventController extends AbstractController
 
                 if(!Util::isDateValid($this->request->post['startDate']) || !Util::isDateValid($this->request->post['endDate'])){
                     $this->redirectTo($this->request->script_name."/event/add/".$redirectParam);
+                    $_SESSION['message'] = 'Les dates doivent être bien formatées';
                     return;
                 }
                 $event->startDate = Util::strToDate($this->request->post['startDate'], MYSQL_DATE_FORMAT);
