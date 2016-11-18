@@ -139,16 +139,19 @@ a.blue-btn, a.lightblue_button {
 .list_epreuve {
   margin-bottom: 20px; }
 
-.export {
+.export, .paiement {
   margin-top: 25px; }
-  .export a {
+  .export a, .paiement a {
     display: block;
     padding: 10px; }
   @media screen and (min-width: 70em) {
-    .export {
+    .export, .paiement {
       float: right; }
-      .export a {
+      .export a, .paiement a {
         display: inline-block; } }
+
+.paiement {
+  float: none; }
 
 #fichier {
   margin-bottom: 15px; }
