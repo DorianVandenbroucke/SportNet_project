@@ -133,7 +133,12 @@ abstract class AbstractView {
                     </li>";
           }
         }
-
+        if(isset($_SESSION['recap'])){
+          $html .=
+                    "<li>
+                      <a href='$this->script_name/recapitulatif/'>Mes inscriptions</a>
+                    </li>";
+        }
         $html .= "</ul>";
         return $html;
 

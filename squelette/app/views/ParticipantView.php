@@ -81,7 +81,8 @@ EOT;
                     </thead>";
         foreach ($_SESSION['recap'] as $inscription) {
             $html .= "<tr><td style='padding:10px'>".$inscription->participant_name." </td>
-            <td style='padding:10px'>".$inscription->activity_name." </td>
+            <td style='padding:10px'>".$inscription->activity_firstname." </td>
+            <td style='padding:10px'>".$inscription->activity_lastname." </td>
             <td style='padding:10px'>".substr($inscription->activity_date,0,10)." </td>
             <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
             <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
