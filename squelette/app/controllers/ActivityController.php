@@ -102,6 +102,7 @@ class ActivityController extends AbstractController {
 
     public function paiement()
     {
+        var_dump($_SESSION['recap']);
         $view = new ParticipantView('Paiement validé');
         return $view->render('paiement');
     }
