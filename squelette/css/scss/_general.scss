@@ -147,12 +147,13 @@ a.blue-btn, a.lightblue_button{
 }
 
 
-.page_header .buttons_event{
+.page_header .buttons_event, .part_link{
 	a{
 		display: block;
 		padding: 10px;
 	}
 }
+
 
 .list .buttons_list{
 	margin: 25px 0;
@@ -197,6 +198,10 @@ a.blue-btn, a.lightblue_button{
 			display: inline-block;
 			margin: 0 5px;
 		}
+	}
+
+	.part_link a {
+		display: inline-block;
 	}
 
 }

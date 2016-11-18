@@ -59,12 +59,9 @@ EOT;
     }
 
     public function recap(){
-        $html = '<section>';
-        foreach ($this->data as $inscription) {
-                     $html .= ' nom: '.$inscription->name.'<br>date: '.substr($inscription->date,0,10).'<br> heure :'.substr($inscription->date,10,6).'<br> price: '.$inscription->price.'<hr>';
-        }   
-        $html .='</section>';
-        return $html;
+        foreach ($this->data as $p) {
+             var_dump($p);
+        }
     }
 
     public function participants(){

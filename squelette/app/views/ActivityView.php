@@ -88,11 +88,11 @@ EOT;
         if(Util::isCurrentEventPromoter($event)){
             $modifyBlock = $optionArray['modify_block'];
         }
-        $actionBlock = empty($optionArray['action_block']) ? '' : "<section class='row column_5 text-align-center'>$optionArray[action_block]</section>";
+        $actionBlock = empty($optionArray['action_block']) ? '' : "<section class='row column_5 part_link text-align-center'>$optionArray[action_block]</section>";
         $html =
             '<div class="page_header row" >
                 <div class="row">
-                    <form class="row" method="GET" action="'.$this->script_name.'/event/">
+                    <form class="row" class="column_3" method="GET" action="'.$this->script_name.'/event/">
                       <input type="hidden" name="id" value="'.$_GET['event_id'].'" />
                       <button class="lightblue_button">Retour</button>
                     </form>
