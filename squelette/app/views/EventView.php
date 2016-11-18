@@ -90,7 +90,7 @@ EOT;
             $options.="<option value='$discipline->id' $selected>$discipline->name";
         }
 
-        $form .= "<div class='page_header row'>
+        $form = "<div class='page_header row'>
                 <h1>$title</h1>
             </div>
             <form action=\"$this->script_name/event/save/\" method='post' >
