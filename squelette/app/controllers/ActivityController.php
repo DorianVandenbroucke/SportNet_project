@@ -110,8 +110,10 @@ class ActivityController extends AbstractController {
     public function validatePaiement()
     {
         foreach ($_SESSION['recap'] as $value) {
-            echo $value->participant_id.' '.$value->activity_id;
-            echo '<hr>';
+            $activity = Activity::find($value->activity_id);
+            $activity->getParticipants()->attach(Participant::find($value->participant_id));
+            $activity->pivot->participant_number = ;
+            $activity->pivot->save();
         }
         $view = new ActivityView('<h1>Paiement accepté</h1>');
         return $view->render('validatePaiement');
@@ -137,7 +139,8 @@ class ActivityController extends AbstractController {
             }
             $activity = Activity::find($this->request->get['id']);
             $iw->participant_id = $participant->id;
-            $iw->participant_name = $participant->firstName.' '.$participant->lastName;
+            $iw->participant_firstname = $participant->firstName;
+            $iw->participant_lastname = $participant->lastName;
             $iw->activity_id = $activity->id;
             $iw->activity_name = $activity->name;
             $iw->activity_tarif = $activity->price;
@@ -202,7 +205,7 @@ class ActivityController extends AbstractController {
         $activity = Activity::find($id);
         $totalSaved = 0;
         foreach ($csvAsArray as $row){
-            //row[0]= participant_number, row[1] = mail, row[2] = score, row[3] = ranking;
+            // row[0]= participant_number, row[1] = mail, row[2] = score, row[3] = ranking
             $participant = $activity->getParticipants()->where('participant_number','=',$row[0])->where('mail','=',$row[1])->first();
             if($participant){
                 $participant->pivot->score = $row[2];

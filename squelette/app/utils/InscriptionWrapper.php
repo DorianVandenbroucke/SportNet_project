@@ -12,7 +12,8 @@ namespace app\utils;
 class InscriptionWrapper
 {
     private $participant_id;
-    private $participant_name;
+    private $participant_firstname;
+    private $participant_lastname;
     private $activity_id;
     private $activity_name;
     private $activity_date;
