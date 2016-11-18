@@ -133,7 +133,7 @@ class ActivityController{
             {
                 $participant = new Participant();
                 $participant->mail = $this->request->post['mail'];
-                $participant->birthDate = $this->request->post['birthDate'];
+                $participant->birthDate = Util::strToDate($this->request->post['birthDate'], MYSQL_DATE_FORMAT);
                 $participant->firstName = $this->request->post['firstName'];
                 $participant->lastName = $this->request->post['lastName'];
                 $participant->save();
