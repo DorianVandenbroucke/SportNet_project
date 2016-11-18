@@ -62,7 +62,23 @@ EOT;
     }
 
     public function recap(){
-        $html = "<h1>Récapitulatif des inscriptions :</h1><table>";
+        $html = "<div class='page_header row'>
+                    <div class='row'>
+                      <form action='".$this->script_name."/event/all/' class='column_3'>
+                        <button class='lightblue_button'>Retour</button>
+                      </form>
+                    </div>
+                    <h1>Récapitulatif des inscriptions :</h1>
+                    <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Epreuve</th>
+                            <th>Date</th>
+                            <th>Heure</th>
+                            <th>Tarif</th>
+                        </tr>
+                    </thead>";
         foreach ($_SESSION['recap'] as $inscription) {
             $html .= "<tr><td style='padding:10px'>".$inscription->participant_name." </td>
             <td style='padding:10px'>".$inscription->activity_name." </td>
@@ -71,8 +87,10 @@ EOT;
             <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
         }
         $html .= "</table>
-        <div class='paiement'><a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a></div> 
-        <div class='paiement'><a href='".$this->script_name."/event/all/' class='blue-btn'>Retour</a>";
+        <div class='paiement'>
+            <a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
+            <a href='".$this->script_name."/event/all/' class='blue-btn'>Continuer les inscriptions</a>
+        </div>";
         return $html;
     }
 
@@ -81,7 +99,7 @@ EOT;
     }
 
     public function validatePaiment(){
-        
+
     }
 
     public function participants(){
