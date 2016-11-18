@@ -84,7 +84,15 @@ abstract class AbstractView {
         if (isset($_SESSION['promoter'])) {
             $array = array(
               "Accueil" => array("", "/", "/logout/"),
-              "Evénements" => array("/event/all/", "/event/", "/activity/detail/", "/activity/register/", "/activity/participants/", "/activity/add/"),
+              "Evénements" => array(
+                                  "/event/all/",
+                                  "/event/",
+                                  "/activity/detail/",
+                                  "/activity/register/",
+                                  "/activity/participants/",
+                                  "/activity/add/",
+                                  "/event/save/"
+                                ),
               "Ajouter un événement" => array("/event/add/"),
               "Mes événements" => array("/event/all/?id=".$_SESSION['promoter']),
               "Me déconnecter" => array("/logout/")
@@ -92,7 +100,15 @@ abstract class AbstractView {
         }else if(!isset($_SESSION['promoter'])){
             $array = array(
               "Accueil" => array("", "/", "/logout/"),
-              "Evénements" => array("/event/all/", "/event/", "/activity/detail/", "/activity/register/", "/activity/participants/", "/activity/add/"),
+              "Evénements" => array(
+                                  "/event/all/",
+                                  "/event/",
+                                  "/activity/detail/",
+                                  "/activity/register/",
+                                  "/activity/participants/",
+                                  "/activity/add/",
+                                  "/event/save/"
+                                ),
               "Ajouter un événement" => array("/event/add/"),
               "Me connecter" => array("/signin/")
             );
