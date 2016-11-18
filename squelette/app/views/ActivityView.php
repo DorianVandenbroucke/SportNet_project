@@ -138,7 +138,7 @@ EOT;
                     <textarea id='desc' name='description'></textarea>
                 </div>
                 <div class='column_4'>
-                    <label for='date'>Date de l'épreuve (dd-mm-yyyy)</label>
+                    <label for='date'>Date de l'épreuve (dd/mm/yyyy)</label>
                     <input type='date' id='date' name='startDate'  >
                 </div>
                 <div class='column_4'>
