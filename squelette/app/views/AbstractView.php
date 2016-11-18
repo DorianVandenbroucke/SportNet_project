@@ -57,6 +57,7 @@ abstract class AbstractView {
 			        <div class="offset_1 column_4">
 				        <p>SportNet &copy; 2016</p>
 				        <a href="#">Nous contacter</a>
+                    </div>
 			    </div>';
         return $html;
     }
@@ -68,10 +69,11 @@ abstract class AbstractView {
         $path_param = "";
         if (isset($_SERVER["PATH_INFO"])) {
             $path = $_SERVER["PATH_INFO"];
-            if($_SERVER["QUERY_STRING"]){
+            if($_SERVER["QUERY_STRING"] && $path == "/event/all/" && (isset($_SESSION['promoter']) && $_SERVER['QUERY_STRING'] == "id=".$_SESSION['promoter'])){
                 $path = $path."?".$_SERVER["QUERY_STRING"];
             }
         }
+
         $id_promoter = "";
         if (isset($_SESSION['promoter'])) {
             $id_promoter = $_SESSION['promoter'];
@@ -81,31 +83,37 @@ abstract class AbstractView {
 
         if (isset($_SESSION['promoter'])) {
             $array = array(
-              "" => "Accueil",
-              "/event/all/" => "Evénements",
-              "/event/add/" => "Ajouter un événement",
-              "/event/all/?id=".$_SESSION['promoter'] => "Mes événements",
-              "/logout/" => "Me déconnecter"
+              "Accueil" => array("", "/", "/logout/"),
+              "Evénements" => array("/event/all/", "/event/", "/activity/detail/", "/activity/register/", "/activity/participants/"),
+              "Ajouter un événement" => array("/event/add/"),
+              "Mes événements" => array("/event/all/?id=".$_SESSION['promoter']),
+              "Me déconnecter" => array("/logout/")
             );
         }else if(!isset($_SESSION['promoter'])){
             $array = array(
-              "" => "Accueil",
-              "/event/all/" => "Evénements",
-              "/event/add/" => "Ajouter un événement",
-              "/signin/" => "Me connecter"
+              "Accueil" => array("", "/", "/logout/"),
+              "Evénements" => array("/event/all/", "/event/", "/activity/detail/", "/activity/register/", "/activity/participants/"),
+              "Ajouter un événement" => array("/event/add/"),
+              "Me connecter" => array("/signin/")
             );
         }
 
-        foreach($array as $lien => $nom){
-          if($lien === $path || ($path == "/" && $lien == "")){
+        foreach($array as $nom => $liens){
+          $verif_link = 0;
+          $lien_o = $liens[0];
+          foreach($liens as $lien){
+            if($lien === $path){
+              $html .=
+                      "<li>
+                          <a href='$this->script_name".$lien_o."' class='active'>".$nom."</a>
+                      </li>";
+              $verif_link = 1;
+            }
+          }
+          if($verif_link == 0){
             $html .=
                     "<li>
-                        <a href='$this->script_name".$lien."' class='active'>".$nom."</a>
-                    </li>";
-          }else{
-            $html .=
-                    "<li>
-                        <a href='$this->script_name".$lien."'>".$nom."</a>
+                        <a href='$this->script_name".$lien_o."'>".$nom."</a>
                     </li>";
           }
         }

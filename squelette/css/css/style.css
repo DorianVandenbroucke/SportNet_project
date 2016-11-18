@@ -33,9 +33,8 @@ header {
 .content {
   background-color: #fff;
   padding: 5px;
-  margin: 20px 0;
-  border: 1px solid #bcbcbc;
-  border-top: none; }
+  margin-bottom: 20px;
+  border: 1px solid #bcbcbc; }
 
 .menu {
   border-bottom: 1px solid #0098d8;
@@ -52,7 +51,10 @@ header {
     color: #ffffff; }
 
 .presentation {
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 30px; }
+  .presentation form {
+    margin-top: 10px; }
 
 .page_header {
   margin-bottom: 20px; }
@@ -109,9 +111,6 @@ textarea {
 .detail {
   float: right; }
 
-a button {
-  margin: 0 5px; }
-
 .heure {
   width: 45%; }
 
@@ -121,8 +120,24 @@ section section {
 .list-without-style li {
   padding: 10px; }
 
-.extra-large-btn {
-  margin: 1px 0; }
+a.blue-btn, a.lightblue_button {
+  font-family: "Open Sans Condensed";
+  font-size: 1.2em;
+  padding: 5px 12px;
+  border-radius: 3px;
+  text-decoration: none;
+  margin: 10px 2px;
+  text-align: center; }
+
+.page_header .buttons_event a {
+  display: block;
+  padding: 10px; }
+
+.list .buttons_list {
+  margin: 25px 0; }
+
+.list_epreuve {
+  margin-bottom: 20px; }
 
 @media screen and (max-width: 70em) {
   .menu ul {
@@ -132,7 +147,6 @@ section section {
     padding: 5px 10px; }
 
   .list .buttons_list {
-    margin-top: 10px;
     text-align: right; }
   .list h3 {
     margin-top: 0 !important; }
@@ -141,7 +155,10 @@ section section {
     text-align: left !important; }
 
   .page_header .buttons_event {
-    text-align: right;
-    margin-top: 0; } }
+    margin: 0;
+    text-align: right; }
+    .page_header .buttons_event a {
+      display: inline-block;
+      margin: 0 5px; } }
 
 /*# sourceMappingURL=style.css.map */

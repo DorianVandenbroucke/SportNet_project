@@ -46,11 +46,7 @@ class DefaultController{
 					if($auth){
 						$id_promoter = $_SESSION['promoter'];
 
-						if(isset($_SESSION['url_redirection'])){
-							header("location: ..".$_SESSION['url_redirection']);
-						}else{
-							header("location: ..");
-						}
+						header("location: ..".$_SESSION['return_to_back']);
 
 					}else{
 						$_SESSION['message_form'] = "Les données entrées ne correspondent pas.";
@@ -104,7 +100,7 @@ class DefaultController{
 							$auth = $authentification->createUser($name, $mail, $login, $password);
 
 							if($auth){
-								header("location: ../signin/");
+								header("location: ..".$_SESSION['return_to_back']);
 							}else{
 								$_SESSION['message_form'] = "Une erreur est survenue.";
 								$this->signupForm();
@@ -131,9 +127,8 @@ class DefaultController{
 	public function logout(){
 		$authentification = new Authentification();
 		$authentification->logout();
-		unset($_SESSION['recap']);
-		header("location: ..");
 		$this->home();
 	}
+
 
 }

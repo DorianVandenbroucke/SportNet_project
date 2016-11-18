@@ -14,9 +14,9 @@ class DefaultView  extends AbstractView{
   		$html =
               "<div class='row presentation'>
                 <h1 class='row'>Bienvenue sur SportNet, le rendez-vous des plus grands sportifs</h1>
-                <div class='row'>
-                  <a href='$this->script_name/event/add/'><button class='blue-btn'>Ajouter un événement</button></a>
-                </div>
+                <form class='row' action='$this->script_name/event/add/'>
+                  <button class='blue-btn'>Ajouter un événement</a>
+                </form>
               </div>";
 
         foreach ($this->data as $event){
@@ -34,9 +34,9 @@ class DefaultView  extends AbstractView{
                           <p>Du $dateStart au $dateEnd</p>
                         </div>
                         <div class='column_4 buttons_list'>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Details</button></a>";
+                            <a class='lightblue_button' href='$this->script_name/event/?id=$event->id'>Details</a>";
                             if(Util::isEventModifyable($event)) {
-                                $html .= "<a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Supprimer</button></a>";
+                                $html .= "<a href='$this->script_name/event/?id=$event->id' class='lightblue_button'>Supprimer</a>";
                             }
 
                         $html.="</div>
@@ -84,12 +84,12 @@ class DefaultView  extends AbstractView{
                   <input id='login' class='row' type='text' name='login' placeholder='Login' />
                 </div>
                 <div class='column_4'>
-                  <label for='password' class='row'>Mot de passe</label>
-                  <input id='password' class='row' type='password' name='password' placeholder='Mot de passe' />
-                </div>
-                <div class='column_4'>
                   <label for='email' class='row'>E-mail</label>
                   <input id='email' class='row' type='email' name='mail' placeholder='E-mail' />
+                </div>
+                <div class='column_4'>
+                  <label for='password' class='row'>Mot de passe</label>
+                  <input id='password' class='row' type='password' name='password' placeholder='Mot de passe' />
                 </div>
                 <div class='column_4'>
                   <label for='password2' class='row'>Confirmer votre mot de passe</label>

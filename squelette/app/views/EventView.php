@@ -104,12 +104,12 @@ EOT;
                     <textarea maxlength='500' id='desc' placeholder='Description' name='description' required>$description</textarea>
                 </div>
                 <div class='column_4'>
-                    <label for='dateStart'>Date de début</label>
-                    <input type='date' id='dateStart' placeholder='dd-mm-yyyy' name='startDate' value='$startDate' required>
+                    <label for='dateStart'>Date de début (dd-mm-yyyy)</label>
+                    <input type='date' id='dateStart' name='startDate' value='$startDate' required>
                 </div>
                 <div class='column_4'>
-                    <label for='dateEnd'>Date de fin</label>
-                    <input type='date' id='dateEnd' placeholder='dd-mm-yyyy' name='endDate' value='$endDate' required>
+                    <label for='dateEnd'>Date de fin (dd-mm-yyyy)</label>
+                    <input type='date' id='dateEnd' name='endDate' value='$endDate' required>
                 </div>
                 <div class='column_4'>
                     <label for='lieu'>Lieu</label>
@@ -121,7 +121,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label>Photos</label>
-                    <input type='file' placeholder='FileUpload'/>
+                    <input type='file' />
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='send'>Valider</button>
@@ -158,11 +158,11 @@ EOT;
         $html.=
             "<div class='page_header row'>
                 <div class='row'>
-                  <div class='column_4'>
-                    <a href='$this->script_name/event/all/'><button class='lightblue_button'>Retour</button></a>
-                  </div>
-                  <div class='column_4 buttons_event'>
-                    $modifyBlock
+                  <form action='$this->script_name/event/all/' class='column_3'>
+                    <button class='lightblue_button'>Retour</button>
+                  </form>
+                  <div class='column_5 buttons_event'>
+                        $modifyBlock
                   </div>
                 </div>
                 <h1>$event->name</h1>
@@ -175,7 +175,7 @@ EOT;
             </div>
             <div class='column_4'>
                 <h2>Liste des épreuves</h2>
-                <div>
+                <div class='list_epreuve'>
                     <ul class='list'>$activitiesList</ul>
                     $addBlock
                 </div>
@@ -203,9 +203,9 @@ EOT;
                 <div class='row list'>
                     $list
                 </div>
-                <div class='row text-align-center'>
-                  <a href='$this->script_name/event/add/'><button class='blue-btn'>Nouveau</button></a>
-                </div>
+                <form action='$this->script_name/event/add/' class='row text-align-center'>
+                  <button class='blue-btn'>Nouveau</button>
+                </form>
              </div>
         ";
         return $html;
@@ -229,9 +229,9 @@ EOT;
                           <p>Du $dateStart au $dateEnd</p>
                         </div>
                         <div class='column_4 buttons_list'>
-                            <a href='$this->script_name/event/?id=$event->id'><button class='lightblue_button'>Détails</button></a>";
+                            <a href='$this->script_name/event/?id=$event->id' class='lightblue_button'>Détails</a>";
                             if(Util::isEventModifyable($event)) {
-                                $html .= "<a href='$this->script_name/event/delete/?id=$event->id'><button class='lightblue_button'>Supprimer</button></a>";
+                                $html .= "<a href='$this->script_name/event/delete/?id=$event->id' class='lightblue_button'>Supprimer</a>";
                             }
                         $html.="</div>
                     </div>";
@@ -251,23 +251,23 @@ EOT;
     }
 
     private function generateEventActions($event){
-        $modifyEventBlock = "<a href='$this->script_name/event/edit/?id=$event->id'><button class='blue-btn'>Modifier</button></a>";
+        $modifyEventBlock = "<a href='$this->script_name/event/edit/?id=$event->id' class='blue-btn'>Modifier</a>";
         $addEventBlock = '';
         switch ($event->status){
             case EVENT_STATUS_CREATED:{
-                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_VALIDATED."&id=$event->id'><button class='blue-btn'>Valider</button></a>";
+                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_VALIDATED."&id=$event->id' class='blue-btn'>Valider</a>";
                 break;
             }
             case EVENT_STATUS_VALIDATED:{
-                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_OPEN."&id=$event->id'><button class='blue-btn'>Ouvrir les inscriptions</button></a>";
+                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_OPEN."&id=$event->id' class='blue-btn'>Ouvrir les inscriptions</a>";
                 break;
             }
             case EVENT_STATUS_OPEN:{
-                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_CLOSED."&id=$event->id'><button class='blue-btn'>Fermer les inscriptions</button></a>";
+                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_CLOSED."&id=$event->id' class='blue-btn'>Fermer les inscriptions</a>";
                 break;
             }
             case EVENT_STATUS_CLOSED:{
-                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_OPEN."&id=$event->id'><button class='blue-btn'>Ouvrir les inscriptions</button></a>";
+                $modifyEventBlock .= "<a href='$this->script_name/event/changeStatus/?status=".EVENT_STATUS_OPEN."&id=$event->id' class='blue-btn'>Ouvrir les inscriptions</a>";
                 break;
             }
             default:{
@@ -276,7 +276,7 @@ EOT;
             }
         }
             if($event->status != EVENT_STATUS_CLOSED && $event->status != EVENT_STATUS_PUBLISHED){
-                $addEventBlock = "<a href='$this->script_name/activity/add/?id=$event->id'><button class='blue-btn'>Ajouter</button></a>";
+                $addEventBlock = "<a href='$this->script_name/activity/add/?id=$event->id' class='blue-btn'>Ajouter</a>";
             }
 
             return ['modify_block'=>$modifyEventBlock, 'add_block'=>$addEventBlock];
