@@ -43,7 +43,7 @@ class ActivityController{
                 $activity->id_event =  $this->request->get['id'];
                 $activity->save();
 
-                header("location: ../detail/?id=".$activity->id);
+                header("location: ../detail/?id=".$activity->id."&event_id=".$activity->id_event);
             }
             $view = new ActivityView($this->request);
             return $view->render('add');
@@ -68,7 +68,7 @@ class ActivityController{
 
                 $activity->save();
 
-                header("location: ../detail/?id=".$activity->id);
+                header("location: ../detail/?id=".$activity->id."&event_id=".$activity->id_event);
             }
 
             $view = new ActivityView($activity);
@@ -161,10 +161,10 @@ class ActivityController{
 
     public function recap(){
         $inscription = [];
-        foreach ($_SESSION['recap'] as $p=>$value) 
+        foreach ($_SESSION['recap'] as $p=>$value)
         {
             $participant = Participant::find($p);
-            foreach ($value as $v) 
+            foreach ($value as $v)
             {
                 $activity = Activity::find($v);
                 $inscription[] = [$p=>$activity];

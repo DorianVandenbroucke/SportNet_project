@@ -126,9 +126,6 @@ EOT;
     public function add(){
         return "
                 <div class='page_header row'>
-                  <form class='column_3' action='$this->script_name".$_SESSION['return_button']."'>
-                    <button class='lightblue_button'>Retour</button>
-                  </form>
                     <h1>Ajouter une épreuve</h1>
                 </div>
                 <form action='#' method='POST'>
@@ -161,9 +158,6 @@ EOT;
 
     public function edit(){
          return "<div class='page_header row'>
-           <div class='row'>
-             <a href='$this->script_name".$_SESSION['return_button']."' class='lightblue_button'>Retour</a>
-           </div>
                     <h1>Modifier : ".$this->data->name."</h1>
                 </div>
                 <form action='#' method='POST'>
