@@ -92,7 +92,7 @@ EOT;
         $html =
             '<div class="page_header row" >
                 <div class="row">
-                    <form class="row" class="column_3" method="GET" action="'.$this->script_name.'/event/">
+                    <form class="column_3" method="GET" action="'.$this->script_name.'/event/">
                       <input type="hidden" name="id" value="'.$_GET['event_id'].'" />
                       <button class="lightblue_button">Retour</button>
                     </form>
@@ -126,7 +126,7 @@ EOT;
     public function add(){
         return "
                 <div class='page_header row'>
-                  <form class='row' action='$this->script_name".$_SESSION['return_button']."'>
+                  <form class='column_3' action='$this->script_name".$_SESSION['return_button']."'>
                     <button class='lightblue_button'>Retour</button>
                   </form>
                     <h1>Ajouter une épreuve</h1>

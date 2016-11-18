@@ -163,6 +163,20 @@ a.blue-btn, a.lightblue_button{
 	margin-bottom: 20px;
 }
 
+.export{
+	margin-top: 25px;
+	a{
+		display: block;
+		padding: 10px;
+	}
+	@media screen and(min-width: 70em){
+		float: right;
+		a{
+			display: inline-block;
+		}
+	}
+}
+
 
 @media screen and (max-width: 70em) {
 	.menu ul{

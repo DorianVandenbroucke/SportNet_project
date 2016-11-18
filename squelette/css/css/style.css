@@ -139,6 +139,17 @@ a.blue-btn, a.lightblue_button {
 .list_epreuve {
   margin-bottom: 20px; }
 
+.export {
+  margin-top: 25px; }
+  .export a {
+    display: block;
+    padding: 10px; }
+  @media screen and (min-width: 70em) {
+    .export {
+      float: right; }
+      .export a {
+        display: inline-block; } }
+
 @media screen and (max-width: 70em) {
   .menu ul {
     margin: 0 auto !important; } }
