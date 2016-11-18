@@ -45,12 +45,29 @@ class DefaultController{
 					$auth = $authentification->login($login, $pass);
 					if($auth){
 						$id_promoter = $_SESSION['promoter'];
-
-						/*if(isset($_SESSION['url_redirection'])){
+/*
+<<<<<<< HEAD
+						if(isset($_SESSION['url_redirection'])){
 							header("location: ..".$_SESSION['url_redirection']);
 						}else{
 							header("location: ..");
-						}*/
+						}
+=======
+						// if(isset($_SESSION['url_redirection'])){
+						// 	header("location: ..".$_SESSION['url_redirection']);
+						// }else{
+						// 	header("location: ..");
+						// }
+
+						$prev = "";
+						if(isset($_SERVER["HTTP_REFERER"])){
+						    $prev = $_SERVER["HTTP_REFERER"];
+							echo "<pre>";
+							var_dump($prev);
+						    echo "</pre>";
+						    header("Location: $prev");
+						}
+>>>>>>> 84ad1a7637588b06e6f7aa5a5633836c2b5ae212*/
 
 					}else{
 						$_SESSION['message_form'] = "Les données entrées ne correspondent pas.";
