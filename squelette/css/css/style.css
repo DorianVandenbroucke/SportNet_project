@@ -151,7 +151,7 @@ a.blue-btn, a.lightblue_button {
         display: inline-block; } }
 
 .paiement {
-  float: left; }
+  float: none; }
 
 #fichier {
   margin-bottom: 15px; }
