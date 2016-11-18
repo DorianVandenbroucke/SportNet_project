@@ -79,18 +79,24 @@ EOT;
                             <th>Tarif</th>
                         </tr>
                     </thead>";
+
         foreach ($_SESSION['recap'] as $inscription) {
-            $html .= "<tr><td style='padding:10px'>".$inscription->participant_name." </td>
-            <td style='padding:10px'>".$inscription->activity_firstname." </td>
-            <td style='padding:10px'>".$inscription->activity_lastname." </td>
-            <td style='padding:10px'>".substr($inscription->activity_date,0,10)." </td>
+
+            $dateStart = substr($inscription->activity_date,0,10);
+            $dateStart = explode("-", $dateStart);
+            $dateStart = $dateStart['2']."/".$dateStart['1']."/".$dateStart['0'];
+
+            $html .= "<tr>
+            <td style='padding:10px'>".$inscription->participant_lastname." ".$inscription->participant_firstname."</td>
+            <td style='padding:10px'>".$inscription->activity_name." </td>
+            <td style='padding:10px'>".$dateStart." </td>
             <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
             <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
         }
         $html .= "</table>
         <div class='paiement'>
-            <a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
             <a href='".$this->script_name."/event/all/' class='blue-btn'>Continuer les inscriptions</a>
+            <a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
         </div>";
         return $html;
     }
