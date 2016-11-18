@@ -20,6 +20,9 @@ class ParticipantView extends AbstractView
             case 'participants':
                 $main = $this->participants();
                 break;
+            case 'results':
+                $main = $this->results();
+                break;
             case 'paiement':
                 $main = $this->paiement();
                 break;
@@ -171,18 +174,42 @@ EOT;
                   </div>
                 </section>
                 <section class='row'>
-                <h1>Participants de l'épreuve <small>".$this->data['activity_name']."</small></h1>
-                <form action='$this->script_name/activity/searchParticipants/' method='POST'/>
-                    <input type='hidden' name='id' value='$id'/>
-                    <input type='text' name='searchQuery' placeholder='Recherche'/>
-                    <div class='row button'>
-                        <button class='blue-btn' name='search'>Recherche</button>
-                    </div>
-                </form>
-                $participantsBlock
+                    <h1>Participants de l'épreuve <small>".$this->data['activity_name']."</small></h1>
+                    $participantsBlock
                 </section>";
         }
 
+    }
+
+    public function results(){
+        $data = '';
+        $id = $this->data['activity_id'];
+        $name = $this->data['activity_name'];
+        foreach ($this->data['participants'] as $participant) {
+            $data .= '<tr>
+                                <td>'.$participant->lastName.' '.$participant->firstName.'</td>
+                                <td class="text-align-center">'.$participant->pivot->participant_number.'</td>
+                                <td>'.$participant->mail.'</td>
+                                <td>'.$participant->pivot->ranking.'</td>
+                                <td>'.$participant->pivot->score.'</td>
+                              </tr>';
+        }
+        return '<section class="row">
+                <h1>Résultats de l\'épreuve <small>'.$name.'</small></h1>
+                <form action="'.$this->script_name.'/activity/searchParticipants/" method="POST"/>
+                    <input type="hidden" name="id" value="'.$id.'"/>
+                    <input type="text" name="searchQuery"/>
+                    <input type="submit" name="search" value="Recherche"/>
+                </form>
+                <table>
+                    <thead>
+                        <tr><th>Nom</th><th>Nº Participant</th><th>Email</th><th>Ranking</th><th>Score</th></tr>
+                    </thead>
+                    <tbody>
+                        '.$data.'
+                    </tbody>
+                </table>
+                </section>';
     }
 
 }

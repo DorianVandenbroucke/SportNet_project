@@ -245,7 +245,8 @@ class ActivityController extends AbstractController {
 
     public function results(){
         $id = $this->request->get['id'];
-        $av = new ActivityView(Activity::find($id));
+        $activity = Activity::find($id);
+        $av = new ParticipantView(['activity_id'=>$id, 'activity_name'=>$activity->name, 'participants'=>$activity->getParticipants()]);
         $av->render('results');
     }
 
@@ -253,12 +254,14 @@ class ActivityController extends AbstractController {
         $searchText = filter_var(trim($this->request->post['searchQuery']),FILTER_SANITIZE_STRING);
         $searchText = empty($searchText) ? '%' : "%$searchText%";
         $activity = Activity::find($this->request->post['id']);
-        $participants = $activity->getParticipants()->where('firstName', 'like',$searchText)->orWhere('lastName','like',$searchText)->get();
-        /*$participants = Participant::whereHas('getActivities', function($q){
-            $q->where('id', '=', $this->request->post['id']);
-        })->where('name','like',$searchText)->get();*/
+        $participants = $activity->getParticipants()->where('firstName', 'like',$searchText)->
+            orWhere('lastName','like',$searchText)
+            ->orWhere('participant_number','like',$searchText)
+            ->orWhere('mail','like',$searchText)
+            ->orderBy('ranking')
+            ->get();
         $view = new ParticipantView(['activity_id'=>$activity->id, 'activity_name'=>$activity->name,'participants'=>$participants]);
-        $view->render('participants');
+        $view->render('results');
     }
 
 }

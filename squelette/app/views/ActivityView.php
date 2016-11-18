@@ -237,7 +237,7 @@ EOT;
                 }
         return '<section class="row">
                 <h1>Résultats de l\'épreuve <small>'.$this->data->name.'</small></h1>
-                <form action="'.$this->script_name.'searchParticipants/" method="POST"/>
+                <form action="'.$this->script_name.'/activity/searchParticipants/" method="POST"/>
                     <input type="hidden" name="id" value="'.$id.'"/>
                     <input type="text" name="searchQuery"/>
                     <input type="submit" name="search" value="Recherche"/>
