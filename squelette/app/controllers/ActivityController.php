@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\utils\HttpRequest;
+use app\utils\InscriptionWrapper;
 use app\utils\Util;
 use app\views\ActivityView;
 use app\views\EventView;
@@ -118,18 +119,11 @@ class ActivityController{
         $participant = null;
         if($this->request->post)
         {
-            $participants = Participant::all();
-
-            //Parcourir la table participant
-            foreach ($participants as $par) {
-                if($par->mail == $this->request->post['mail'])
-                {
-                    $participant = $par;
-                }
-            }
+            $iw = new InscriptionWrapper();
+            $participant = Participant::where('mail','=', $this->request->post['mail'])->first();
 
             //Verifier si le participant existe dans la BD
-            if($participant == null)
+            if(!$participant)
             {
                 $participant = new Participant();
                 $participant->mail = $this->request->post['mail'];
@@ -138,14 +132,14 @@ class ActivityController{
                 $participant->lastName = $this->request->post['lastName'];
                 $participant->save();
             }
-
             $activity = Activity::find($this->request->get['id']);
-            if(!isset($_SESSION['recap'][$participant->id]))
-                $_SESSION['recap'][$participant->id] = [$activity->id];
-            else
-                array_push($_SESSION['recap'][$participant->id],$activity->id);
-
-            return $this->recap($participant->id);
+            $iw->participant_id = $participant->id;
+            $iw->participant_name = $participant->firstName.' '.$participant->lastName;
+            $iw->activity_id = $activity->id;
+            $iw->activity_name = $activity->name;
+            $iw->activity_tarif = $activity->price;
+            $iw->activity_date = $activity->date;
+            array_push($_SESSION['recap'], $iw);
         }
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
@@ -160,24 +154,9 @@ class ActivityController{
     }
 
     public function recap(){
-        $inscription = [];
-        foreach ($_SESSION['recap'] as $p=>$value)
-        {
-            $participant = Participant::find($p);
-            foreach ($value as $v)
-            {
-                $activity = Activity::find($v);
-                $inscription[] = [$p=>$activity];
-            }
+        foreach ($_SESSION['recap'] as $value) {
+            echo "<p>" . $value->printData() . "</p>";
         }
-        foreach ($inscription as $key => $value) {
-            foreach ($value as $key => $v) {
-                echo $v->name;
-            }
-        }
-        var_dump($inscription[0][83]->name);
-       // $view = new ParticipantView();
-       // $view->render('recap');
     }
 
 
