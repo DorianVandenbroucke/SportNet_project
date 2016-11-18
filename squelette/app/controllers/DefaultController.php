@@ -18,7 +18,7 @@ class DefaultController{
 	}
 
 	public function home(){
-		$events = Event::select()->take(10)->get();
+		$events = Event::select()->where('status', '!=',0)->take(10)->get();
 		$defaultView = new DefaultView($events);
 		$defaultView->render('home');
 	}
