@@ -102,7 +102,26 @@ EOT;
     }
 
     public function paiement(){
-        return "<h1>Paiement</h1><input type='text'/><input type='text'/><input type='text'/><a href='$this->script_name/validatePaiement/'>Valider</a>";
+        return "<div class='page_header row'>
+                    <h1>Paiement</h1>
+                </div>
+                    <form action='$this->script_name/validatePaiement/' method='post'>
+                        <div class='column_4'>
+                            <label for='nom'>Titulaire de la carte</label>
+                            <input type='text' id='nom'/>
+                        </div>
+                        <div class='column_4'>
+                            <label for='num'>Numéro de carte</label>
+                            <input type='number' id='num'/>
+                        </div>
+                        <div class='column_4'>
+                            <label for='crypto'>Cryptogramme</label>
+                            <input type='number' id='crypto'/>
+                        </div>
+                        <div class='row button'>
+                            <button class='blue-btn'>Valider</button>
+                        </div>
+                    </form>";
     }
 
     public function validatePaiment(){
