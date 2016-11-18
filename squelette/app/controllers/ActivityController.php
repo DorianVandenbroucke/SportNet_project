@@ -103,8 +103,7 @@ class ActivityController{
 
     public function paiement()
     {
-        $activity = Activity::find($this->request->get['id']);
-        $view = new ActivityView($activity);
+        $view = new ParticipantView('Paiement validé');
         return $view->render('paiement');
     }
 
@@ -140,6 +139,7 @@ class ActivityController{
             $iw->activity_tarif = $activity->price;
             $iw->activity_date = $activity->date;
             array_push($_SESSION['recap'], $iw);
+            return $this->recap();
         }
         $activity = Activity::find($this->request->get['id']);
         $view = new ActivityView($activity);
@@ -154,9 +154,8 @@ class ActivityController{
     }
 
     public function recap(){
-        foreach ($_SESSION['recap'] as $value) {
-            echo "<p>" . $value->printData() . "</p>";
-        }
+        $view = new ParticipantView($_SESSION['recap']);
+        return $view->render('recap');
     }
 
 

@@ -20,6 +20,9 @@ class ParticipantView extends AbstractView
             case 'participants':
                 $main = $this->participants();
                 break;
+            case 'paiement':
+                $main = $this->paiement();
+                break;
         }
         $framework = $this->app_root.'/css/vandenbr3u_library/css/theme.css';
         $style_file = $this->app_root.'/css/css/style.css';
@@ -59,10 +62,22 @@ EOT;
     }
 
     public function recap(){
-        foreach ($this->data as $p) {
-             var_dump($p);
+        $html = "<h1>Récapitulatif des inscriptions :</h1><table>";
+        foreach ($this->data as $inscription) {
+            $html .= "<tr><td style='padding:10px'>".$inscription->participant_name." </td>
+            <td style='padding:10px'>".$inscription->activity_name." </td>
+            <td style='padding:10px'>".substr($inscription->activity_date,0,10)." </td>
+            <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
+            <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
         }
+        $html .= "</table><a href='".$this->script_name."/paiement/'>Paiment</a>";
+        return $html;
     }
+
+    public function paiement(){
+        return '<h1>'.$this->data.'</h1>';
+    }
+
 
     public function participants(){
         $data = '';
