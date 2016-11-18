@@ -92,7 +92,8 @@ EOT;
         $html =
             '<div class="page_header row" >
                 <div class="row">
-                    <form class="row" action="'.$this->script_name.'/event/?'.$_SERVER['QUERY_STRING'].'">
+                    <form class="row" method="GET" action="'.$this->script_name.'/event/">
+                      <input type="hidden" name="id" value="'.$_GET['event_id'].'" />
                       <button class="lightblue_button">Retour</button>
                     </form>
                     <div class="column_5 buttons_event">'.

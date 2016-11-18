@@ -241,10 +241,11 @@ EOT;
 
     private function eventActivities(){
         $html='';
+        $event_id = $this->data['events']->id;
         foreach ($this->data['events']->getActivities as $activity){
             $html.="<li class='column_8'>
                     <span class='column_7'>$activity->name</span>
-                    <a href='$this->script_name/activity/detail/?id=$activity->id' class='row'>Détails</a>
+                    <a href='$this->script_name/activity/detail/?id=$activity->id&event_id=$event_id' class='row'>Détails</a>
                 </li>";
         }
         return $html;
