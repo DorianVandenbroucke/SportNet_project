@@ -134,10 +134,6 @@ EOT;
                     </form>";
     }
 
-    public function validatePaiment(){
-
-    }
-
     public function participants(){
         $data = ''; $participantsBlock = 'Il n\'y a pas des participants pour l\'instant.';
         if(!isset($this->data['activity_id'])){
