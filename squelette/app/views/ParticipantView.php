@@ -163,21 +163,21 @@ EOT;
                     </tbody>
                 </table>
                 <div class="export">
-                    <a href="'.$this->script_name.'/activity/export/?id='.$id.'". class="blue-btn row">Exporter CSV</a>
+                    <a href="'.$this->script_name.'/activity/export/?id='.$id.'" class="blue-btn row">Exporter CSV</a>
                 </div>';
             }
             return "
                 <section class='row'>
                        <div class='column_3'>
-                            <a href='$this->script_name/activity/detail/?id=".$this->data['activity_id']."&event_id=".$this->data['event_id']."'>
-                                <button class='lightblue_button'>Retour</button>
+                            <a class='lightblue_button' href='$this->script_name/activity/detail/?id=".$this->data['activity_id']."&event_id=".$this->data['event_id']."'>
+                                Retour
                             </a>
                   </div>
                 </section>
                 <section class='row'>
                     <h1>Participants de l'épreuve <small>".$this->data['activity_name']."</small></h1>
                     <div>
-                        <p>Nb. Participants: " . $this->data['participants']->count()."</p>
+                        <p>Il y a actuellement " . $this->data['participants']->count()." participants</p>
                         $participantsBlock
                     </div>
 
