@@ -219,12 +219,12 @@ EOT;
                     <button class='blue-btn' name='register'>S'inscrire</button>
                 </div>
                 </form>";
-          if($_SESSION['dateNaiss'] == false) 
+          if($_SESSION['dateNaiss'] == false)
           {
               $html .= "<H1>Le format de la date de naissance est invalide</H1>";
           }
 
-          return $html;     
+          return $html;
     }
 
     public function all(){
@@ -282,12 +282,12 @@ EOT;
               $html .= '<div>
                             <p>Nom : '.$participant->firstName.'</p>
                             <p>Prenom : '.$participant->lastName.'</p>
-                            <p>Votre numéro de participant est :'.$participant->id.'</p>
+                            <p>Votre numéro de participant est le '.$participant->id.'</p>
                         </div>
                     </div><hr>';
           }
           return $html;
-                    
+
 
     }
 
