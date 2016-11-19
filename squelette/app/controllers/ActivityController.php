@@ -70,7 +70,6 @@ class ActivityController extends AbstractController {
                     $this->redirectTo("../detail/?id=".$activity->id."&event_id=".$activity->id_event);
                     }
                 }
-
                 $_SESSION['dateValide'] = 'La date de l\'épreuve ne correspond pas à l\'évenement';
             }
             $view = new ActivityView($this->request);
@@ -160,26 +159,28 @@ class ActivityController extends AbstractController {
     public function register()
     {
         $participant = null;
+
         if($this->request->post)
         {
+            $mail = $this->request->post['mail'];
+            $birthDate = $this->request->post['birthDate'];
+            if(!filter_var(filter_var($mail, FILTER_SANITIZE_EMAIL),FILTER_VALIDATE_EMAIL) || !Util::isDateValid($birthDate)){
+                $_SESSION['dateNaiss'] = "Le format de la date de naissance est invalide";
+                $this->redirectTo($this->request->script_name."/activity/register/?id=".$this->request->get['id']);
+                return;
+            }
             $iw = new InscriptionWrapper();
             $participant = Participant::where('mail','=', $this->request->post['mail'])->first();
-
             //Verifier si le participant existe dans la BD
             if(!$participant)
             {
-                if(Util::isDateValid($this->request->post['birthDate']))
-                {
                     $participant = new Participant();
-                    $participant->mail = $this->request->post['mail'];
+                    $participant->mail = $mail;
                     $dateNaissance = new \Datetime($this->request->post['birthDate']);
                     $participant->birthDate = $dateNaissance;
                     $participant->firstName = $this->request->post['firstName'];
                     $participant->lastName = $this->request->post['lastName'];
                     $participant->save();
-                }
-                $_SESSION['dateNaiss'] = false;
-                header('location:'.$this->request->script_name.'/activity/register/?id='.$this->request->get['id']);
             }
             $activity = Activity::find($this->request->get['id']);
             $iw->participant_id = $participant->id;
