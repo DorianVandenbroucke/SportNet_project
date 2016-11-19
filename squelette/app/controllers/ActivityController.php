@@ -138,6 +138,7 @@ class ActivityController extends AbstractController {
             $result[] = Participant::find($value);
         }
 
+        unset($_SESSION['recap']);
         $view = new ActivityView($result);
         return $view->render('validatePaiement');
     }
