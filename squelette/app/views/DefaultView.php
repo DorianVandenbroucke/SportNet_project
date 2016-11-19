@@ -15,7 +15,7 @@ class DefaultView  extends AbstractView{
               "<div class='row presentation'>
                 <h1 class='row'>Bienvenue sur SportNet, le rendez-vous des plus grands sportifs</h1>
                 <form class='row' action='$this->script_name/event/add/'>
-                  <button class='blue-btn'>Ajouter un événement</a>
+                  <button class='blue-btn'>Ajouter un événement</button>
                 </form>
               </div>";
 
