@@ -211,7 +211,7 @@ class ActivityController extends AbstractController {
             $activity = Activity::find($id);
            $participants = $activity->getParticipants()->get();
             $fp = fopen('php://memory', 'w');
-            fputcsv($fp, ['Nom', 'Nº Participant','Date de Naissance', 'E-Mail']);
+            fputcsv($fp, ['Nom', 'Num. Participant','Date de Naissance', 'E-Mail']);
             foreach ($participants as $participant){
                 fputcsv($fp, [$participant->lastName, $participant->getParticipantNumber(), $participant->birthDate, $participant->mail]);
             }

@@ -282,7 +282,7 @@ EOT;
               $html .= '<div>
                             <p>Nom : '.$participant->firstName.'</p>
                             <p>Prenom : '.$participant->lastName.'</p>
-                            <p>Votre numéro de participant est le '.$participant->id.'</p>
+                            <p>Votre numéro de participant est :'.$participant->getParticipantNumber().'</p>
                         </div>
                     </div><hr>';
           }
@@ -303,7 +303,6 @@ EOT;
                         <input type='hidden' name='id' value='$id'/>
                         <label for='fichier'>Ajout du fichier CSV</label>
                         <input type='file' accept='text/csv' name='fichier' class='text-align-center' id='fichier' required >
-
                         <div class='row button'>
                             <button class='blue-btn send' name='send'>Upload</button>
                         </div>

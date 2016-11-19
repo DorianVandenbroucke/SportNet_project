@@ -64,7 +64,6 @@ class EventController extends AbstractController
                 $event->endDate = Util::strToDate($this->request->post['endDate'], MYSQL_DATE_FORMAT);
                 $event->addresse = $this->request->post['addresse'];
                 $event->id_discipline = $this->request->post['id_discipline'];
-
                 if(empty($id)) {
                     $event->status = EVENT_STATUS_CREATED;
                     $event->id_promoter = $this->auth->promoter;

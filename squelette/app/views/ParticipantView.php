@@ -168,14 +168,18 @@ EOT;
             return "
                 <section class='row'>
                        <div class='column_3'>
-                    <a href='$this->script_name/activity/detail/?id=".$this->data['activity_id']."&event_id=".$this->data['event_id']."'>
-                        <button class='lightblue_button'>Retour</button>
-                    </a>
+                            <a href='$this->script_name/activity/detail/?id=".$this->data['activity_id']."&event_id=".$this->data['event_id']."'>
+                                <button class='lightblue_button'>Retour</button>
+                            </a>
                   </div>
                 </section>
                 <section class='row'>
                     <h1>Participants de l'épreuve <small>".$this->data['activity_name']."</small></h1>
-                    $participantsBlock
+                    <div>
+                        <p>Nb. Participants: " . $this->data['participants']->count()."</p>
+                        $participantsBlock
+                    </div>
+                    
                 </section>";
         }
 
