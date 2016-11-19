@@ -326,6 +326,13 @@ EOT;
                   numéro du participant, e-mail du participant, rang, score
                 </div>
            </section>";
+        if(isset($_SESSION['message_form'])){
+            $html .=
+                "<div class='danger-alert row'>
+                          <span>".$_SESSION['message_form']."</span>
+                        </div>";
+            unset($_SESSION['message_form']);
+        }
         return $html;
     }
 
