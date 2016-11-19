@@ -138,7 +138,7 @@ EOT;
                     <textarea id='desc' name='description'></textarea>
                 </div>
                 <div class='column_4'>
-                    <label for='date'>Date de l'épreuve (dd/mm/yyyy)</label>
+                    <label for='date'>Date de l'épreuve (dd-mm-yyyy)</label>
                     <input type='date' id='date' name='startDate'  >
                 </div>
                 <div class='column_4'>
@@ -195,7 +195,7 @@ EOT;
     }
 
     public function register(){
-        return "<div class='page_header row'>
+        $html ="<div class='page_header row'>
                     <h1>Inscription à ".$this->data->name."</h1>
                 </div>
                 <form action='#' method='POST'>
@@ -219,6 +219,12 @@ EOT;
                     <button class='blue-btn' name='register'>S'inscrire</button>
                 </div>
                 </form>";
+          if($_SESSION['dateNaiss'] == false) 
+          {
+              $html .= "<H1>Le format de la date de naissance est invalide</H1>";
+          }
+
+          return $html;     
     }
 
     public function all(){

@@ -149,12 +149,18 @@ class ActivityController extends AbstractController {
             //Verifier si le participant existe dans la BD
             if(!$participant)
             {
-                $participant = new Participant();
-                $participant->mail = $this->request->post['mail'];
-                $participant->birthDate = $this->request->post['birthDate'];
-                $participant->firstName = $this->request->post['firstName'];
-                $participant->lastName = $this->request->post['lastName'];
-                $participant->save();
+                if(Util::isDateValid($this->request->post['birthDate']))
+                {
+                    $participant = new Participant();
+                    $participant->mail = $this->request->post['mail'];
+                    $dateNaissance = new \Datetime($this->request->post['birthDate']);
+                    $participant->birthDate = $dateNaissance;
+                    $participant->firstName = $this->request->post['firstName'];
+                    $participant->lastName = $this->request->post['lastName'];
+                    $participant->save();
+                }
+                $_SESSION['dateNaiss'] = false;
+                header('location:'.$this->request->script_name.'/activity/register/?id='.$this->request->get['id']);
             }
             $activity = Activity::find($this->request->get['id']);
             $iw->participant_id = $participant->id;
