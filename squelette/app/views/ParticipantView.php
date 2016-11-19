@@ -67,6 +67,7 @@ EOT;
     public function recap(){
         $html = "<div class='page_header row'>
                     <h1>Récapitulatif des inscriptions :</h1>
+                </div>
                     <table>
                     <thead>
                         <tr>
@@ -91,7 +92,7 @@ EOT;
             <td style='padding:10px'>".$dateStart." </td>
             <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
             <td style='padding:10px'>".$inscription->activity_tarif." </td>
-            <td style='padding:10px'><a href='".$this->script_name."/recapitulatif/?idact=".$inscription->activity_id."&idPar=".$inscription->participant_id."'/>Supprimer</a></td></tr>";
+            <td style='padding:10px'><a href='".$this->script_name."/recapitulatif/?idact=".$inscription->activity_id."&idPar=".$inscription->participant_id."'>Supprimer</a></td></tr>";
         }
 
         if(isset($inscription))
@@ -179,7 +180,7 @@ EOT;
                         <p>Nb. Participants: " . $this->data['participants']->count()."</p>
                         $participantsBlock
                     </div>
-                    
+
                 </section>";
         }
 
