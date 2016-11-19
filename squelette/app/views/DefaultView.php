@@ -31,7 +31,7 @@ class DefaultView  extends AbstractView{
                     <div class='ligne row'>
                         <div class='column_4'>
                           <h3>$event->name</h3>
-                          <p>Du $dateStart au $dateEnd</p>
+                          <p>Du $dateStart au $dateEnd à $event->addresse</p>
                         </div>
                         <div class='column_4 buttons_list'>
                             <a class='lightblue_button' href='$this->script_name/event/?id=$event->id'>Details</a>";
