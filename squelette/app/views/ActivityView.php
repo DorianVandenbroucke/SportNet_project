@@ -269,9 +269,6 @@ EOT;
                         '.$data.'
                     </tbody>
                 </table>
-                <div class="export">
-                    <a href="'.$this->script_name.'/activity/export/?id='.$id.'" class="blue-btn row">Exporter CSV</a>
-                </div>
                 </section>';
     }
 
