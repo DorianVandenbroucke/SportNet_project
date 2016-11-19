@@ -20,6 +20,9 @@ class ParticipantView extends AbstractView
             case 'participants':
                 $main = $this->participants();
                 break;
+            case 'results':
+                $main = $this->results();
+                break;
             case 'paiement':
                 $main = $this->paiement();
                 break;
@@ -72,6 +75,7 @@ EOT;
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Tarif</th>
+                            <th></th>
                         </tr>
                     </thead>";
 
@@ -86,23 +90,47 @@ EOT;
             <td style='padding:10px'>".$inscription->activity_name." </td>
             <td style='padding:10px'>".$dateStart." </td>
             <td style='padding:10px'>".substr($inscription->activity_date,10,6)." </td>
-            <td style='padding:10px'>".$inscription->activity_tarif." </td></tr>";
+            <td style='padding:10px'>".$inscription->activity_tarif." </td>
+            <td style='padding:10px'><a href='".$this->script_name."/recapitulatif/?idact=".$inscription->activity_id."&idPar=".$inscription->participant_id."'/>Supprimer</a></td></tr>";
         }
 
-        $id_event = "";
-        if(isset($_SESSION['recap']['0'])){
-            $id_event = $_SESSION['recap']['0']->event_id;
-        }
-        $html .= "</table>
-        <div class='paiement'>
-            <a href='".$this->script_name."/event/?id=".$id_event."' class='blue-btn'>Continuer les inscriptions</a>
-            <a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
+        if(isset($inscription))
+            {
+                $html .= "</table>
+                <div class='paiement'>"." <a href='".$this->script_name."/event/?id=".$inscription->event_id."' class='blue-btn'>Continuer les inscriptions</a>";
+                }
+        else
+            {
+                $html .= "</table>
+                <div class='paiement'>"." <a href='".$this->script_name."/event/all' class='blue-btn'>Continuer les inscriptions</a>";
+            }
+
+        $html .= "<a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
         </div>";
         return $html;
     }
 
     public function paiement(){
-        return "<h1>Paiement</h1><input type='text'/><input type='text'/><input type='text'/><a href='$this->script_name/validatePaiement/'>Valider</a>";
+        return "<div class='page_header row'>
+                    <h1>Paiement</h1>
+                </div>
+                    <form action='$this->script_name/validatePaiement/' method='post'>
+                        <div class='column_4'>
+                            <label for='nom'>Titulaire de la carte</label>
+                            <input type='text' id='nom'/>
+                        </div>
+                        <div class='column_4'>
+                            <label for='num'>Numéro de carte</label>
+                            <input type='number' id='num'/>
+                        </div>
+                        <div class='column_4'>
+                            <label for='crypto'>Cryptogramme</label>
+                            <input type='number' id='crypto'/>
+                        </div>
+                        <div class='row button'>
+                            <button class='blue-btn'>Valider</button>
+                        </div>
+                    </form>";
     }
 
     public function validatePaiment(){
@@ -110,42 +138,78 @@ EOT;
     }
 
     public function participants(){
-        $data = '';
+        $data = ''; $participantsBlock = 'Il n\'y a pas des participants pour l\'instant.';
         if(!isset($this->data['activity_id'])){
             //error
         }else{
             $id = $this->data['activity_id'];
+
             foreach ($this->data['participants'] as $participant) {
                 $data .= '<tr>
                                 <td>'.$participant->lastName.' '.$participant->firstName.'</td>
-                                <td>'.$participant->id.'</td>
+                                <td>'.$participant->getParticipantNumber().'</td>
                                 <td>'.$participant->mail.'</td>
                                 <td>'.$participant->birthDate.'</td>
                               </tr>';
             }
-            return '<section class="row">
-                <h1>Participants de l\'épreuve <small>'.$this->data['activity_name'].'</small></h1>
+            if($this->data['participants']->count()>0){
+                $participantsBlock = '<table>
+                    <thead>
+                        <tr><th>Nom</th><th>Nº du participant</th><th>E-mail</th><th>Date de naissance</th></tr>
+                    </thead>
+                    <tbody>
+                '.$data.'
+                    </tbody>
+                </table>
+                <div class="export">
+                    <a href="'.$this->script_name.'/activity/export/?id='.$id.'". class="blue-btn row">Exporter CSV</a>
+                </div>';
+            }
+            return "
+                <section class='row'>
+                       <div class='column_3'>
+                    <a href='$this->script_name/activity/detail/?id=".$this->data['activity_id']."&event_id=".$this->data['event_id']."'>
+                        <button class='lightblue_button'>Retour</button>
+                    </a>
+                  </div>
+                </section>
+                <section class='row'>
+                    <h1>Participants de l'épreuve <small>".$this->data['activity_name']."</small></h1>
+                    $participantsBlock
+                </section>";
+        }
+
+    }
+
+    public function results(){
+        $data = '';
+        $id = $this->data['activity_id'];
+        $name = $this->data['activity_name'];
+        foreach ($this->data['participants'] as $participant) {
+            $data .= '<tr>
+                                <td>'.$participant->lastName.' '.$participant->firstName.'</td>
+                                <td class="text-align-center">'.$participant->pivot->participant_number.'</td>
+                                <td>'.$participant->mail.'</td>
+                                <td>'.$participant->pivot->ranking.'</td>
+                                <td>'.$participant->pivot->score.'</td>
+                              </tr>';
+        }
+        return '<section class="row">
+                <h1>Résultats de l\'épreuve <small>'.$name.'</small></h1>
                 <form action="'.$this->script_name.'/activity/searchParticipants/" method="POST"/>
                     <input type="hidden" name="id" value="'.$id.'"/>
-                    <input type="text" name="searchQuery" placeholder="Recherche"/>
-                    <div class="row button">
-                        <button class="blue-btn" name="search">Recherche</button>
-                    </div>
+                    <input type="text" name="searchQuery"/>
+                    <input type="submit" name="search" value="Recherche"/>
                 </form>
                 <table>
                     <thead>
-                        <tr><th>Nom</th><th>Nº du participant</th><th>E-mail</th><th>Date de naissance</th></tr>
+                        <tr><th>Nom</th><th>Nº Participant</th><th>Email</th><th>Ranking</th><th>Score</th></tr>
                     </thead>
                     <tbody>
                         '.$data.'
                     </tbody>
                 </table>
-                <div class="export">
-                    <a href="'.$this->script_name.'/activity/export/?id='.$id.'". class="blue-btn row">Exporter CSV</a>
-                </div>
                 </section>';
-        }
-
     }
 
 }

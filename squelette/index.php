@@ -18,6 +18,10 @@ $router = new Router();
 if(!isset($_SESSION['recap']))
 {$_SESSION['recap']=array();}
 
+$_SESSION['dateValide'] = true;
+$_SESSION['dateNaiss'] = true;
+
+
 $router->addRoute('default', '\app\controllers\DefaultController', 'home');
 $router->addRoute('/signin/', '\app\controllers\DefaultController', 'signinForm');
 $router->addRoute('/signinVerification/', '\app\controllers\DefaultController', 'signinVerification');
@@ -35,6 +39,7 @@ $router->addRoute('/activity/searchParticipants/', '\app\controllers\ActivityCon
 $router->addRoute('/activity/export/', '\app\controllers\ActivityController', 'export');
 $router->addRoute('/activity/publish/', '\app\controllers\ActivityController', 'publish');
 $router->addRoute('/activity/importResult/', '\app\controllers\ActivityController', 'importResult');
+$router->addRoute('/activity/result/', '\app\controllers\ActivityController', 'results');
 $router->addRoute('/paiement/', '\app\controllers\ActivityController', 'paiement');
 $router->addRoute('/recapitulatif/', '\app\controllers\ActivityController', 'recap');
 $router->addRoute('/validatePaiement/', '\app\controllers\ActivityController', 'validatePaiement');

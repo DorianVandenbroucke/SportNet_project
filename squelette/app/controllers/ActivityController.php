@@ -32,18 +32,32 @@ class ActivityController extends AbstractController {
         {
             if($this->request->post)
             {
-                $activity = new Activity();
-                $activity->name = $this->request->post['name'];
-                $activity->description =  $this->request->post['description'];
-                $activity->price = $this->request->post['price'];
+                //verification de la date si elle est valide
+                $event = Event::find($this->request->get['id']);
+                $datetimeEventStart = new \DateTime($event->startDate);
+                $datetimeEventEnd = new \DateTime($event->endDate);
+                $datetimeActivity = new \DateTime($this->request->post['startDate']);
+                $datetimeEventStart = $datetimeEventStart->format('Ymd');
+                $datetimeEventEnd = $datetimeEventEnd->format('Ymd');
+                $datetimeActivity = $datetimeActivity->format('Ymd');
+                
+                if($datetimeActivity >= $datetimeEventStart && $datetimeActivity <= $datetimeEventEnd)
+                {
+                    $activity = new Activity();
+                    $activity->name = $this->request->post['name'];
+                    $activity->description =  $this->request->post['description'];
+                    $activity->price = $this->request->post['price'];
 
-                $date = new \DateTime();
-                $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
-                $activity->date =  $date;
+                    $date = new \DateTime($this->request->post['startDate']);
+                    $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
+                    $activity->date =  $date;
 
-                $activity->id_event =  $this->request->get['id'];
-                $activity->save();
-                $this->redirectTo("../detail/?id=".$activity->id."&event_id=".$activity->id_event);
+                    $activity->id_event =  $this->request->get['id'];
+                    $activity->save();
+                    $this->redirectTo("../detail/?id=".$activity->id."&event_id=".$activity->id_event);
+                }
+
+                $_SESSION['dateValide'] = false;
             }
             $view = new ActivityView($this->request);
             return $view->render('add');
@@ -108,18 +122,26 @@ class ActivityController extends AbstractController {
 
     public function validatePaiement()
     {
+        $parti = [];
+        $result = [];
         foreach ($_SESSION['recap'] as $value) {
             $activity = Activity::find($value->activity_id);
             $parts =  $activity->getParticipants();
             $parts->attach(Participant::find($value->participant_id));
             $part = $activity->getParticipants()->where('id_participant','=',$value->participant_id)->first();
-            $part->pivot->participant_number = Util::generateParticipantNumber(); 
-            $part->pivot->save();  
+            $part->pivot->participant_number = Util::generateParticipantNumber();
+            $parti[] = $value->participant_id;
+            $part->pivot->save();
         }
-            unset($_SESSION['recap']);        
-            $view = new ActivityView('<h1>Paiement accepté</h1>');
-            return $view->render('validatePaiement');
+
+        foreach ($parti as $value) {
+            $result[] = Participant::find($value);
+        }
+
+        $view = new ActivityView($result);
+        return $view->render('validatePaiement');
     }
+
     public function register()
     {
         $participant = null;
@@ -131,12 +153,18 @@ class ActivityController extends AbstractController {
             //Verifier si le participant existe dans la BD
             if(!$participant)
             {
-                $participant = new Participant();
-                $participant->mail = $this->request->post['mail'];
-                $participant->birthDate = Util::strToDate($this->request->post['birthDate'], MYSQL_DATE_FORMAT);
-                $participant->firstName = $this->request->post['firstName'];
-                $participant->lastName = $this->request->post['lastName'];
-                $participant->save();
+                if(Util::isDateValid($this->request->post['birthDate']))
+                {
+                    $participant = new Participant();
+                    $participant->mail = $this->request->post['mail'];
+                    $dateNaissance = new \Datetime($this->request->post['birthDate']);
+                    $participant->birthDate = $dateNaissance;
+                    $participant->firstName = $this->request->post['firstName'];
+                    $participant->lastName = $this->request->post['lastName'];
+                    $participant->save();
+                }
+                $_SESSION['dateNaiss'] = false;
+                header('location:'.$this->request->script_name.'/activity/register/?id='.$this->request->get['id']);
             }
             $activity = Activity::find($this->request->get['id']);
             $iw->participant_id = $participant->id;
@@ -158,11 +186,20 @@ class ActivityController extends AbstractController {
     public function participants()
     {
         $activity = Activity::find($this->request->get['id']);
-        $view = new ParticipantView(['activity_id'=>$activity->id, 'activity_name'=>$activity->name,'participants'=>$activity->getParticipants]);
+        $view = new ParticipantView(['event_id'=>$activity->id_event,'activity_id'=>$activity->id, 'activity_name'=>$activity->name,'participants'=>$activity->getParticipants]);
         return $view->render('participants');
     }
 
     public function recap(){
+        if(isset($_GET['idPar']) && isset($_GET['idact']))
+        {
+            foreach ($_SESSION['recap'] as $key => $inscription) {
+                    if($inscription->participant_id == $_GET['idPar'] && $inscription->activity_id == $_GET['idact'])
+                    {
+                        unset($_SESSION['recap'][$key]);
+                    }
+            }
+        }
         $view = new ParticipantView(null);
         $view->render('recap');
     }
@@ -176,7 +213,7 @@ class ActivityController extends AbstractController {
             $fp = fopen('php://memory', 'w');
             fputcsv($fp, ['Nom', 'Nº Participant','Date de Naissance', 'E-Mail']);
             foreach ($participants as $participant){
-                fputcsv($fp, [$participant->lastName, $participant->id, $participant->birthDate, $participant->mail]);
+                fputcsv($fp, [$participant->lastName, $participant->getParticipantNumber(), $participant->birthDate, $participant->mail]);
             }
             fseek($fp,0);
             $date  = Util::dateToStr($activity->date, STANDARD_DATE_FORMAT);
@@ -198,7 +235,7 @@ class ActivityController extends AbstractController {
     public function importResult(){
         $id = $this->request->post['id'];
         if($_FILES['fichier']['error']>0){
-            echo "Hubo un error al cargar el archivo";
+            $_SESSION['message_form'] = 'Un erreur est arrivé';
             return;
         }
         $csvFile = $_FILES['fichier']['tmp_name'];
@@ -225,20 +262,30 @@ class ActivityController extends AbstractController {
         }else{
             $av = new ActivityView($activity);
             $av->render('publish');
-            echo "Un erreur est arrivé";
+            //$_SESSION['message_form'] = 'Un erreur est arrivé, vérifiez que l\'évenement a participants inscrits';
         }
+    }
+
+    public function results(){
+        $id = $this->request->get['id'];
+        $activity = Activity::find($id);
+        $participants = $activity->getParticipants()->orderBy('ranking')->get();
+        $av = new ParticipantView(['activity_id'=>$activity->id, 'activity_name'=>$activity->name, 'participants'=>$participants]);
+        $av->render('results');
     }
 
     public function searchParticipants(){
         $searchText = filter_var(trim($this->request->post['searchQuery']),FILTER_SANITIZE_STRING);
         $searchText = empty($searchText) ? '%' : "%$searchText%";
         $activity = Activity::find($this->request->post['id']);
-        $participants = $activity->getParticipants()->where('firstName', 'like',$searchText)->orWhere('lastName','like',$searchText)->get();
-        /*$participants = Participant::whereHas('getActivities', function($q){
-            $q->where('id', '=', $this->request->post['id']);
-        })->where('name','like',$searchText)->get();*/
+        $participants = $activity->getParticipants()->where('firstName', 'like',$searchText)->
+            orWhere('lastName','like',$searchText)
+            ->orWhere('participant_number','like',$searchText)
+            ->orWhere('mail','like',$searchText)
+            ->orderBy('ranking')
+            ->get();
         $view = new ParticipantView(['activity_id'=>$activity->id, 'activity_name'=>$activity->name,'participants'=>$participants]);
-        $view->render('participants');
+        $view->render('results');
     }
 
 }

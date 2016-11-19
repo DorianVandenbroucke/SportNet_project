@@ -84,7 +84,7 @@ EOT;
     public function detail(){
         $event = Event::find($this->data->id_event);
         $modifyBlock='';$actionBlock='';
-        $optionArray = $this->generateactivityActions($event->status);
+        $optionArray = $this->generateactivityActions($event);
         if(Util::isCurrentEventPromoter($event)){
             $modifyBlock = $optionArray['modify_block'];
         }
@@ -124,7 +124,7 @@ EOT;
     }
 
     public function add(){
-        return "
+        $html = "
                 <div class='page_header row'>
                     <h1>Ajouter une épreuve</h1>
                 </div>
@@ -139,7 +139,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve (dd-mm-yyyy)</label>
-                    <input type='date' id='date' name='startDate'  >
+                    <input type='text' id='date' name='startDate'  >
                 </div>
                 <div class='column_4'>
                     <label for='heure'>Heure de l'épreuve (hh:mm)</label><br>
@@ -154,6 +154,12 @@ EOT;
                     <button class='blue-btn' name='valider'>Valider</button>
                 </div>
                 </form>";
+            if(!$_SESSION['dateValide']){
+                $html .= "<div class='row'>
+                         la date ne correspondent pas aux dates de l'événement
+                        </div>";
+            }
+            return $html;
     }
 
     public function edit(){
@@ -171,7 +177,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve (dd-mm-yyyy)</label>
-                    <input type='date' id='date' name='startDate' value=".$this->data->date."  >
+                    <input type='text' id='date' name='startDate' value=".$this->data->date."  >
                 </div>
                 <div class='column_4'>
                     <label for='heure'>Heure de l'épreuve (hh:mm)</label><br>
@@ -189,7 +195,7 @@ EOT;
     }
 
     public function register(){
-        return "<div class='page_header row'>
+        $html ="<div class='page_header row'>
                     <h1>Inscription à ".$this->data->name."</h1>
                 </div>
                 <form action='#' method='POST'>
@@ -213,6 +219,12 @@ EOT;
                     <button class='blue-btn' name='register'>S'inscrire</button>
                 </div>
                 </form>";
+          if($_SESSION['dateNaiss'] == false) 
+          {
+              $html .= "<H1>Le format de la date de naissance est invalide</H1>";
+          }
+
+          return $html;     
     }
 
     public function all(){
@@ -237,7 +249,7 @@ EOT;
                 }
         return '<section class="row">
                 <h1>Résultats de l\'épreuve <small>'.$this->data->name.'</small></h1>
-                <form action="'.$this->script_name.'searchParticipants/" method="POST"/>
+                <form action="'.$this->script_name.'/activity/searchParticipants/" method="POST"/>
                     <input type="hidden" name="id" value="'.$id.'"/>
                     <input type="text" name="searchQuery"/>
                     <input type="submit" name="search" value="Recherche"/>
@@ -264,9 +276,19 @@ EOT;
                 ";
     }
 
-    public function validatePaiement()
-    {
-        return $this->data;
+    public function validatePaiement(){
+        $html = "<div class='page_header row'><h1>Paiement accepté</h1>";
+          foreach ($this->data as $participant) {
+              $html .= '<div>
+                            <p>Nom : '.$participant->firstName.'</p>
+                            <p>Prenom : '.$participant->lastName.'</p>
+                            <p>Votre numéro de participant est :'.$participant->id.'</p>
+                        </div>
+                    </div><hr>';
+          }
+          return $html;
+                    
+
     }
 
     public function publish(){
@@ -287,15 +309,14 @@ EOT;
                         </div>
                     </form>
                 </section>
-
            </section>";
         return $html;
     }
 
 
-    private function generateactivityActions($status){
+    private function generateactivityActions($event){
         $modifyBlock = ''; $actionBlock ='';
-
+        $status = $event->status;
         if($status != EVENT_STATUS_PUBLISHED){
             if($status == EVENT_STATUS_CLOSED){
                 $modifyBlock.= '<a href="'.$this->script_name.'/activity/publish/?id='.$this->data->id.'" class="blue-btn row">Publier les résultats</a>';
