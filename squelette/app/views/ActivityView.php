@@ -277,15 +277,20 @@ EOT;
     }
 
     public function validatePaiement(){
-        $html = "<div class='page_header row'><h1>Paiement accepté</h1>";
+        $html =
+                "<div class='page_header row'>
+                  <h1>Paiement accepté</h1>
+                  <div class='row list'>";
           foreach ($this->data as $participant) {
-              $html .= '<div>
+              $html .= '<div class="ligne row">
                             <p>Nom : '.$participant->firstName.'</p>
                             <p>Prenom : '.$participant->lastName.'</p>
                             <p>Votre numéro de participant est :'.$participant->getParticipantNumber().'</p>
-                        </div>
-                    </div><hr>';
+                        </div>';
           }
+          $html .=
+                      "</div>
+                    </div>";
           return $html;
 
 
