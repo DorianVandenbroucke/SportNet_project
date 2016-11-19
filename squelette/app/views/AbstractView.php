@@ -91,6 +91,7 @@ abstract class AbstractView {
                                   "/activity/register/",
                                   "/activity/participants/",
                                   "/activity/add/",
+                                  "/activity/result/",
                                   "/event/save/"
                                 ),
               "Ajouter un événement" => array("/event/add/"),
@@ -107,6 +108,7 @@ abstract class AbstractView {
                                   "/activity/register/",
                                   "/activity/participants/",
                                   "/activity/add/",
+                                  "/activity/result/",
                                   "/event/save/"
                                 ),
               "Ajouter un événement" => array("/event/add/"),
