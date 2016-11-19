@@ -253,7 +253,7 @@ EOT;
                 <form action="'.$this->script_name.'/activity/searchParticipants/" method="POST"/>
                     <input type="hidden" name="id" value="'.$id.'"/>
                     <input type="text" name="searchQuery"/>
-                    <input type="submit" name="search" value="Recherche"/>
+                    <input type="submit" name="search" class="blue-btn" value="Recherche"/>
                 </form>
                 <table>
                     <thead>
@@ -263,7 +263,9 @@ EOT;
                         '.$data.'
                     </tbody>
                 </table>
-                <a href="'.$this->script_name.'/activity/export/?id='.$this->data->id.'".><button>Exporter CSV</button></a>
+                <div class="export">
+                    <a href="'.$this->script_name.'/activity/export/?id='.$id.'" class="blue-btn row">Exporter CSV</a>
+                </div>
                 </section>';
     }
 
