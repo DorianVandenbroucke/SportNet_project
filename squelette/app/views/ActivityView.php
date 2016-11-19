@@ -155,7 +155,7 @@ EOT;
                 </div>
                 </form>";
             if(isset($_SESSION['dateValide'])){
-                $html .= "<div class='row'>
+                $html .= "<div class='danger-alert row'>
                          ".$_SESSION['dateValide']."
                         </div>";
                 unset($_SESSION['dateValide']);
@@ -220,11 +220,13 @@ EOT;
                     <button class='blue-btn' name='register'>S'inscrire</button>
                 </div>
                 </form>";
-          if($_SESSION['dateNaiss'] == false)
-          {
-              $html .= "<H1>Le format de la date de naissance est invalide</H1>";
-          }
-
+                if(isset($_SESSION['dateNaiss'])){
+                  $html .=
+                            "<div class='danger-alert row'>
+                              <span>".$_SESSION['dateNaiss']."</span>
+                            </div>";
+                  unset($_SESSION['dateNaiss']);
+                }
           return $html;
     }
 
