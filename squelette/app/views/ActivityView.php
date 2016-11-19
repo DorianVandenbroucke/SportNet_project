@@ -311,14 +311,12 @@ EOT;
             </div>
             <section>
                 <section class='column_8'>
-                    <div class=\"export\">
-                    <a href='$this->script_name/activity/template/?id=$id'  class='blue-btn row'>Télécharger Template à remplir</a>
-                    </div>
                     <form enctype='multipart/form-data' action='$this->script_name/activity/importResult/' method='post'>
                         <input type='hidden' name='id' value='$id'/>
                         <label for='fichier'>Ajout du fichier CSV</label>
                         <input type='file' accept='text/csv' name='fichier' class='text-align-center' id='fichier' required >
                         <div class='row button'>
+                            <a href='$this->script_name/activity/template/?id=$id'  class='blue-btn row'>Télécharger Template à remplir</a>
                             <button class='blue-btn send' name='send'>Upload</button>
                         </div>
                     </form>
