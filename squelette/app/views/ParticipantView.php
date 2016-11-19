@@ -199,7 +199,7 @@ EOT;
                 <h1>Résultats de l\'épreuve <small>'.$name.'</small></h1>
                 <form action="'.$this->script_name.'/activity/searchParticipants/" method="POST"/>
                     <input type="hidden" name="id" value="'.$id.'"/>
-                    <input type="text" name="searchQuery"/>
+                    <input type="text" placeholder="Rechercher un participant" name="searchQuery"/>
                     <div class="text-align-center">
                       <button type="submit" name="search" class="blue-btn">Rechercher</button>
                     </div>
