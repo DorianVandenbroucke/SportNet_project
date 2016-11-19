@@ -321,6 +321,10 @@ EOT;
                         </div>
                     </form>
                 </section>
+                <div class='row info-alert'>
+                  <strong>Votre fichier CSV doit être organisé comme suit: </strong>
+                  numéro du participant, e-mail du participant, rang, score
+                </div>
            </section>";
         return $html;
     }
