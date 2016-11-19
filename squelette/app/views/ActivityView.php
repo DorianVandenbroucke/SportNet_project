@@ -315,7 +315,7 @@ EOT;
                         <input type='hidden' name='id' value='$id'/>
                         <label for='fichier'>Ajout du fichier CSV</label>
                         <input type='file' accept='text/csv' name='fichier' class='text-align-center' id='fichier' required >
-                        <div class='row button'>
+                        <div class='row button publish'>
                             <a href='$this->script_name/activity/template/?id=$id'  class='blue-btn row'>Télécharger Template à remplir</a>
                             <button class='blue-btn send' name='send'>Upload</button>
                         </div>
