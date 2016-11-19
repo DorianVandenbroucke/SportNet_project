@@ -38,7 +38,7 @@ class Authentification extends AbstractAuthentification
     public function logout()
     {
         unset($_SESSION['promoter']);
-    		unset($_SESSION['recap']);
+        unset($_SESSION['recap']);
         $this->logged_in = false;
         $this->promoter = null;
     }
