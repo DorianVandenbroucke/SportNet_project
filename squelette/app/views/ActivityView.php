@@ -209,7 +209,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='mail'>Mail</label>
-                    <input type='mail' id='mail' placeholder='Mail' name='mail' required  >
+                    <input type='email' id='mail' placeholder='Mail' name='mail' required  >
                 </div>
                 <div class='column_4'>
                     <label for='birthDate'>Date de naissance</label>
