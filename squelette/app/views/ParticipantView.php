@@ -65,10 +65,10 @@ EOT;
     }
 
     public function recap(){
-        $html = "<div class='page_header row'>
-                    <h1>Récapitulatif des inscriptions :</h1>
-                </div>
-                    <table>
+        $inscription_array = $_SESSION['recap'];
+        $tableBlock = "<div>Il n'ya pas d'inscriptions pour l'instant</div>";
+        if(count($inscription_array) > 0){
+            $tableBlock ="<table>
                     <thead>
                         <tr>
                             <th>Nom</th>
@@ -79,8 +79,13 @@ EOT;
                             <th></th>
                         </tr>
                     </thead>";
+        }
+        $html = "<div class='page_header row'>
+                    <h1>Récapitulatif des inscriptions :</h1>
+                </div>
+                $tableBlock";
 
-        foreach ($_SESSION['recap'] as $inscription) {
+        foreach ($inscription_array as $inscription) {
 
             $dateStart = substr($inscription->activity_date,0,10);
             $dateStart = explode("-", $dateStart);
@@ -95,19 +100,19 @@ EOT;
             <td style='padding:10px'><a href='".$this->script_name."/recapitulatif/?idact=".$inscription->activity_id."&idPar=".$inscription->participant_id."'>Supprimer</a></td></tr>";
         }
 
-        if(isset($inscription))
+        if(count($inscription_array) > 0){
+            if(isset($inscription))
             {
                 $html .= "</table>
                 <div class='paiement'>"." <a href='".$this->script_name."/event/?id=".$inscription->event_id."' class='blue-btn'>Continuer les inscriptions</a>";
-                }
-        else
+            }
+            else
             {
                 $html .= "</table>
                 <div class='paiement'>"." <a href='".$this->script_name."/event/all' class='blue-btn'>Continuer les inscriptions</a>";
             }
-
-        $html .= "<a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a>
-        </div>";
+            $html .= "<a href='".$this->script_name."/paiement/' class='blue-btn'>Paiement</a></div>";
+        }
         return $html;
     }
 
