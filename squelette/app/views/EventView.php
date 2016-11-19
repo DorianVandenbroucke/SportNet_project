@@ -197,7 +197,7 @@ EOT;
         $id = isset($this->data['promoter_id']) ? $this->data['promoter_id'] : '';
         $html.="
             <div class='page_header row'>
-                <h1>Listes des Évenements</h1>
+                <h1>Liste des Évenements</h1>
                 <div class='row search'>
                   <form action='$this->script_name/event/search/' method='post'>
                   <input type='hidden' value='$id' name='id'/>
