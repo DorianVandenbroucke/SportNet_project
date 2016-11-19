@@ -172,7 +172,7 @@ EOT;
                 </section>
                 <section class='row'>
                     <div class='page_header row'>
-                        <h1>Résultats de l\'épreuve <small>".$this->data['activity_name']."</small></h1>
+                        <h1>Participants à l'épreuve <small>".$this->data['activity_name']."</small></h1>
                     </div>
                     <div>
                         <p>Il y a actuellement " . $this->data['participants']->count()." participant(s).</p>
