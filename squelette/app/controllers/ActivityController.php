@@ -278,7 +278,7 @@ class ActivityController extends AbstractController {
         }else{
             $av = new ActivityView($activity);
             $av->render('publish');
-            $_SESSION['message_form'] = 'Un erreur est arrivé, vérifiez que l\'évenement a participants inscrits';
+            $_SESSION['message_form'] = 'Il y a une erreur, vérifiez que l\'évenement a des participants inscrits';
         }
     }
 
