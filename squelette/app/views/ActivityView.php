@@ -148,16 +148,17 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='price'>Tarif de l'épreuve (en €)</label>
-                    <input type='number' id='price' placeholder='Prix' name='price'  >
+                    <input type='number' id='price' placeholder='Prix' name='price' min='1'  >
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='valider'>Valider</button>
                 </div>
                 </form>";
-            if(!$_SESSION['dateValide']){
+            if(isset($_SESSION['dateValide'])){
                 $html .= "<div class='row'>
-                         la date ne correspondent pas aux dates de l'événement
+                         ".$_SESSION['dateValide']."
                         </div>";
+                unset($_SESSION['dateValide']);
             }
             return $html;
     }

@@ -32,13 +32,21 @@ class ActivityController extends AbstractController {
         {
             if($this->request->post)
             {
+                $id = $this->request->get['id'];
+                $redirectParam = "?id=$id";
                 //verification de la date si elle est valide
-                $event = Event::find($this->request->get['id']);
+                $event = Event::find($id);
                 $datetimeEventStart = new \DateTime($event->startDate);
                 $datetimeEventEnd = new \DateTime($event->endDate);
-                $datetimeActivity = new \DateTime($this->request->post['startDate']);
+                $activity_date = $this->request->post['startDate'];
+                if(!Util::isDateValid($activity_date)){
+                    $this->redirectTo($this->request->script_name."/activity/add/".$redirectParam);
+                    $_SESSION['dateValide'] = "Le format de la date est incorrect";
+                    return;
+                }
                 $datetimeEventStart = $datetimeEventStart->format('Ymd');
                 $datetimeEventEnd = $datetimeEventEnd->format('Ymd');
+                $datetimeActivity = new \DateTime($activity_date);
                 $datetimeActivity = $datetimeActivity->format('Ymd');
 
                 if($datetimeActivity >= $datetimeEventStart && $datetimeActivity <= $datetimeEventEnd)
@@ -49,15 +57,21 @@ class ActivityController extends AbstractController {
                     $activity->price = $this->request->post['price'];
 
                     $date = new \DateTime($this->request->post['startDate']);
+                    if(!Util::isHourValid($this->request->post['startDateH']) || !Util::isMinuteValid($this->request->post['startDateM'])){
+                        $this->redirectTo($this->request->script_name."/activity/add/".$redirectParam);
+                        $_SESSION['dateValide'] = "Le format de l'heure n'est pas correct (HH:mm)";
+                        return;
+                    }else{
                     $date->setTime($this->request->post['startDateH'], $this->request->post['startDateM']);
                     $activity->date =  $date;
 
                     $activity->id_event =  $this->request->get['id'];
                     $activity->save();
                     $this->redirectTo("../detail/?id=".$activity->id."&event_id=".$activity->id_event);
+                    }
                 }
 
-                $_SESSION['dateValide'] = false;
+                $_SESSION['dateValide'] = 'La date de l\'épreuve ne correspond pas à l\'évenement';
             }
             $view = new ActivityView($this->request);
             return $view->render('add');
