@@ -312,6 +312,9 @@ EOT;
             </div>
             <section>
                 <section class='column_8'>
+                    <div class=\"export\">
+                    <a href='$this->script_name/activity/template/?id=$id'  class='blue-btn row'>Télécharger Template à remplir</a>
+                    </div>
                     <form enctype='multipart/form-data' action='$this->script_name/activity/importResult/' method='post'>
                         <input type='hidden' name='id' value='$id'/>
                         <label for='fichier'>Ajout du fichier CSV</label>

@@ -304,4 +304,23 @@ class ActivityController extends AbstractController {
         $view->render('results');
     }
 
+    public function template(){
+        $id = $this->request->get['id'];
+        if(!empty($id)){
+            $activity = Activity::find($id);
+            $participants = $activity->getParticipants()->get();
+            $fp = fopen('php://memory', 'w');
+            fputcsv($fp, ['Num Participant', 'Mail Participant','Score', 'Ranking']);
+            foreach ($participants as $participant){
+                fputcsv($fp, [$participant->getParticipantNumber(), $participant->mail, '','']);
+            }
+            fseek($fp,0);
+            $filename = $activity->name.'-participants-template(remplir_resultats)';
+            header('Content-Type: application/csv');
+            header("Content-Disposition: attachment; filename=$filename.csv;");
+            fpassthru($fp);
+            fclose($fp);
+        }
+    }
+
 }

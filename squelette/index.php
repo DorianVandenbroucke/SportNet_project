@@ -36,6 +36,7 @@ $router->addRoute('/activity/searchParticipants/', '\app\controllers\ActivityCon
 $router->addRoute('/activity/export/', '\app\controllers\ActivityController', 'export');
 $router->addRoute('/activity/publish/', '\app\controllers\ActivityController', 'publish');
 $router->addRoute('/activity/importResult/', '\app\controllers\ActivityController', 'importResult');
+$router->addRoute('/activity/template/', '\app\controllers\ActivityController', 'template');
 $router->addRoute('/activity/result/', '\app\controllers\ActivityController', 'results');
 $router->addRoute('/paiement/', '\app\controllers\ActivityController', 'paiement');
 $router->addRoute('/recapitulatif/', '\app\controllers\ActivityController', 'recap');
