@@ -171,9 +171,11 @@ EOT;
                   </div>
                 </section>
                 <section class='row'>
-                    <h1>Participants de l'épreuve <small>".$this->data['activity_name']."</small></h1>
+                    <div class='page_header row'>
+                        <h1>Résultats de l\'épreuve <small>".$this->data['activity_name']."</small></h1>
+                    </div>
                     <div>
-                        <p>Il y a actuellement " . $this->data['participants']->count()." participants</p>
+                        <p>Il y a actuellement " . $this->data['participants']->count()." participant(s).</p>
                         $participantsBlock
                     </div>
 
@@ -196,7 +198,9 @@ EOT;
                               </tr>';
         }
         return '<section class="row">
+                <div class="page_header row">
                 <h1>Résultats de l\'épreuve <small>'.$name.'</small></h1>
+                </div>
                 <form action="'.$this->script_name.'/activity/searchParticipants/" method="POST"/>
                     <input type="hidden" name="id" value="'.$id.'"/>
                     <input type="text" placeholder="Rechercher un participant" name="searchQuery"/>
