@@ -18,7 +18,7 @@ $router = new Router();
 if(!isset($_SESSION['recap']))
 {$_SESSION['recap']=array();}
 
-$_SESSION['dateValide'] = true;
+//$_SESSION['dateValide'] = true;
 $_SESSION['dateNaiss'] = true;
 
 

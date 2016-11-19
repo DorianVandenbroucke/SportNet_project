@@ -41,7 +41,29 @@ class Util
     public static function isDateValid($date){
             $dt = DateTime::createFromFormat("d-m-Y", $date);
             return $dt !== false && !array_sum($dt->getLastErrors());
+    }
 
+    public static function isHourValid($hour){
+        $hour = trim($hour);
+        try{
+            echo intval($hour);
+            return strlen($hour)<=2 && intval($hour) >= 0 && intval($hour) <=23;
+        }catch(\Exception $e){
+            return false;
+        }
+    }
+
+    public static function isMinuteValid($minute){
+        $minute = trim($minute);
+        try{
+            return strlen($minute)<=2 && intval($minute) >= 0 && intval($minute) <= 59;
+        }catch(\Exception $e){
+            return false;
+        }
+    }
+
+    public static function isEmailValid($email){
+        return filter_var(filter_var($email, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL);
     }
 
     public static function generateParticipantNumber(){
