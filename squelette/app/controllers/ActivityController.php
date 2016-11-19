@@ -122,20 +122,24 @@ class ActivityController extends AbstractController {
 
     public function validatePaiement()
     {
-        $parti = 0;
+        $parti = [];
+        $result = [];
         foreach ($_SESSION['recap'] as $value) {
             $activity = Activity::find($value->activity_id);
             $parts =  $activity->getParticipants();
             $parts->attach(Participant::find($value->participant_id));
             $part = $activity->getParticipants()->where('id_participant','=',$value->participant_id)->first();
-            $number = Util::generateParticipantNumber();
-            $part->pivot->participant_number = $number;
+            $part->pivot->participant_number = Util::generateParticipantNumber();
+            $parti[] = $value->participant_id;
             $part->pivot->save();
         }
-            unset($_SESSION['recap']);
-            $view = new ActivityView($parti);
 
-            return $view->render('validatePaiement');
+        foreach ($parti as $value) {
+            $result[] = Participant::find($value);
+        }
+
+        $view = new ActivityView($result);
+        return $view->render('validatePaiement');
     }
 
     public function register()

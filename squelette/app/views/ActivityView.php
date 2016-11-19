@@ -139,7 +139,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve (dd-mm-yyyy)</label>
-                    <input type='date' id='date' name='startDate'  >
+                    <input type='text' id='date' name='startDate'  >
                 </div>
                 <div class='column_4'>
                     <label for='heure'>Heure de l'épreuve (hh:mm)</label><br>
@@ -177,7 +177,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='date'>Date de l'épreuve (dd-mm-yyyy)</label>
-                    <input type='date' id='date' name='startDate' value=".$this->data->date."  >
+                    <input type='text' id='date' name='startDate' value=".$this->data->date."  >
                 </div>
                 <div class='column_4'>
                     <label for='heure'>Heure de l'épreuve (hh:mm)</label><br>
@@ -213,7 +213,7 @@ EOT;
                 </div>
                 <div class='column_4'>
                     <label for='birthDate'>Date de naissance</label>
-                    <input type='date' id='birthDate' placeholder='dd-mm-yyyy' name='birthDate' required >
+                    <input type='text' id='birthDate' placeholder='dd-mm-yyyy' name='birthDate' required >
                 </div>
                 <div class='row button'>
                     <button class='blue-btn' name='register'>S'inscrire</button>
@@ -277,12 +277,18 @@ EOT;
     }
 
     public function validatePaiement(){
-        return "<div class='page_header row'>
-                    <h1>Paiement accepté</h1>
-                    <div>
-                        <p>Votre numéro de participant est $this->data</p>
-                    </div>
-                </div>";
+        $html = "<div class='page_header row'><h1>Paiement accepté</h1>";
+          foreach ($this->data as $participant) {
+              $html .= '<div>
+                            <p>Nom : '.$participant->firstName.'</p>
+                            <p>Prenom : '.$participant->lastName.'</p>
+                            <p>Votre numéro de participant est :'.$participant->id.'</p>
+                        </div>
+                    </div><hr>';
+          }
+          return $html;
+                    
+
     }
 
     public function publish(){
