@@ -281,6 +281,7 @@ EOT;
                 "<div class='page_header row'>
                   <h1>Paiement accepté</h1>
                   <div class='row list'>";
+
           foreach ($this->data as $participant) {
               $html .= '<div class="ligne row">
                             <p>Nom : '.$participant->firstName.'</p>

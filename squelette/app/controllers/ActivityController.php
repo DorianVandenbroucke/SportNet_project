@@ -40,7 +40,7 @@ class ActivityController extends AbstractController {
                 $datetimeEventStart = $datetimeEventStart->format('Ymd');
                 $datetimeEventEnd = $datetimeEventEnd->format('Ymd');
                 $datetimeActivity = $datetimeActivity->format('Ymd');
-                
+
                 if($datetimeActivity >= $datetimeEventStart && $datetimeActivity <= $datetimeEventEnd)
                 {
                     $activity = new Activity();
